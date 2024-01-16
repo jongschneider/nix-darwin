@@ -48,8 +48,12 @@
   programs.direnv.enable = true;
   programs.direnv.enableZshIntegration = true;
   programs.direnv.nix-direnv.enable = true;
-  programs.fzf.enable = true;
-  programs.fzf.enableZshIntegration = true;
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  # programs.fzf.enable = true;
+  # programs.fzf.enableZshIntegration = true;
   programs.eza.enable = true;
   programs.eza.enableAliases = true;
   programs.git.enable = true;
@@ -134,6 +138,7 @@
     gcom = "git checkout master && git pull";
     gignore = "c .git/info/exclude";
     glog = "git log --simplify-by-decoration --oneline --graph";
+    glast = "git branch --sort=-committerdate | fzf --header \"Checkout Recent Branch\" --preview \"git diff {1} --color=always\" | xargs git checkout";
   };
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
