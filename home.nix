@@ -121,6 +121,7 @@
     
     # More git aliases
     g = "git";
+    ga = "git add";
     gs = "git status";
     gd = "git diff";
     gdt = "git difftool";
@@ -130,6 +131,7 @@
     gcob = "git checkout -b";
     gcom = "git checkout master && git pull";
     gignore = "c .git/info/exclude";
+    glog = "git log --simplify-by-decoration --oneline --graph";
   };
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
