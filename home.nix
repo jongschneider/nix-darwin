@@ -103,6 +103,7 @@
   programs.git.userEmail = "jonathan.schneider@thetalake.com";
   programs.git.difftastic.enable = true;
   programs.git.difftastic.display = "side-by-side-show-both";
+  programs.git.difftastic.color = "always";
   programs.z-lua.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -122,6 +123,7 @@
     colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";
     goi = "go install ./... && go vet ./...";
     c = "code .";
+    ff = "fzf --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)' | xargs code";
 
     nixconf = "code /Users/jschneider/.config/nix-darwin";
     
@@ -138,7 +140,7 @@
     gcom = "git checkout master && git pull";
     gignore = "c .git/info/exclude";
     glog = "git log --simplify-by-decoration --oneline --graph";
-    glast = "git branch --sort=-committerdate | fzf --header \"Checkout Recent Branch\" --preview \"git diff {1} --color=always\" | xargs git checkout";
+    glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' | xargs git checkout";
   };
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;

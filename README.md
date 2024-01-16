@@ -15,5 +15,5 @@ When in doubt, use Flakes for installations.
     - [manual](https://daiderd.com/nix-darwin/manual/)
     - [home-manager nix-darwin options](https://nix-community.github.io/home-manager/nix-darwin-options.xhtml)
 * The Nix Way
-    - Lots of greate examples for using Nix
+    - Lots of great examples for using Nix
     - [github](https://github.com/the-nix-way)
