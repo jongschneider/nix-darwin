@@ -118,6 +118,8 @@
     colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";
     goi = "go install ./... && go vet ./...";
     c = "code .";
+
+    nixconf = "code /Users/jschneider/.config/nix-darwin";
     
     # More git aliases
     g = "git";
