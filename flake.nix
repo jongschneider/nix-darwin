@@ -30,7 +30,10 @@
       # nix.package = pkgs.nix;
 
       fonts.fontDir.enable = true; # DANGER
-      fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
+      fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ 
+        "Meslo"
+        "Monaspace"
+      ]; }) ];
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";

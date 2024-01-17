@@ -26,6 +26,7 @@
     jqp
     go
     golangci-lint
+    gotestsum
     nodejs_21
     git-open
   ];
@@ -147,8 +148,9 @@
 
   programs.alacritty = {
     enable = true;
-    settings.font.normal.family = "MesloLGS Nerd Font Mono";
-    settings.font.size = 16;
+    # settings.font.normal.family = "MesloLGS Nerd Font Mono";
+    settings.font.normal.family = "Monaspace Krypton Light";
+    settings.font.size = 13;
   };
 
   # home.file.".zshrc".file = ./.zshrc
