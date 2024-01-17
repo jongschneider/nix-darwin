@@ -107,6 +107,9 @@
   programs.git.difftastic.color = "always";
   programs.z-lua.enable = true;
   programs.zsh.enable = true;
+  programs.zsh.initExtra = ''
+    PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+  '';
   programs.zsh.enableCompletion = true;
   programs.zsh.autocd = true;
   programs.zsh.enableAutosuggestions = true;
@@ -117,6 +120,7 @@
     nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
 
     # Work
+    localdev = "/Users/jschneider/code/localdev/localdev";
     runingester = "export INGESTER_ENV=.env && goi && ingester > tmp.txt";
     runintegrator = "export INTEGRATOR_ENV=.env && goi && integrator  > tmp.txt";
     runemailpreprocessor = "ENV_FILE=preprocessor.env.localdev go run ./cmd/email_preprocessor/...";
@@ -124,7 +128,7 @@
     colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";
     goi = "go install ./... && go vet ./...";
     c = "code .";
-    ff = "fzf --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)' | xargs code";
+    ff = "fzf --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs code";
 
     nixconf = "code /Users/jschneider/.config/nix-darwin";
     
@@ -141,16 +145,20 @@
     gcom = "git checkout master && git pull";
     gignore = "c .git/info/exclude";
     glog = "git log --simplify-by-decoration --oneline --graph";
-    glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' | xargs git checkout";
+    glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' --preview-window down --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs git checkout";
   };
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
 
   programs.alacritty = {
     enable = true;
-    # settings.font.normal.family = "MesloLGS Nerd Font Mono";
-    settings.font.normal.family = "Monaspace Krypton Light";
+    settings.font.normal.family = "MesloLGS Nerd Font Mono";
+    # settings.font.normal.family = "Monaspace Krypton Light";
     settings.font.size = 13;
+    settings.cursor.style = {
+      shape = "Beam";
+      blinking = "On";
+    };
   };
 
   # home.file.".zshrc".file = ./.zshrc
