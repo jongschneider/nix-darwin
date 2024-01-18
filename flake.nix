@@ -22,7 +22,8 @@
           shells = with pkgs; [ bash zsh ];
           loginShell = pkgs.zsh;
           systemPackages = with pkgs; [
-            nixpkgs-fmt
+            nixpkgs-fmt # nix code formatter
+            nil # nix LSP... testing this out.
             coreutils
             (import ./scripts/ff.nix { inherit pkgs; })
           ];
@@ -100,20 +101,21 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#Jonathans-MacBook-Pro
-      darwinConfigurations."Jonathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        modules = [
-          configuration
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.jschneider = import ./home.nix;
+      darwinConfigurations."Jonathans-MacBook-Pro" =
+        nix-darwin.lib.darwinSystem {
+          modules = [
+            configuration
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.jschneider = import ./home.nix;
 
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-        ];
-      };
+              # Optionally, use home-manager.extraSpecialArgs to pass
+              # arguments to home.nix
+            }
+          ];
+        };
 
       # Expose the package set, including overlays, for convenience.
       darwinPackages = self.darwinConfigurations."Jonathans-MacBook-Pro".pkgs;
