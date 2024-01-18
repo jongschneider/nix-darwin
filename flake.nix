@@ -23,6 +23,7 @@
         loginShell = pkgs.zsh;
         systemPackages = with pkgs; [ 
           coreutils
+          (import ./scripts/ff.nix { inherit pkgs;})
         ];
         systemPath = [ "/opt/homebrew/bin" ];
         pathsToLink = [ "/Applications" ];

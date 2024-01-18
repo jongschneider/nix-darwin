@@ -110,6 +110,9 @@
   programs.zsh.initExtra = ''
     PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
   '';
+  programs.zsh.initExtraBeforeCompInit = ''
+    PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+  '';
   programs.zsh.enableCompletion = true;
   programs.zsh.autocd = true;
   programs.zsh.enableAutosuggestions = true;
@@ -128,7 +131,6 @@
     colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";
     goi = "go install ./... && go vet ./...";
     c = "code .";
-    ff = "fzf --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs code";
 
     nixconf = "code /Users/jschneider/.config/nix-darwin";
     
