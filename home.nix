@@ -112,6 +112,7 @@
         core.excludesfile = "/Users/jschneider/.gitignore";
         url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
         pull.rebase = true;
+        push = { autoSetupRemote = true; };
       };
     };
 

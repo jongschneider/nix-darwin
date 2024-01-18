@@ -26,6 +26,7 @@
             nil # nix LSP... testing this out.
             coreutils
             (import ./scripts/ff.nix { inherit pkgs; })
+            (import ./scripts/gsquash.nix { inherit pkgs; })
           ];
           systemPath = [ "/opt/homebrew/bin" ];
           pathsToLink = [ "/Applications" ];
