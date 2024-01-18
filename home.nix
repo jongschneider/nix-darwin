@@ -6,7 +6,7 @@
   home.username = "jschneider";
   home.homeDirectory = "/Users/jschneider";
 
-    # Packages that should be installed to the user profile.
+  # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # Basics
     htop
@@ -43,7 +43,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
+
   programs.bat.enable = true;
   programs.bat.config.theme = "TwoDark";
   programs.direnv.enable = true;
@@ -59,45 +59,45 @@
   programs.eza.enableAliases = true;
   programs.git.enable = true;
   programs.git.aliases = {
-      a = "add";
-      c = "commit";
-      ca = "commit --amend";
-      can = "commit --amend --no-edit";
-      cl = "clone";
-      cm = "commit -m";
-      co = "checkout";
-      cp = "cherry-pick";
-      cpx = "cherry-pick -x";
-      d = "diff";
-      f = "fetch";
-      fo = "fetch origin";
-      fu = "fetch upstream";
-      lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
-      lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
-      pl = "pull";
-      pr = "pull -r";
-      ps = "push";
-      psf = "push -f";
-      rb = "rebase";
-      rbi = "rebase -i";
-      r = "remote";
-      ra = "remote add";
-      rr = "remote rm";
-      rv = "remote -v";
-      rs = "remote show";
-      st = "status";
+    a = "add";
+    c = "commit";
+    ca = "commit --amend";
+    can = "commit --amend --no-edit";
+    cl = "clone";
+    cm = "commit -m";
+    co = "checkout";
+    cp = "cherry-pick";
+    cpx = "cherry-pick -x";
+    d = "diff";
+    f = "fetch";
+    fo = "fetch origin";
+    fu = "fetch upstream";
+    lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
+    lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
+    pl = "pull";
+    pr = "pull -r";
+    ps = "push";
+    psf = "push -f";
+    rb = "rebase";
+    rbi = "rebase -i";
+    r = "remote";
+    ra = "remote add";
+    rr = "remote rm";
+    rv = "remote -v";
+    rs = "remote show";
+    st = "status";
   };
   programs.git.extraConfig = {
     core = {
-       excludesfile = "/Users/jschneider/.gitignore";
+      excludesfile = "/Users/jschneider/.gitignore";
     };
     url = {
-        "git@bitbucket.org:" = {
+      "git@bitbucket.org:" = {
         insteadOf = "https://bitbucket.org/";
       };
     };
     pull = {
-        rebase=true;
+      rebase = true;
     };
   };
   programs.git.userName = "Jonathan Schneider";
@@ -133,7 +133,7 @@
     c = "code .";
 
     nixconf = "code /Users/jschneider/.config/nix-darwin";
-    
+
     # More git aliases
     g = "git";
     ga = "git add";

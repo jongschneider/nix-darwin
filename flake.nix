@@ -9,96 +9,101 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager}:
-  let
-    configuration = { pkgs, ... }: {
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
-      services.karabiner-elements.enable = true;
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+    let
+      configuration = { pkgs, ... }: {
+        # List packages installed in system profile. To search by name, run:
+        # $ nix-env -qaP | grep wget
+        # Auto upgrade nix package and the daemon service.
+        services.nix-daemon.enable = true;
+        services.karabiner-elements.enable = true;
 
-      environment = {
-        shells = with pkgs; [ bash zsh ];
-        loginShell = pkgs.zsh;
-        systemPackages = with pkgs; [ 
-          coreutils
-          (import ./scripts/ff.nix { inherit pkgs;})
-        ];
-        systemPath = [ "/opt/homebrew/bin" ];
-        pathsToLink = [ "/Applications" ];
-      };
-      # nix.package = pkgs.nix;
-
-      fonts.fontDir.enable = true; # DANGER
-      fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ 
-        "Meslo"
-        "Monaspace"
-      ]; }) ];
-
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
-      # Create /etc/zshrc that loads the nix-darwin environment.
-      programs.zsh.enable = true;  # default shell on catalina
-      # programs.fish.enable = true;
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # MacOS Configuration
-      system = {
-
-        defaults = {
-          finder.AppleShowAllExtensions = true;
-          finder._FXShowPosixPathInTitle = true;
-          finder.ShowPathbar = true;
-          NSGlobalDomain.InitialKeyRepeat = 14;
-          NSGlobalDomain.KeyRepeat = 1;
-          dock.autohide = true;
+        environment = {
+          shells = with pkgs; [ bash zsh ];
+          loginShell = pkgs.zsh;
+          systemPackages = with pkgs; [
+            nixpkgs-fmt
+            coreutils
+            (import ./scripts/ff.nix { inherit pkgs; })
+          ];
+          systemPath = [ "/opt/homebrew/bin" ];
+          pathsToLink = [ "/Applications" ];
         };
-        
-        # Used for backwards compatibility, please read the changelog before changing.
-        stateVersion = 4;
+        # nix.package = pkgs.nix;
 
-        keyboard.enableKeyMapping = true;
-        keyboard.remapCapsLockToEscape = true;
-      };
+        fonts.fontDir.enable = true; # DANGER
+        fonts.fonts = [
+          (pkgs.nerdfonts.override {
+            fonts = [
+              "Meslo"
+              "Monaspace"
+            ];
+          })
+        ];
+
+        # Necessary for using flakes on this system.
+        nix.settings.experimental-features = "nix-command flakes";
+
+        # Create /etc/zshrc that loads the nix-darwin environment.
+        programs.zsh.enable = true; # default shell on catalina
+        # programs.fish.enable = true;
+
+        # Set Git commit hash for darwin-version.
+        system.configurationRevision = self.rev or self.dirtyRev or null;
+
+        # MacOS Configuration
+        system = {
+
+          defaults = {
+            finder.AppleShowAllExtensions = true;
+            finder._FXShowPosixPathInTitle = true;
+            finder.ShowPathbar = true;
+            NSGlobalDomain.InitialKeyRepeat = 14;
+            NSGlobalDomain.KeyRepeat = 1;
+            dock.autohide = true;
+          };
+
+          # Used for backwards compatibility, please read the changelog before changing.
+          stateVersion = 4;
+
+          keyboard.enableKeyMapping = true;
+          keyboard.remapCapsLockToEscape = true;
+        };
 
 
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
+        # The platform the configuration will be used on.
+        nixpkgs.hostPlatform = "aarch64-darwin";
 
 
-      # Add ability to used TouchID for sudo authentication
-      security.pam.enableSudoTouchIdAuth = true;
+        # Add ability to used TouchID for sudo authentication
+        security.pam.enableSudoTouchIdAuth = true;
 
-      users.users.jschneider = {
+        users.users.jschneider = {
           name = "jschneider";
           home = "/Users/jschneider";
-      };
+        };
 
-      # Homebrew stuff
-      homebrew = {
-        enable = true;
-        caskArgs.no_quarantine = true;
-        global.brewfile = true;
-        casks = [ 
-          "rectangle"
-          "shottr"
-        ];
-        taps = [];
-        brews = [ "trash" ];
+        # Homebrew stuff
+        homebrew = {
+          enable = true;
+          caskArgs.no_quarantine = true;
+          global.brewfile = true;
+          casks = [
+            "rectangle"
+            "shottr"
+          ];
+          taps = [ ];
+          brews = [ "trash" ];
+        };
       };
-    };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Jonathans-MacBook-Pro
-    darwinConfigurations."Jonathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [ 
-        configuration
-        home-manager.darwinModules.home-manager
+    in
+    {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Jonathans-MacBook-Pro
+      darwinConfigurations."Jonathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        modules = [
+          configuration
+          home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -108,9 +113,9 @@
             # arguments to home.nix
           }
         ];
-    };
+      };
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Jonathans-MacBook-Pro".pkgs;
-  };
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."Jonathans-MacBook-Pro".pkgs;
+    };
 }
