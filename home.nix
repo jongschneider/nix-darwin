@@ -29,6 +29,7 @@
       procs
       ripgrep
       ffmpeg
+      asciiquarium
 
       # Dev
       gh
