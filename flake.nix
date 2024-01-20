@@ -16,7 +16,6 @@
         # $ nix-env -qaP | grep wget
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
-        services.karabiner-elements.enable = true;
 
         environment = {
           shells = with pkgs; [ bash zsh ];
@@ -93,6 +92,7 @@
           casks = [
             "rectangle"
             "shottr"
+            "karabiner-elements" # using the cask bc couldn't get  services.karabiner-elements to work correctly
           ];
           taps = [ ];
           brews = [ "trash" ];
