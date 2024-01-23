@@ -7,9 +7,11 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-index-database, ... }:
     let
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
@@ -17,10 +19,13 @@
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
 
+        nixpkgs.config.allowUnfree = true;
+
         environment = {
           shells = with pkgs; [ bash zsh ];
           loginShell = pkgs.zsh;
           systemPackages = with pkgs; [
+            # kitty
             nixpkgs-fmt # nix code formatter
             nil # nix LSP... testing this out.
             coreutils
@@ -47,6 +52,7 @@
 
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh.enable = true; # default shell on catalina
+        programs.bash.enable = true;
         # programs.fish.enable = true;
 
         # Set Git commit hash for darwin-version.
@@ -93,6 +99,7 @@
             "rectangle"
             "shottr"
             "karabiner-elements" # using the cask bc couldn't get  services.karabiner-elements to work correctly
+            # "kitty"
           ];
           taps = [ ];
           brews = [ "trash" ];

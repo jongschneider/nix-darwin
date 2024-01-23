@@ -31,6 +31,16 @@
       ffmpeg
       asciiquarium
 
+      bottom # fancy version of `top` with ASCII graphs
+      du-dust # fancy version of `du`
+      eza # fancy version of `ls`
+      fd # fancy version of `find`
+      mosh # wrapper for `ssh` that better and not dropping connections
+      tealdeer # rust implementation of `tldr`
+      thefuck
+      unrar # extract RAR archives
+      xz # extract XZ archives
+
       # Dev
       gh
       fh
@@ -42,10 +52,20 @@
       gotestsum
       nodejs_21
       git-open
+
+      # Useful nix related tools
+      cachix # adding/managing alternative binary caches hosted by Cachix
+      comma # run software from without installing it
+      nix-output-monitor # get additional information while building packages
+      nix-tree # interactively browse dependency graphs of Nix derivations
+      nix-update # swiss-knife for updating nix packages
+      node2nix # generate Nix expressions to build NPM packages
+      statix # lints and suggestions for the Nix programming language
     ];
   };
 
   programs = {
+
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
@@ -175,6 +195,8 @@
       enable = true;
 
       settings = {
+        env.TERM = "xterm-256color";
+
         font = {
           normal.family = "MesloLGS Nerd Font Mono";
           # normal.family = "Monaspace Krypton Light";
@@ -187,6 +209,12 @@
         };
       };
 
+    };
+
+    kitty = {
+      enable = true;
+      extraConfig = builtins.readFile ./kitty;
+      shellIntegration.enableZshIntegration = true;
     };
   };
 
