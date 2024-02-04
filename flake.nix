@@ -54,6 +54,7 @@
         programs.zsh.enable = true; # default shell on catalina
         programs.bash.enable = true;
         # programs.fish.enable = true;
+        # programs.nix-index.enable = true;
 
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -96,10 +97,10 @@
           caskArgs.no_quarantine = true;
           global.brewfile = true;
           casks = [
+            "raycast"
             "rectangle"
             "shottr"
             "karabiner-elements" # using the cask bc couldn't get  services.karabiner-elements to work correctly
-            # "kitty"
           ];
           taps = [ ];
           brews = [ "trash" ];

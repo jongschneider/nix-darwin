@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
@@ -52,6 +52,7 @@
       gotestsum
       nodejs_21
       git-open
+      mkcert
 
       # Useful nix related tools
       cachix # adding/managing alternative binary caches hosted by Cachix
