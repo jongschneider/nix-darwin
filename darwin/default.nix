@@ -40,11 +40,9 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
   programs.bash.enable = true;
-  # programs.fish.enable = true;
 
   # MacOS Configuration
   system = {
-
     defaults = {
       finder.AppleShowAllExtensions = true;
       finder._FXShowPosixPathInTitle = true;
@@ -65,19 +63,4 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   nixpkgs.hostPlatform = "aarch64-darwin";
-  
-  # Homebrew stuff
-  # homebrew = {
-  #   enable = true;
-  #   caskArgs.no_quarantine = true;
-  #   global.brewfile = true;
-  #   casks = [
-  #     "raycast"
-  #     "rectangle"
-  #     "shottr"
-  #     "karabiner-elements" # using the cask bc couldn't get  services.karabiner-elements to work correctly
-  #   ];
-  #   taps = [ ];
-  #   brews = [ "trash" ];
-  # };
 }

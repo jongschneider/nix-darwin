@@ -21,7 +21,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.jschneider = import ./home.nix;
+              home-manager.users.jschneider = import ./hosts/work/home.nix;
 
               # Optionally, use home-manager.extraSpecialArgs to pass
               # arguments to home.nix

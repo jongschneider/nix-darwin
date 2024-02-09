@@ -1,6 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, home-manager, ... }:
 
 {
+
+imports = [
+    ./kitty
+    # ./programs
+    # ./skhd
+    # ./vscode
+    # ./yabai
+  ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
 
@@ -211,12 +219,6 @@
         };
       };
 
-    };
-
-    kitty = {
-      enable = true;
-      extraConfig = builtins.readFile ./kitty;
-      shellIntegration.enableZshIntegration = true;
     };
   };
 
