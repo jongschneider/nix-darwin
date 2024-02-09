@@ -53,6 +53,7 @@
       nodejs_21
       git-open
       mkcert
+      glow
 
       # Useful nix related tools
       cachix # adding/managing alternative binary caches hosted by Cachix
