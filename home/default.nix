@@ -32,6 +32,7 @@
       # Basics
       htop
       coreutils
+      inetutils
       curl
       wget
       tree
@@ -39,6 +40,7 @@
       ripgrep
       ffmpeg
       asciiquarium
+      srt
 
       bottom # fancy version of `top` with ASCII graphs
       du-dust # fancy version of `du`
@@ -51,6 +53,7 @@
       xz # extract XZ archives
 
       # Dev
+      awscli
       gh
       fh
       lf
@@ -63,6 +66,21 @@
       git-open
       mkcert
       glow
+      youtube-dl
+      redis
+      protobuf
+      cpulimit
+      
+      # not sure I need... were migrated from brew
+      x265
+      x264
+      svt-av1
+      utf8proc
+      speex
+      snappy
+      shared-mime-info
+      rav1e
+      pango
 
       # Useful nix related tools
       cachix # adding/managing alternative binary caches hosted by Cachix
