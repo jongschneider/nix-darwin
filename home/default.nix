@@ -30,34 +30,26 @@
     # Packages that should be installed to the user profile.
     packages = with pkgs; [
       # Basics
-      htop
       coreutils
       inetutils
       curl
       wget
       tree
       procs
-      ripgrep
       ffmpeg
       asciiquarium
       srt
+      mysql
 
-      bottom # fancy version of `top` with ASCII graphs
       du-dust # fancy version of `du`
-      eza # fancy version of `ls`
       fd # fancy version of `find`
       mosh # wrapper for `ssh` that better and not dropping connections
-      tealdeer # rust implementation of `tldr`
-      thefuck
       unrar # extract RAR archives
       xz # extract XZ archives
+      zlib
 
       # Dev
-      awscli
-      gh
       fh
-      lf
-      jq
       jqp
       go
       golangci-lint

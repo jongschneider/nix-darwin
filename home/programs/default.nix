@@ -3,6 +3,25 @@
 # https://nix-community.github.io/home-manager/options.html
 {
   programs = {
+    htop.enable = true;
+    ripgrep.enable = true;
+    bottom.enable = true; # fancy version of `top` with ASCII graphs
+    tealdeer.enable = true; # rust implementation of `tldr`
+    gh.enable = true;
+    lf.enable = true;
+    jq.enable = true;
+
+    thefuck = {
+      enable = true;
+      enableZshIntegration = true;
+      enableInstantMode = true;
+    };
+
+    awscli = {
+      enable = true;
+      # TODO: add credentials here
+    };
+
     bat = {
       enable = true;
       config.theme = "TwoDark";
@@ -11,6 +30,8 @@
     eza = {
       enable = true;
       enableAliases = true;
+      git = true;
+      icons = true;
     };
 
     direnv = {
@@ -77,17 +98,17 @@
       enable = true;
       initExtra = ''
         PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+        # Fig post block. Keep at the bottom of this file.
+        [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
       '';
-      initExtraBeforeCompInit = ''
-        PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
-      '';
+
       enableCompletion = true;
       autocd = true;
       enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        # ls = "ls --color=auto -F";
+        nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
         nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
         nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
 
