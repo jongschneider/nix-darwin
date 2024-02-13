@@ -31,15 +31,28 @@
   services.nix-daemon.enable = true;
   services.karabiner-elements.enable = true;
 
-  # nix.package = pkgs.nix;
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      builders-use-substitutes = true;
+      experimental-features = [ "flakes" "nix-command" ];
+      substituters = [ "https://nix-community.cachix.org" ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      trusted-users = [ "@wheel" ];
+      warn-dirty = false;
+    };
+  };
+  
   nixpkgs.config.allowUnfree = true;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
   programs.bash.enable = true;
+  programs.nix-index.enable = true;
 
   # MacOS Configuration
   system = {

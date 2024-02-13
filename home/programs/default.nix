@@ -84,6 +84,8 @@
         st = "status";
       };
 
+      ignores = [  ".direnv" ".envrc" "tmp.txt" "testout.txt"];
+
       extraConfig = {
         core.excludesfile = "/Users/jschneider/.gitignore";
         url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
