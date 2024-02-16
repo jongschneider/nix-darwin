@@ -10,6 +10,7 @@
       coreutils
       (import ../scripts/ff.nix { inherit pkgs; })
       (import ../scripts/gsquash.nix { inherit pkgs; })
+      discord
     ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
@@ -45,6 +46,9 @@
       trusted-users = [ "@wheel" ];
       warn-dirty = false;
     };
+    extraOptions = ''
+      extra-platforms = x86_64-darwin aarch64-darwin
+    '';
   };
   
   nixpkgs.config.allowUnfree = true;

@@ -62,6 +62,7 @@
       redis
       protobuf
       cpulimit
+      neofetch
       
       # not sure I need... were migrated from brew
       x265
