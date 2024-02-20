@@ -105,7 +105,6 @@
         f = "fetch";
         fo = "fetch origin";
         fu = "fetch upstream";
-        lg = "lazygit";
         lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
         lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
         pl = "pull";
@@ -197,6 +196,7 @@
         nixconf = "code /Users/jschneider/.config/nix-darwin";
 
         # More git aliases
+        lg = "lazygit";
         g = "git";
         ga = "git add";
         gs = "git status";
