@@ -30,7 +30,7 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  services.karabiner-elements.enable = true;
+  # services.karabiner-elements.enable = true;
 
 
   # Necessary for using flakes on this system.
@@ -50,7 +50,11 @@
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
   };
-  
+
+  nix.nixPath = [
+    "$HOME/.nix-defexpr/channels"
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   # Create /etc/zshrc that loads the nix-darwin environment.

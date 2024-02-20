@@ -1,4 +1,4 @@
-{pkgs, ...}: 
+{ pkgs, ... }:
 {
   # TODO: https://github.com/davish/setup/blob/main/home/vscode/default.nix
 

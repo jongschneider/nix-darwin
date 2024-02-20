@@ -9,13 +9,14 @@
   ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home = {
     username = "jschneider";
     homeDirectory = "/Users/jschneider";
+    sessionVariables.EDITOR = "code";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -63,7 +64,7 @@
       protobuf
       cpulimit
       neofetch
-      
+
       # not sure I need... were migrated from brew
       x265
       x264
