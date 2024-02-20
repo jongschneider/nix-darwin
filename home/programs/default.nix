@@ -46,7 +46,22 @@
     };
 
 
-    lazygit.enable = true;
+    lazygit = {
+      enable = true;
+      settings = {
+        git = {
+          paging = {
+            colorArg = "always";
+            pager = "delta --color-only --dark --paging=never";
+            useConfig = false;
+            showRandomTip = true;
+            nerdFontsVersion = "2";
+            showFileIcons = true;
+            splitDiff = "auto";
+          };
+        };
+      };
+    };
 
     git = {
       enable = true;
@@ -144,6 +159,16 @@
         mappings = {
           K = "preview-tui";
         };
+        src = pkgs.nnn + "/plugins";
+      };
+      bookmarks = {
+        a = "~/Applications";
+        d = "~/Desktop";
+        D = "~/Downloads";
+        c = "~/code";
+        i = "~/code/integrator";
+        n = "~/code/ingester";
+        N = "/Users/jschneider/.config/nix-darwin";
       };
     };
 
