@@ -17,7 +17,6 @@
       presenterm
       nurl
       manix
-      go
     ];
     systemPath = ["/opt/homebrew/bin"];
     pathsToLink = ["/Applications"];

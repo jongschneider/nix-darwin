@@ -55,9 +55,9 @@
       # Dev
       fh
       jqp
-      # go
-      # golangci-lint
-      # gotestsum
+      go
+      golangci-lint
+      gotestsum
       nodejs_21
       git-open
       mkcert
