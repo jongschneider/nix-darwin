@@ -1,19 +1,25 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
   environment = {
-    shells = with pkgs; [ bash zsh ];
+    shells = with pkgs; [bash zsh];
     loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
-      nixpkgs-fmt # nix code formatter
-      nil # nix LSP... testing this out.
+      # nixpkgs-fmt # nix code formatter
+      # nil # nix LSP... testing this out.
+      alejandra
       coreutils
-      (import ../scripts/ff.nix { inherit pkgs; })
-      (import ../scripts/gsquash.nix { inherit pkgs; })
+      (import ../scripts/ff.nix {inherit pkgs;})
+      (import ../scripts/gsquash.nix {inherit pkgs;})
       discord
+      presenterm
+      nurl
+      manix
     ];
-    systemPath = [ "/opt/homebrew/bin" ];
-    pathsToLink = [ "/Applications" ];
+    systemPath = ["/opt/homebrew/bin"];
+    pathsToLink = ["/Applications"];
   };
 
   fonts.fontDir.enable = true; # DANGER
@@ -26,29 +32,33 @@
     })
   ];
 
-  homebrew = import ./homebrew.nix // { enable = true; };
+  homebrew = import ./homebrew.nix // {enable = true;};
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   # services.karabiner-elements.enable = true;
-
 
   # Necessary for using flakes on this system.
   nix = {
     settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
-      experimental-features = [ "flakes" "nix-command" ];
-      substituters = [ "https://nix-community.cachix.org" ];
+      experimental-features = ["flakes" "nix-command"];
+      substituters = ["https://nix-community.cachix.org"];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
-      trusted-users = [ "@wheel" ];
+      trusted-users = ["@wheel"];
       warn-dirty = false;
     };
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
+
+    # linux-builder.enable = true;
+
+    # # This line is a prerequisite
+    # trusted-users = [ "@admin" ];
   };
 
   nix.nixPath = [

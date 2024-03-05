@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-
+{pkgs, ...}:
 # https://nix-community.github.io/home-manager/options.html
 {
   programs = {
@@ -44,7 +43,6 @@
       enable = true;
       enableZshIntegration = true;
     };
-
 
     lazygit = {
       enable = true;
@@ -136,7 +134,7 @@
         st = "status";
       };
 
-      ignores = [ ".direnv" ".envrc" "tmp.txt" "testout.txt" ];
+      ignores = [".direnv" ".envrc" "tmp.txt" "testout.txt"];
 
       extraConfig = {
         url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
@@ -154,7 +152,7 @@
 
     nnn = {
       enable = true;
-      package = pkgs.nnn.override { withNerdIcons = true; };
+      package = pkgs.nnn.override {withNerdIcons = true;};
       plugins = {
         mappings = {
           K = "preview-tui";
@@ -263,7 +261,6 @@
           blinking = "On";
         };
       };
-
     };
   };
 }

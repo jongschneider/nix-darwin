@@ -1,7 +1,10 @@
-{ pkgs, config, lib, home-manager, ... }:
-
 {
-
+  pkgs,
+  config,
+  lib,
+  home-manager,
+  ...
+}: {
   imports = [
     ./kitty
     ./programs
@@ -37,7 +40,7 @@
       wget
       tree
       procs
-      ffmpeg
+      # ffmpeg
       asciiquarium
       srt
       mysql
@@ -52,14 +55,14 @@
       # Dev
       fh
       jqp
-      go
-      golangci-lint
-      gotestsum
+      # go
+      # golangci-lint
+      # gotestsum
       nodejs_21
       git-open
       mkcert
       glow
-      youtube-dl
+      # youtube-dl
       redis
       protobuf
       cpulimit
@@ -72,7 +75,7 @@
       utf8proc
       speex
       snappy
-      shared-mime-info
+      # shared-mime-info
       rav1e
       pango
 
@@ -86,5 +89,4 @@
       statix # lints and suggestions for the Nix programming language
     ];
   };
-
 }
