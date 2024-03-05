@@ -26,12 +26,12 @@
       config.theme = "TwoDark";
     };
 
-    # eza = {
-    #   enable = true;
-    #   enableAliases = true;
-    #   git = true;
-    #   icons = true;
-    # };
+    eza = {
+      enable = true;
+      # enableAliases = true;
+      git = true;
+      icons = true;
+    };
 
     direnv = {
       enable = true;
@@ -201,6 +201,11 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
+        ls = "eza";
+        lll = "eza -l";
+        la = "eza -a";
+        lt = "eza --tree";
+        lla = "eza -la";
         ll = "n";
         nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
         nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
