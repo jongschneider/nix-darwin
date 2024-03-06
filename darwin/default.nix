@@ -74,7 +74,7 @@
 
   programs.nixvim = {
     enable = true;
-    colorschemes.tokyonight.enable = true;
+    colorschemes.nord.enable = true;
 
     # Use system clipboard
     clipboard.register = "unnamedplus";
