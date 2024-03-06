@@ -72,6 +72,53 @@
   programs.bash.enable = true;
   programs.nix-index.enable = true;
 
+  programs.nixvim = {
+    enable = true;
+    colorschemes.tokyonight.enable = true;
+
+    # Use system clipboard
+    clipboard.register = "unnamedplus";
+
+    # Plugins
+    plugins.airline = {
+      enable = true;
+      theme = "deus";
+    };
+
+    # LSP
+    plugins.lsp.enable = true;
+    plugins.lsp.servers = {
+      bashls = {
+        enable = true;
+      };
+      clangd = {
+        enable = true;
+      };
+      pyright = {
+        enable = true;
+      };
+      rnix-lsp = {
+        enable = true;
+      };
+    };
+
+    options = {
+      number = true;
+      relativenumber = true;
+      fileencoding = "utf-8";
+      hlsearch = true;
+      ignorecase = true;
+      mouse = "a";
+      showtabline = 2;
+      smartcase = true;
+      smartindent = true;
+      undofile = true;
+      expandtab = true;
+      shiftwidth = 2;
+      tabstop = 2;
+    };
+  };
+
   # MacOS Configuration
   system = {
     defaults = {
