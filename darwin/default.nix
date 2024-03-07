@@ -62,7 +62,8 @@
   };
 
   nix.nixPath = [
-    "$HOME/.nix-defexpr/channels"
+    # Support legacy workflows that use `<nixpkgs>` etc.
+    "nixpkgs=${pkgs.path}"
   ];
 
   nixpkgs.config.allowUnfree = true;
