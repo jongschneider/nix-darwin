@@ -75,16 +75,34 @@
 
   programs.nixvim = {
     enable = true;
-    colorschemes.nord.enable = true;
+
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>lg";
+        action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>";
+        # options.desc = "[U]ndo tree";
+      }
+      {
+        mode = "n";
+        key = "<leader>ll";
+        action = ":FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>";
+      }
+    ];
+
+    colorschemes.nord = {
+      enable = true;
+      settings.contrast = true;
+    };
 
     # Use system clipboard
     clipboard.register = "unnamedplus";
 
     # Plugins
-    plugins.airline = {
-      enable = true;
-      theme = "deus";
-    };
+    # plugins.airline = {
+    #   enable = true;
+    #   theme = "deus";
+    # };
 
     # LSP
     plugins.lsp.enable = true;
@@ -101,6 +119,17 @@
       rnix-lsp = {
         enable = true;
       };
+    };
+
+    plugins.bufferline = {
+      enable = true;
+    };
+
+    plugins.floaterm = {
+      enable = true;
+      keymaps.toggle = "<leader>t";
+      width = 0.9;
+      height = 0.9;
     };
 
     options = {
