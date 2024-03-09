@@ -201,7 +201,7 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        ls = "eza";
+        l = "eza";
         lll = "eza -l";
         la = "eza -a";
         lt = "eza --tree";
@@ -211,6 +211,8 @@
         nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
         nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
 
+        killmysql = "sudo pkill mysql";
+
         # Work
         localdev = "/Users/jschneider/code/localdev/localdev";
         runingester = "export INGESTER_ENV=.env && goi && ingester > tmp.txt";
@@ -218,7 +220,8 @@
         runemailpreprocessor = "ENV_FILE=preprocessor.env.localdev go run ./cmd/email_preprocessor/...";
         telcon = "tsh login --proxy=thetalake.teleport.sh --auth=google";
         colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";
-        goi = "go install ./... && go vet ./...";
+        # goi = "go install ./... && go vet ./...";
+        goi = "go install ./...";
         c = "code .";
 
         nixconf = "code /Users/jschneider/.config/nix-darwin";

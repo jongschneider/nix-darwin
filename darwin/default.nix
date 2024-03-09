@@ -48,17 +48,18 @@
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
-      trusted-users = ["@wheel"];
+      trusted-users = [
+        "@wheel"
+        "@admin" # This line is a prerequisite for linux-builder
+      ];
       warn-dirty = false;
     };
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
 
-    # linux-builder.enable = true;
-
-    # # This line is a prerequisite
-    # trusted-users = [ "@admin" ];
+    #  https://nixcademy.com/2024/02/12/macos-linux-builder/
+    linux-builder.enable = true;
   };
 
   nix.nixPath = [
@@ -75,6 +76,7 @@
 
   programs.nixvim = {
     enable = true;
+    enableMan = true;
 
     keymaps = [
       {
@@ -83,10 +85,45 @@
         action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>";
         # options.desc = "[U]ndo tree";
       }
+      # map('n', '<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', options)
+      {
+        mode = "n";
+        key = "<leader>ld";
+        action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>";
+        # options.desc = "[U]ndo tree";
+      }
       {
         mode = "n";
         key = "<leader>ll";
         action = ":FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>";
+      }
+      {
+        key = "<leader>fm";
+        action = ":Autoformat<CR>";
+        options = {
+          silent = true;
+        };
+      }
+      {
+        key = ".";
+        action = ":";
+      }
+      {
+        key = "<leader>bb";
+        action = "<CMD>Telescope file_browser<NL>";
+      }
+      {
+        key = "<leader>t";
+        action = "<CMD>Neotree<NL>";
+      }
+      {
+        key = "<Tab>";
+        action = "<CMD>:bnext<NL>";
+      }
+
+      {
+        key = "<leader>x";
+        action = "<CMD>:bp | bd #<NL>";
       }
     ];
 
@@ -95,9 +132,54 @@
       settings.contrast = true;
     };
 
+    plugins.neo-tree = {
+      enable = true;
+      autoCleanAfterSessionRestore = true;
+      closeIfLastWindow = true;
+
+      window = {
+        position = "float";
+      };
+
+      filesystem = {
+        followCurrentFile.enabled = true;
+        filteredItems = {
+          hideHidden = false;
+          hideDotfiles = false;
+          forceVisibleInEmptyFolder = true;
+          hideGitignored = false;
+        };
+      };
+
+      window.mappings = {
+        "<bs>" = "navigate_up";
+        "." = "set_root";
+        "f" = "fuzzy_finder";
+        "/" = "filter_on_submit";
+        "h" = "show_help";
+      };
+
+      eventHandlers = {
+        neo_tree_buffer_enter = ''
+          function()
+            vim.cmd 'highlight! Cursor blend=100'
+          end
+        '';
+        neo_tree_buffer_leave = ''
+          function()
+            vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
+          end
+        '';
+      };
+    };
+
+    # colorschemes.catppuccin = {
+    #   enable = true;
+    # };
+
     # Use system clipboard
     clipboard.register = "unnamedplus";
-
+    globals.mapleader = " ";
     # Plugins
     # plugins.airline = {
     #   enable = true;
@@ -113,21 +195,117 @@
       clangd = {
         enable = true;
       };
+
+      eslint = {
+        enable = true;
+      };
+
+      gopls = {
+        enable = true;
+      };
+
+      html = {
+        enable = true;
+      };
       pyright = {
         enable = true;
       };
       rnix-lsp = {
         enable = true;
       };
+
+      rust-analyzer = {
+        enable = true;
+        installCargo = true;
+        installRustc = true;
+      };
+
+      terraformls = {
+        enable = true;
+      };
+    };
+
+    plugins.luasnip.enable = true;
+    plugins.lsp-format.enable = true;
+    plugins.lsp-lines.enable = true;
+    plugins.treesitter.enable = true;
+    plugins.treesitter.nixGrammars = true;
+    plugins.treesitter-context.enable = true;
+    plugins.cmp-treesitter.enable = true;
+    plugins.treesitter-refactor = {
+      enable = true;
+      highlightCurrentScope.enable = true;
+      highlightCurrentScope.disable = [
+        "nix"
+      ];
+      highlightDefinitions.enable = true;
+      navigation.enable = true;
+      smartRename.enable = true;
+    };
+    plugins.nvim-colorizer.enable = true;
+    plugins.rainbow-delimiters.enable = true;
+    plugins.which-key = {
+      enable = true;
+    };
+
+    # plugins.cmp.enable = true;
+
+    plugins.cmp = {
+      enable = true;
+      settings.sources = [
+        {name = "nvim_lsp";}
+        {name = "path";}
+        {name = "buffer";}
+        {name = "luasnip";}
+      ];
+
+      settings.mapping = {
+        "<CR>" = "cmp.mapping.confirm({ select = true })";
+        "<C-Space>" = "cmp.mapping.complete()";
+        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+        "<C-e>" = "cmp.mapping.close()";
+        "<C-f>" = "cmp.mapping.scroll_docs(4)";
+        "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+        "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+      };
+      settings.snippet.expand = ''
+        function(args)
+        require('luasnip').lsp_expand(args.body)
+        end
+      '';
     };
 
     plugins.bufferline = {
       enable = true;
     };
 
+    plugins.telescope = {
+      enable = true;
+
+      enabledExtensions = ["ui-select"];
+      extensionConfig.ui-select = {};
+      extensions.frecency.enable = true;
+      extensions.fzf-native.enable = true;
+
+      extensions.file_browser = {
+        enable = true;
+        hidden = true;
+        depth = 9999999999;
+        autoDepth = true;
+      };
+      keymaps = {
+        "<leader>ff" = "find_files";
+        "<leader>fs" = "grep_string";
+        "<leader>fg" = "live_grep";
+      };
+    };
+
+    plugins.gitsigns.enable = true;
+    plugins.lualine.enable = true;
+
     plugins.floaterm = {
       enable = true;
-      keymaps.toggle = "<leader>t";
+      keymaps.toggle = "<leader>j";
       width = 0.9;
       height = 0.9;
     };
@@ -147,6 +325,12 @@
       shiftwidth = 2;
       tabstop = 2;
     };
+
+    extraPlugins = with pkgs.vimPlugins; [
+      telescope-ui-select-nvim
+      vim-autoformat
+      vim-jsbeautify
+    ];
   };
 
   # MacOS Configuration

@@ -40,6 +40,7 @@
     protobuf
     cpulimit
     neofetch
+    lazydocker
 
     # not sure I need... were migrated from brew
     x265
