@@ -22,15 +22,10 @@
     pathsToLink = ["/Applications"];
   };
 
-  fonts.fontDir.enable = true; # DANGER
-  fonts.fonts = [
-    (pkgs.nerdfonts.override {
-      fonts = [
-        "Meslo"
-        "Monaspace"
-      ];
-    })
-  ];
+  # fonts.fontDir.enable = true; # DANGER
+  # fonts.fonts = [
+  #   (pkgs.nerdfonts.override {fonts = ["Hack" "Monaspace" "Meslo"];})
+  # ];
 
   homebrew = import ./homebrew.nix // {enable = true;};
 
@@ -74,264 +69,327 @@
   programs.bash.enable = true;
   programs.nix-index.enable = true;
 
-  programs.nixvim = {
-    enable = true;
-    enableMan = true;
+  # programs.nixvim = {
+  #   enable = true;
+  #   enableMan = true;
 
-    keymaps = [
-      {
-        mode = "n";
-        key = "<leader>lg";
-        action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>";
-        # options.desc = "[U]ndo tree";
-      }
-      # map('n', '<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', options)
-      {
-        mode = "n";
-        key = "<leader>ld";
-        action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>";
-        # options.desc = "[U]ndo tree";
-      }
-      {
-        mode = "n";
-        key = "<leader>ll";
-        action = ":FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>";
-      }
-      {
-        key = "<leader>fm";
-        action = ":Autoformat<CR>";
-        options = {
-          silent = true;
-        };
-      }
-      {
-        key = ".";
-        action = ":";
-      }
-      {
-        key = "<leader>bb";
-        action = "<CMD>Telescope file_browser<NL>";
-      }
-      {
-        key = "<leader>t";
-        action = "<CMD>Neotree<NL>";
-      }
-      {
-        key = "<Tab>";
-        action = "<CMD>:bnext<NL>";
-      }
+  #   keymaps = [
+  #     {
+  #       mode = "n";
+  #       key = "<leader>lg";
+  #       action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>";
+  #       # options.desc = "[U]ndo tree";
+  #     }
+  #     # map('n', '<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', options)
+  #     {
+  #       mode = "n";
+  #       key = "<leader>ld";
+  #       action = ":FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>";
+  #       # options.desc = "[U]ndo tree";
+  #     }
+  #     {
+  #       mode = "n";
+  #       key = "<leader>ll";
+  #       action = ":FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>";
+  #     }
+  #     {
+  #       key = "<leader>fm";
+  #       action = ":Autoformat<CR>";
+  #       options = {
+  #         silent = true;
+  #       };
+  #     }
+  #     {
+  #       key = ".";
+  #       action = ":";
+  #     }
+  #     {
+  #       key = "<leader>bb";
+  #       action = "<CMD>Telescope file_browser<NL>";
+  #     }
+  #     {
+  #       key = "<leader>t";
+  #       action = "<CMD>Neotree<NL>";
+  #     }
+  #     {
+  #       key = "<Tab>";
+  #       action = "<CMD>:bnext<NL>";
+  #     }
+  #     {
+  #       key = "<leader>x";
+  #       action = "<CMD>:bp | bd #<NL>";
+  #     }
+  #     {
+  #       mode = "n";
+  #       key = "<leader>u";
+  #       action = "<cmd>UndotreeToggle<CR>";
+  #       options = {
+  #         silent = true;
+  #         desc = "Undotree";
+  #       };
+  #     }
+  #     # {
+  #     #   key = "<leader>u";
+  #     #   action = "vim.cmd.UndotreeToggle";
+  #     #   lua = true;
+  #     #   mode = "n";
+  #     #   options.silent = true;
+  #     # }
+  #   ];
 
-      {
-        key = "<leader>x";
-        action = "<CMD>:bp | bd #<NL>";
-      }
-    ];
+  #   colorschemes.nord = {
+  #     enable = true;
+  #     settings.contrast = true;
+  #     settings.italic = false;
+  #   };
 
-    colorschemes.nord = {
-      enable = true;
-      settings.contrast = true;
-    };
+  #   plugins.neo-tree = {
+  #     enable = true;
+  #     autoCleanAfterSessionRestore = true;
+  #     closeIfLastWindow = true;
 
-    plugins.neo-tree = {
-      enable = true;
-      autoCleanAfterSessionRestore = true;
-      closeIfLastWindow = true;
+  #     window = {
+  #       position = "float";
+  #     };
 
-      window = {
-        position = "float";
-      };
+  #     filesystem = {
+  #       followCurrentFile.enabled = true;
+  #       filteredItems = {
+  #         hideHidden = false;
+  #         hideDotfiles = false;
+  #         forceVisibleInEmptyFolder = true;
+  #         hideGitignored = false;
+  #       };
+  #     };
 
-      filesystem = {
-        followCurrentFile.enabled = true;
-        filteredItems = {
-          hideHidden = false;
-          hideDotfiles = false;
-          forceVisibleInEmptyFolder = true;
-          hideGitignored = false;
-        };
-      };
+  #     window.mappings = {
+  #       "<bs>" = "navigate_up";
+  #       "." = "set_root";
+  #       "f" = "fuzzy_finder";
+  #       "/" = "filter_on_submit";
+  #       "h" = "show_help";
+  #     };
 
-      window.mappings = {
-        "<bs>" = "navigate_up";
-        "." = "set_root";
-        "f" = "fuzzy_finder";
-        "/" = "filter_on_submit";
-        "h" = "show_help";
-      };
+  #     eventHandlers = {
+  #       neo_tree_buffer_enter = ''
+  #         function()
+  #           vim.cmd 'highlight! Cursor blend=100'
+  #         end
+  #       '';
+  #       neo_tree_buffer_leave = ''
+  #         function()
+  #           vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
+  #         end
+  #       '';
+  #     };
+  #   };
 
-      eventHandlers = {
-        neo_tree_buffer_enter = ''
-          function()
-            vim.cmd 'highlight! Cursor blend=100'
-          end
-        '';
-        neo_tree_buffer_leave = ''
-          function()
-            vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
-          end
-        '';
-      };
-    };
+  #   plugins.undotree = {
+  #     enable = true;
+  #     settings = {
+  #       autoOpenDiff = true;
+  #       focusOnToggle = true;
+  #       # CursorLine = true;
+  #       # DiffAutoOpen = true;
+  #       # DiffCommand = "diff";
+  #       # DiffpanelHeight = 10;
+  #       # HelpLine = true;
+  #       # HighlightChangedText = true;
+  #       # HighlightChangedWithSign = true;
+  #       # HighlightSyntaxAdd = "DiffAdd";
+  #       # HighlightSyntaxChange = "DiffChange";
+  #       # HighlightSyntaxDel = "DiffDelete";
+  #       # RelativeTimestamp = true;
+  #       # SetFocusWhenToggle = true;
+  #       # ShortIndicators = false;
+  #       # SplitWidth = 40;
+  #       # TreeNodeShape = "*";
+  #       # TreeReturnShape = "\\";
+  #       # TreeSplitShape = "/";
+  #       # TreeVertShape = "|";
+  #       # WindowLayout = 4;
+  #     };
+  #   };
 
-    # colorschemes.catppuccin = {
-    #   enable = true;
-    # };
+  #   # colorschemes.catppuccin = {
+  #   #   enable = true;
+  #   # };
 
-    # Use system clipboard
-    clipboard.register = "unnamedplus";
-    globals.mapleader = " ";
-    # Plugins
-    # plugins.airline = {
-    #   enable = true;
-    #   theme = "deus";
-    # };
+  #   # Use system clipboard
+  #   clipboard.register = "unnamedplus";
+  #   globals.mapleader = " ";
+  #   # Plugins
+  #   # plugins.airline = {
+  #   #   enable = true;
+  #   #   theme = "deus";
+  #   # };
 
-    # LSP
-    plugins.lsp.enable = true;
-    plugins.lsp.servers = {
-      bashls = {
-        enable = true;
-      };
-      clangd = {
-        enable = true;
-      };
+  #   # LSP
+  #   plugins.lsp = {
+  #     enable = true;
+  #     servers = {
+  #       bashls = {
+  #         enable = true;
+  #       };
+  #       clangd = {
+  #         enable = true;
+  #       };
 
-      eslint = {
-        enable = true;
-      };
+  #       eslint = {
+  #         enable = true;
+  #       };
 
-      gopls = {
-        enable = true;
-      };
+  #       gopls = {
+  #         enable = true;
+  #       };
 
-      html = {
-        enable = true;
-      };
-      pyright = {
-        enable = true;
-      };
-      rnix-lsp = {
-        enable = true;
-      };
+  #       html = {
+  #         enable = true;
+  #       };
+  #       pyright = {
+  #         enable = true;
+  #       };
+  #       rnix-lsp = {
+  #         enable = true;
+  #       };
 
-      rust-analyzer = {
-        enable = true;
-        installCargo = true;
-        installRustc = true;
-      };
+  #       rust-analyzer = {
+  #         enable = true;
+  #         installCargo = true;
+  #         installRustc = true;
+  #       };
 
-      terraformls = {
-        enable = true;
-      };
-    };
+  #       terraformls = {
+  #         enable = true;
+  #       };
+  #     };
 
-    plugins.luasnip.enable = true;
-    plugins.lsp-format.enable = true;
-    plugins.lsp-lines.enable = true;
-    plugins.treesitter.enable = true;
-    plugins.treesitter.nixGrammars = true;
-    plugins.treesitter-context.enable = true;
-    plugins.cmp-treesitter.enable = true;
-    plugins.treesitter-refactor = {
-      enable = true;
-      highlightCurrentScope.enable = true;
-      highlightCurrentScope.disable = [
-        "nix"
-      ];
-      highlightDefinitions.enable = true;
-      navigation.enable = true;
-      smartRename.enable = true;
-    };
-    plugins.nvim-colorizer.enable = true;
-    plugins.rainbow-delimiters.enable = true;
-    plugins.which-key = {
-      enable = true;
-    };
+  #     keymaps.lspBuf = {
+  #       K = "hover";
+  #       gr = "references";
+  #       gD = "declaration";
+  #       gd = "definition";
+  #       gi = "implementation";
+  #       gt = "type_definition";
+  #       gs = "signature_help";
+  #       rn = "rename";
+  #       ca = "code_action";
+  #     };
+  #   };
 
-    # plugins.cmp.enable = true;
+  #   plugins.luasnip.enable = true;
+  #   plugins.lsp-format.enable = true;
+  #   plugins.lsp-lines.enable = true;
+  #   plugins.treesitter.enable = true;
+  #   plugins.treesitter.nixGrammars = true;
+  #   plugins.treesitter-context.enable = true;
+  #   plugins.cmp-treesitter.enable = true;
+  #   plugins.treesitter-refactor = {
+  #     enable = true;
+  #     highlightCurrentScope.enable = true;
+  #     highlightCurrentScope.disable = [
+  #       "nix"
+  #     ];
+  #     highlightDefinitions.enable = true;
+  #     navigation.enable = true;
+  #     smartRename.enable = true;
+  #   };
+  #   plugins.nvim-colorizer.enable = true;
+  #   plugins.rainbow-delimiters.enable = true;
+  #   plugins.which-key = {
+  #     enable = true;
+  #   };
+  #   plugins.comment-nvim.enable = true;
+  #   plugins.trouble.enable = true;
+  #   plugins.multicursors.enable = true;
 
-    plugins.cmp = {
-      enable = true;
-      settings.sources = [
-        {name = "nvim_lsp";}
-        {name = "path";}
-        {name = "buffer";}
-        {name = "luasnip";}
-      ];
+  #   # plugins.cmp.enable = true;
 
-      settings.mapping = {
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
-        "<C-Space>" = "cmp.mapping.complete()";
-        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-e>" = "cmp.mapping.close()";
-        "<C-f>" = "cmp.mapping.scroll_docs(4)";
-        "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-        "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-      };
-      settings.snippet.expand = ''
-        function(args)
-        require('luasnip').lsp_expand(args.body)
-        end
-      '';
-    };
+  #   plugins.cmp = {
+  #     enable = true;
+  #     settings.sources = [
+  #       {name = "nvim_lsp";}
+  #       {name = "path";}
+  #       {name = "buffer";}
+  #       {name = "luasnip";}
+  #     ];
 
-    plugins.bufferline = {
-      enable = true;
-    };
+  #     settings.mapping = {
+  #       "<CR>" = "cmp.mapping.confirm({ select = true })";
+  #       "<C-Space>" = "cmp.mapping.complete()";
+  #       "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+  #       "<C-e>" = "cmp.mapping.close()";
+  #       "<C-f>" = "cmp.mapping.scroll_docs(4)";
+  #       "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+  #       "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+  #     };
+  #     settings.snippet.expand = ''
+  #       function(args)
+  #       require('luasnip').lsp_expand(args.body)
+  #       end
+  #     '';
+  #   };
 
-    plugins.telescope = {
-      enable = true;
+  #   plugins.bufferline = {
+  #     enable = true;
+  #   };
 
-      enabledExtensions = ["ui-select"];
-      extensionConfig.ui-select = {};
-      extensions.frecency.enable = true;
-      extensions.fzf-native.enable = true;
+  #   plugins.telescope = {
+  #     enable = true;
 
-      extensions.file_browser = {
-        enable = true;
-        hidden = true;
-        depth = 9999999999;
-        autoDepth = true;
-      };
-      keymaps = {
-        "<leader>ff" = "find_files";
-        "<leader>fs" = "grep_string";
-        "<leader>fg" = "live_grep";
-      };
-    };
+  #     enabledExtensions = ["ui-select"];
+  #     extensionConfig.ui-select = {};
+  #     extensions.frecency.enable = true;
+  #     extensions.fzf-native.enable = true;
 
-    plugins.gitsigns.enable = true;
-    plugins.lualine.enable = true;
+  #     extensions.file_browser = {
+  #       enable = true;
+  #       hidden = true;
+  #       depth = 9999999999;
+  #       autoDepth = true;
+  #     };
+  #     keymaps = {
+  #       "<leader>ff" = "find_files";
+  #       "<leader>fs" = "grep_string";
+  #       "<leader>fg" = "live_grep";
+  #     };
+  #   };
 
-    plugins.floaterm = {
-      enable = true;
-      keymaps.toggle = "<leader>j";
-      width = 0.9;
-      height = 0.9;
-    };
+  #   plugins.gitsigns.enable = true;
+  #   plugins.lualine.enable = true;
 
-    options = {
-      number = true;
-      relativenumber = true;
-      fileencoding = "utf-8";
-      hlsearch = true;
-      ignorecase = true;
-      mouse = "a";
-      showtabline = 2;
-      smartcase = true;
-      smartindent = true;
-      undofile = true;
-      expandtab = true;
-      shiftwidth = 2;
-      tabstop = 2;
-    };
+  #   plugins.floaterm = {
+  #     enable = true;
+  #     keymaps.toggle = "<leader>j";
+  #     width = 0.9;
+  #     height = 0.9;
+  #   };
 
-    extraPlugins = with pkgs.vimPlugins; [
-      telescope-ui-select-nvim
-      vim-autoformat
-      vim-jsbeautify
-    ];
-  };
+  #   options = {
+  #     number = true;
+  #     relativenumber = true;
+  #     fileencoding = "utf-8";
+  #     hlsearch = true;
+  #     ignorecase = true;
+  #     mouse = "a";
+  #     showtabline = 4;
+  #     smartcase = true;
+  #     smartindent = true;
+  #     undofile = true;
+  #     expandtab = true;
+  #     shiftwidth = 4;
+  #     tabstop = 4;
+  #   };
+
+  #   extraPlugins = with pkgs.vimPlugins; [
+  #     telescope-ui-select-nvim
+  #     vim-autoformat
+  #     vim-jsbeautify
+  #     vim-go
+  #     fzf-vim
+  #     ultisnips
+  #   ];
+  # };
 
   # MacOS Configuration
   system = {

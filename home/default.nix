@@ -8,6 +8,7 @@
   imports = [
     ./kitty
     ./programs
+    ./programs
     ./packages.nix
     # ./vscode
   ];
@@ -16,7 +17,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
+  fonts.fontconfig.enable = true;
   home = {
     username = "jschneider";
     homeDirectory = "/Users/jschneider";
