@@ -68,6 +68,10 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
+-- Open floating neotree
+nnoremap("<leader>v", ":Neotree filesystem reveal float<cr>", { silent = false })
+
+
 -- -- Map Oil to <leader>e
 -- nnoremap("<leader>e", function()
 --   require("oil").toggle_float()
