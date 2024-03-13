@@ -383,5 +383,21 @@
         };
       };
     };
+
+    neovim = {
+      enable = true;
+      # defaultEditor = true;
+      extraLuaConfig = ''
+        require('user')
+      '';
+      extraPackages = [
+        # Included for nil_ls
+        pkgs.cargo
+      ];
+      withNodeJs = true;
+      withPython3 = true;
+      withRuby = true;
+      vimdiffAlias = true;
+    };
   };
 }

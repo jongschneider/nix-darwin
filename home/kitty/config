@@ -6,7 +6,7 @@
 font_family Hack Nerd Font Mono
 bold_font Hack Nerd Font Mono
 font_size 13.0
-modify_font cell_height 125%
+modify_font cell_height 150%
 disable_ligatures never
 
 #--------------------------------------------------------------------

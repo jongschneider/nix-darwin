@@ -8,7 +8,6 @@
   imports = [
     ./kitty
     ./programs
-    ./programs
     ./packages.nix
     # ./vscode
   ];
@@ -18,6 +17,15 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
+
+  # xdg.configFile.nvim.source = ./nvim;
+  xdg.configFile = {
+    nvim = {
+      source = config.lib.file.mkOutOfStoreSymlink ./nvim;
+      recursive = true;
+    };
+  };
+
   home = {
     username = "jschneider";
     homeDirectory = "/Users/jschneider";
