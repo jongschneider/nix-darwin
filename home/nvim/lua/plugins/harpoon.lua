@@ -1,6 +1,7 @@
 return {
-	{
-		"ThePrimeagen/harpoon",
-		lazy = true,
-	},
+    {
+        "ThePrimeagen/harpoon",
+        lazy = true,
+    },
 }
+
