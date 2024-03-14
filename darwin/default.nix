@@ -19,6 +19,7 @@
       presenterm
       nurl
       manix
+      delve
     ];
     systemPath = ["/opt/homebrew/bin"];
     pathsToLink = ["/Applications"];
