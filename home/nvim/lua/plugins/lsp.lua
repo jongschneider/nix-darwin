@@ -32,6 +32,12 @@ return {
 			lspconfig.gopls.setup({
 				capabilities = capabilities
 			})
+
+			-- Default handlers for LSP
+			local default_handlers = {
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+			}
 			-- See `:help K` for why this keymap
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation" })
 			vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation" })
@@ -39,10 +45,10 @@ return {
 			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "LSP: [G]oto [T]ype Definition" })
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: [G]oto [D]efinition" })
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: [G]oto [I]mplementation" })
-			vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "LSP: [G]oto [R]eferences" })
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration" })
 			vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame" })
 			vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { desc = "LSP: [C]ode [A]ction" })
+			vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "LSP: [G]oto [R]eferences" })
 		end,
 	},
 }
