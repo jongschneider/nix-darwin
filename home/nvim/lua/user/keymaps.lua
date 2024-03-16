@@ -277,7 +277,7 @@ nnoremap("<leader>sc", function()
 end, { desc = "[S]earch [C]ommands" })
 
 nnoremap("<leader>/", function()
-  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+  require("telescope.builtin").current_buffer_fuzzy_find(require("telerscope.themes").get_dropdown({
     previewer = false,
   }))
 end, { desc = "[/] Fuzzily search in current buffer]" })

@@ -141,7 +141,16 @@ in {
       source = config.lib.file.mkOutOfStoreSymlink ../config/nvim;
       recursive = true;
     };
+
+    "tmux/plugins/tpm" = {
+       source = pkgs.fetchgit {
+        url = "https://github.com/tmux-plugins/tpm";
+        sha256 = "sha256-1agBX7r4tEdG3fRvsuXHj+YfhsIj0eLLA1Wl8fP+UbQ=";
+        rev = "99469c4";
+      };
+    };
   };
+
 
   programs.neovim = {
     enable = true;

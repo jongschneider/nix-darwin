@@ -44,10 +44,11 @@ return {
 			vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "LSP: [G]oto [S]ignature Documentation" })
 			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "LSP: [G]oto [T]ype Definition" })
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: [G]oto [D]efinition" })
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: [G]oto [I]mplementation" })
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration" })
 			vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame" })
 			vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { desc = "LSP: [C]ode [A]ction" })
+			-- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: [G]oto [I]mplementation" })
+			vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, { desc = "LSP: [G]oto [R]eferences" })
 			vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "LSP: [G]oto [R]eferences" })
 		end,
 	},
