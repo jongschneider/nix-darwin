@@ -288,6 +288,8 @@ nnoremap("<leader>ss", function()
   }))
 end, { desc = "[S]earch [S]pelling suggestions" })
 
+nnoremap("<leader>lg", ":LazyGit <cr>")
+
 -- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
 -- M.map_lsp_keybinds = function(buffer_number)
 --   nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame", buffer = buffer_number })
