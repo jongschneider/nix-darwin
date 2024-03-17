@@ -7,9 +7,6 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    # Nixvim for configure Neovim
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -17,12 +14,10 @@
     nix-darwin,
     nixpkgs,
     home-manager,
-    nixvim,
     ...
   }: {
     darwinConfigurations."Jonathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [
-        nixvim.nixDarwinModules.nixvim
         ./hosts/work/configuration.nix
         home-manager.darwinModules.home-manager
         {
