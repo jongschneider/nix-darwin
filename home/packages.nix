@@ -25,6 +25,7 @@
     unrar # extract RAR archives
     xz # extract XZ archives
     zlib
+    asciinema
 
     # Dev
     fh

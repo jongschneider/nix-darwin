@@ -5,7 +5,7 @@ return {
       "voldikss/vim-floaterm",
       cmd = { "FloatermNew", "FloatermToggle", "FloatermNext", "FloatermPrev" },
       keys = {
-        { '<leader>', '<cmd>FloatermToggle<cr>', desc = 'Floating Terminal' },
+        { '<leader>tt', '<cmd>FloatermToggle<cr>', desc = 'Floating Terminal' },
       },
       config = function ()
         vim.g.floaterm_autoclose = 1
