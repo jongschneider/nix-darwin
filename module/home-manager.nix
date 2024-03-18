@@ -143,7 +143,7 @@ in {
     };
 
     "tmux/plugins/tpm" = {
-       source = pkgs.fetchgit {
+      source = pkgs.fetchgit {
         url = "https://github.com/tmux-plugins/tpm";
         sha256 = "sha256-1agBX7r4tEdG3fRvsuXHj+YfhsIj0eLLA1Wl8fP+UbQ=";
         rev = "99469c4";
@@ -151,22 +151,21 @@ in {
     };
   };
 
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    extraLuaConfig = ''
-      require('user')
-    '';
-    extraPackages = [
-      # Included for nil_ls
-      pkgs.cargo
-    ];
-    withNodeJs = true;
-    withPython3 = true;
-    withRuby = true;
-    vimdiffAlias = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   extraLuaConfig = ''
+  #     require('user')
+  #   '';
+  #   extraPackages = [
+  #     # Included for nil_ls
+  #     pkgs.cargo
+  #   ];
+  #   withNodeJs = true;
+  #   withPython3 = true;
+  #   # withRuby = true;
+  #   vimdiffAlias = true;
+  # };
 
   #   programs.starship = {
   #     enable = true;

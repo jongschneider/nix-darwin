@@ -55,7 +55,7 @@ return {
                     "vim",
                     "go",
                     "nix",
-                    "ruby",
+                    -- "ruby",
                     "rust"
                     -- "yaml", This is currently borked see: https://github.com/ikatyang/tree-sitter-yaml/issues/53
                 },

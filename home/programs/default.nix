@@ -440,7 +440,7 @@ in
         ];
         withNodeJs = true;
         withPython3 = true;
-        withRuby = true;
+        # withRuby = true;
         vimdiffAlias = true;
       };
 
