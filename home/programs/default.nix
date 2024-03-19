@@ -199,7 +199,7 @@ in
 
         enableCompletion = true;
         autocd = true;
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
 
         shellAliases = {
