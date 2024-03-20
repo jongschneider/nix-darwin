@@ -159,8 +159,8 @@ nnoremap("<leader>d", function()
   })
 end)
 
--- -- Place all dignostics into a qflist
--- nnoremap("<leader>ld", vim.diagnostic.setqflist, { desc = "Quickfix [L]ist [D]iagnostics" })
+-- Place all dignostics into a qflist
+nnoremap("<leader>ld", vim.diagnostic.setqflist, { desc = "Quickfix [L]ist [D]iagnostics" })
 
 -- -- Navigate to next qflist item
 -- nnoremap("<leader>cn", ":cnext<cr>zz")
@@ -263,21 +263,21 @@ end, { desc = "Search [G]it [F]iles" })
 
 -- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-nnoremap("<leader>sb", require("telescope.builtin").buffers, { desc = "[S]earch Open [B]uffers" })
-nnoremap("<leader>sf", function()
+nnoremap("<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind in Open [B]uffers" })
+nnoremap("<leader>ff", function()
   require("telescope.builtin").find_files({ hidden = true })
-end, { desc = "[S]earch [F]iles" })
-nnoremap("<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-nnoremap("<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
+end, { desc = "[F]ind [F]iles" })
+nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
+nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 
-nnoremap("<leader>sc", function()
+nnoremap("<leader>fc", function()
   require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
     previewer = false,
   }))
-end, { desc = "[S]earch [C]ommands" })
+end, { desc = "[F]ind [C]ommands" })
 
 nnoremap("<leader>/", function()
-  require("telescope.builtin").current_buffer_fuzzy_find(require("telerscope.themes").get_dropdown({
+  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
     previewer = false,
   }))
 end, { desc = "[/] Fuzzily search in current buffer]" })
@@ -288,7 +288,7 @@ nnoremap("<leader>ss", function()
   }))
 end, { desc = "[S]earch [S]pelling suggestions" })
 
-nnoremap("<leader>lg", ":LazyGit <cr>")
+-- nnoremap("<leader>lg", ":LazyGit <cr>")
 
 -- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
 -- M.map_lsp_keybinds = function(buffer_number)
@@ -377,7 +377,7 @@ end)
 -- Terminal --
 -- Enter normal mode while in a terminal
 tnoremap("<esc>", [[<C-\><C-n>]])
-tnoremap("jj", [[<C-\><C-n>]])
+-- tnoremap("jj", [[<C-\><C-n>]])
 
 -- Window navigation from terminal
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])

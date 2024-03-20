@@ -20,8 +20,9 @@
       nurl
       manix
       delve
+      go
     ];
-    systemPath = ["/opt/homebrew/bin"];
+    systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin/integrator"];
     pathsToLink = ["/Applications"];
   };
 
