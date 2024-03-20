@@ -21,6 +21,12 @@
       manix
       delve
       go
+      gofumpt
+      gomodifytags
+      impl
+      golangci-lint
+      gotools
+      gotests
     ];
     systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin/integrator"];
     pathsToLink = ["/Applications"];
