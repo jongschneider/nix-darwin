@@ -27,6 +27,7 @@
       golangci-lint
       gotools
       gotests
+      golines
     ];
     systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin/integrator"];
     pathsToLink = ["/Applications"];

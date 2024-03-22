@@ -239,6 +239,7 @@ nnoremap("<leader>5", function()
 	harpoon_ui.nav_file(5)
 end)
 
+
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
 nnoremap("<leader>gf", function()
@@ -249,7 +250,7 @@ nnoremap("<leader>gf", function()
 		"<(git diff --name-only)",
 		"<(git diff --name-only --diff-filter=U)",
 	}
-
+	
 	if not utils.is_git_directory() then
 		vim.notify(
 			"Current project is not a git directory",
@@ -261,31 +262,33 @@ nnoremap("<leader>gf", function()
 	end
 end, { desc = "Search [G]it [F]iles" })
 
+nnoremap("<leader>lg", ":LazyGit <cr>")
+
 -- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-nnoremap("<leader>sb", require("telescope.builtin").buffers, { desc = "[S]earch Open [B]uffers" })
-nnoremap("<leader>sf", function()
-	require("telescope.builtin").find_files({ hidden = true })
-end, { desc = "[S]earch [F]iles" })
-nnoremap("<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-nnoremap("<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
+nnoremap("<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind in Open [B]uffers" })
+nnoremap("<leader>ff", function()
+  require("telescope.builtin").find_files({ hidden = true })
+end, { desc = "[F]ind [F]iles" })
+nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
+nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 
-nnoremap("<leader>sc", function()
-	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
-		previewer = false,
-	}))
-end, { desc = "[S]earch [C]ommands" })
+nnoremap("<leader>fc", function()
+  require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
+    previewer = false,
+  }))
+end, { desc = "[F]ind [C]ommands" })
 
 nnoremap("<leader>/", function()
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		previewer = false,
-	}))
+  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+    previewer = false,
+  }))
 end, { desc = "[/] Fuzzily search in current buffer]" })
 
 nnoremap("<leader>ss", function()
-	require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
-		previewer = false,
-	}))
+  require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
+    previewer = false,
+  }))
 end, { desc = "[S]earch [S]pelling suggestions" })
 
 -- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
@@ -327,24 +330,18 @@ M.map_lsp_keybinds = function(buffer_number)
 
 	-- Lesser used LSP functionality
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
-	nnoremap("td", vim.lsp.buf.type_definition, { desc = "LSP: [T]ype [D]efinition", buffer = buffer_number })
+	nnoremap("gt", vim.lsp.buf.type_definition, {  desc = "LSP: [G]oto [T]ype Definition", buffer = buffer_number })
+	nnoremap("'<leader>cl'", vim.lsp.codelens.run, { desc = "LSP: [C]ode [L]ens", buffer = buffer_number })
 end
 
 -- Symbol Outline keybind
 nnoremap("<leader>so", ":SymbolsOutline<cr>")
-
--- Open Copilot panel
-nnoremap("<leader>oc", function()
-	require("copilot.panel").open({})
-end, { desc = "[O]pen [C]opilot panel" })
 
 -- nvim-ufo keybinds
 nnoremap("zR", require("ufo").openAllFolds)
 nnoremap("zM", require("ufo").closeAllFolds)
 
 -- Insert --
--- Map jj to <esc>
-inoremap("jj", "<esc>")
 
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key

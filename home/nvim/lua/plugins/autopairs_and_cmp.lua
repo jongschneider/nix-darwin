@@ -74,7 +74,8 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" }, -- lsp
 					{ name = "buffer", max_item_count = 5 }, -- text within current buffer
-					{ name = "copilot" }, -- Copilot suggestions
+					-- { name = "copilot" }, -- Copilot suggestions
+					-- TODO: look into if people add go to this list
 					{ name = "path", max_item_count = 3 }, -- file system paths
 					{ name = "luasnip", max_item_count = 3 }, -- snippets
 				}),
@@ -86,7 +87,8 @@ return {
 						maxwidth = 50,
 						ellipsis_char = "...",
 						symbol_map = {
-							Copilot = "",
+							-- TODO: look into if people add go to this list
+							-- Copilot = "",
 						},
 					}),
 				},

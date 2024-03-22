@@ -1,5 +1,19 @@
 return {
 	{
+		"ray-x/go.nvim",
+		dependencies = {  -- optional packages
+		  "ray-x/guihua.lua",
+		  "neovim/nvim-lspconfig",
+		  "nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+		  require("go").setup()
+		end,
+		event = {"CmdlineEnter"},
+		ft = {"go", 'gomod'},
+		build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+	},
+	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
@@ -17,42 +31,9 @@ return {
 
 			-- Install lsp autocompletions
 			"hrsh7th/cmp-nvim-lsp",
-
-			-- Progress/Status update for LSP
-			{ "j-hui/fidget.nvim", opts = {} },
 		},
 		config = function()
 			local map_lsp_keybinds = require("user.keymaps").map_lsp_keybinds -- Has to load keymaps before pluginslsp
-
-			-- Override tsserver diagnostics to filter out specific messages
-			local messages_to_filter = {
-				"This may be converted to an async function.",
-				"'_Assertion' is declared but never used.",
-				"'__Assertion' is declared but never used.",
-				"The signature '(data: string): string' of 'atob' is deprecated.",
-				"The signature '(data: string): string' of 'btoa' is deprecated.",
-			}
-
-			local function tsserver_on_publish_diagnostics_override(_, result, ctx, config)
-				local filtered_diagnostics = {}
-
-				for _, diagnostic in ipairs(result.diagnostics) do
-					local found = false
-					for _, message in ipairs(messages_to_filter) do
-						if diagnostic.message == message then
-							found = true
-							break
-						end
-					end
-					if not found then
-						table.insert(filtered_diagnostics, diagnostic)
-					end
-				end
-
-				result.diagnostics = filtered_diagnostics
-
-				vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-			end
 
 			-- Default handlers for LSP
 			local default_handlers = {
@@ -107,23 +88,51 @@ return {
 					},
 				},
 				marksman = {},
-				ocamllsp = {},
 				nil_ls = {},
 				pyright = {},
 				sqlls = {},
-				tailwindcss = {},
-				tsserver = {
-					settings = {
-						maxTsServerMemory = 12000,
-					},
-					handlers = {
-						["textDocument/publishDiagnostics"] = vim.lsp.with(
-							tsserver_on_publish_diagnostics_override,
-							{}
-						),
-					},
-				},
 				yamlls = {},
+				gopls = {
+					flags = { debounce_text_changes = 200 },
+					gocoverage_sign = "█",
+					settings = {
+						gopls = {
+							completeUnimported = true,
+							usePlaceholders = true,
+							gofumpt = true,
+							analyses = {
+								nilness = true,
+								unusedparams = true,
+								unusedwrite = true,
+								  useany = true,
+							},
+							codelenses = {
+								gc_details = false,
+								generate = true,
+								regenerate_cgo = true,
+								run_govulncheck = true,
+								test = true,
+								tidy = true,
+								upgrade_dependency = true,
+								vendor = true,
+							  },
+							  experimentalPostfixCompletions = true,
+							  completeUnimported = true,
+							  staticcheck = true,
+							  directoryFilters = { "-.git", "-node_modules" },
+							  semanticTokens = true,
+							  hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
+							  },
+						}
+					}
+				},
 			}
 
 			local formatters = {
@@ -131,7 +140,7 @@ return {
 				stylua = {},
 			}
 
-			local manually_installed_servers = { "ocamllsp", "gleam" }
+			local manually_installed_servers = { }
 
 			local mason_tools_to_install = vim.tbl_keys(vim.tbl_deep_extend("force", {}, servers, formatters))
 
@@ -191,8 +200,6 @@ return {
 			},
 			formatters_by_ft = {
 				javascript = { { "prettierd", "prettier" } },
-				typescript = { { "prettierd", "prettier" } },
-				typescriptreact = { { "prettierd", "prettier" } },
 				lua = { "stylua" },
 			},
 		},

@@ -1,3 +1,6 @@
+-- If you get an error with fuzzy match
+-- run :UpdateRemotePlugins and restart nvim
+-- https://github.com/gelguy/wilder.nvim/issues/16
 return {
 	{
 		"gelguy/wilder.nvim",
