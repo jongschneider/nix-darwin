@@ -164,6 +164,18 @@ end)
 
 -- Place all dignostics into a qflist
 nnoremap("<leader>ld", vim.diagnostic.setqflist, { desc = "Quickfix [L]ist [D]iagnostics" })
+nnoremap("<leader>xx", ":TroubleToggle<cr>", {})
+nnoremap("<leader>xw", ":TroubleToggle workspace_diagnostics<cr>", {})
+nnoremap("<leader>xd", ":TroubleToggle document_diagnostics<cr>", {})
+nnoremap("<leader>xq", ":TroubleToggle quickfix<cr>", {})
+nnoremap("<leader>xl", ":TroubleToggle loclist<cr>", {})
+nnoremap("<leader>gr", ":TroubleToggle lsp_references<cr>", {})
+
+-- nnoremap("<leader>ld", function()
+-- 	require("telescope.builtin").quickfix(require("telescope.themes").get_dropdown({
+-- 	  previewer = true,
+-- 	}))
+--   end, { desc = "Quickfix [L]ist [D]iagnostics" })
 
 -- Navigate to next qflist item
 nnoremap("<leader>cn", ":cnext<cr>zz")
@@ -184,7 +196,7 @@ nnoremap("<leader>m", ":MaximizerToggle<cr>")
 nnoremap("<leader>=", "<C-w>=")
 
 -- Press leader f to format
-nnoremap("<leader>f", function()
+nnoremap("<leader>fm", function()
 	conform.format({ async = true, lsp_fallback = true })
 end, { desc = "Format the current buffer" })
 
@@ -193,9 +205,6 @@ nnoremap("<leader>rw", ":RotateWindows<cr>", { desc = "[R]otate [W]indows" })
 
 -- Press gx to open the link under the cursor
 nnoremap("gx", ":sil !open <cWORD><cr>", { silent = true })
-
--- TSC autocommand keybind to run TypeScripts tsc
-nnoremap("<leader>tc", ":TSC<cr>", { desc = "[T]ypeScript [C]ompile" })
 
 -- Harpoon keybinds --
 -- Open harpoon ui
@@ -372,7 +381,6 @@ end)
 -- Terminal --
 -- Enter normal mode while in a terminal
 tnoremap("<esc>", [[<C-\><C-n>]])
-tnoremap("jj", [[<C-\><C-n>]])
 
 -- Window navigation from terminal
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
