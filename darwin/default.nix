@@ -12,7 +12,6 @@
       alejandra
       coreutils
       gnumake
-      clang # for building nvim-telescope/telescope?
       (import ../scripts/ff.nix {inherit pkgs;})
       (import ../scripts/gsquash.nix {inherit pkgs;})
       discord
