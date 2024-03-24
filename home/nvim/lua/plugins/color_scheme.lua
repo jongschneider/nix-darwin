@@ -4,8 +4,10 @@ return {
 		"catppuccin/nvim",
 		config = function()
 			require("catppuccin").setup({
+				transparent_background = true,
 				integrations = {
 					cmp = true,
+					fidget = true,
 					gitsigns = true,
 					harpoon = true,
 					illuminate = true,
@@ -23,6 +25,7 @@ return {
 					telescope = true,
 					treesitter = true,
 					treesitter_context = true,
+					which_key = true,
 				},
 			})
 
