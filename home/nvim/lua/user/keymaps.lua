@@ -89,6 +89,9 @@ nnoremap("%", "%zz")
 nnoremap("*", "*zz")
 nnoremap("#", "#zz")
 
+-- Open neotree
+nnoremap("<leader>v", ":Neotree filesystem reveal right<cr>", { silent = false })
+
 -- Press 'S' for quick find/replace for the word under the cursor
 nnoremap("S", function()
 	local cmd = ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>"
