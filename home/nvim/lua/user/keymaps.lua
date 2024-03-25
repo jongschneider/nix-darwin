@@ -117,6 +117,9 @@ nnoremap("U", "<C-r>")
 -- Turn off highlighted results
 nnoremap("<leader>no", "<cmd>noh<cr>")
 
+-- Debugging
+nnoremap("<leader>db", ":DapToggleBreakpoint<cr>", {})
+
 -- Diagnostics
 
 -- Goto next diagnostic of any severity

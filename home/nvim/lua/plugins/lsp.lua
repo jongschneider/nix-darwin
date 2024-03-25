@@ -8,10 +8,12 @@ return {
 		},
 		config = function()
 		  require("go").setup({
+			go='go',
 			verbose = true,
 			gocoverage_sign = "█",
 			test_runner = 'go',
 			run_in_floaterm = true,
+			icons = {breakpoint = '🔴', currentpos = '👈'},
 			floaterm = {   -- position
 				posititon = 'bottom', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
 				width = 0.98, -- width of float window if not auto
