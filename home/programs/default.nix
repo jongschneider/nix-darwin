@@ -216,21 +216,21 @@ in
       zsh = {
         enable = true;
         initExtra = ''
-          # n () {
-          #   if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
-          #     echo "nnn is already running"
-          #     return
-          #   fi
+          nn () {
+            if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
+              echo "nnn is already running"
+              return
+            fi
 
-          #   export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+            export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
 
-          #   nnn -adeHo "$@"
+            nnn -adeHo "$@"
 
-          #   if [ -f "$NNN_TMPFILE" ]; then
-          #     . "$NNN_TMPFILE"
-          #     rm -f "$NNN_TMPFILE" > /dev/null
-          #   fi
-          # }
+            if [ -f "$NNN_TMPFILE" ]; then
+              . "$NNN_TMPFILE"
+              rm -f "$NNN_TMPFILE" > /dev/null
+            fi
+          }
           # PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
           # # Fig post block. Keep at the bottom of this file.
           # [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
@@ -247,7 +247,7 @@ in
           la = "eza -a";
           lt = "eza --tree";
           lla = "eza -la";
-          ll = "n";
+          ll = "nn";
           nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
           nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
           nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
