@@ -152,15 +152,34 @@ in
         };
       };
 
+      # nnn = {
+      #   enable = true;
+      #   package = pkgs.nnn.override {withNerdIcons = true;};
+      #   plugins = {
+      #     mappings = {
+      #       p = "preview-tui";
+      #     };
+      #     src = pkgs.nnn + "/plugins";
+      #   };
+      #   bookmarks = {
+      #     a = "~/Applications";
+      #     d = "~/Desktop";
+      #     D = "~/Downloads";
+      #     c = "~/code";
+      #     i = "~/code/integrator";
+      #     n = "~/code/ingester";
+      #     N = "/Users/jschneider/.config/nix-darwin";
+      #   };
+      # };
+
       nnn = {
         enable = true;
         package = pkgs.nnn.override {withNerdIcons = true;};
-        plugins = {
-          mappings = {
-            K = "preview-tui";
-          };
-          src = pkgs.nnn + "/plugins";
-        };
+        extraPackages = with pkgs; [
+          ffmpegthumbnailer
+          mediainfo
+        ];
+
         bookmarks = {
           a = "~/Applications";
           d = "~/Desktop";
@@ -170,6 +189,26 @@ in
           n = "~/code/ingester";
           N = "/Users/jschneider/.config/nix-darwin";
         };
+
+        plugins = {
+          src =
+            (pkgs.fetchFromGitHub {
+              owner = "jarun";
+              repo = "nnn";
+              rev = "v4.8";
+              sha256 = "sha256-QbKW2wjhUNej3zoX18LdeUHqjNLYhEKyvPH2MXzp/iQ=";
+            })
+            + "/plugins";
+
+          mappings = {
+            c = "fzcd";
+            d = "dragdrop";
+            f = "fzopen";
+            o = "launch";
+            p = "preview-tui";
+            v = "imgview";
+          };
+        };
       };
 
       z-lua.enable = true;
@@ -177,24 +216,24 @@ in
       zsh = {
         enable = true;
         initExtra = ''
-          n () {
-            if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
-              echo "nnn is already running"
-              return
-            fi
+          # n () {
+          #   if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
+          #     echo "nnn is already running"
+          #     return
+          #   fi
 
-            export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+          #   export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
 
-            nnn -adeHo "$@"
+          #   nnn -adeHo "$@"
 
-            if [ -f "$NNN_TMPFILE" ]; then
-              . "$NNN_TMPFILE"
-              rm -f "$NNN_TMPFILE" > /dev/null
-            fi
-          }
-          PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
-          # Fig post block. Keep at the bottom of this file.
-          [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+          #   if [ -f "$NNN_TMPFILE" ]; then
+          #     . "$NNN_TMPFILE"
+          #     rm -f "$NNN_TMPFILE" > /dev/null
+          #   fi
+          # }
+          # PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+          # # Fig post block. Keep at the bottom of this file.
+          # [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
         '';
 
         enableCompletion = true;

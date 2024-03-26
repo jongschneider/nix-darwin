@@ -139,13 +139,13 @@ return {
 							  directoryFilters = { "-.git", "-node_modules" },
 							  semanticTokens = true,
 							  hints = {
-								assignVariableTypes = true,
+								-- assignVariableTypes = true,
 								compositeLiteralFields = true,
 								compositeLiteralTypes = true,
 								constantValues = true,
-								functionTypeParameters = true,
-								parameterNames = true,
-								rangeVariableTypes = true,
+								-- functionTypeParameters = true,
+								-- parameterNames = true,
+								-- rangeVariableTypes = true,
 							  },
 						}
 					}

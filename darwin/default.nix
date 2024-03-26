@@ -8,7 +8,7 @@
     loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
       # nixpkgs-fmt # nix code formatter
-      # nil # nix LSP... testing this out.
+      nil # nix LSP... testing this out.
       alejandra
       coreutils
       gnumake

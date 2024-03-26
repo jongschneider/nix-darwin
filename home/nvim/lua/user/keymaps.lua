@@ -69,10 +69,6 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
--- Map Oil to <leader>e
-nnoremap("<leader>e", function()
-	require("oil").toggle_float()
-end)
 
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
@@ -90,7 +86,7 @@ nnoremap("*", "*zz")
 nnoremap("#", "#zz")
 
 -- Open neotree
-nnoremap("<leader>v", ":Neotree filesystem reveal right<cr>", { silent = false })
+nnoremap("<leader>v", ":Neotree filesystem toggle right<cr>", { silent = false })
 
 -- Press 'S' for quick find/replace for the word under the cursor
 nnoremap("S", function()
@@ -277,7 +273,14 @@ nnoremap("<leader>gf", function()
 	end
 end, { desc = "Search [G]it [F]iles" })
 
-nnoremap("<leader>lg", ":LazyGit <cr>")
+-- nnoremap("<leader>lg", ":LazyGit <cr>")
+
+-- Floaterm
+nnoremap('<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', { silent = true })
+nnoremap('<leader>lg', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>', { silent = true })
+-- nnoremap('<leader>nn', '<CMD>FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>', { silent = true })
+nnoremap('<leader>nn', '<CMD>NnnPicker<CR>', { silent = true })
+nnoremap('<leader>tt', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>', { silent = true })
 
 -- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })

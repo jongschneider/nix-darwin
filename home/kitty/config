@@ -9,9 +9,10 @@ font_features Hack Nerd Font Mono +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv2
 font_size 12.0
 modify_font cell_height 130%
 disable_ligatures never
-background_opacity 0.95
+background_opacity 0.90
 background_blur 25
-
+allow_remote_control yes
+listen_on unix:/tmp/mykitty
 #--------------------------------------------------------------------
 # Key bindings
 #--------------------------------------------------------------------
