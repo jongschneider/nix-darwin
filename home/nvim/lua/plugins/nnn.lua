@@ -27,7 +27,7 @@ return {
                   fullscreen = true, -- whether to fullscreen picker window when current tab is empty
                 },
                 auto_open = {
-                  setup = nil,       -- or "explorer" / "picker", auto open on setup function
+                  setup = nil,       -- or "explorer"q / "picker", auto open on setup function
                   tabpage = nil,     -- or "explorer" / "picker", auto open when opening new tabpage
                   empty = false,     -- only auto open on empty buffer
                   ft_ignore = {      -- dont auto open for these filetypes
@@ -35,7 +35,7 @@ return {
                   }
                 },
                 auto_close = false,  -- close tabpage/nvim when nnn is last window
-                replace_netrw = "picker", -- or "explorer" / "picker"
+                -- replace_netrw = "picker", -- or "explorer" / "picker"
                 mappings = {
                     { "<C-t>", nnn.builtin.open_in_tab },       -- open file(s) in tab
                     { "<C-s>", nnn.builtin.open_in_split },     -- open file(s) in split

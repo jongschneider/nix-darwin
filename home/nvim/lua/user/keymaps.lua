@@ -197,7 +197,7 @@ nnoremap("<leader>m", ":MaximizerToggle<cr>")
 -- Resize split windows to be equal size
 nnoremap("<leader>=", "<C-w>=")
 
--- Press leader f to format
+-- Press leader fm to format
 nnoremap("<leader>fm", function()
 	conform.format({ async = true, lsp_fallback = true })
 end, { desc = "Format the current buffer" })
@@ -250,6 +250,11 @@ nnoremap("<leader>5", function()
 	harpoon_ui.nav_file(5)
 end)
 
+-- Go keymaps --
+nnoremap("<leader>gtf", ":GoTestFunc -v<cr>")
+nnoremap("<leader>gtp", ":GoTestPkg -v<cr>")
+
+
 
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
@@ -276,8 +281,8 @@ end, { desc = "Search [G]it [F]iles" })
 -- nnoremap("<leader>lg", ":LazyGit <cr>")
 
 -- Floaterm
-nnoremap('<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', { silent = true })
-nnoremap('<leader>lg', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>', { silent = true })
+-- nnoremap('<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', { silent = true })
+-- nnoremap('<leader>lg', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>', { silent = true })
 -- nnoremap('<leader>nn', '<CMD>FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>', { silent = true })
 nnoremap('<leader>nn', '<CMD>NnnPicker<CR>', { silent = true })
 nnoremap('<leader>tt', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>', { silent = true })

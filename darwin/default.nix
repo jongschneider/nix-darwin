@@ -28,7 +28,7 @@
       gotests
       golines
     ];
-    systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin/integrator"];
+    systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin"];
     pathsToLink = ["/Applications"];
   };
 
