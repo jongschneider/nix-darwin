@@ -30,9 +30,13 @@
     # Dev
     fh
     jqp
-    go
-    golangci-lint
-    gotestsum
+    # go
+    # golangci-lint
+    # gotestsum
+    ruby
+    rubyPackages.solargraph
+    rubyPackages.rubocop-performance
+    rubocop
     nodejs_21
     git-open
     mkcert

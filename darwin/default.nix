@@ -26,7 +26,13 @@
       golangci-lint
       gotools
       gotests
+      gotestsum
       golines
+      # ruby
+      # ruby_3_3
+      # rubyPackages.solargraph
+      # rubyPackages.rubocop-performance
+      # rubocop
     ];
     systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin"];
     pathsToLink = ["/Applications"];

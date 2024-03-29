@@ -106,6 +106,7 @@ return {
 				pyright = {},
 				sqlls = {},
 				yamlls = {},
+				solargraph = {},
 				gopls = {
 					flags = { debounce_text_changes = 200 },
 					gocoverage_sign = "█",

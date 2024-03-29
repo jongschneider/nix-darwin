@@ -16,6 +16,11 @@ local TERM = os.getenv("TERM")
 -- Disable Space bar since it'll be used as the leader key
 nnoremap("<space>", "<nop>")
 
+-- vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
+-- vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
+-- vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
+-- vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
+
 -- Window +  better kitty navigation
 nnoremap("<C-j>", function()
 	if vim.fn.exists(":KittyNavigateDown") ~= 0 and TERM == "xterm-kitty" then
@@ -253,6 +258,11 @@ end)
 -- Go keymaps --
 nnoremap("<leader>gtf", ":GoTestFunc -v<cr>")
 nnoremap("<leader>gtp", ":GoTestPkg -v<cr>")
+-- nnoremap("<leader>tn", ":TestNearest<CR>")
+-- nnoremap("<leader>tf", ":TestFile<CR>")
+-- nnoremap("<leader>ts", ":TestSuite<CR>")
+-- nnoremap("<leader>tl", ":TestLast<CR>")
+-- nnoremap("<leader>tv", ":TestVisit<CR>")
 
 
 
@@ -353,7 +363,7 @@ M.map_lsp_keybinds = function(buffer_number)
 	-- See `:help K` for why this keymap
 	nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
 	nnoremap("<leader>k", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
-	inoremap("<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
+	-- inoremap("<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
 
 	-- Lesser used LSP functionality
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
