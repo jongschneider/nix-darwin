@@ -293,6 +293,10 @@ nnoremap("<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind in
 nnoremap("<leader>ff", function()
   require("telescope.builtin").find_files({ hidden = true })
 end, { desc = "[F]ind [F]iles" })
+nnoremap('<leader>fsd', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols'})
+-- -- Fuzzy find all the symbols in your current workspace.
+-- --  Similar to document symbols, except searches over your entire project.
+nnoremap('<leader>fsw', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = '[W]orkspace [S]ymbols'})
 nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
 nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 
