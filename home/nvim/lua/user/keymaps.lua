@@ -256,8 +256,8 @@ nnoremap("<leader>5", function()
 end)
 
 -- Go keymaps --
-nnoremap("<leader>gtf", ":GoTestFunc -v<cr>")
-nnoremap("<leader>gtp", ":GoTestPkg -v<cr>")
+nnoremap("<leader>gc", ":GoCoverage -t<cr>", {desc = "Toggle Test Coverage"})
+nnoremap("<leader>gp", ":GoTestPkg -v<cr>")
 -- nnoremap("<leader>tn", ":TestNearest<CR>")
 -- nnoremap("<leader>tf", ":TestFile<CR>")
 -- nnoremap("<leader>ts", ":TestSuite<CR>")
