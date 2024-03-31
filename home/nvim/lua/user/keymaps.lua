@@ -74,7 +74,6 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 -- Save and Quit with leader key
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
-
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
 nnoremap("<C-d>", "<C-d>zz")
@@ -256,15 +255,13 @@ nnoremap("<leader>5", function()
 end)
 
 -- Go keymaps --
-nnoremap("<leader>gc", ":GoCoverage -t<cr>", {desc = "Toggle Test Coverage"})
+nnoremap("<leader>gc", ":GoCoverage -t<cr>", { desc = "Toggle Test Coverage" })
 nnoremap("<leader>gp", ":GoTestPkg -v<cr>")
 -- nnoremap("<leader>tn", ":TestNearest<CR>")
 -- nnoremap("<leader>tf", ":TestFile<CR>")
 -- nnoremap("<leader>ts", ":TestSuite<CR>")
 -- nnoremap("<leader>tl", ":TestLast<CR>")
 -- nnoremap("<leader>tv", ":TestVisit<CR>")
-
-
 
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
@@ -276,7 +273,7 @@ nnoremap("<leader>gf", function()
 		"<(git diff --name-only)",
 		"<(git diff --name-only --diff-filter=U)",
 	}
-	
+
 	if not utils.is_git_directory() then
 		vim.notify(
 			"Current project is not a git directory",
@@ -294,38 +291,38 @@ end, { desc = "Search [G]it [F]iles" })
 -- nnoremap('<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', { silent = true })
 -- nnoremap('<leader>lg', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>', { silent = true })
 -- nnoremap('<leader>nn', '<CMD>FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>', { silent = true })
-nnoremap('<leader>nn', '<CMD>NnnPicker<CR>', { silent = true })
-nnoremap('<leader>tt', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>', { silent = true })
+nnoremap("<leader>nn", "<CMD>NnnPicker<CR>", { silent = true })
+nnoremap("<leader>tt", "<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>", { silent = true })
 
 -- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
 nnoremap("<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind in Open [B]uffers" })
 nnoremap("<leader>ff", function()
-  require("telescope.builtin").find_files({ hidden = true })
+	require("telescope.builtin").find_files({ hidden = true })
 end, { desc = "[F]ind [F]iles" })
-nnoremap('<leader>fsd', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols'})
+nnoremap("<leader>fsd", require("telescope.builtin").lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
 -- -- Fuzzy find all the symbols in your current workspace.
 -- --  Similar to document symbols, except searches over your entire project.
-nnoremap('<leader>fsw', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = '[W]orkspace [S]ymbols'})
+nnoremap("<leader>fsw", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
 nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
 nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 
 nnoremap("<leader>fc", function()
-  require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
-    previewer = false,
-  }))
+	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
+		previewer = false,
+	}))
 end, { desc = "[F]ind [C]ommands" })
 
 nnoremap("<leader>/", function()
-  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-    previewer = false,
-  }))
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		previewer = false,
+	}))
 end, { desc = "[/] Fuzzily search in current buffer]" })
 
 nnoremap("<leader>ss", function()
-  require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
-    previewer = false,
-  }))
+	require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({
+		previewer = false,
+	}))
 end, { desc = "[S]earch [S]pelling suggestions" })
 
 -- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
@@ -367,7 +364,7 @@ M.map_lsp_keybinds = function(buffer_number)
 
 	-- Lesser used LSP functionality
 	nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
-	nnoremap("gt", vim.lsp.buf.type_definition, {  desc = "LSP: [G]oto [T]ype Definition", buffer = buffer_number })
+	nnoremap("gt", vim.lsp.buf.type_definition, { desc = "LSP: [G]oto [T]ype Definition", buffer = buffer_number })
 	nnoremap("'<leader>cl'", vim.lsp.codelens.run, { desc = "LSP: [C]ode [L]ens", buffer = buffer_number })
 end
 
@@ -389,9 +386,6 @@ vnoremap("L", "$<left>")
 vnoremap("H", "^")
 
 -- Paste without losing the contents of the register
-vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
-vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
-
 xnoremap("<leader>p", '"_dP')
 
 -- Reselect the last visual selection
@@ -405,6 +399,10 @@ xnoremap(">>", function()
 	vim.cmd("normal! >>")
 	vim.cmd("normal! gv")
 end)
+
+-- Move line up/down
+vnoremap("J", ":m '>+1<CR>gv=gv")
+vnoremap("K", ":m '<-2<CR>gv=gv")
 
 -- Terminal --
 -- Enter normal mode while in a terminal

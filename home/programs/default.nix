@@ -211,7 +211,11 @@ in
         };
       };
 
-      z-lua.enable = true;
+      # z-lua.enable = true;
+      zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
 
       zsh = {
         enable = true;
@@ -232,8 +236,6 @@ in
             fi
           }
           # PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
-          # # Fig post block. Keep at the bottom of this file.
-          # [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
         '';
 
         enableCompletion = true;
