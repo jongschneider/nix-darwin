@@ -298,7 +298,7 @@ nnoremap("<leader>tt", "<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
 nnoremap("<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind in Open [B]uffers" })
 nnoremap("<leader>ff", function()
-	require("telescope.builtin").find_files({ hidden = true })
+	require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
 end, { desc = "[F]ind [F]iles" })
 nnoremap("<leader>fsd", require("telescope.builtin").lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
 -- -- Fuzzy find all the symbols in your current workspace.

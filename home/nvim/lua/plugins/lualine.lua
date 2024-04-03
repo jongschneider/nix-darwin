@@ -51,6 +51,11 @@ return {
 						harpoon_component,
 						"diff",
 						"diagnostics",
+						{
+							"searchcount",
+							maxcount = 999,
+							timeout = 500,
+						},
 					},
 					lualine_c = {
 						{ "filename", path = 1 },

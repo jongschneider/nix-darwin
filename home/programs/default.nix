@@ -235,7 +235,8 @@ in
               rm -f "$NNN_TMPFILE" > /dev/null
             fi
           }
-          # PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+          
+          PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
         '';
 
         enableCompletion = true;
