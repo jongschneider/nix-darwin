@@ -12,12 +12,12 @@ return {
 			--   fullscreen = true, -- whether to fullscreen explorer window when current tab is empty
 			-- },
 			picker = {
-				cmd = "nnn -a -Pp", -- command override (-p flag is implied)
+				cmd = "nnn -a -Hde -Pp", -- command override (-p flag is implied)
 				-- cmd = [[NNN_PLUG="p:preview-tui" ICONLOOKUP=1 tmux new-session nnn -a -Pp]],
-				style = { border = "shadow" },
+				-- style = { border = "shadow" },
 				style = {
-					width = 0.9, -- percentage relative to terminal size when < 1, absolute otherwise
-					height = 0.8, -- ^
+					width = 0.75, -- percentage relative to terminal size when < 1, absolute otherwise
+					height = 0.75, -- ^
 					xoffset = 0.5, -- ^
 					yoffset = 0.5, -- ^
 					border = "rounded", -- border decoration for example "rounded"(:h nvim_open_win)
