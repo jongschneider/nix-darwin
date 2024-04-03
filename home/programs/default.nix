@@ -251,6 +251,8 @@ in
           lt = "eza --tree";
           lla = "eza -la";
           ll = "nn";
+
+
           nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
           nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
           nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
@@ -268,6 +270,7 @@ in
           goi = "go install ./...";
           c = "code .";
           vim = "nvim";
+          vi = "nvim";
 
           nixconf = "code /Users/jschneider/.config/nix-darwin";
 
