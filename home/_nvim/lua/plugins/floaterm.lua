@@ -1,12 +1,11 @@
 -- Plugin configuration: vim-floaterm ------------------------------------------------------
-
 return {
     {
       "voldikss/vim-floaterm",
       cmd = { "FloatermNew", "FloatermToggle", "FloatermNext", "FloatermPrev" },
-      keys = {
-        { '<leader>tt', '<cmd>FloatermToggle<cr>', desc = 'Floating Terminal' },
-      },
+    --   keys = {
+    --     { '<leader>tt', '<cmd>FloatermToggle<cr>', desc = 'Floating Terminal' },
+    --   },
       config = function ()
         vim.g.floaterm_autoclose = 1
         vim.g.floaterm_autoinsert = 1
