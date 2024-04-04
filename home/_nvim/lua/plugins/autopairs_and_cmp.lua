@@ -39,42 +39,56 @@ return {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
+				completion = { completeopt = "menu,menuone,noinsert" },
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-					["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
+					-- Select the [n]ext item
+					["<C-j>"] = cmp.mapping.select_next_item(),
+					-- Select the [p]revious item
+					["<C-k>"] = cmp.mapping.select_prev_item(),
+
+					-- Scroll the documentation window [b]ack / [f]orward
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
+					["<C-f>"] = cmp.mapping.scroll_docs(4),
+
+					-- Accept ([y]es) the completion.
+					--  This will auto-import if your LSP supports it.
+					--  This will expand snippets if the LSP sent a snippet.
+					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+
+					-- Manually trigger a completion from nvim-cmp.
+					--  Generally you don't need this, because nvim-cmp will display
+					--  completions whenever it has completion options available.
+					["<C-Space>"] = cmp.mapping.complete({}),
+
+					-- Think of <c-l> as moving to the right of your snippet expansion.
+					--  So if you have a snippet that's like:
+					--  function $name($args)
+					--    $body
+					--  end
+					--
+					-- <c-l> will move you to the right of each of the expansion locations.
+					-- <c-h> is similar, except moving you backwards.
+					["<C-l>"] = cmp.mapping(function()
+						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
-						else
-							fallback()
 						end
 					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
+					["<C-h>"] = cmp.mapping(function()
+						if luasnip.locally_jumpable(-1) then
 							luasnip.jump(-1)
-						else
-							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-u>"] = cmp.mapping.scroll_docs(4), -- scroll up preview
-					["<C-d>"] = cmp.mapping.scroll_docs(-4), -- scroll down preview
-					["<C-Space>"] = cmp.mapping.complete({}), -- show completion suggestions
-					["<C-c>"] = cmp.mapping.abort(), -- close completion window
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- select suggestion
 				}),
 				-- sources for autocompletion
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" }, -- lsp
 					{ name = "buffer", max_item_count = 5 }, -- text within current buffer
 					-- { name = "copilot" }, -- Copilot suggestions
+					-- TODO: look into if people add go to this list
 					{ name = "path", max_item_count = 3 }, -- file system paths
 					{ name = "luasnip", max_item_count = 3 }, -- snippets
 				}),
@@ -86,7 +100,8 @@ return {
 						maxwidth = 50,
 						ellipsis_char = "...",
 						symbol_map = {
-							Copilot = "",
+							-- TODO: look into if people add go to this list
+							-- Copilot = "",
 						},
 					}),
 				},
