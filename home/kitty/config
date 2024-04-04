@@ -1,5 +1,7 @@
-font_family "FiraCode Nerd Font Mono"
-font_features FiraCode Nerd Font Mono +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +ss10 +zero +onum
+# font_family "FiraCode Nerd Font Mono"
+# font_features FiraCode Nerd Font Mono +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +ss10 +zero +onum
+font_family MesloLGL Nerd Font Mono
+font_features MesloLGL Nerd Font Mono +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +ss10 +zero +onum
 # font_family Fira Code
 # font_family "MesloLGS Nerd Font Mono"
 # font_family Monaspace Krypton
