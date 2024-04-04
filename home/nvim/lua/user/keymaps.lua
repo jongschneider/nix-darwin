@@ -169,13 +169,13 @@ nnoremap("<leader>d", function()
 end)
 
 -- Place all dignostics into a qflist
-nnoremap("<leader>ld", vim.diagnostic.setqflist, { desc = "Quickfix [L]ist [D]iagnostics" })
-nnoremap("<leader>xx", ":TroubleToggle<cr>", {})
-nnoremap("<leader>xw", ":TroubleToggle workspace_diagnostics<cr>", {})
-nnoremap("<leader>xd", ":TroubleToggle document_diagnostics<cr>", {})
-nnoremap("<leader>xq", ":TroubleToggle quickfix<cr>", {})
-nnoremap("<leader>xl", ":TroubleToggle loclist<cr>", {})
-nnoremap("<leader>gr", ":TroubleToggle lsp_references<cr>", {})
+-- nnoremap("<leader>ld", vim.diagnostic.setqflist, { desc = "Quickfix [L]ist [D]iagnostics" })
+-- nnoremap("<leader>xx", ":TroubleToggle<cr>", {})
+-- nnoremap("<leader>xw", ":TroubleToggle workspace_diagnostics<cr>", {})
+-- nnoremap("<leader>xd", ":TroubleToggle document_diagnostics<cr>", {})
+-- nnoremap("<leader>xq", ":TroubleToggle quickfix<cr>", {})
+-- nnoremap("<leader>xl", ":TroubleToggle loclist<cr>", {})
+-- nnoremap("<leader>gr", ":TroubleToggle lsp_references<cr>", {})
 
 -- nnoremap("<leader>ld", function()
 -- 	require("telescope.builtin").quickfix(require("telescope.themes").get_dropdown({

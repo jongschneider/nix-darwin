@@ -7,7 +7,6 @@
     "wkhtmltopdf" # for work
     "vlc"
     "font-monaspace"
-    # "fig"
     "raycast"
     "rectangle"
     "shottr"

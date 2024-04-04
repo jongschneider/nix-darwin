@@ -5,7 +5,9 @@ return {
 			require("catppuccin").setup({
 				transparent_background = true,
 				integrations = {
+					barbar = true,
 					cmp = true,
+					dap_ui = true,
 					fidget = true,
 					gitsigns = true,
 					harpoon = true,
@@ -15,15 +17,39 @@ return {
 						scope_color = "sapphire",
 						colored_indent_levels = false,
 					},
+					lsp_trouble = true,
+					mini = {
+						enabled = true,
+						indentscope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+					},
 					mason = true,
-					native_lsp = { enabled = true },
 					notify = true,
+					noice = true,
 					nvimtree = true,
+					native_lsp = {
+						enabled = true,
+						virtual_text = {
+							errors = { "italic" },
+							hints = { "italic" },
+							warnings = { "italic" },
+							information = { "italic" },
+						},
+						underlines = {
+							errors = { "underline" },
+							hints = { "underline" },
+							warnings = { "underline" },
+							information = { "underline" },
+						},
+						inlay_hints = {
+							background = true,
+						},
+					},
 					neotree = true,
 					symbols_outline = true,
 					telescope = true,
 					treesitter = true,
 					treesitter_context = true,
+					ufo = true,
 					which_key = true,
 				},
 			})

@@ -152,26 +152,6 @@ in
         };
       };
 
-      # nnn = {
-      #   enable = true;
-      #   package = pkgs.nnn.override {withNerdIcons = true;};
-      #   plugins = {
-      #     mappings = {
-      #       p = "preview-tui";
-      #     };
-      #     src = pkgs.nnn + "/plugins";
-      #   };
-      #   bookmarks = {
-      #     a = "~/Applications";
-      #     d = "~/Desktop";
-      #     D = "~/Downloads";
-      #     c = "~/code";
-      #     i = "~/code/integrator";
-      #     n = "~/code/ingester";
-      #     N = "/Users/jschneider/.config/nix-darwin";
-      #   };
-      # };
-
       nnn = {
         enable = true;
         package = pkgs.nnn.override {withNerdIcons = true;};
@@ -235,7 +215,7 @@ in
               rm -f "$NNN_TMPFILE" > /dev/null
             fi
           }
-          
+
           PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
         '';
 
@@ -251,7 +231,6 @@ in
           lt = "eza --tree";
           lla = "eza -la";
           ll = "nn";
-
 
           nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
           nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
