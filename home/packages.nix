@@ -41,7 +41,7 @@
     git-open
     mkcert
     glow
-    # youtube-dl
+    youtube-dl
     redis
     protobuf
     cpulimit
