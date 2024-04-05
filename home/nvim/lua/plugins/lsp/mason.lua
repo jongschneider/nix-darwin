@@ -49,6 +49,13 @@ return {
           "black", -- python formatter
           "pylint",
           "eslint_d",
+          "golangci-lint",
+          "goimports",
+          "gofumpt",
+          "gomodifytags",
+          "nilaway",
+          "rubocop",
+          "sqlfmt"
         },
       })
     end,
