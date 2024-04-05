@@ -57,7 +57,8 @@ return {
         --   theme = my_lualine_theme,
         -- },
         options = {
-            theme = 'tokyonight'
+            -- theme = 'tokyonight'
+            theme = "catppuccin",
         },
         sections = {
           lualine_x = {
