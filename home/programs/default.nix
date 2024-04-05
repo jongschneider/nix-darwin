@@ -323,6 +323,24 @@ in
         };
       };
 
+      neovim = {
+        enable = true;
+        # defaultEditor = true;
+        extraLuaConfig = ''
+          require('user')
+        '';
+        extraPackages = [
+          # Included for nil_ls
+          pkgs.cargo
+          # Included to build telescope-fzf-native.nvim
+          pkgs.cmake
+        ];
+        withNodeJs = true;
+        withPython3 = true;
+        withRuby = true;
+        vimdiffAlias = true;
+      };
+
       tmux = {
         enable = true;
         sensibleOnTop = true;
