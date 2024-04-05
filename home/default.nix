@@ -19,12 +19,12 @@
   fonts.fontconfig.enable = true;
 
   # xdg.configFile.nvim.source = ./nvim;
-  # xdg.configFile = {
-  #   nvim = {
-  #     source = config.lib.file.mkOutOfStoreSymlink ./nvim;
-  #     recursive = true;
-  #   };
-  # };
+  xdg.configFile = {
+    nvim = {
+      source = config.lib.file.mkOutOfStoreSymlink ./nvim;
+      recursive = true;
+    };
+  };
 
   home = {
     username = "jschneider";
