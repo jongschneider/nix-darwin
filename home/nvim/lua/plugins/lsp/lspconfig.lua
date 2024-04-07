@@ -78,6 +78,48 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		lspconfig.gopls.setup({
+			capabilities = capabilities,
+			flags = { debounce_text_changes = 200 },
+			gocoverage_sign = "█",
+			settings = {
+				gopls = {
+					completeUnimported = true,
+					usePlaceholders = true,
+					gofumpt = true,
+					analyses = {
+						nilness = true,
+						unusedparams = true,
+						unusedwrite = true,
+						useany = true,
+					},
+					codelenses = {
+						gc_details = false,
+						generate = true,
+						regenerate_cgo = true,
+						run_govulncheck = true,
+						test = true,
+						tidy = true,
+						upgrade_dependency = true,
+						vendor = true,
+					},
+					experimentalPostfixCompletions = true,
+					staticcheck = true,
+					directoryFilters = { "-.git", "-node_modules" },
+					semanticTokens = true,
+					hints = {
+						-- assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						-- parameterNames = true,
+						-- rangeVariableTypes = true,
+					},
+				},
+			},
+		})
+
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
@@ -128,4 +170,3 @@ return {
 		})
 	end,
 }
-
