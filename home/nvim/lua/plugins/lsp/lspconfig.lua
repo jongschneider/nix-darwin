@@ -113,9 +113,31 @@ return {
 						compositeLiteralTypes = true,
 						constantValues = true,
 						functionTypeParameters = true,
-						-- parameterNames = true,
-						-- rangeVariableTypes = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
 					},
+				},
+			},
+		})
+
+		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph
+		lspconfig.solargraph.setup({
+			capabilities = capabilities,
+			flags = {
+				debounce_text_changes = 150,
+			},
+			cmd = { "bundle", "exec", "solargraph", "stdio" },
+			filetypes = { "ruby" },
+			init_options = { formatting = true },
+			root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+			settings = {
+				solargraph = {
+					diagnostics = true,
+					formatting = true,
+					folding = true,
+					checkGemVersion = false,
+					useBundler = true,
+					-- bundlePath = '/var/folders/xk/lm_549095ml5lvk1bkl3vc000000gp/T/frum_1103_1690382810047/bin/bundle',
 				},
 			},
 		})

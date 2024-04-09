@@ -83,27 +83,70 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 keymap.set("n", "<leader>ho", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = "Open harpoon ui" })
 
 -- Add current file to harpoon
-keymap.set("n", "<leader>ha", '<cmd>lua require("harpoon.mark").add_file()<CR>', { desc = "Add current file to harpoon" })
+keymap.set(
+	"n",
+	"<leader>ha",
+	'<cmd>lua require("harpoon.mark").add_file()<CR>',
+	{ desc = "Add current file to harpoon" }
+)
 
 -- -- Remove current file from harpoon
-keymap.set("n", "<leader>hr", '<cmd>lua require("harpoon.mark").rm_file()<CR>', { desc = "Remove current file from harpoon" })
+keymap.set(
+	"n",
+	"<leader>hr",
+	'<cmd>lua require("harpoon.mark").rm_file()<CR>',
+	{ desc = "Remove current file from harpoon" }
+)
 
 -- -- Remove all files from harpoon
-keymap.set("n", "<leader>hc", '<cmd>lua require("harpoon.mark").clear_all()<CR>', { desc = "Remove all files from harpoon" })
+keymap.set(
+	"n",
+	"<leader>hc",
+	'<cmd>lua require("harpoon.mark").clear_all()<CR>',
+	{ desc = "Remove all files from harpoon" }
+)
 
 -- -- Quickly jump to harpooned files
-keymap.set("n", "<leader>1", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', { desc = "Quickly jump to harpooned file 1"})
+keymap.set(
+	"n",
+	"<leader>1",
+	'<cmd>lua require("harpoon.ui").nav_file(1)<CR>',
+	{ desc = "Quickly jump to harpooned file 1" }
+)
 
-keymap.set("n", "<leader>2", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', { desc = "Quickly jump to harpooned file 2" })
+keymap.set(
+	"n",
+	"<leader>2",
+	'<cmd>lua require("harpoon.ui").nav_file(2)<CR>',
+	{ desc = "Quickly jump to harpooned file 2" }
+)
 
-keymap.set("n", "<leader>3", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', { desc = "Quickly jump to harpooned file 3" })
+keymap.set(
+	"n",
+	"<leader>3",
+	'<cmd>lua require("harpoon.ui").nav_file(3)<CR>',
+	{ desc = "Quickly jump to harpooned file 3" }
+)
 
-keymap.set("n", "<leader>4", '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', { desc = "Quickly jump to harpooned file 4" })
+keymap.set(
+	"n",
+	"<leader>4",
+	'<cmd>lua require("harpoon.ui").nav_file(4)<CR>',
+	{ desc = "Quickly jump to harpooned file 4" }
+)
 
-keymap.set("n", "<leader>5", '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', { desc = "Quickly jump to harpooned file 5" })
+keymap.set(
+	"n",
+	"<leader>5",
+	'<cmd>lua require("harpoon.ui").nav_file(5)<CR>',
+	{ desc = "Quickly jump to harpooned file 5" }
+)
 
 -- Save with leader key
 nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
+
+-- Quit with leader key
+nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 nnoremap("L", "$")
@@ -169,7 +212,6 @@ nnoremap("[w", function()
 	vim.api.nvim_feedkeys("zz", "n", false)
 end)
 
-
 -- Press leader rw to rotate open windows
 nnoremap("<leader>rw", ":RotateWindows<cr>", { desc = "[R]otate [W]indows" })
 
@@ -184,3 +226,4 @@ vnoremap("J", ":m '>+1<CR>gv=gv")
 vnoremap("K", ":m '<-2<CR>gv=gv")
 
 -- TODO: Telescope lsp_document_symbols ignore_symbols=variable
+
