@@ -200,6 +200,9 @@ in
       zsh = {
         enable = true;
         initExtra = ''
+          function gcpb(){
+              git branch | grep \* | cut -d ' ' -f2 | pbcopy
+          }
           nn () {
             if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
               echo "nnn is already running"

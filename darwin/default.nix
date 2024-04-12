@@ -93,6 +93,7 @@
       finder.ShowPathbar = true;
       NSGlobalDomain.InitialKeyRepeat = 14;
       NSGlobalDomain.KeyRepeat = 1;
+      NSGlobalDomain.ApplePressAndHoldEnabled = false;
       dock.autohide = true;
     };
 
