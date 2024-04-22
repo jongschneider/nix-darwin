@@ -52,7 +52,8 @@
   # Necessary for using flakes on this system.
   nix = {
     settings = {
-      auto-optimise-store = true;
+      # auto-optimise-store = true;
+      auto-optimise-store = false;
       builders-use-substitutes = true;
       experimental-features = ["flakes" "nix-command"];
       substituters = ["https://nix-community.cachix.org"];
