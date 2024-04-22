@@ -9,7 +9,19 @@ in
       bottom.enable = true; # fancy version of `top` with ASCII graphs
       tealdeer.enable = true; # rust implementation of `tldr`
       gh.enable = true;
-      lf.enable = true;
+      # lf.enable = true;
+      lf = {
+        enable = true;
+        settings = {
+          preview = true;
+          hidden = true;
+          drawbox = true;
+          icons = true;
+          ignorecase = true;
+          color256 = true;
+          relativenumber = true;
+        };
+      };
       jq.enable = true;
 
       thefuck = {
@@ -281,11 +293,18 @@ in
           env.TERM = "xterm-256color";
 
           font = {
-            normal.family = "MesloLGS Nerd Font Mono";
+            # normal.family = "MesloLGS Nerd Font Mono";
+            normal.family = "Hack Nerd Font Mono";
             # normal.family = "Monaspace Krypton Light";
             size = 13;
           };
-
+          window = {
+            opacity = 0.85;
+            padding.x = 25;
+            padding.y = 20;
+            dynamic_padding = false;
+            decorations = "buttonless";
+          };
           cursor.style = {
             shape = "Beam";
             blinking = "On";
