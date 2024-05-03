@@ -302,10 +302,11 @@ in
             size = 13;
           };
           window = {
-            opacity = 0.85;
-            padding.x = 25;
-            padding.y = 20;
-            dynamic_padding = false;
+            opacity = 0.97;
+            padding.x = 2;
+            padding.y = 2;
+            dynamic_padding = true;
+            dynamic_title = true;
             decorations = "buttonless";
           };
           cursor.style = {
