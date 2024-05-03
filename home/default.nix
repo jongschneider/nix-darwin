@@ -24,6 +24,11 @@
       source = config.lib.file.mkOutOfStoreSymlink ./nvim;
       recursive = true;
     };
+    wezterm = {
+      # source = config.lib.file.mkOutOfStoreSymlink ./wezterm;
+      source = ./wezterm;
+      # recursive = true;
+    };
   };
 
   home = {

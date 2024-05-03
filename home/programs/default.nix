@@ -316,6 +316,11 @@ in
         };
       };
 
+      wezterm = {
+        enable = true;
+        # extraConfig = ''''
+      };
+
       starship = {
         enable = true;
         enableZshIntegration = true;
