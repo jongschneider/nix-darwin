@@ -109,7 +109,8 @@ return {
 				solargraph = {},
 				gopls = {
 					flags = { debounce_text_changes = 200 },
-					gocoverage_sign = "█",
+					-- gocoverage_sign = "█",
+					gocoverage_sign = "|",
 					settings = {
 						gopls = {
 							completeUnimported = true,
@@ -138,9 +139,9 @@ return {
 							hints = {
 								-- assignVariableTypes = true,
 								compositeLiteralFields = true,
-								compositeLiteralTypes = true,
+								-- compositeLiteralTypes = true,
 								constantValues = true,
-								functionTypeParameters = true,
+								-- functionTypeParameters = true,
 								-- parameterNames = true,
 								-- rangeVariableTypes = true,
 							},

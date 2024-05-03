@@ -12,14 +12,24 @@ local M = {}
 
 local TERM = os.getenv("TERM")
 
+inoremap("fj", "<ESC>", { desc = "Exit insert mode with fj" })
+
 -- Normal --
 -- Disable Space bar since it'll be used as the leader key
 nnoremap("<space>", "<nop>")
+nnoremap("fj", "<ESC>", { desc = "Exit normal mode with fj" })
 
--- vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
--- vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
--- vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
--- vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
+-- window management
+nnoremap("<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+nnoremap("<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
+nnoremap("<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+nnoremap("<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+
+nnoremap("<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
+nnoremap("<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
+nnoremap("<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
+nnoremap("<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
+nnoremap("<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
 -- Window +  better kitty navigation
 nnoremap("<C-j>", function()
@@ -118,7 +128,7 @@ nnoremap("H", "^")
 nnoremap("U", "<C-r>")
 
 -- Turn off highlighted results
-nnoremap("<leader>no", "<cmd>noh<cr>")
+nnoremap("<leader>nh", "<cmd>noh<cr>", { desc = "Clear search highlights" })
 
 -- Debugging
 nnoremap("<leader>db", ":DapToggleBreakpoint<cr>", {})
@@ -257,11 +267,6 @@ end)
 -- Go keymaps --
 nnoremap("<leader>gc", ":GoCoverage -t<cr>", { desc = "Toggle Test Coverage" })
 nnoremap("<leader>gp", ":GoTestPkg -v<cr>")
--- nnoremap("<leader>tn", ":TestNearest<CR>")
--- nnoremap("<leader>tf", ":TestFile<CR>")
--- nnoremap("<leader>ts", ":TestSuite<CR>")
--- nnoremap("<leader>tl", ":TestLast<CR>")
--- nnoremap("<leader>tv", ":TestVisit<CR>")
 
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")
@@ -380,6 +385,8 @@ nnoremap("zM", require("ufo").closeAllFolds)
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key
 vnoremap("<space>", "<nop>")
+vnoremap("fj", "<ESC>", { desc = "Exit visual mode with fj" })
+
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 vnoremap("L", "$<left>")
@@ -407,6 +414,8 @@ vnoremap("K", ":m '<-2<CR>gv=gv")
 -- Terminal --
 -- Enter normal mode while in a terminal
 tnoremap("<esc>", [[<C-\><C-n>]])
+tnoremap("fj", "<ESC>", { desc = "Exit term mode with fj" })
+
 
 -- Window navigation from terminal
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])

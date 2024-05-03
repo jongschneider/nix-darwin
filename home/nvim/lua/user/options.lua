@@ -6,13 +6,13 @@ vim.opt.rnu = true
 vim.opt.showmode = false
 
 -- Set tabs to 2 spaces
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
 -- Enable auto indenting and set it to spaces
 vim.opt.smartindent = true
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
 
 -- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
 vim.opt.breakindent = true
@@ -50,6 +50,7 @@ vim.opt.undofile = true
 
 -- Enable 24-bit color
 vim.opt.termguicolors = true
+vim.opt.background = "dark" -- colorschemes that can be light or dark will be made dark
 
 -- Enable the sign column to prevent the screen from jumping
 vim.opt.signcolumn = "yes"
@@ -59,6 +60,8 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 
 -- Enable cursor line highlight
 vim.opt.cursorline = true
+-- vim.opt.list = true
+vim.opt.listchars:append "eol:↴"
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
@@ -67,6 +70,9 @@ vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+
+-- backspace
+vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
 -- Always keep 8 lines above/below cursor unless at start/end of file
 vim.opt.scrolloff = 8
@@ -82,3 +88,6 @@ vim.opt.guicursor = {
 	"a:blinkwait700-blinkoff400-blinkon250", -- All modes: blinking settings
 	"sm:block-blinkwait175-blinkoff150-blinkon175", -- Showmatch: block cursor with specific blinking settings
 }
+
+-- turn off swapfile
+vim.opt.swapfile = false

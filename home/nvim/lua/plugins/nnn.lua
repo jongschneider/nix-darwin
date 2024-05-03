@@ -12,7 +12,8 @@ return {
 			--   fullscreen = true, -- whether to fullscreen explorer window when current tab is empty
 			-- },
 			picker = {
-				cmd = "nnn -a -Hde -Pp", -- command override (-p flag is implied)
+				-- cmd = "nnn -a -Hde -Pp", -- command override (-p flag is implied)
+				cmd = "nnn -a -He -Pp", -- command override (-p flag is implied)
 				-- cmd = [[NNN_PLUG="p:preview-tui" ICONLOOKUP=1 tmux new-session nnn -a -Pp]],
 				-- style = { border = "shadow" },
 				style = {
@@ -52,7 +53,8 @@ return {
 				prev = "<C-w>W",
 			},
 			buflisted = false, -- whether or not nnn buffers show up in the bufferlist
-			quitcd = nil, -- or "cd" / tcd" / "lcd", command to run on quitcd file if found
+			-- quitcd = nil, -- or "cd" / tcd" / "lcd", command to run on quitcd file if found
+			quitcd = "cd", -- or "cd" / tcd" / "lcd", command to run on quitcd file if found
 			offset = false, -- whether or not to write position offset to tmpfile(for use in preview-tui)
 		})
 	end,

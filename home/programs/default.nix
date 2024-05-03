@@ -208,6 +208,9 @@ in
       zoxide = {
         enable = true;
         enableZshIntegration = true;
+        options = [
+          "--cmd cd"
+        ];
       };
 
       zsh = {
@@ -224,7 +227,8 @@ in
 
             export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
 
-            nnn -adeHo "$@"
+            nnn -aeHo "$@"
+            # nnn -adeHo "$@"
 
             if [ -f "$NNN_TMPFILE" ]; then
               . "$NNN_TMPFILE"
