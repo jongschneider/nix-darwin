@@ -90,11 +90,23 @@
   system = {
     defaults = {
       finder.AppleShowAllExtensions = true;
+      finder.AppleShowAllFiles = true;
       finder._FXShowPosixPathInTitle = true;
       finder.ShowPathbar = true;
+      finder.ShowStatusBar = true;
+      # Use current directory as default search scope in Finder
+      finder.FXDefaultSearchScope = "SCcf";
       NSGlobalDomain.InitialKeyRepeat = 14;
       NSGlobalDomain.KeyRepeat = 1;
       NSGlobalDomain.ApplePressAndHoldEnabled = false;
+      # expand save dialog by default
+      NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+      # expand save dialog by default
+      NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+      # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+      NSGlobalDomain.AppleKeyboardUIMode = 3;
+      # Enable subpixel font rendering on non-Apple LCDs
+      NSGlobalDomain.AppleFontSmoothing = 2;
       dock.autohide = true;
     };
 
