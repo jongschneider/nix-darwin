@@ -14,6 +14,7 @@
       gnumake
       (import ../scripts/ff.nix {inherit pkgs;})
       (import ../scripts/gsquash.nix {inherit pkgs;})
+      (import ../scripts/git-bare-clone.nix {inherit pkgs;})
       discord
       presenterm
       nurl
