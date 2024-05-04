@@ -296,7 +296,7 @@ end, { desc = "Search [G]it [F]iles" })
 -- nnoremap('<leader>ld', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazydocker<CR>', { silent = true })
 -- nnoremap('<leader>lg', '<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>', { silent = true })
 -- nnoremap('<leader>nn', '<CMD>FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>', { silent = true })
-nnoremap("<leader>N", "<CMD>NnnPicker<CR>", { silent = true })
+nnoremap("<leader>N", "<CMD>NnnPicker %:p:h<CR>", { silent = true })
 nnoremap("<leader>tt", "<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>", { silent = true })
 
 -- Telescope keybinds --

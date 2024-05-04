@@ -269,6 +269,12 @@ in
           vim = "nvim";
           vi = "nvim";
 
+          # tmux aliases
+          ta = "tmux attach";
+          tls = "tmux ls";
+          tat = "tmux attach -t";
+          tns = "tmux new-session -s";
+
           nixconf = "code /Users/jschneider/.config/nix-darwin";
 
           # More git aliases
@@ -286,6 +292,7 @@ in
           gignore = "c .git/info/exclude";
           glog = "git log --simplify-by-decoration --oneline --graph";
           glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' --preview-window down --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs git checkout";
+          wt = "git worktree";
         };
       };
 

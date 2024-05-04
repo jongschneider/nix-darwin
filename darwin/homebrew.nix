@@ -8,7 +8,7 @@
     "vlc"
     "font-monaspace"
     "raycast"
-    "rectangle"
+    # "rectangle"
     "shottr"
     # "karabiner-elements" # using the cask bc couldn't get  services.karabiner-elements to work correctly
   ];

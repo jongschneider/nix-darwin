@@ -48,6 +48,42 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+  services.yabai = {
+    enable = false;
+    config = {
+      window_placement = "second_child";
+      window_opacity = "off";
+      window_opacity_duration = 0.0;
+      active_window_opacity = 1.0;
+      normal_window_opacity = 0.9;
+      layout = "bsp";
+      top_padding = 12;
+      bottom_padding = 12;
+      left_padding = 12;
+      right_padding = 12;
+      window_gap = 12;
+      # mouse support
+      mouse_modifier = "fn";
+      mouse_action1 = "move";
+      mouse_action2 = "resize";
+      mouse_follows_focus = "off";
+      focus_follows_mouse = "off";
+    };
+    extraConfig = ''
+      # ignore these apps
+      yabai -m rule --add app="^System Settings$" manage=off
+      yabai -m rule --add app="^Alfred Preferences$" manage=off
+      yabai -m rule --add app="^Messages$" manage=off
+      yabai -m rule --add app="^Music$" manage=off
+      yabai -m rule --add app="Microsoft Teams$" manage=off
+      yabai -m rule --add app="^CleanShot X$" manage=off
+      yabai -m rule --add app="^CleanMyMac X$" manage=off
+      yabai -m rule --add app="^1Password$" manage=off
+      yabai -m rule --add app="^Raycast$" manage=off
+      yabai -m rule --add app="^Ivory$" manage=off
+      yabai -m rule --add app="^Finder$" manage=off
+    '';
+  };
   # services.karabiner-elements.enable = true;
 
   # Necessary for using flakes on this system.
