@@ -236,7 +236,7 @@ in
 
           PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
         '';
-
+        oh-my-zsh.enable = true;
         enableCompletion = true;
         autocd = true;
         autosuggestion.enable = true;
