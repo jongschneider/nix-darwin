@@ -41,14 +41,14 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "catppuccin",
-					globalstatus = true,
+					globalstatus = false,
 					component_separators = { left = "", right = "" },
 					section_separators = { left = "█", right = "█" },
 				},
 				sections = {
 					lualine_b = {
 						{ "branch", icon = "", fmt = truncate_branch_name },
-						harpoon_component,
+						-- harpoon_component,
 						"diff",
 						"diagnostics",
 						{

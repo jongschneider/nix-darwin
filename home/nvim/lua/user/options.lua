@@ -60,8 +60,9 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 
 -- Enable cursor line highlight
 vim.opt.cursorline = true
--- vim.opt.list = true
-vim.opt.listchars:append "eol:↴"
+vim.opt.list = true
+-- vim.opt.listchars:append("eol:↴")
+vim.opt.listchars = "eol:↴,tab:  ,lead:·,trail:·,nbsp:⍽,extends:◣,precedes:◢"
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
@@ -78,7 +79,7 @@ vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line
 vim.opt.scrolloff = 8
 
 -- Place a column line
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 
 vim.opt.guicursor = {
 	"n-v-c:block", -- Normal, visual, command-line: block cursor

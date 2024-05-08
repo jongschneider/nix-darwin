@@ -382,10 +382,12 @@ in
         enable = true;
         sensibleOnTop = true;
         baseIndex = 1;
-        shortcut = "Space";
+        shortcut = "b";
         aggressiveResize = true;
         plugins = with pkgs.tmuxPlugins; [
           vim-tmux-navigator
+          resurrect # persist tmux sessions after computer restart
+          continuum # automatically saves sessions for you every 15 minutes
           sensible
           yank
           prefix-highlight
@@ -454,14 +456,27 @@ in
           bind -n M-H previous-window
           bind -n M-L next-window
 
-          # Resize panes
-          bind -r S-left resize-pane -L 5
-          bind -r S-down resize-pane -D 5
-          bind -r S-up resize-pane -U 5
-          bind -r S-right resize-pane -R 5
+          # Remap the split pane
+          unbind %
+          bind | split-window -h 
 
+          unbind '"'
+          bind - split-window -v
+          # Resize panes
+          bind -r h resize-pane -L 5
+          bind -r j resize-pane -D 5
+          bind -r k resize-pane -U 5
+          bind -r l resize-pane -R 5
+
+          # bind -r S-left resize-pane -L 5
+          # bind -r S-down resize-pane -D 5
+          # bind -r S-up resize-pane -U 5
+          # bind -r S-right resize-pane -R 5
+          
           # set vi-mode
           set-window-option -g mode-keys vi
+          
+          bind -r m resize-pane -Z
 
           # vim style yank keybindings
           bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -471,6 +486,12 @@ in
           # keybinding to make sure that when we split pane we are in the same cwd as the pane we came from
           bind '"' split-window -v -c "#{pane_current_path}"
           bind % split-window -h -c "#{pane_current_path}"
+
+          # auto kill pane when closing
+          bind-key x kill-pane
+
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @continuum-restore 'on'
         '';
       };
     };

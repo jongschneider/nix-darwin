@@ -100,7 +100,7 @@ nnoremap("*", "*zz")
 nnoremap("#", "#zz")
 
 -- Open neotree
-nnoremap("<leader>v", "<cmd>Neotree filesystem toggle right<cr>", { silent = false })
+-- nnoremap("<leader>v", "<cmd>Neotree filesystem toggle right<cr>", { silent = false })
 
 -- Press 'S' for quick find/replace for the word under the cursor
 nnoremap("S", function()
@@ -298,6 +298,7 @@ end, { desc = "Search [G]it [F]iles" })
 -- nnoremap('<leader>nn', '<CMD>FloatermNew --autoclose=2 --height=0.75 --width=0.75 nnn -Hde<CR>', { silent = true })
 nnoremap("<leader>N", "<CMD>NnnPicker %:p:h<CR>", { silent = true })
 nnoremap("<leader>tt", "<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 zsh<CR>", { silent = true })
+nnoremap("<leader>T", "<CMD>FloatermToggle --autoclose=2 --height=0.9 --width=0.9 zsh<CR>", { silent = true })
 
 -- Telescope keybinds --
 nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
@@ -387,7 +388,6 @@ nnoremap("zM", require("ufo").closeAllFolds)
 vnoremap("<space>", "<nop>")
 vnoremap("fj", "<ESC>", { desc = "Exit visual mode with fj" })
 
-
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 vnoremap("L", "$<left>")
 vnoremap("H", "^")
@@ -415,7 +415,6 @@ vnoremap("K", ":m '<-2<CR>gv=gv")
 -- Enter normal mode while in a terminal
 tnoremap("<esc>", [[<C-\><C-n>]])
 tnoremap("fj", "<ESC>", { desc = "Exit term mode with fj" })
-
 
 -- Window navigation from terminal
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
