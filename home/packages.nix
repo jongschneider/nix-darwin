@@ -18,6 +18,7 @@
     asciiquarium
     srt
     mysql
+    fastfetch
 
     du-dust # fancy version of `du`
     fd # fancy version of `find`
@@ -47,6 +48,7 @@
     cpulimit
     neofetch
     lazydocker
+    sesh
 
     # not sure I need... were migrated from brew
     x265

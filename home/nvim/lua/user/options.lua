@@ -22,7 +22,7 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
 -- Disable text wrap
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Set leader key to space
 vim.g.mapleader = " "
@@ -62,7 +62,7 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 vim.opt.cursorline = true
 vim.opt.list = true
 -- vim.opt.listchars:append("eol:↴")
-vim.opt.listchars = "eol:↴,tab:  ,lead:·,trail:·,nbsp:⍽,extends:◣,precedes:◢"
+vim.opt.listchars = "eol:↴,tab:  ,lead: ,trail:·,nbsp:⍽,extends:◣,precedes:◢"
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
