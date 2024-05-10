@@ -12,7 +12,7 @@ return {
 		},
 		config = function()
 			local actions = require("telescope.actions")
-			local trouble = require("trouble.providers.telescope")
+			local trouble = require("trouble.sources.telescope")
 
 			require("telescope").setup({
 				defaults = {
@@ -22,9 +22,9 @@ return {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 							["<C-x>"] = actions.delete_buffer,
-							["<c-t>"] = trouble.open_with_trouble,
+							["<c-t>"] = trouble.open,
 						},
-						n = { ["<c-t>"] = trouble.open_with_trouble },
+						n = { ["<c-t>"] = trouble.open },
 					},
 					file_ignore_patterns = {
 						"node_modules",
