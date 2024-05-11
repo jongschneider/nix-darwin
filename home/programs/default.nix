@@ -4,6 +4,7 @@
 in
   # https://nix-community.github.io/home-manager/options.html
   {
+    catppuccin.flavour = "mocha";
     programs = {
       htop.enable = true;
       ripgrep.enable = true;
@@ -61,6 +62,7 @@ in
 
       lazygit = {
         enable = true;
+        catppuccin.enable = true;
         settings = {
           git = {
             paging = {
