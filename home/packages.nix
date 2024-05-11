@@ -1,73 +1,34 @@
-{
-  config,
-  pkgs,
-  fomt,
-  system,
-  ...
-}: {
-  home.packages = with pkgs; [
-    # Basics
-    (pkgs.nerdfonts.override {fonts = ["FiraCode" "Monaspace" "Hack" "Meslo"];})
-    coreutils
-    inetutils
-    curl
-    wget
-    tree
-    procs
-    # ffmpeg
-    asciiquarium
-    srt
-    mysql
-    fastfetch
+{ pkgs, inputs, work, ... }:
 
-    du-dust # fancy version of `du`
-    fd # fancy version of `find`
-    mosh # wrapper for `ssh` that better and not dropping connections
-    unrar # extract RAR archives
-    xz # extract XZ archives
-    zlib
-    asciinema
+[
+  # (pkgs.callPackage ../pkgs/bins {})
 
-    # Dev
-    fh
-    jqp
-    # go
-    # golangci-lint
-    # gotestsum
-    ruby
-    rubyPackages.solargraph
-    rubyPackages.rubocop-performance
-    rubocop
-    nodejs_21
-    git-open
-    mkcert
-    glow
-    youtube-dl
-    redis
-    protobuf
-    cpulimit
-    neofetch
-    lazydocker
-    sesh
+  pkgs.awscli2
+  pkgs.cachix
+  pkgs.ctlptl
+  pkgs.doppler
+  pkgs.fd
+  # pkgs.glab
+  pkgs.glow
+  pkgs.gum
+  # pkgs.httpie
+  pkgs.jq
+  # pkgs.k9s
+  # pkgs.kind
+  # pkgs.kubectl
+  pkgs.mods
+  pkgs.moreutils
+  pkgs.nmap
+  pkgs.podman-compose
+  # pkgs.pyenv
+  pkgs.ripgrep
+  pkgs.sops
+  pkgs.tilt
+  pkgs.viddy
+  # pkgs.weechat
 
-    # not sure I need... were migrated from brew
-    x265
-    x264
-    svt-av1
-    utf8proc
-    speex
-    snappy
-    # shared-mime-info
-    rav1e
-    pango
-
-    # Useful nix related tools
-    cachix # adding/managing alternative binary caches hosted by Cachix
-    comma # run software from without installing it
-    nix-output-monitor # get additional information while building packages
-    nix-tree # interactively browse dependency graphs of Nix derivations
-    nix-update # swiss-knife for updating nix packages
-    node2nix # generate Nix expressions to build NPM packages
-    statix # lints and suggestions for the Nix programming language
-  ];
-}
+  # inputs.hvim.packages.${pkgs.system}.default # my nixos config
+  # inputs.build-configs.packages.${pkgs.system}.default
+] ++ pkgs.lib.lists.optionals work [
+  pkgs.bitwarden-cli
+]
