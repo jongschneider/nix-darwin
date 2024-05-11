@@ -216,6 +216,7 @@ return {
 			formatters_by_ft = {
 				javascript = { { "prettierd", "prettier" } },
 				lua = { "stylua" },
+				nix = { "alejandra" },
 			},
 		},
 	},

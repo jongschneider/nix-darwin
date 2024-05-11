@@ -458,7 +458,7 @@ in
 
           # Remap the split pane
           unbind %
-          bind | split-window -h 
+          bind | split-window -h
 
           unbind '"'
           bind - split-window -v
@@ -472,10 +472,10 @@ in
           # bind -r S-down resize-pane -D 5
           # bind -r S-up resize-pane -U 5
           # bind -r S-right resize-pane -R 5
-          
+
           # set vi-mode
           set-window-option -g mode-keys vi
-          
+
           bind -r m resize-pane -Z
 
           # vim style yank keybindings
