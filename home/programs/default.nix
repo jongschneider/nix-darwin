@@ -4,7 +4,10 @@
 in
   # https://nix-community.github.io/home-manager/options.html
   {
-    catppuccin.flavour = "mocha";
+    catppuccin = {
+      enable = true;
+      flavour = "mocha";
+    };
     programs = {
       htop.enable = true;
       ripgrep.enable = true;
@@ -39,7 +42,7 @@ in
 
       bat = {
         enable = true;
-        config.theme = "TwoDark";
+        catppuccin.enable = true;
       };
 
       eza = {
@@ -57,6 +60,7 @@ in
 
       fzf = {
         enable = true;
+        catppuccin.enable = true;
         enableZshIntegration = true;
       };
 
@@ -85,38 +89,39 @@ in
 
         delta = {
           enable = true;
+          catppuccin.enable = true;
           options = {
-            chameleon = {
-              blame-code-style = "syntax";
-              blame-format = "{author:<18} ({commit:>7}) {timestamp:^12} ";
-              blame-palette = "#2E3440 #3B4252 #434C5E #4C566A";
-              dark = true;
-              file-added-label = "[+]";
-              file-copied-label = "[==]";
-              file-decoration-style = "#434C5E ul";
-              file-modified-label = "[*]";
-              file-removed-label = "[-]";
-              file-renamed-label = "[->]";
-              file-style = "#434C5E bold";
-              hunk-header-style = "omit";
-              keep-plus-minus-markers = true;
-              line-numbers = true;
-              line-numbers-left-format = " {nm:>1} │";
-              line-numbers-left-style = "red";
-              line-numbers-minus-style = "red italic black";
-              line-numbers-plus-style = "green italic black";
-              line-numbers-right-format = " {np:>1} │";
-              line-numbers-right-style = "green";
-              line-numbers-zero-style = "#434C5E italic";
-              minus-emph-style = "bold red";
-              minus-style = "bold red";
-              plus-emph-style = "bold green";
-              plus-style = "bold green";
-              side-by-side = true;
-              syntax-theme = "Nord";
-              zero-style = "syntax";
-            };
-            features = "chameleon";
+            # chameleon = {
+            #   blame-code-style = "syntax";
+            #   blame-format = "{author:<18} ({commit:>7}) {timestamp:^12} ";
+            #   blame-palette = "#2E3440 #3B4252 #434C5E #4C566A";
+            #   dark = true;
+            #   file-added-label = "[+]";
+            #   file-copied-label = "[==]";
+            #   file-decoration-style = "#434C5E ul";
+            #   file-modified-label = "[*]";
+            #   file-removed-label = "[-]";
+            #   file-renamed-label = "[->]";
+            #   file-style = "#434C5E bold";
+            #   hunk-header-style = "omit";
+            #   keep-plus-minus-markers = true;
+            #   line-numbers = true;
+            #   line-numbers-left-format = " {nm:>1} │";
+            #   line-numbers-left-style = "red";
+            #   line-numbers-minus-style = "red italic black";
+            #   line-numbers-plus-style = "green italic black";
+            #   line-numbers-right-format = " {np:>1} │";
+            #   line-numbers-right-style = "green";
+            #   line-numbers-zero-style = "#434C5E italic";
+            #   minus-emph-style = "bold red";
+            #   minus-style = "bold red";
+            #   plus-emph-style = "bold green";
+            #   plus-style = "bold green";
+            #   side-by-side = true;
+            #   syntax-theme = "Nord";
+            #   zero-style = "syntax";
+            # };
+            # features = "chameleon";
             side-by-side = true;
           };
         };
@@ -243,7 +248,7 @@ in
         autocd = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-
+        syntaxHighlighting.catppuccin.enable = true;
         shellAliases = {
           l = "eza";
           lll = "eza -l";
@@ -332,33 +337,34 @@ in
 
       starship = {
         enable = true;
+        catppuccin.enable = true;
         enableZshIntegration = true;
         settings = {
           line_break = {
             disabled = false;
           };
           add_newline = false;
-          palette = "tokyonight";
-          palettes.tokyonight = {
-            red = "#f7768e";
-            orange = "#ff9e64";
-            yellow = "#e0af68";
-            light-green = "#9ece6a";
-            green = "#73daca";
-            turquoise = "#89ddff";
-            light-cyan = "#b4f9f8";
-            teal = "#2ac3de";
-            cyan = "#7dcfff";
-            blue = "#7aa2f7";
-            magenta = "#bb9af7";
-            white = "#c0caf5";
-            light-gray = "#9aa5ce";
-            parameters = "#cfc9c2";
-            comment = "#565f89";
-            black = "#414868";
-            foreground = "#a9b1d6";
-            background = "#1a1b26";
-          };
+          # palette = "tokyonight";
+          # palettes.tokyonight = {
+          #   red = "#f7768e";
+          #   orange = "#ff9e64";
+          #   yellow = "#e0af68";
+          #   light-green = "#9ece6a";
+          #   green = "#73daca";
+          #   turquoise = "#89ddff";
+          #   light-cyan = "#b4f9f8";
+          #   teal = "#2ac3de";
+          #   cyan = "#7dcfff";
+          #   blue = "#7aa2f7";
+          #   magenta = "#bb9af7";
+          #   white = "#c0caf5";
+          #   light-gray = "#9aa5ce";
+          #   parameters = "#cfc9c2";
+          #   comment = "#565f89";
+          #   black = "#414868";
+          #   foreground = "#a9b1d6";
+          #   background = "#1a1b26";
+          # };
         };
       };
 
@@ -382,6 +388,7 @@ in
 
       tmux = {
         enable = true;
+        catppuccin.enable = true;
         sensibleOnTop = true;
         baseIndex = 1;
         shortcut = "b";
@@ -393,31 +400,31 @@ in
           sensible
           yank
           prefix-highlight
-          {
-            plugin = catppuccin;
-
-            extraConfig = ''
-              set -g @catppuccin_window_left_separator ""
-              set -g @catppuccin_window_right_separator " "
-              set -g @catppuccin_window_middle_separator " █"
-              set -g @catppuccin_window_number_position "right"
-
-              set -g @catppuccin_window_default_fill "number"
-              set -g @catppuccin_window_default_text "#W"
-
-              set -g @catppuccin_window_current_fill "number"
-              set -g @catppuccin_window_current_text "#W"
-
-              set -g @catppuccin_status_modules_right "directory user host session"
-              set -g @catppuccin_status_left_separator  " "
-              set -g @catppuccin_status_right_separator ""
-              set -g @catppuccin_status_right_separator_inverse "no"
-              set -g @catppuccin_status_fill "icon"
-              set -g @catppuccin_status_connect_separator "no"
-
-              set -g @catppuccin_directory_text "#{pane_current_path}"
-            '';
-          }
+          # {
+          #   plugin = catppuccin;
+          #
+          #   extraConfig = ''
+          #     set -g @catppuccin_window_left_separator ""
+          #     set -g @catppuccin_window_right_separator " "
+          #     set -g @catppuccin_window_middle_separator " █"
+          #     set -g @catppuccin_window_number_position "right"
+          #
+          #     set -g @catppuccin_window_default_fill "number"
+          #     set -g @catppuccin_window_default_text "#W"
+          #
+          #     set -g @catppuccin_window_current_fill "number"
+          #     set -g @catppuccin_window_current_text "#W"
+          #
+          #     set -g @catppuccin_status_modules_right "directory user host session"
+          #     set -g @catppuccin_status_left_separator  " "
+          #     set -g @catppuccin_status_right_separator ""
+          #     set -g @catppuccin_status_right_separator_inverse "no"
+          #     set -g @catppuccin_status_fill "icon"
+          #     set -g @catppuccin_status_connect_separator "no"
+          #
+          #     set -g @catppuccin_directory_text "#{pane_current_path}"
+          #   '';
+          # }
         ];
         extraConfig = ''
           # https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
