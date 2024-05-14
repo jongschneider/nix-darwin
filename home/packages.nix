@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  fomt,
-  system,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # Basics
     (pkgs.nerdfonts.override {fonts = ["FiraCode" "Monaspace" "Hack" "Meslo"];})
@@ -19,6 +13,7 @@
     srt
     mysql
     fastfetch
+    teleport_14
 
     du-dust # fancy version of `du`
     fd # fancy version of `find`

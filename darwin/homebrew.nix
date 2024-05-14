@@ -8,9 +8,7 @@
     "vlc"
     "font-monaspace"
     "raycast"
-    # "rectangle"
     "shottr"
-    # "karabiner-elements" # using the cask bc couldn't get  services.karabiner-elements to work correctly
   ];
   taps = [
     "homebrew/cask-fonts"

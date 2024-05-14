@@ -185,7 +185,7 @@ in
           d = "~/Desktop";
           D = "~/Downloads";
           c = "~/code";
-          i = "~/code/integrator";
+          i = "/Users/jschneider/Documents/code_bare/integrator";
           n = "~/code/ingester";
           N = "/Users/jschneider/.config/nix-darwin";
         };
@@ -344,27 +344,6 @@ in
             disabled = false;
           };
           add_newline = false;
-          # palette = "tokyonight";
-          # palettes.tokyonight = {
-          #   red = "#f7768e";
-          #   orange = "#ff9e64";
-          #   yellow = "#e0af68";
-          #   light-green = "#9ece6a";
-          #   green = "#73daca";
-          #   turquoise = "#89ddff";
-          #   light-cyan = "#b4f9f8";
-          #   teal = "#2ac3de";
-          #   cyan = "#7dcfff";
-          #   blue = "#7aa2f7";
-          #   magenta = "#bb9af7";
-          #   white = "#c0caf5";
-          #   light-gray = "#9aa5ce";
-          #   parameters = "#cfc9c2";
-          #   comment = "#565f89";
-          #   black = "#414868";
-          #   foreground = "#a9b1d6";
-          #   background = "#1a1b26";
-          # };
         };
       };
 
@@ -400,31 +379,6 @@ in
           sensible
           yank
           prefix-highlight
-          # {
-          #   plugin = catppuccin;
-          #
-          #   extraConfig = ''
-          #     set -g @catppuccin_window_left_separator ""
-          #     set -g @catppuccin_window_right_separator " "
-          #     set -g @catppuccin_window_middle_separator " █"
-          #     set -g @catppuccin_window_number_position "right"
-          #
-          #     set -g @catppuccin_window_default_fill "number"
-          #     set -g @catppuccin_window_default_text "#W"
-          #
-          #     set -g @catppuccin_window_current_fill "number"
-          #     set -g @catppuccin_window_current_text "#W"
-          #
-          #     set -g @catppuccin_status_modules_right "directory user host session"
-          #     set -g @catppuccin_status_left_separator  " "
-          #     set -g @catppuccin_status_right_separator ""
-          #     set -g @catppuccin_status_right_separator_inverse "no"
-          #     set -g @catppuccin_status_fill "icon"
-          #     set -g @catppuccin_status_connect_separator "no"
-          #
-          #     set -g @catppuccin_directory_text "#{pane_current_path}"
-          #   '';
-          # }
         ];
         extraConfig = ''
           # https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
