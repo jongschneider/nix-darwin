@@ -63,6 +63,7 @@ vim.opt.cursorline = true
 vim.opt.list = true
 -- vim.opt.listchars:append("eol:↴")
 vim.opt.listchars = "eol:↴,tab:  ,lead: ,trail:·,nbsp:⍽,extends:◣,precedes:◢"
+vim.opt.fillchars = "eob:~"
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
