@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Basics
-    (pkgs.nerdfonts.override {fonts = ["FiraCode" "Monaspace" "Hack" "Meslo"];})
+    (nerdfonts.override {fonts = ["FiraCode" "Monaspace" "Hack" "Meslo"];})
     coreutils
     inetutils
     curl
@@ -33,7 +33,7 @@
     rubyPackages.solargraph
     rubyPackages.rubocop-performance
     rubocop
-    nodejs_21
+    nodejs_22
     git-open
     mkcert
     glow

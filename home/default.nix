@@ -1,10 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  home-manager,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ./kitty
     ./programs
