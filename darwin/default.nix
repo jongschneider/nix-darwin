@@ -8,6 +8,7 @@
     loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
       # nixpkgs-fmt # nix code formatter
+      nixd
       nil # nix LSP... testing this out.
       alejandra
       coreutils

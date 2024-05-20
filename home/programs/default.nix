@@ -76,7 +76,8 @@ in
               showRandomTip = true;
               nerdFontsVersion = "2";
               showFileIcons = true;
-              splitDiff = "auto";
+              # splitDiff = "auto";
+              splitDiff = "always";
             };
           };
         };
