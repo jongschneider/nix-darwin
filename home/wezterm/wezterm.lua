@@ -22,8 +22,9 @@ local config = {
 	hide_tab_bar_if_only_one_tab = true,
 	-- font = wezterm.font("MesloLGS Nerd Font Mono", { weight = "Regular" }),
 	-- font = wezterm.font("FiraCode Nerd Font Mono", { weight = "Regular" }),
+	font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" }),
 	-- font = wezterm.font("Monaspace Krypton", { weight = "Regular" }),
-	font = wezterm.font("MonaspiceKr Nerd Font Mono", { weight = "Regular" }),
+	-- font = wezterm.font("MonaspiceKr Nerd Font Mono", { weight = "Regular" }),
 	-- font = wezterm.font("Hack Nerd Font Mono", { weight = "Regular" }),
 	harfbuzz_features = { "calt", "dlig", "clig=1", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
 	font_size = 13,
@@ -34,6 +35,8 @@ local config = {
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = false,
 }
+
+config.scrollback_lines = 3500
 
 config.background = {
 	{

@@ -1,3 +1,16 @@
+local function is_whitespace(line)
+	return vim.fn.match(line, [[^\s*$]]) ~= -1
+end
+
+local function all(tbl, check)
+	for _, entry in ipairs(tbl) do
+		if not check(entry) then
+			return false
+		end
+	end
+	return true
+end
+
 return {
 	"AckslD/nvim-neoclip.lua",
 	dependencies = {
@@ -10,7 +23,9 @@ return {
 			length_limit = 1048576,
 			continuous_sync = false,
 			db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
-			filter = nil,
+			filter = function(data)
+				return not all(data.event.regcontents, is_whitespace)
+			end,
 			preview = true,
 			prompt = nil,
 			default_register = '"',

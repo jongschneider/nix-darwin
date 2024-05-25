@@ -28,7 +28,7 @@
   home = {
     username = "jschneider";
     homeDirectory = "/Users/jschneider";
-    sessionVariables.EDITOR = "code";
+    sessionVariables.EDITOR = "nvim";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

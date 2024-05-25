@@ -30,6 +30,7 @@
       gotests
       gotestsum
       golines
+      yazi
       # ruby
       # ruby_3_3
       # rubyPackages.solargraph
