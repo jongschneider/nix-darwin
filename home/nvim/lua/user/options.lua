@@ -39,6 +39,9 @@ vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = "menuone,noselect"
+
 -- Decrease updatetime to 200ms
 vim.opt.updatetime = 50
 
