@@ -4,10 +4,11 @@
 in
   # https://nix-community.github.io/home-manager/options.html
   {
-    catppuccin = {
-      enable = true;
-      flavour = "mocha";
-    };
+    # catppuccin = {
+    #   enable = true;
+    #   # flavour = "mocha";
+    #   flavour = "frappe";
+    # };
     programs = {
       htop.enable = true;
       ripgrep.enable = true;
@@ -70,7 +71,11 @@ in
 
       lazygit = {
         enable = true;
-        catppuccin.enable = true;
+        # catppuccin.enable = true;
+        catppuccin = {
+          enable = true;
+          flavour = "frappe";
+        };
         settings = {
           git = {
             paging = {
@@ -226,27 +231,31 @@ in
       zsh = {
         enable = true;
         initExtra = ''
-          function gcpb(){
-              git branch | grep \* | cut -d ' ' -f2 | pbcopy
+            function gcpb(){
+                git branch | grep \* | cut -d ' ' -f2 | pbcopy
+            }
+            nn () {
+              if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
+                echo "nnn is already running"
+                return
+              fi
+
+              export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+
+              nnn -aeHo "$@"
+              # nnn -adeHo "$@"
+
+              if [ -f "$NNN_TMPFILE" ]; then
+                . "$NNN_TMPFILE"
+                rm -f "$NNN_TMPFILE" > /dev/null
+              fi
+            }
+
+          wtp () {
+              CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+              git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
           }
-          nn () {
-            if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
-              echo "nnn is already running"
-              return
-            fi
-
-            export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
-
-            nnn -aeHo "$@"
-            # nnn -adeHo "$@"
-
-            if [ -f "$NNN_TMPFILE" ]; then
-              . "$NNN_TMPFILE"
-              rm -f "$NNN_TMPFILE" > /dev/null
-            fi
-          }
-
-          PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+            PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
         '';
         oh-my-zsh.enable = true;
         enableCompletion = true;
@@ -260,7 +269,12 @@ in
           la = "eza -a";
           lt = "eza --tree";
           lla = "eza -la";
-          ll = "nn";
+          # ll = "nn";
+          ll = "yazi";
+
+          z = "cd";
+          zi = "cdi";
+          cl = "clear";
 
           nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
           nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
@@ -305,6 +319,7 @@ in
           glog = "git log --simplify-by-decoration --oneline --graph";
           glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' --preview-window down --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs git checkout";
           wt = "git worktree";
+          # wtp = 
         };
       };
 
@@ -342,9 +357,131 @@ in
 
       starship = {
         enable = true;
-        catppuccin.enable = true;
+        catppuccin = {
+          enable = true;
+          # flavour = "latte";
+          # flavour = "frappe";
+          # flavour = "macchiato";
+          flavour = "mocha";
+        };
         enableZshIntegration = true;
         settings = {
+          # format = "$os$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$line_break$character ";
+          # format = "[](surface0)$os$username[](bg:peach fg:surface0)$directory[](fg:peach bg:green)$git_branch$git_status[](fg:green bg:teal)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:teal)$line_break$character ";
+          format = "[](surface0)$os$username[](bg:surface0 fg:text)$directory[](bg:surface0 fg:text)$git_branch$git_status[](bg:surface0 fg:text)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](surface0)$line_break$character ";
+          os = {
+            disabled = false;
+            style = "bg:surface0 fg:text";
+          };
+
+          os.symbols = {
+            NixOS = "";
+            Raspbian = "󰐿";
+            Mint = "󰣭";
+            Fedora = "󰣛";
+            Macos = "󰀵";
+            Windows = "󰍲";
+            Ubuntu = "󰕈";
+            SUSE = "";
+            # Raspbian = "󰐿";
+            # Mint = "󰣭";
+            # Macos = "";
+            Manjaro = "";
+            Linux = "󰌽";
+            Gentoo = "󰣨";
+            # Fedora = "󰣛";
+            Alpine = "";
+            Amazon = "";
+            Android = "";
+            Arch = "󰣇";
+            Artix = "󰣇";
+            CentOS = "";
+            Debian = "󰣚";
+            Redhat = "󱄛";
+            RedHatEnterprise = "󱄛";
+          };
+
+          username = {
+            show_always = true;
+            style_user = "bg:surface0 fg:text";
+            style_root = "bg:surface0 fg:text";
+            format = "[ $user ]($style)";
+          };
+
+          directory = {
+            # style = "fg:mantle bg:peach";
+            style = "bg:surface0 fg:peach";
+            format = "[ $path ]($style)";
+            truncation_length = 3;
+            truncation_symbol = "…/";
+          };
+
+          directory.substitutions = {
+            "Documents" = "󰈙 ";
+            "Downloads" = " ";
+            "Music" = "󰝚 ";
+            "Pictures" = " ";
+            "Developer" = "󰲋 ";
+          };
+
+          git_branch = {
+            # symbol = "";
+            # style = "bg:teal";
+            symbol = "";
+            style = "bg:surface0 fg:green";
+            # format = "[[ $symbol $branch ](fg:base bg:green)]($style)";
+            format = "[ $symbol $branch ]($style)";
+          };
+
+          git_status = {
+            # style = "bg:teal";
+            # format = "[[($all_status$ahead_behind )](fg:base bg:green)]($style)";
+            style = "bg:surface0 fg:green";
+            format = "[($all_status$ahead_behind )]($style)";
+          };
+
+          time = {
+            disabled = false;
+            time_format = "%R";
+            style = "bg:peach";
+            format = "[[  $time ](fg:mantle bg:purple)]($style)";
+          };
+
+          nodejs = {
+            symbol = "";
+            # style = "bg:teal";
+            # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
+            style = "bg:surface0 fg:teal";
+            format = "[ $symbol( $version) ]($style)";
+          };
+
+          golang = {
+            symbol = "󰟓";
+            # style = "bg:teal";
+            # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
+            style = "bg:surface0 fg:teal";
+            format = "[ $symbol( $version) ]($style)";
+          };
+
+          python = {
+            symbol = "";
+            # style = "bg:teal";
+            # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
+            style = "bg:surface0 fg:teal";
+            format = "[ $symbol( $version) ]($style)";
+          };
+
+          docker_context = {
+            symbol = "";
+            style = "bg:mantle";
+            # format = "[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)";
+            format = "[[ $symbol( $context) ](fg:base bg:blue)]($style)";
+          };
+          character = {
+            success_symbol = "[❯](maroon)";
+            error_symbol = "[❯](red)";
+            vimcmd_symbol = "[❮](green)";
+          };
           line_break = {
             disabled = false;
           };
