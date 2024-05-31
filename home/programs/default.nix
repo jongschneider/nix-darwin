@@ -370,10 +370,13 @@ in
         settings = {
           # format = "$os$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$line_break$character ";
           # format = "[](surface0)$os$username[](bg:peach fg:surface0)$directory[](fg:peach bg:green)$git_branch$git_status[](fg:green bg:teal)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:teal)$line_break$character ";
-          format = "[](surface0)$os$username[](bg:surface0 fg:text)$directory[](bg:surface0 fg:text)$git_branch$git_status[](bg:surface0 fg:text)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](surface0)$line_break$character ";
+          # format = "[](surface0)$os$username[](bg:surface0 fg:text)$directory[](bg:surface0 fg:text)$git_branch$git_status[](bg:surface0 fg:text)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](surface0)$line_break$character ";
+          # format = "$os$username[](fg:text)$directory[](fg:text)$git_branch$git_status[](fg:text)$c$rust$golang$nodejs$php$java$kotlin$haskell$python$line_break$character ";
+          format = "$os$username$directory$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$line_break$character ";
           os = {
             disabled = false;
-            style = "bg:surface0 fg:text";
+            # style = "bg:surface0 fg:text";
+            style = "fg:text";
           };
 
           os.symbols = {
@@ -405,16 +408,22 @@ in
 
           username = {
             show_always = true;
-            style_user = "bg:surface0 fg:text";
-            style_root = "bg:surface0 fg:text";
+            # style_user = "bg:surface0 fg:text";
+            # style_root = "bg:surface0 fg:text";
+            style_user = "fg:text";
+            style_root = "fg:text";
             format = "[ $user ]($style)";
           };
 
           directory = {
             # style = "fg:mantle bg:peach";
-            style = "bg:surface0 fg:peach";
-            format = "[ $path ]($style)";
-            truncation_length = 3;
+            # style = "bg:surface0 fg:peach";
+            style = "fg:peach";
+            format = "[](fg:text)[ $path ]($style)";
+            # truncation_length = 3;
+            # truncate_to_repo = true;
+            # truncation_symbol = "…/";
+            # truncation_length = 8;
             truncation_symbol = "…/";
           };
 
@@ -430,15 +439,17 @@ in
             # symbol = "";
             # style = "bg:teal";
             symbol = "";
-            style = "bg:surface0 fg:green";
+            # style = "bg:surface0 fg:green";
+            style = "fg:green";
             # format = "[[ $symbol $branch ](fg:base bg:green)]($style)";
-            format = "[ $symbol $branch ]($style)";
+            format = "[](fg:text)[ $symbol $branch ]($style)";
           };
 
           git_status = {
             # style = "bg:teal";
             # format = "[[($all_status$ahead_behind )](fg:base bg:green)]($style)";
-            style = "bg:surface0 fg:green";
+            # style = "bg:surface0 fg:green";
+            style = "fg:green";
             format = "[($all_status$ahead_behind )]($style)";
           };
 
@@ -453,24 +464,27 @@ in
             symbol = "";
             # style = "bg:teal";
             # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
-            style = "bg:surface0 fg:teal";
-            format = "[ $symbol( $version) ]($style)";
+            # style = "bg:surface0 fg:teal";
+            style = "fg:teal";
+            format = "[](fg:text)[ $symbol( $version) ]($style)";
           };
 
           golang = {
             symbol = "󰟓";
             # style = "bg:teal";
             # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
-            style = "bg:surface0 fg:teal";
-            format = "[ $symbol( $version) ]($style)";
+            # style = "bg:surface0 fg:teal";
+            style = "fg:teal";
+            format = "[](fg:text)[ $symbol( $version) ]($style)";
           };
 
           python = {
             symbol = "";
             # style = "bg:teal";
             # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
-            style = "bg:surface0 fg:teal";
-            format = "[ $symbol( $version) ]($style)";
+            # style = "bg:surface0 fg:teal";
+            style = "fg:teal";
+            format = "[](fg:text)[ $symbol( $version) ]($style)";
           };
 
           docker_context = {
