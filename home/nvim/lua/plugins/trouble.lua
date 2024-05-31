@@ -2,8 +2,8 @@
 -- https://github.com/folke/trouble.nvim/issues/52
 local signs = {
 	Error = "",
-	Warn = " ",
-	Hint = " ",
+	Warn = " ",
+	Hint = "",
 	Info = " ",
 }
 for type, icon in pairs(signs) do
@@ -13,7 +13,7 @@ end
 return {
 	"folke/trouble.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
-	branch = "dev", -- IMPORTANT!
+	-- branch = "dev", -- IMPORTANT!
 	keys = {
 		{
 			"<leader>xx",

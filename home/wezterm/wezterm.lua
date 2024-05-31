@@ -42,12 +42,12 @@ config.background = {
 	{
 		source = {
 			Gradient = {
-				colors = { "#1E1E2E" },
+				colors = { "#303446" }, -- Base color for Frappé flavour on https://github.com/catppuccin/catppuccin
 			},
 		},
 		width = "100%",
 		height = "100%",
-		opacity = 0.85,
+		opacity = 0.90,
 	},
 	-- This is the deepest/back-most layer. It will be rendered first
 	{
