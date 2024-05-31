@@ -195,8 +195,9 @@ in
           d = "~/Desktop";
           D = "~/Downloads";
           c = "~/code";
-          i = "/Users/jschneider/Documents/code_bare/integrator";
-          n = "~/code/ingester";
+          v = "/Users/jschneider/Developer";
+          i = "/Users/jschneider/Developer/integrator";
+          n = "/Users/jschneider/Developer/ingester";
           N = "/Users/jschneider/.config/nix-darwin";
         };
 
@@ -292,8 +293,9 @@ in
           # goi = "go install ./... && go vet ./...";
           goi = "go install ./...";
           c = "code .";
-          vim = "nvim";
+          v = "nvim";
           vi = "nvim";
+          vim = "nvim";
 
           # tmux aliases
           ta = "tmux attach";

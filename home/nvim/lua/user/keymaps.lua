@@ -85,6 +85,8 @@ nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })
 nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
 -- Center buffer while navigating
+nnoremap("j", "jzz")
+nnoremap("k", "kzz")
 nnoremap("<C-u>", "<C-u>zz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("{", "{zz")
@@ -336,7 +338,10 @@ M.map_lsp_keybinds = function(buffer_number)
 	nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame", buffer = buffer_number })
 	nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: [C]ode [A]ction", buffer = buffer_number })
 
-	nnoremap("gd", vim.lsp.buf.definition, { desc = "LSP: [G]oto [D]efinition", buffer = buffer_number })
+	nnoremap("gd", function()
+		vim.lsp.buf.definition({})
+		vim.api.nvim_feedkeys("zz", "n", false)
+	end, { desc = "LSP: [G]oto [D]efinition", buffer = buffer_number })
 
 	-- Telescope LSP keybinds --
 	nnoremap(
