@@ -20,7 +20,10 @@ return {
 					lsp_trouble = true,
 					mini = {
 						enabled = true,
-						indentscope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+						-- indentscope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+						-- indentscope_color = "pink", -- catppuccin color (eg. `lavender`) Default: text
+						-- indentscope_color = "peach", -- catppuccin color (eg. `lavender`) Default: text
+						indentscope_color = "mauve", -- catppuccin color (eg. `lavender`) Default: text
 					},
 					mason = true,
 					notify = true,
