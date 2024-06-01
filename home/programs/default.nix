@@ -418,6 +418,8 @@ in
           directory = {
             # style = "fg:mantle bg:peach";
             # style = "bg:surface0 fg:peach";
+            truncation_length = 100;
+            truncate_to_repo = false;
             style = "fg:peach";
             format = "[](fg:text)[ $path ]($style)";
             # truncation_length = 3;
@@ -494,9 +496,12 @@ in
             format = "[[ $symbol( $context) ](fg:base bg:blue)]($style)";
           };
           character = {
-            success_symbol = "[](maroon)";
-            error_symbol = "[](red)";
-            vimcmd_symbol = "[](green)";
+            # success_symbol = "[](maroon)";
+            # error_symbol = "[](red)";
+            # vimcmd_symbol = "[](green)";
+            success_symbol = "[󰘍](maroon)";
+            error_symbol = "[󰘍](red)";
+            vimcmd_symbol = "[󰘍](green)";
           };
           line_break = {
             disabled = false;

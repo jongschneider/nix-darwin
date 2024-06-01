@@ -63,9 +63,11 @@ return {
 			-- |MiniIndentscope.gen_animation| for builtin options. To disable
 			-- animation, use `require('mini.indentscope').gen_animation.none()`.
 			-- animation = --<function: implements constant 20ms between steps>,
-
+			animation = function()
+				return 30
+			end,
 			-- Symbol priority. Increase to display on top of more symbols.
-			priority = 2,
+			priority = 0,
 		},
 
 		-- Module mappings. Use `''` (empty string) to disable one.
@@ -96,9 +98,10 @@ return {
 		},
 
 		-- Which character to use for drawing scope indicator
+		-- symbol = "󰤃",
 		-- symbol = "╎",
 		-- symbol = "┊",
-		symbol = "┋",
+		-- symbol = "┋",
 	},
 
 	-- CONFIG

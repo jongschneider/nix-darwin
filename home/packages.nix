@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Basics
-    (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Monaspace" "Hack" "Meslo"];})
+    (nerdfonts.override {fonts = ["CascadiaCode" "JetBrainsMono" "FiraCode" "Monaspace" "Hack" "Meslo" "GeistMono"];})
     coreutils
     inetutils
     curl
