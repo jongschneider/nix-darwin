@@ -256,7 +256,7 @@ in
               CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
               git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
           }
-            PATH=$HOME/bin:$HOME/go/bin:$HOME/tools:$HOME/scripts:$PATH
+            PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         '';
         oh-my-zsh.enable = true;
         enableCompletion = true;

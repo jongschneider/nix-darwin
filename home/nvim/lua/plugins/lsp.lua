@@ -1,4 +1,5 @@
 return {
+	{ "simrat39/rust-tools.nvim" },
 	{
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
@@ -102,7 +103,18 @@ return {
 					},
 				},
 				marksman = {},
-
+				-- rust_analyzer = {
+				-- 	settings = {
+				-- 		["rust-analyzer"] = {
+				-- 			check = {
+				-- 				command = "clippy",
+				-- 			},
+				-- 			diagnostics = {
+				-- 				enable = true,
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				nixd = {
 					settings = {
 						nixd = {

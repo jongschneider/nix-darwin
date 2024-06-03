@@ -20,6 +20,7 @@ local config = {
 	},
 
 	hide_tab_bar_if_only_one_tab = true,
+	use_fancy_tab_bar = true,
 	-- font = wezterm.font("MesloLGS Nerd Font Mono", { weight = "Regular" }),
 	-- font = wezterm.font("FiraCode Nerd Font Mono", { weight = "Regular" }),
 	-- font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" }),
