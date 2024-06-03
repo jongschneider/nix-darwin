@@ -1,13 +1,13 @@
 {pkgs, ...}: let
-  flavour = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
+  flavor = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
   lib = pkgs.lib;
 in
   # https://nix-community.github.io/home-manager/options.html
   {
     # catppuccin = {
     #   enable = true;
-    #   # flavour = "mocha";
-    #   flavour = "frappe";
+    #   # flavor = "mocha";
+    #   flavor = "frappe";
     # };
     programs = {
       htop.enable = true;
@@ -74,7 +74,7 @@ in
         # catppuccin.enable = true;
         catppuccin = {
           enable = true;
-          flavour = "frappe";
+          flavor = "frappe";
         };
         settings = {
           git = {
@@ -361,10 +361,10 @@ in
         enable = true;
         catppuccin = {
           enable = true;
-          # flavour = "latte";
-          # flavour = "frappe";
-          # flavour = "macchiato";
-          flavour = "mocha";
+          # flavor = "latte";
+          # flavor = "frappe";
+          # flavor = "macchiato";
+          flavor = "mocha";
         };
         enableZshIntegration = true;
         settings = {
