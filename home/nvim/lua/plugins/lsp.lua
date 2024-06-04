@@ -1,5 +1,13 @@
 return {
-	{ "simrat39/rust-tools.nvim" },
+	-- { "simrat39/rust-tools.nvim" },
+	{
+		"saecki/crates.nvim",
+		ft = { "rust", "toml" },
+		event = { "BufRead Cargo.toml" },
+		config = function()
+			require("crates").setup()
+		end,
+	},
 	{
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
@@ -103,18 +111,21 @@ return {
 					},
 				},
 				marksman = {},
-				-- rust_analyzer = {
-				-- 	settings = {
-				-- 		["rust-analyzer"] = {
-				-- 			check = {
-				-- 				command = "clippy",
-				-- 			},
-				-- 			diagnostics = {
-				-- 				enable = true,
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							-- check = {
+							-- 	command = "clippy",
+							-- },
+							-- diagnostics = {
+							-- 	enable = true,
+							-- },
+							cargo = {
+								allFeatures = true,
+							},
+						},
+					},
+				},
 				nixd = {
 					settings = {
 						nixd = {
