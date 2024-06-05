@@ -471,6 +471,15 @@ in
             format = "[](fg:text)[ $symbol( $version) ]($style)";
           };
 
+          rust = {
+            # symbol = "";
+            # style = "bg:teal";
+            # format = "[[ $symbol( $version) ](fg:base bg:teal)]($style)";
+            # style = "bg:surface0 fg:teal";
+            style = "red bold";
+            format = "[](fg:text) [$symbol( $version)]($style)";
+          };
+
           golang = {
             symbol = "󰟓";
             # style = "bg:teal";
