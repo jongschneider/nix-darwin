@@ -226,7 +226,8 @@ in
       zoxide = {
         enable = true;
         enableZshIntegration = true;
-        options = ["--cmd cd" "--hook pwd"];
+        # options = ["--cmd cd" "--hook pwd"];
+        options = ["--hook pwd"];
       };
 
       zsh = {
@@ -252,6 +253,15 @@ in
               fi
             }
 
+            function yy() {
+                local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+                yazi "$@" --cwd-file="$tmp"
+                if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+                    cd -- "$cwd"
+                fi
+                rm -f -- "$tmp"
+            }
+
           wtp () {
               CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
               git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
@@ -265,15 +275,17 @@ in
         syntaxHighlighting.enable = true;
         syntaxHighlighting.catppuccin.enable = true;
         shellAliases = {
-          l = "eza";
+          # l = "eza";
           lll = "eza -l";
           la = "eza -a";
           lt = "eza --tree";
           lla = "eza -la";
           # ll = "nn";
           ll = "yazi";
+          # ll = "yazi";
 
-          z = "cd";
+          y = "yy";
+          l = "yy";
           zi = "cdi";
           cl = "clear";
 
