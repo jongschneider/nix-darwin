@@ -52,7 +52,6 @@ in
 
       eza = {
         enable = true;
-        # enableAliases = true;
         git = true;
         icons = true;
       };
@@ -276,15 +275,14 @@ in
         syntaxHighlighting.catppuccin.enable = true;
         shellAliases = {
           # l = "eza";
-          lll = "eza -l";
-          la = "eza -a";
-          lt = "eza --tree";
-          lla = "eza -la";
+          # lll = "eza -l";
+          # la = "eza -a";
+          # lt = "eza --tree";
+          # lla = "eza -la";
           # ll = "nn";
-          ll = "yazi";
           # ll = "yazi";
 
-          y = "yy";
+          # y = "yy";
           l = "yy";
           zi = "cdi";
           cl = "clear";
