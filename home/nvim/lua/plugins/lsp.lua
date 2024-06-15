@@ -89,7 +89,6 @@ return {
 				-- LSP Servers
 				bashls = {},
 				cssls = {},
-				gleam = {},
 				eslint = {},
 				html = {},
 				jsonls = {},

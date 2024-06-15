@@ -16,7 +16,6 @@ return {
 					"bash",
 					"c",
 					"css",
-					"gleam",
 					"graphql",
 					"html",
 					"javascript",
