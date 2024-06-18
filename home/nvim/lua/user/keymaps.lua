@@ -104,23 +104,23 @@ nnoremap("#", "#zz")
 -- Open neotree
 -- nnoremap("<leader>v", "<cmd>Neotree filesystem toggle right<cr>", { silent = false })
 
--- Press 'S' for quick find/replace for the word under the cursor
-nnoremap("S", function()
+-- for quick find/replace for the word under the cursor
+nnoremap("<leader>S", function()
 	local cmd = ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>"
 	local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
 	vim.api.nvim_feedkeys(keys, "n", false)
 end)
 
--- Open Spectre for global find/replace
-nnoremap("<leader>S", function()
-	require("spectre").toggle()
-end)
-
--- Open Spectre for global find/replace for the word under the cursor in normal mode
--- TODO Fix, currently being overriden by Telescope
-nnoremap("<leader>sw", function()
-	require("spectre").open_visual({ select_word = true })
-end, { desc = "Search current word" })
+-- -- Open Spectre for global find/replace
+-- nnoremap("<leader>S", function()
+-- 	require("spectre").toggle()
+-- end)
+--
+-- -- Open Spectre for global find/replace for the word under the cursor in normal mode
+-- -- TODO Fix, currently being overriden by Telescope
+-- nnoremap("<leader>sw", function()
+-- 	require("spectre").open_visual({ select_word = true })
+-- end, { desc = "Search current word" })
 
 -- Press 'H', 'L' to jump to start/end of a line (first/last char)
 nnoremap("L", "$")

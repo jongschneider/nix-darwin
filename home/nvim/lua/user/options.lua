@@ -80,7 +80,8 @@ vim.opt.foldenable = true
 vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
 -- Always keep 8 lines above/below cursor unless at start/end of file
-vim.opt.scrolloff = 8
+-- vim.opt.scrolloff = 8
+vim.opt.scrolloff = 20
 
 -- Place a column line
 -- vim.opt.colorcolumn = "80"
