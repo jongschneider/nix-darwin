@@ -515,15 +515,15 @@ in
             format = "[[ $symbol( $context) ](fg:base bg:blue)]($style)";
           };
           character = {
-            # success_symbol = "[](maroon)";
-            # error_symbol = "[](red)";
-            # vimcmd_symbol = "[](green)";
+            success_symbol = "[](maroon)";
+            error_symbol = "[](red)";
+            vimcmd_symbol = "[](green)";
             # success_symbol = "[󰘍](maroon)";
             # error_symbol = "[󰘍](red)";
             # vimcmd_symbol = "[󰘍](green)";
-            success_symbol = "[](maroon)";
-            error_symbol = "[](red)";
-            vimcmd_symbol = "[](green)";
+            # success_symbol = "[](maroon)";
+            # error_symbol = "[](red)";
+            # vimcmd_symbol = "[](green)";
           };
           line_break = {
             disabled = false;
