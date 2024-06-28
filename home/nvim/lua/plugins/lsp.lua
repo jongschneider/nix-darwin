@@ -1,5 +1,12 @@
 return {
-	-- { "simrat39/rust-tools.nvim" },
+	{
+		"jmbuhr/otter.nvim",
+		dependencies = {
+			"hrsh7th/nvim-cmp", -- optional, for completion
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
 	{
 		"saecki/crates.nvim",
 		ft = { "rust", "toml" },
