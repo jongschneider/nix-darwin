@@ -284,7 +284,7 @@ in
 
           # y = "yy";
           l = "yy";
-          zi = "cdi";
+          # zi = "cdi";
           cl = "clear";
 
           nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
