@@ -267,6 +267,12 @@ in
           }
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         '';
+        plugins = [
+          {
+            name = "fzf-tab";
+            src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+          }
+        ];
         oh-my-zsh.enable = true;
         enableCompletion = true;
         autocd = true;

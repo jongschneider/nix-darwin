@@ -44,6 +44,7 @@
     neofetch
     lazydocker
     sesh
+    # zsh-fzf-tab
 
     # not sure I need... were migrated from brew
     x265
