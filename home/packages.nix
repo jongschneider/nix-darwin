@@ -1,7 +1,17 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Basics
-    (nerdfonts.override {fonts = ["CascadiaCode" "JetBrainsMono" "FiraCode" "Monaspace" "Hack" "Meslo" "GeistMono"];})
+    (nerdfonts.override {
+      fonts = [
+        "CascadiaCode"
+        "JetBrainsMono"
+        "FiraCode"
+        "Monaspace"
+        "Hack"
+        "Meslo"
+        "GeistMono"
+      ];
+    })
     coreutils
     inetutils
     curl
@@ -26,9 +36,6 @@
     # Dev
     fh
     jqp
-    # go
-    # golangci-lint
-    # gotestsum
     ruby
     rubyPackages.solargraph
     rubyPackages.rubocop-performance
@@ -44,7 +51,6 @@
     neofetch
     lazydocker
     sesh
-    # zsh-fzf-tab
 
     # not sure I need... were migrated from brew
     x265
