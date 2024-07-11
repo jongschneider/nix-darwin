@@ -18,6 +18,9 @@
       (import ../scripts/git-bare-clone.nix {inherit pkgs;})
       discord
       presenterm
+      asciinema
+      asciinema-agg
+      t-rec
       nurl
       manix
       delve
