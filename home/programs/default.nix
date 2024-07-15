@@ -68,9 +68,9 @@ in
           # key_path = "${config.home.homeDirectory}/secrets/ATUIN_KEY";
           ctrl_n_shortcuts = true;
           enter_accept = true;
-          filter_mode = "session";
+          # filter_mode = "session";
         };
-        flags = ["--disable-up-arrow"];
+        # flags = ["--disable-up-arrow"];
       };
 
       lazygit = {
