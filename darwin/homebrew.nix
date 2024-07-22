@@ -9,6 +9,7 @@
     "font-monaspace"
     "raycast"
     "shottr"
+    "powershell"
   ];
   taps = [
     "homebrew/cask-fonts"
