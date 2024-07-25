@@ -137,7 +137,21 @@ in
           st = "status";
         };
 
-        ignores = [".direnv" ".envrc" "tmp.txt" "testout.txt"];
+        ignores = [
+          ".direnv"
+          ".envrc"
+          "tmp.txt"
+          "testout.txt"
+          "permitted_addresses.txt"
+          "postscreen_access.txt"
+          ".DS_Store"
+          ".vscode"
+          "*.pem"
+          "*.env"
+          ".env.localdev"
+          "tmp.txt"
+          ".golangci.yml"
+        ];
 
         extraConfig = {
           url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
