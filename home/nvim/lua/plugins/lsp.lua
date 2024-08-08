@@ -132,29 +132,29 @@ return {
 						},
 					},
 				},
-				nixd = {
-					settings = {
-						nixd = {
-							nixpkgs = {
-								expr = "import <nixpkgs> { }",
-							},
-							formatting = {
-								command = { "alejandra" },
-							},
-							-- options = {
-							--     nixos = {
-							--         expr = '(builtins.getFlake "/tmp/NixOS_Home-Manager").nixosConfigurations.hostname.options',
-							--     },
-							--     home_manager = {
-							--         expr = '(builtins.getFlake "/tmp/NixOS_Home-Manager").homeConfigurations."user@hostname".options',
-							--     },
-							--     flake_parts = {
-							--         expr = 'let flake = builtins.getFlake ("/tmp/NixOS_Home-Manager"); in flake.debug.options // flake.currentSystem.options',
-							--     },
-						},
-					},
-				},
-				-- nil_ls = {},
+				-- nixd = {
+				-- 	settings = {
+				-- 		nixd = {
+				-- 			nixpkgs = {
+				-- 				expr = "import <nixpkgs> { }",
+				-- 			},
+				-- 			formatting = {
+				-- 				command = { "alejandra" },
+				-- 			},
+				-- 			-- options = {
+				-- 			--     nixos = {
+				-- 			--         expr = '(builtins.getFlake "/tmp/NixOS_Home-Manager").nixosConfigurations.hostname.options',
+				-- 			--     },
+				-- 			--     home_manager = {
+				-- 			--         expr = '(builtins.getFlake "/tmp/NixOS_Home-Manager").homeConfigurations."user@hostname".options',
+				-- 			--     },
+				-- 			--     flake_parts = {
+				-- 			--         expr = 'let flake = builtins.getFlake ("/tmp/NixOS_Home-Manager"); in flake.debug.options // flake.currentSystem.options',
+				-- 			--     },
+				-- 		},
+				-- 	},
+				-- },
+				nil_ls = {},
 				pyright = {},
 				sqlls = {},
 				yamlls = {},
