@@ -73,26 +73,26 @@ in
         # flags = ["--disable-up-arrow"];
       };
 
-      lazygit = {
-        enable = true;
-        catppuccin = {
-          enable = true;
-          flavor = "frappe";
-        };
-        settings = {
-          git = {
-            paging = {
-              colorArg = "always";
-              pager = "delta --color-only --dark --paging=never";
-              useConfig = false;
-              showRandomTip = true;
-              nerdFontsVersion = "2";
-              showFileIcons = true;
-              splitDiff = "always";
-            };
-          };
-        };
-      };
+      # lazygit = {
+      #   enable = true;
+      #   catppuccin = {
+      #     enable = true;
+      #     flavor = "frappe";
+      #   };
+      #   settings = {
+      #     git = {
+      #       paging = {
+      #         colorArg = "always";
+      #         pager = "delta --color-only --dark --paging=never";
+      #         useConfig = false;
+      #         showRandomTip = true;
+      #         nerdFontsVersion = "2";
+      #         showFileIcons = true;
+      #         splitDiff = "always";
+      #       };
+      #     };
+      #   };
+      # };
 
       git = {
         enable = true;

@@ -16,5 +16,6 @@
   ];
   brews = [
     "trash"
+    "lazygit"
   ];
 }
