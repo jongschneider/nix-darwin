@@ -91,9 +91,11 @@ color15 #A5ADCE
 # bold_font MonaspiceKr Nerd Font Mono
 # font_family        Fira Code Light Nerd Font
 # font_family        Fira Code Light Nerd Font
-font_family Hack Nerd Font Mono
-bold_font Hack Nerd Font Mono
-font_features Hack Nerd Font Mono +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +ss10 +zero +onum
+font_family GeistMono Nerd Font
+font_features GeistMono Nerd Font +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +ss10 +zero +onum
+# font_family Hack Nerd Font Mono
+# bold_font Hack Nerd Font Mono
+# font_features Hack Nerd Font Mono +cv02 +cv05 +cv09 +cv14 +ss04 +cv16 +cv31 +cv25 +cv26 +cv32 +cv28 +ss10 +zero +onum
 font_size 12.0
 adjust_line_height 4
 # modify_font cell_height 130%

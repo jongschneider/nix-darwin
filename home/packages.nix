@@ -44,6 +44,7 @@
     git-open
     mkcert
     glow
+    gum
     yt-dlp
     # youtube-dl
     redis

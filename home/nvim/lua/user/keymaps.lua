@@ -315,7 +315,7 @@ nnoremap("<leader>fsw", require("telescope.builtin").lsp_dynamic_workspace_symbo
 nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
 nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 
-nnoremap("<leader>fc", function()
+nnoremap("<leader>Tab", function()
 	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
 		previewer = false,
 	}))

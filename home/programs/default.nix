@@ -23,7 +23,6 @@ in
         };
       };
       jq.enable = true;
-
       thefuck = {
         enable = true;
         enableZshIntegration = true;
@@ -309,6 +308,9 @@ in
           glog = "git log --simplify-by-decoration --oneline --graph";
           glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' --preview-window down --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs git checkout";
           wt = "git worktree";
+          sc = "sesh connect \"$(
+	sesh list -i | gum filter --limit 1 --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
+)\"";
         };
       };
 
