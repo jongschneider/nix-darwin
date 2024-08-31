@@ -10,6 +10,7 @@
         "Hack"
         "Meslo"
         "GeistMono"
+        "NerdFontsSymbolsOnly"
       ];
     })
     coreutils

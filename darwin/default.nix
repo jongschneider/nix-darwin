@@ -7,6 +7,7 @@
     shells = with pkgs; [bash zsh];
     loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
+      bitwarden-cli
       process-compose
       nixd
       nil # nix LSP... testing this out.
