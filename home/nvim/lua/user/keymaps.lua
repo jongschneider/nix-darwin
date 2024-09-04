@@ -76,7 +76,7 @@ end)
 nnoremap("<leader>'", "<C-^>", { desc = "Switch to last buffer" })
 
 -- Save with leader key
--- nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
+nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
 
 -- Quit with leader key
 -- nnoremap("<leader>q", "<cmd>q<cr>", { silent = false })

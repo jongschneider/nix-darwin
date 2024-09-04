@@ -7,35 +7,38 @@
     shells = with pkgs; [bash zsh];
     loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
-      bitwarden-cli
-      process-compose
-      nixd
-      nil # nix LSP... testing this out.
-      alejandra
-      coreutils
-      gnumake
       (import ../scripts/ff.nix {inherit pkgs;})
-      (import ../scripts/gsquash.nix {inherit pkgs;})
       (import ../scripts/git-bare-clone.nix {inherit pkgs;})
-      discord
-      presenterm
+      (import ../scripts/gsquash.nix {inherit pkgs;})
+      # (import ../scripts/tmux-sessionizer.nix {inherit pkgs;}) # example of wrapping a shell script
+      alejandra
       asciinema
       asciinema-agg
-      t-rec
-      nurl
-      manix
+      bitwarden-cli
+      coreutils
       delve
+      discord
+      gnumake
       go
       gofumpt
-      gomodifytags
-      impl
       golangci-lint
-      gotools
+      golines
+      gomodifytags
       gotests
       gotestsum
-      golines
-      yazi
+      gotools
+      gum
+      ice-bar
+      impl
       just
+      manix
+      nil # nix LSP... testing this out.
+      nixd
+      nurl
+      presenterm
+      process-compose
+      t-rec
+      yazi
     ];
     systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin"];
     pathsToLink = ["/Applications"];
