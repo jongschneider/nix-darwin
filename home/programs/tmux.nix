@@ -98,5 +98,9 @@ in {
     bind '"' split-window -v -c "#{pane_current_path}"
     bind % split-window -h -c "#{pane_current_path}"
     bind c new-window -c "#{pane_current_path}"
+
+    # Make pam_tid.so work in tmux
+    __helper="${pkgs.pam-reattach}/bin/reattach-to-session-namespace";
+    set-option -g default-command "$__helper zsh"
   '';
 }
