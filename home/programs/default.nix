@@ -272,7 +272,7 @@ in
           killmysql = "sudo pkill mysql";
 
           # Work
-          localdev = "/Users/jschneider/code/localdev/localdev";
+          localdev = "/Users/jschneider/Developer/localdev/localdev";
           runingester = "export INGESTER_ENV=.env && goi && ingester > tmp.txt";
           runintegrator = "export INTEGRATOR_ENV=.env && goi && integrator  > tmp.txt";
           runemailpreprocessor = "ENV_FILE=preprocessor.env.localdev go run ./cmd/email_preprocessor/...";

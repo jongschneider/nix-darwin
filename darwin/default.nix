@@ -14,7 +14,7 @@
       alejandra
       asciinema
       asciinema-agg
-      bitwarden-cli
+      # bitwarden-cli
       coreutils
       delve
       discord
