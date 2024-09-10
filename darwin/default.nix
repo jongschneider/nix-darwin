@@ -7,14 +7,13 @@
     shells = with pkgs; [bash zsh];
     loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
+      # (import ../scripts/tmux-sessionizer.nix {inherit pkgs;}) # example of wrapping a shell script
       (import ../scripts/ff.nix {inherit pkgs;})
       (import ../scripts/git-bare-clone.nix {inherit pkgs;})
       (import ../scripts/gsquash.nix {inherit pkgs;})
-      # (import ../scripts/tmux-sessionizer.nix {inherit pkgs;}) # example of wrapping a shell script
       alejandra
       asciinema
       asciinema-agg
-      # bitwarden-cli
       coreutils
       delve
       discord
@@ -40,8 +39,8 @@
       t-rec
       yazi
     ];
-    systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin"];
     pathsToLink = ["/Applications"];
+    systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin"];
   };
 
   homebrew = import ./homebrew.nix // {enable = true;};

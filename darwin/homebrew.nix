@@ -4,18 +4,19 @@
   caskArgs.no_quarantine = true;
   global.brewfile = true;
   casks = [
-    "wkhtmltopdf" # for work
-    "vlc"
     "font-monaspace"
+    "powershell"
     "raycast"
     "shottr"
-    "powershell"
+    "vlc"
+    "wkhtmltopdf" # for work
   ];
   taps = [
     "homebrew/cask-fonts"
   ];
   brews = [
-    "trash"
+    "bitwarden-cli"
     "lazygit"
+    "trash"
   ];
 }

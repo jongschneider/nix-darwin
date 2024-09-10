@@ -4,67 +4,63 @@
     (nerdfonts.override {
       fonts = [
         "CascadiaCode"
-        "JetBrainsMono"
         "FiraCode"
-        "Monaspace"
-        "Hack"
-        "Meslo"
         "GeistMono"
+        "Hack"
+        "JetBrainsMono"
+        "Meslo"
+        "Monaspace"
         "NerdFontsSymbolsOnly"
       ];
     })
-    coreutils
-    inetutils
-    curl
-    wget
-    tree
-    procs
-    # ffmpeg
+    asciinema
     asciiquarium
-    srt
-    mysql
-    fastfetch
-    teleport_14
-
+    coreutils
+    curl
     du-dust # fancy version of `du`
+    fastfetch
     fd # fancy version of `find`
+    inetutils
     mosh # wrapper for `ssh` that better and not dropping connections
+    mysql
+    procs
+    srt
+    teleport_14
+    tree
     unrar # extract RAR archives
+    wget
     xz # extract XZ archives
     zlib
-    asciinema
 
     # Dev
+    cpulimit
     fh
-    jqp
-    ruby
-    rubyPackages.solargraph
-    rubyPackages.rubocop-performance
-    rubocop
-    nodejs_22
     git-open
-    mkcert
     glow
     gum
-    yt-dlp
-    # youtube-dl
-    redis
-    protobuf
-    cpulimit
-    neofetch
+    jqp
     lazydocker
+    mkcert
+    neofetch
+    nodejs_22
+    protobuf
+    redis
+    rubocop
+    ruby
+    rubyPackages.rubocop-performance
+    rubyPackages.solargraph
     sesh
+    yt-dlp
 
     # not sure I need... were migrated from brew
-    x265
-    x264
+    pango
+    rav1e
+    snappy
+    speex
     svt-av1
     utf8proc
-    speex
-    snappy
-    # shared-mime-info
-    rav1e
-    pango
+    x264
+    x265
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
