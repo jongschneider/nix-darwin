@@ -40,6 +40,9 @@ local config = {
 }
 
 config.scrollback_lines = 3500
+--
+-- add to fix M1 related bug
+config.front_end = "WebGpu"
 
 config.background = {
 	{

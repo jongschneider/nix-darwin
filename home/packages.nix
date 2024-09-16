@@ -11,6 +11,8 @@
         "Meslo"
         "Monaspace"
         "NerdFontsSymbolsOnly"
+        "Gohu"
+        "CodeNewRoman"
       ];
     })
     asciinema
