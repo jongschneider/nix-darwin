@@ -11,6 +11,7 @@
     "shottr"
     "vlc"
     "wkhtmltopdf" # for work
+    "zed"
   ];
   taps = [
     "homebrew/cask-fonts"
