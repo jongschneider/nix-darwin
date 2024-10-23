@@ -22,6 +22,7 @@
     du-dust # fancy version of `du`
     fastfetch
     fd # fancy version of `find`
+    ffmpeg
     inetutils
     mosh # wrapper for `ssh` that better and not dropping connections
     mysql
