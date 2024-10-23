@@ -30,6 +30,11 @@
       ice-bar
       impl
       just
+      # luajit
+      # luajitPackages.magick
+      # luajitPackages.tiktoken_core
+      lua
+      luarocks
       manix
       nil # nix LSP... testing this out.
       nixd
@@ -70,7 +75,7 @@
     '';
 
     #  https://nixcademy.com/2024/02/12/macos-linux-builder/
-    linux-builder.enable = true;
+    # linux-builder.enable = true;
   };
 
   nix.nixPath = [

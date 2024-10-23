@@ -42,7 +42,7 @@ in
       eza = {
         enable = true;
         git = true;
-        icons = true;
+        icons = "auto";
       };
 
       direnv = {
@@ -466,11 +466,12 @@ in
         extraLuaConfig = ''
           require('user')
         '';
-        extraPackages = [
+        extraPackages = with pkgs; [
           # Included for nil_ls
-          pkgs.cargo
+          cargo
           # Included to build telescope-fzf-native.nvim
-          pkgs.cmake
+          cmake
+          luajitPackages.tiktoken_core # copilot (optional)
         ];
         withNodeJs = true;
         withPython3 = true;

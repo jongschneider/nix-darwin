@@ -24,11 +24,11 @@
     fd # fancy version of `find`
     ffmpeg
     inetutils
-    mosh # wrapper for `ssh` that better and not dropping connections
-    mysql
+    # mosh # wrapper for `ssh` that better and not dropping connections
+    mariadb
     procs
     srt
-    teleport_14
+    teleport
     tree
     unrar # extract RAR archives
     wget

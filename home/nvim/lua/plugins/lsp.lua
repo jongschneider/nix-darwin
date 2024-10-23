@@ -266,7 +266,7 @@ return {
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				javascript = { { "prettierd", "prettier" } },
+				javascript = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
 				nix = { "alejandra" },
 			},
