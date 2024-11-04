@@ -5,6 +5,7 @@
   global.brewfile = true;
   casks = [
     "font-monaspace"
+    "microsoft-teams"
     "orbstack"
     "powershell"
     "raycast"
