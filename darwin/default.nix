@@ -5,7 +5,7 @@
 }: {
   environment = {
     shells = with pkgs; [bash zsh];
-    loginShell = pkgs.zsh;
+    # loginShell = pkgs.zsh;
     systemPackages = with pkgs; [
       # (import ../scripts/tmux-sessionizer.nix {inherit pkgs;}) # example of wrapping a shell script
       (import ../scripts/ff.nix {inherit pkgs;})
