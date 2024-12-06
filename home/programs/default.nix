@@ -146,10 +146,9 @@ in
           ".DS_Store"
           ".vscode"
           "*.pem"
-          "*.env"
-          ".env.localdev"
-          "tmp.txt"
-          ".golangci.yml"
+          # "*.env"
+          # ".env.localdev"
+          # ".golangci.yml"
         ];
 
         extraConfig = {

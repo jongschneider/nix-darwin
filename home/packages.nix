@@ -1,22 +1,33 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Basics
-    (nerdfonts.override {
-      fonts = [
-        "CascadiaCode"
-        "FiraCode"
-        "GeistMono"
-        "Hack"
-        "JetBrainsMono"
-        "Meslo"
-        "Monaspace"
-        "NerdFontsSymbolsOnly"
-        "Gohu"
-        "CodeNewRoman"
-      ];
-    })
+    # (nerdfonts.override {
+    #   fonts = [
+    #     "CascadiaCode"
+    #     "FiraCode"
+    #     "GeistMono"
+    #     "Hack"
+    #     "JetBrainsMono"
+    #     "Meslo"
+    #     "Monaspace"
+    #     "NerdFontsSymbolsOnly"
+    #     "Gohu"
+    #     "CodeNewRoman"
+    #   ];
+    # })
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.fira-code
+    nerd-fonts.geist-mono
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    nerd-fonts.monaspace
+    nerd-fonts.symbols-only
+    nerd-fonts.gohufont
+    nerd-fonts.code-new-roman
     asciinema
     asciiquarium
+    azure-cli
     coreutils
     curl
     du-dust # fancy version of `du`
@@ -45,7 +56,7 @@
     lazydocker
     mkcert
     neofetch
-    nodejs_22
+    nodejs_23
     protobuf
     redis
     rubocop
