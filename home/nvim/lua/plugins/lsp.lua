@@ -269,7 +269,38 @@ return {
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
 				nix = { "alejandra" },
+				json = { "prettierd" },
 			},
 		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		event = {
+			"BufReadPre",
+			"BufNewFile",
+		},
+		-- event = { "BufWritePost", "BufNewFile", "InsertLeave" },
+		config = function()
+			local lint = require("lint")
+			lint.linters_by_ft = {
+				javascript = { "eslint_d" },
+				-- lua = { "luacheck" },
+				nix = { "nix" },
+				json = { "jsonlint" },
+				-- go = { "golangci-lint" },
+				go = { "golangcilint" },
+			}
+
+			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				group = lint_augroup,
+				callback = function()
+					-- try_lint without arguments runs the linters defined in `linters_by_ft`
+					-- for the current filetype
+					lint.try_lint()
+				end,
+			})
+		end,
 	},
 }

@@ -21,7 +21,7 @@ return {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
+		branch = "main",
 		event = "VeryLazy",
 		dependencies = {
 			{ "zbirenbaum/copilot.lua" },
