@@ -146,9 +146,7 @@ in
           ".DS_Store"
           ".vscode"
           "*.pem"
-          # "*.env"
-          # ".env.localdev"
-          # ".golangci.yml"
+          "*/vcr_responses.localdev.*.yaml"
         ];
 
         extraConfig = {
