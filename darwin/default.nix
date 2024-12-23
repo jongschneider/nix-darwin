@@ -1,130 +1,48 @@
-{
-  pkgs,
-  # config,
-  ...
-}: {
-  environment = {
-    shells = with pkgs; [bash zsh];
-    # loginShell = pkgs.zsh;
-    systemPackages = with pkgs; [
-      # (import ../scripts/tmux-sessionizer.nix {inherit pkgs;}) # example of wrapping a shell script
-      (import ../scripts/ff.nix {inherit pkgs;})
-      (import ../scripts/git-bare-clone.nix {inherit pkgs;})
-      (import ../scripts/gsquash.nix {inherit pkgs;})
-      alejandra
-      asciinema
-      asciinema-agg
-      coreutils
-      delve
-      discord
-      gnumake
-      go
-      gofumpt
-      golangci-lint
-      golines
-      gomodifytags
-      gotests
-      gotestsum
-      gotools
-      gum
-      ice-bar
-      impl
-      just
-      # luajit
-      # luajitPackages.magick
-      # luajitPackages.tiktoken_core
-      lua
-      luarocks
-      manix
-      nil # nix LSP... testing this out.
-      nixd
-      nurl
-      presenterm
-      process-compose
-      t-rec
-      yazi
-    ];
-    pathsToLink = ["/Applications"];
-    systemPath = ["/opt/homebrew/bin" "/Users/jschneider/go/bin"];
-  };
-
-  homebrew = import ./homebrew.nix // {enable = true;};
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
-  # Necessary for using flakes on this system.
-  nix = {
-    settings = {
-      # auto-optimise-store = true;
-      auto-optimise-store = false;
-      builders-use-substitutes = true;
-      experimental-features = ["flakes" "nix-command"];
-      substituters = ["https://nix-community.cachix.org"];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-      trusted-users = [
-        "@wheel"
-        "@admin" # This line is a prerequisite for linux-builder
-      ];
-      warn-dirty = false;
+# darwin/default.nix
+{pkgs, ...}: {
+  # System-wide configuration
+  system.defaults = {
+    dock = {
+      autohide = true;
+      orientation = "bottom";
+      showhidden = true;
     };
-    extraOptions = ''
-      extra-platforms = x86_64-darwin aarch64-darwin
-    '';
 
-    #  https://nixcademy.com/2024/02/12/macos-linux-builder/
-    # linux-builder.enable = true;
+    finder = {
+      AppleShowAllExtensions = true;
+      FXEnableExtensionChangeWarning = false;
+    };
+
+    NSGlobalDomain = {
+      AppleShowAllExtensions = true;
+      InitialKeyRepeat = 15;
+      KeyRepeat = 2;
+    };
   };
 
-  nix.nixPath = [
-    # Support legacy workflows that use `<nixpkgs>` etc.
-    "nixpkgs=${pkgs.path}"
+  # System packages
+  environment.systemPackages = with pkgs; [
+    curl
+    git
+    vim
   ];
 
+  # Enable fonts dir
+  fonts.fontDir.enable = true;
+
+  # Auto upgrade nix package and the daemon service
+  services.nix-daemon.enable = true;
+  nix.package = pkgs.nix;
+
+  # Create /etc/zshrc that loads the nix-darwin environment
+  programs.zsh.enable = true;
+
+  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
-  programs.bash.enable = true;
-  programs.nix-index.enable = true;
+  # Configure hostname
+  networking.hostName = "Jonathans-MacBook-Pro";
 
-  # MacOS Configuration
-  system = {
-    defaults = {
-      finder.AppleShowAllExtensions = true;
-      finder.AppleShowAllFiles = true;
-      finder._FXShowPosixPathInTitle = true;
-      finder.ShowPathbar = true;
-      finder.ShowStatusBar = true;
-      # Use current directory as default search scope in Finder
-      finder.FXDefaultSearchScope = "SCcf";
-      NSGlobalDomain.InitialKeyRepeat = 14;
-      NSGlobalDomain.KeyRepeat = 1;
-      NSGlobalDomain.ApplePressAndHoldEnabled = false;
-      # expand save dialog by default
-      NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
-      # expand save dialog by default
-      NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
-      # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-      NSGlobalDomain.AppleKeyboardUIMode = 3;
-      # Enable subpixel font rendering on non-Apple LCDs
-      NSGlobalDomain.AppleFontSmoothing = 2;
-      dock.autohide = true;
-      # Whether to automatically rearrange spaces based on most recent use
-      dock.mru-spaces = false;
-    };
-
-    # Used for backwards compatibility, please read the changelog before changing.
-    stateVersion = 4;
-
-    keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToControl = true;
-  };
-
-  # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
-
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  # Used for backwards compatibility
+  system.stateVersion = 4;
 }
