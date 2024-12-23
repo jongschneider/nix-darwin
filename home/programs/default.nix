@@ -151,7 +151,6 @@ in
 
         extraConfig = {
           url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
-          core.excludesfile = "/Users/jschneider/.gitignore";
           color.ui = true;
           diff.colorMoved = "zebra";
           fetch.prune = true;
