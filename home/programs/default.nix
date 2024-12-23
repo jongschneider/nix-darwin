@@ -4,6 +4,15 @@
 in
   # https://nix-community.github.io/home-manager/options.html
   {
+    catppuccin = {
+      enable = true;
+      flavor = flavor;
+      bat.enable = true;
+      fzf.enable = true;
+      delta.enable = true;
+      zsh-syntax-highlighting.enable = true;
+    };
+
     programs = {
       htop.enable = true;
       ripgrep.enable = true;
@@ -36,7 +45,6 @@ in
 
       bat = {
         enable = true;
-        catppuccin.enable = true;
       };
 
       eza = {
@@ -53,7 +61,6 @@ in
 
       fzf = {
         enable = true;
-        catppuccin.enable = true;
         enableZshIntegration = true;
       };
 
@@ -100,7 +107,6 @@ in
 
         delta = {
           enable = true;
-          catppuccin.enable = true;
           options = {
             side-by-side = true;
           };
@@ -256,7 +262,6 @@ in
         autocd = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-        syntaxHighlighting.catppuccin.enable = true;
         shellAliases = {
           l = "yy";
           cl = "clear";
@@ -341,10 +346,6 @@ in
 
       starship = {
         enable = true;
-        catppuccin = {
-          enable = true;
-          flavor = "mocha";
-        };
         enableZshIntegration = true;
         settings = {
           format = "$os$username$directory$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$line_break$character ";
