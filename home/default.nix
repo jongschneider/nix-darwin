@@ -1,5 +1,29 @@
 # home/default.nix
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
+  home = {
+    username = "jschneider";
+    homeDirectory = "/Users/jschneider";
+    sessionVariables.EDITOR = "nvim";
+
+    # This value determines the Home Manager release that your
+    # configuration is compatible with. This helps avoid breakage
+    # when a new Home Manager release introduces backwards
+    # incompatible changes.
+    #
+    # You can update Home Manager without changing this value. See
+    # the Home Manager release notes for a list of state version
+    # changes in each release.
+    stateVersion = "23.11";
+  };
+
+  # home.username = "jschneider";
+  # home.homeDirectory = "/Users/jschneider";
+  # home.stateVersion = "23.11";
+
   # Let home-manager manage itself
   programs.home-manager.enable = true;
 
@@ -14,14 +38,14 @@
   programs.git = {
     enable = true;
     userName = "Jonathan Schneider";
-    userEmail = "jonathan.schneider@thetalake.com";
+    userEmail = "your.email@example.com"; # Replace with your email
   };
 
   # Terminal configuration
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
     oh-my-zsh = {
       enable = true;

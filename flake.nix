@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "Jonathan's System Configuration";
 
@@ -18,13 +17,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs @ {
-    flake-parts,
-    nixpkgs,
-    darwin,
-    home-manager,
-    ...
-  }:
+  outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["aarch64-darwin"];
 
@@ -37,29 +30,22 @@
         ...
       }: {
         # Per-system attributes can be defined here
-        packages = {
-          # Add any custom packages here
-        };
       };
 
       flake = {
-        darwinConfigurations."Jonathans-MacBook-Pro" = darwin.lib.darwinSystem {
+        darwinConfigurations."Jonathans-MacBook-Pro" = inputs.darwin.lib.darwinSystem {
           system = "aarch64-darwin"; # Assuming M1/M2 Mac
           modules = [
             ./darwin
-            home-manager.darwinModules.home-manager
+            inputs.home-manager.darwinModules.home-manager
             {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.jschneider = {pkgs, ...}: {
-                  imports = [./home];
-                  home = {
-                    username = "jschneider";
-                    homeDirectory = "/Users/jschneider";
-                    stateVersion = "23.11";
-                  };
-                };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              # home-manager.users.jschneider = import ./home;
+              home-manager.users.jschneider = {
+                imports = [
+                  ./home
+                ];
               };
             }
           ];

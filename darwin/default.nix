@@ -1,4 +1,3 @@
-# darwin/default.nix
 {pkgs, ...}: {
   # System-wide configuration
   system.defaults = {
@@ -19,7 +18,6 @@
       KeyRepeat = 2;
     };
   };
-
   # System packages
   environment.systemPackages = with pkgs; [
     curl
@@ -28,7 +26,7 @@
   ];
 
   # Enable fonts dir
-  fonts.fontDir.enable = true;
+  # fonts.fontDir.enable = true;
 
   # Auto upgrade nix package and the daemon service
   services.nix-daemon.enable = true;
@@ -41,8 +39,13 @@
   nixpkgs.config.allowUnfree = true;
 
   # Configure hostname
-  networking.hostName = "Jonathans-MacBook-Pro";
+  # networking.hostName = "Jonathans-MacBook-Pro";
 
   # Used for backwards compatibility
   system.stateVersion = 4;
+
+  users.users.jschneider = {
+    name = "jschneider";
+    home = "/Users/jschneider";
+  };
 }
