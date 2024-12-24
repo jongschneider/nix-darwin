@@ -40,7 +40,7 @@
               username = "jschneider";
             };
             modules = [
-              ./hosts/mbp
+              ./hosts/mbp/configuration.nix
               inputs.home-manager.darwinModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
@@ -51,7 +51,7 @@
                 };
                 home-manager.users.jschneider = {
                   imports = [
-                    ./home
+                    ./hosts/mbp/home.nix
                     inputs.catppuccin.homeManagerModules.catppuccin
                   ];
                 };

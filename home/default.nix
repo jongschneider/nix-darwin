@@ -7,6 +7,10 @@
 }: let
   flavor = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
 in {
+  imports = [
+    ./packages.nix
+  ];
+
   catppuccin = {
     enable = true;
     flavor = flavor;
@@ -45,13 +49,6 @@ in {
 
   # Let home-manager manage itself
   programs.home-manager.enable = true;
-
-  # Packages to install
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    tree
-  ];
 
   # Git configuration
   programs = {
