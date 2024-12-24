@@ -1,4 +1,4 @@
-# home/default.nix
+# ./home/default.nix
 {
   config,
   pkgs,
@@ -19,10 +19,6 @@
     # changes in each release.
     stateVersion = "23.11";
   };
-
-  # home.username = "jschneider";
-  # home.homeDirectory = "/Users/jschneider";
-  # home.stateVersion = "23.11";
 
   # Let home-manager manage itself
   programs.home-manager.enable = true;
