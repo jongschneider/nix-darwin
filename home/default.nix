@@ -2,11 +2,12 @@
 {
   config,
   pkgs,
+  username,
   ...
 }: {
   home = {
-    username = "jschneider";
-    homeDirectory = "/Users/jschneider";
+    username = username;
+    homeDirectory = "/Users/${username}";
     sessionVariables.EDITOR = "nvim";
 
     # This value determines the Home Manager release that your

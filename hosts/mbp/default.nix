@@ -1,5 +1,9 @@
 # hosts/mbp/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ../../darwin
     ./overrides.nix # Import the overrides
@@ -10,8 +14,8 @@
     # MBP-specific packages
   ];
 
-  users.users.jschneider = {
-    name = "jschneider";
-    home = "/Users/jschneider";
+  users.users.${username} = {
+    name = username;
+    home = "/Users/${username}";
   };
 }

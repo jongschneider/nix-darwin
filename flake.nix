@@ -34,12 +34,20 @@
         darwinConfigurations = {
           "Jonathans-MacBook-Pro" = inputs.darwin.lib.darwinSystem {
             system = "aarch64-darwin";
+            # specialArgs for darwin system modules
+            specialArgs = {
+              username = "jschneider";
+            };
             modules = [
               ./hosts/mbp
               inputs.home-manager.darwinModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                # extraSpecialArgs for home-manager modules (since it's a separate module system)
+                home-manager.extraSpecialArgs = {
+                  username = "jschneider";
+                };
                 home-manager.users.jschneider = import ./home;
               }
             ];
