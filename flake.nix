@@ -13,6 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -48,7 +49,12 @@
                 home-manager.extraSpecialArgs = {
                   username = "jschneider";
                 };
-                home-manager.users.jschneider = import ./home;
+                home-manager.users.jschneider = {
+                  imports = [
+                    ./home
+                    inputs.catppuccin.homeManagerModules.catppuccin
+                  ];
+                };
               }
             ];
           };
