@@ -6,12 +6,7 @@
 }: {
   imports = [
     ../../darwin
-    ./overrides.nix # Import the overrides
-  ];
-
-  # packages added here will be added to the shared config, not replace them.
-  environment.systemPackages = with pkgs; [
-    # MBP-specific packages
+    ./systemoverrides.nix # Import the overrides
   ];
 
   users.users.${username} = {
