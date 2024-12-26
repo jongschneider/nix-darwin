@@ -7,12 +7,11 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      # cleanup = "zap"; # Remove everything not listed
-      cleanup = "uninstall"; # uncomment when everything is migrated over
+      cleanup = "zap"; # Remove everything not listed
     };
 
     global.brewfile = true;
-
+    caskArgs.no_quarantine = true;
     # Core homebrew packages
     brews = [
       "bitwarden-cli"

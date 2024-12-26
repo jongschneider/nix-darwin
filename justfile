@@ -26,7 +26,6 @@ switch hostname=host: (build hostname)
 # Clean up old generations
 clean:
     nix-collect-garbage -d
-    home-manager expire-generations "-30 days"
 
 # Check configuration for errors (optionally specify a different hostname)
 check hostname=host:

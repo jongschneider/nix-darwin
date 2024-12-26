@@ -104,6 +104,7 @@ in {
         ".vscode"
         "*.pem"
         "*/vcr_responses.localdev.*.yaml"
+        "result"
       ];
 
       extraConfig = {
