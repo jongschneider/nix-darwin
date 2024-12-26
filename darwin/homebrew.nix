@@ -1,25 +1,37 @@
 {
-  onActivation.cleanup = "uninstall"; # uncomment when everything is migrated over
-  enable = true;
-  caskArgs.no_quarantine = true;
-  global.brewfile = true;
-  casks = [
-    "font-monaspace"
-    "microsoft-teams"
-    "orbstack"
-    "powershell"
-    "raycast"
-    "shottr"
-    "vlc"
-    "wkhtmltopdf" # for work
-    "zed"
-  ];
-  taps = [
-    "homebrew/cask-fonts"
-  ];
-  brews = [
-    "bitwarden-cli"
-    "lazygit"
-    "trash"
-  ];
+  pkgs,
+  lib,
+  ...
+}: {
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      # cleanup = "zap"; # Remove everything not listed
+      cleanup = "uninstall"; # uncomment when everything is migrated over
+    };
+
+    global.brewfile = true;
+
+    # Core homebrew packages
+    brews = [
+      "bitwarden-cli"
+      "lazygit"
+      "trash"
+    ];
+
+    # Default casks for all machines
+    casks = [
+      "font-monaspace"
+      "orbstack"
+      "raycast"
+      "shottr"
+      "vlc"
+    ];
+
+    # Default taps
+    taps = [
+      "homebrew/cask-fonts"
+    ];
+  };
 }
