@@ -1,4 +1,3 @@
-# ./home/default.nix
 {
   config,
   pkgs,

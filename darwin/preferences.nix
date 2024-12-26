@@ -1,4 +1,3 @@
-# darwin/preferences.nix
 {lib, ...}: {
   # Default system preferences that can be overridden per-machine
   system = {

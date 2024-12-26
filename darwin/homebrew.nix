@@ -1,4 +1,3 @@
-# darwin/homebrew.nix
 {
   pkgs,
   lib,

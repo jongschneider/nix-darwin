@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "Jonathan's System Configuration";
 

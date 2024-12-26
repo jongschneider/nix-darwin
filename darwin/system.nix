@@ -1,4 +1,3 @@
-# darwin/system.nix
 {pkgs, ...}: {
   # Base system configuration
   services.nix-daemon.enable = true;

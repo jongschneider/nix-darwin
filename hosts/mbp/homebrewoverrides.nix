@@ -1,4 +1,3 @@
-# hosts/mbp/overrides.nix
 {pkgs, ...}: {
   # Machine-specific Homebrew configuration
   homebrew.casks = [

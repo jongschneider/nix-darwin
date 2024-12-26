@@ -1,4 +1,3 @@
-# hosts/mbp/default.nix
 {
   pkgs,
   username,
