@@ -7,10 +7,6 @@ host := `scutil --get LocalHostName`
 default:
     @just --list
 
-# Check flake inputs for updates
-check-updates:
-    nix flake update --dry-run
-
 # Update flake inputs
 update:
     nix flake update

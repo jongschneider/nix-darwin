@@ -45,6 +45,8 @@
   programs.nix-index.enable = true;
 
   system.stateVersion = 4;
+  # Add ability to used TouchID for sudo authentication
+  security.pam.enableSudoTouchIdAuth = true;
 
   # Basic system packages all machines should have
   environment.systemPackages = with pkgs; [
