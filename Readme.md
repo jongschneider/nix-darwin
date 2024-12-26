@@ -27,7 +27,7 @@ brew install just
 │   └── homebrew.nix                # Base Homebrew config
 ├── home/                           # Base home-manager configuration
 │   ├── default.nix
-    └── packages.nix                # Base home-manager packages
+│   └── packages.nix                # Base home-manager packages
 └── hosts/                          # Machine-specific configurations
     └── mbp/                        # Example MacBook Pro config
         ├── configuration.nix       # System configuration
