@@ -50,6 +50,8 @@
 
   # Basic system packages all machines should have
   environment.systemPackages = with pkgs; [
+    (import ../scripts/git-bare-clone.nix {inherit pkgs;})
+    (import ../scripts/gsquash.nix {inherit pkgs;})
     alejandra
     coreutils
     curl
