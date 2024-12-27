@@ -22,6 +22,7 @@
     # Default casks for all machines
     casks = [
       "font-monaspace"
+      "ghostty"
       "orbstack"
       "raycast"
       "shottr"

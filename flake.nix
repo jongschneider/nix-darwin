@@ -13,6 +13,8 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
+    ghostty.url = "github:ghostty-org/ghostty";
+    ghostty-hm.url = "github:clo4/ghostty-hm-module";
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -52,6 +54,7 @@
                   imports = [
                     ./hosts/mbp/home.nix
                     inputs.catppuccin.homeManagerModules.catppuccin
+                    inputs.ghostty-hm.homeModules.default
                   ];
                 };
               }
