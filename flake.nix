@@ -19,7 +19,7 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["aarch64-darwin"];
+      systems = ["aarch64-darwin" "x86_64-darwin"];
 
       perSystem = {
         config,
