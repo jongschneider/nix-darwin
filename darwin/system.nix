@@ -26,6 +26,15 @@
       warn-dirty = false;
     };
 
+    # optimise store
+    optimise.automatic = true;
+
+    # Enable automatic garbage collection
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
+
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
@@ -41,12 +50,15 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
-  programs.bash.enable = true;
   programs.nix-index.enable = true;
 
   system.stateVersion = 4;
+
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
+
+  # Currently not working as a system service - using homebrew instead
+  services.karabiner-elements.enable = false;
 
   # Basic system packages all machines should have
   environment.systemPackages = with pkgs; [

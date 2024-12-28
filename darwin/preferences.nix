@@ -27,8 +27,5 @@
 
     # Used for backwards compatibility, please read the changelog before changing.
     stateVersion = 4;
-
-    keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToControl = true;
   };
 }

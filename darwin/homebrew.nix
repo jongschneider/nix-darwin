@@ -23,6 +23,7 @@
     casks = [
       "font-monaspace"
       "ghostty"
+      "karabiner-elements"
       "orbstack"
       "raycast"
       "shottr"
