@@ -61,18 +61,41 @@
             ];
           };
 
-          # "Jonathans-MacBook-Air" = inputs.darwin.lib.darwinSystem {
-          #   system = "aarch64-darwin";
-          #   modules = [
-          #     ./hosts/mba
-          #     inputs.home-manager.darwinModules.home-manager
-          #     {
-          #       home-manager.useGlobalPkgs = true;
-          #       home-manager.useUserPackages = true;
-          #       home-manager.users.jschneider = import ./home;
-          #     }
-          #   ];
-          # };
+          "Jonathans-Mac-mini" = inputs.darwin.lib.darwinSystem {
+            system = "x86_64-darwin";
+            specialArgs = {
+              username = "jgs";
+            };
+            modules = [
+              ./hosts/mbp/configuration.nix
+              inputs.home-manager.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                # extraSpecialArgs for home-manager modules (since it's a separate module system)
+                home-manager.extraSpecialArgs = {
+                  username = "jgs";
+                };
+                home-manager.users.jgs = {
+                  imports = [
+                    ./hosts/macmini/home.nix
+                    inputs.catppuccin.homeManagerModules.catppuccin
+                    inputs.ghostty-hm.homeModules.default
+                  ];
+                };
+              }
+            ];
+
+            # modules = [
+            #   ./hosts/mba
+            #   inputs.home-manager.darwinModules.home-manager
+            #   {
+            #     home-manager.useGlobalPkgs = true;
+            #     home-manager.useUserPackages = true;
+            #     home-manager.users.jschneider = import ./home;
+            #   }
+            # ];
+          };
         };
       };
     };
