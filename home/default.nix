@@ -50,12 +50,6 @@ in {
               to_if_alone = [
                 {key_code = "escape";}
               ];
-              conditions = [
-                {
-                  type = "device_if";
-                  identifiers = [{is_built_in_keyboard = true;}];
-                }
-              ];
             }
           ];
         }
