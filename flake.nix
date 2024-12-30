@@ -39,6 +39,7 @@
             # specialArgs for darwin system modules
             specialArgs = {
               username = "jschneider";
+              system = "aarch64-darwin";
             };
             modules = [
               ./hosts/mbp/configuration.nix
@@ -49,6 +50,7 @@
                 # extraSpecialArgs for home-manager modules (since it's a separate module system)
                 home-manager.extraSpecialArgs = {
                   username = "jschneider";
+                  system = "aarch64-darwin";
                 };
                 home-manager.users.jschneider = {
                   imports = [
@@ -65,6 +67,7 @@
             system = "x86_64-darwin";
             specialArgs = {
               username = "jgs";
+              system = "x86_64-darwin";
             };
             modules = [
               ./hosts/macmini/configuration.nix
@@ -75,12 +78,13 @@
                 # extraSpecialArgs for home-manager modules (since it's a separate module system)
                 home-manager.extraSpecialArgs = {
                   username = "jgs";
+                  system = "x86_64-darwin";
                 };
                 home-manager.users.jgs = {
                   imports = [
                     ./hosts/macmini/home.nix
-                    # inputs.catppuccin.homeManagerModules.catppuccin
-                    # inputs.ghostty-hm.homeModules.default
+                    inputs.catppuccin.homeManagerModules.catppuccin
+                    inputs.ghostty-hm.homeModules.default
                   ];
                 };
               }

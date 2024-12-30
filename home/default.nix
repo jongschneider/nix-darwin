@@ -1,7 +1,9 @@
 {
   config,
   pkgs,
+  lib,
   username,
+  system,
   ...
 }: let
   flavor = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
@@ -10,14 +12,14 @@ in {
     ./packages.nix
   ];
 
-  # catppuccin = {
-  #  enable = false;
-  #  flavor = flavor;
-  #  bat.enable = true;
-  #  fzf.enable = true;
-  #  delta.enable = true;
-  #  zsh-syntax-highlighting.enable = true;
-  # };
+  catppuccin = lib.mkIf (system == "aarch64-darwin") {
+    enable = true;
+    flavor = flavor;
+    bat.enable = true;
+    fzf.enable = true;
+    delta.enable = true;
+    zsh-syntax-highlighting.enable = true;
+  };
 
   xdg.configFile = {
     nvim = {
@@ -78,20 +80,20 @@ in {
 
   # Git configuration
   programs = {
-    # ghostty = {
-    #   enable = true;
-    #   # flake not supported in darwin... yet
-    #   package = null;
-    #   shellIntegration.enable = true;
-    #   settings = {
-    #     font-size = 13;
-    #     font-family = "GeistMono Nerd Font";
-    #     background-opacity = 0.95;
-    #     theme = "tokyonight";
-    #     window-theme = "system";
-    #     macos-option-as-alt = true;
-    #   };
-    # };
+    ghostty = lib.mkIf (system == "aarch64-darwin") {
+      enable = true;
+      # flake not supported in darwin... yet
+      package = null;
+      shellIntegration.enable = true;
+      settings = {
+        font-size = 13;
+        font-family = "GeistMono Nerd Font";
+        background-opacity = 0.95;
+        theme = "tokyonight";
+        window-theme = "system";
+        macos-option-as-alt = true;
+      };
+    };
 
     git = {
       enable = true;
