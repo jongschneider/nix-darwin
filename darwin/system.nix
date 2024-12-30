@@ -45,7 +45,8 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    hostPlatform = "aarch64-darwin";
+    # hostPlatform = "aarch64-darwin";
+    hostPlatform = "x86_64-darwin";
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.

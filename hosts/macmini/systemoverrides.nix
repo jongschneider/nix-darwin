@@ -9,8 +9,9 @@
   # packages added here will be added to the shared config, not replace them.
   environment.systemPackages = with pkgs; [
     # MBP-specific packages
-    discord
+    # discord
   ];
+  ids.uids.nixbld = 300;
 
   environment.pathsToLink = ["/Applications"];
   environment.systemPath = ["/opt/homebrew/bin" "/Users/${username}/go/bin"];

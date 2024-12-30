@@ -1,9 +1,6 @@
 {pkgs, ...}: {
   # Machine-specific Homebrew configuration
   homebrew.casks = [
-    "microsoft-teams"
-    "powershell"
-    # "wkhtmltopdf" # for work
     "zed"
   ];
 

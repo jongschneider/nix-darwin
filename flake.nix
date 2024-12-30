@@ -67,7 +67,7 @@
               username = "jgs";
             };
             modules = [
-              ./hosts/mbp/configuration.nix
+              ./hosts/macmini/configuration.nix
               inputs.home-manager.darwinModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
@@ -79,8 +79,8 @@
                 home-manager.users.jgs = {
                   imports = [
                     ./hosts/macmini/home.nix
-                    inputs.catppuccin.homeManagerModules.catppuccin
-                    inputs.ghostty-hm.homeModules.default
+                    # inputs.catppuccin.homeManagerModules.catppuccin
+                    # inputs.ghostty-hm.homeModules.default
                   ];
                 };
               }

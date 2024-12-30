@@ -14,20 +14,20 @@
     caskArgs.no_quarantine = true;
     # Core homebrew packages
     brews = [
-      "bitwarden-cli"
-      "lazygit"
-      "trash"
+      # "bitwarden-cli"
+      # "lazygit"
+      # "trash"
     ];
 
     # Default casks for all machines
     casks = [
       "font-monaspace"
-      "ghostty"
+      # "ghostty"
       "karabiner-elements"
-      "orbstack"
+      # "orbstack"
       "raycast"
-      "shottr"
-      "vlc"
+      # "shottr"
+      # "vlc"
     ];
 
     # Default taps
