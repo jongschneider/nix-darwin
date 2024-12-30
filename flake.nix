@@ -34,72 +34,69 @@
 
       flake = {
         darwinConfigurations = {
-          "Jonathans-MacBook-Pro" = inputs.darwin.lib.darwinSystem {
+          "Jonathans-MacBook-Pro" = let
+            username = "jschneider";
             system = "aarch64-darwin";
-            # specialArgs for darwin system modules
-            specialArgs = {
-              username = "jschneider";
-              system = "aarch64-darwin";
+          in
+            inputs.darwin.lib.darwinSystem {
+              inherit system;
+              specialArgs = {
+                inherit username system;
+              };
+              modules = [
+                ./hosts/mbp/configuration.nix
+                inputs.home-manager.darwinModules.home-manager
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    # extraSpecialArgs for home-manager modules (since it's a separate module system)
+                    extraSpecialArgs = {
+                      inherit username system;
+                    };
+                    users.${username} = {
+                      imports = [
+                        ./hosts/mbp/home.nix
+                        inputs.catppuccin.homeManagerModules.catppuccin
+                        inputs.ghostty-hm.homeModules.default
+                      ];
+                    };
+                  };
+                }
+              ];
             };
-            modules = [
-              ./hosts/mbp/configuration.nix
-              inputs.home-manager.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                # extraSpecialArgs for home-manager modules (since it's a separate module system)
-                home-manager.extraSpecialArgs = {
-                  username = "jschneider";
-                  system = "aarch64-darwin";
-                };
-                home-manager.users.jschneider = {
-                  imports = [
-                    ./hosts/mbp/home.nix
-                    inputs.catppuccin.homeManagerModules.catppuccin
-                    inputs.ghostty-hm.homeModules.default
-                  ];
-                };
-              }
-            ];
-          };
 
-          "Jonathans-Mac-mini" = inputs.darwin.lib.darwinSystem {
+          "Jonathans-Mac-mini" = let
+            username = "jgs";
             system = "x86_64-darwin";
-            specialArgs = {
-              username = "jgs";
-              system = "x86_64-darwin";
+          in
+            inputs.darwin.lib.darwinSystem {
+              inherit system;
+              specialArgs = {
+                inherit username system;
+              };
+              modules = [
+                ./hosts/macmini/configuration.nix
+                inputs.home-manager.darwinModules.home-manager
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    # extraSpecialArgs for home-manager modules (since it's a separate module system)
+                    extraSpecialArgs = {
+                      inherit username system;
+                    };
+                    users.${username} = {
+                      imports = [
+                        ./hosts/mbp/home.nix
+                        inputs.catppuccin.homeManagerModules.catppuccin
+                        inputs.ghostty-hm.homeModules.default
+                      ];
+                    };
+                  };
+                }
+              ];
             };
-            modules = [
-              ./hosts/macmini/configuration.nix
-              inputs.home-manager.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                # extraSpecialArgs for home-manager modules (since it's a separate module system)
-                home-manager.extraSpecialArgs = {
-                  username = "jgs";
-                  system = "x86_64-darwin";
-                };
-                home-manager.users.jgs = {
-                  imports = [
-                    ./hosts/macmini/home.nix
-                    inputs.catppuccin.homeManagerModules.catppuccin
-                    inputs.ghostty-hm.homeModules.default
-                  ];
-                };
-              }
-            ];
-
-            # modules = [
-            #   ./hosts/mba
-            #   inputs.home-manager.darwinModules.home-manager
-            #   {
-            #     home-manager.useGlobalPkgs = true;
-            #     home-manager.useUserPackages = true;
-            #     home-manager.users.jschneider = import ./home;
-            #   }
-            # ];
-          };
         };
       };
     };

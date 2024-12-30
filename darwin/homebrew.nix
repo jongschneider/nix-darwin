@@ -27,9 +27,6 @@
         "karabiner-elements"
         "raycast"
         "shottr"
-        # "orbstack"
-        # "ghostty"
-        # "vlc"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "ghostty"
