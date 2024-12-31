@@ -88,7 +88,7 @@
                     };
                     users.${username} = {
                       imports = [
-                        ./hosts/mbp/home.nix
+                        ./hosts/macmini/home.nix
                         inputs.catppuccin.homeManagerModules.catppuccin
                         inputs.ghostty-hm.homeModules.default
                       ];
