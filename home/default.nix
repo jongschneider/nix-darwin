@@ -1,7 +1,9 @@
 {
   config,
   pkgs,
+  lib,
   username,
+  system,
   ...
 }: let
   flavor = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
@@ -10,7 +12,7 @@ in {
     ./packages.nix
   ];
 
-  catppuccin = {
+  catppuccin = lib.mkIf (system == "aarch64-darwin") {
     enable = true;
     flavor = flavor;
     bat.enable = true;
@@ -50,12 +52,6 @@ in {
               to_if_alone = [
                 {key_code = "escape";}
               ];
-              conditions = [
-                {
-                  type = "device_if";
-                  identifiers = [{is_built_in_keyboard = true;}];
-                }
-              ];
             }
           ];
         }
@@ -84,7 +80,7 @@ in {
 
   # Git configuration
   programs = {
-    ghostty = {
+    ghostty = lib.mkIf (system == "aarch64-darwin") {
       enable = true;
       # flake not supported in darwin... yet
       package = null;

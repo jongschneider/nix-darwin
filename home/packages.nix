@@ -16,6 +16,7 @@
     ffmpeg
     mariadb
     ripgrep
+    lazydocker
     tree
 
     # Useful nix related tools

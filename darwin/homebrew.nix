@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  system,
   ...
 }: {
   homebrew = {
@@ -13,22 +14,29 @@
     global.brewfile = true;
     caskArgs.no_quarantine = true;
     # Core homebrew packages
-    brews = [
-      "bitwarden-cli"
-      "lazygit"
-      "trash"
-    ];
+    brews =
+      [
+        "lazygit"
+        "trash"
+      ]
+      ++ lib.optionals (system == "aarch64-darwin") [
+        "bitwarden-cli"
+      ];
 
     # Default casks for all machines
-    casks = [
-      "font-monaspace"
-      "ghostty"
-      "karabiner-elements"
-      "orbstack"
-      "raycast"
-      "shottr"
-      "vlc"
-    ];
+    casks =
+      [
+        "font-monaspace"
+        "karabiner-elements"
+        "raycast"
+        "shottr"
+        "claude"
+      ]
+      ++ lib.optionals (system == "aarch64-darwin") [
+        "ghostty"
+        "orbstack"
+        "vlc"
+      ];
 
     # Default taps
     taps = [

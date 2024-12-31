@@ -20,8 +20,8 @@ build hostname=host:
     nix build .#darwinConfigurations.{{hostname}}.system
 
 # Build and switch to the new configuration (optionally specify a different hostname)
-switch hostname=host: (build hostname)
-    ./result/sw/bin/darwin-rebuild switch --flake .
+switch hostname=host:
+    darwin-rebuild switch --flake .#{{hostname}}
 
 # Clean up old generations
 clean:
@@ -30,7 +30,7 @@ clean:
 # Check configuration for errors (optionally specify a different hostname)
 check hostname=host:
     nix flake check
-    darwin-rebuild check --flake .
+    darwin-rebuild check --flake .#{{hostname}}
 
 # Format nix files
 fmt:

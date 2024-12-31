@@ -7,11 +7,9 @@
     azure-cli
     inetutils
     # mosh # wrapper for `ssh` that better and not dropping connections
-    mariadb
     procs
     srt
     teleport
-    tree
     unrar # extract RAR archives
     wget
     xz # extract XZ archives
