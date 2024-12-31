@@ -57,6 +57,10 @@ in {
         }
       ];
     };
+
+    "raycast/latest.rayconfig" = {
+      source = ./raycast/latest.rayconfig;
+    };
   };
 
   home = {
