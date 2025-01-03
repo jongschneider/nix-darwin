@@ -87,7 +87,8 @@ in {
       shellIntegration.enable = true;
       settings = {
         font-size = 13;
-        font-family = "GeistMono Nerd Font";
+        font-family = "MonoLisa Nerd Font";
+        # font-family = "GeistMono Nerd Font";
         background-opacity = 0.95;
         theme = "tokyonight";
         window-theme = "system";

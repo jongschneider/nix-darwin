@@ -1,5 +1,8 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  monolisa = pkgs.callPackage ./monolisa/default.nix {};
+in {
   home.packages = with pkgs; [
+    monolisa
     nerd-fonts.caskaydia-cove
     nerd-fonts.fira-code
     nerd-fonts.geist-mono
