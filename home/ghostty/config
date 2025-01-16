@@ -1,0 +1,39 @@
+# Ghostty theme
+# Shell integration is sourced and configured manually
+shell-integration = none
+
+# Font settings
+font-family = GeistMono Nerd Font
+font-size = 13
+
+# Ghostty theme
+theme = tokyonight
+window-theme = system
+
+# Opacity of split windows
+unfocused-split-opacity = 0.92  
+
+# Set the background-opacity to be slightly transparent
+background-opacity = 0.96
+
+# Cursor style
+cursor-style-blink = true
+
+# Clipboard settings
+clipboard-read = allow
+clipboard-write = allow
+
+# macos options
+macos-option-as-alt = true
+macos-titlebar-proxy-icon = hidden
+
+# Always show ghostty as the title
+title = ghostty 
+# Window settings
+window-width = 90
+window-height = 30
+window-colorspace = display-p3
+window-padding-color = background
+window-padding-balance = true
+window-padding-x = 2
+window-padding-y = 0

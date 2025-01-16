@@ -22,6 +22,9 @@ in {
   };
 
   xdg.configFile = {
+    ghostty = {
+      source = ./ghostty;
+    };
     nvim = {
       source = config.lib.file.mkOutOfStoreSymlink ./nvim;
       recursive = true;
@@ -125,22 +128,6 @@ in {
 
   # Git configuration
   programs = {
-    ghostty = lib.mkIf (system == "aarch64-darwin") {
-      enable = true;
-      # flake not supported in darwin... yet
-      package = null;
-      shellIntegration.enable = true;
-      settings = {
-        font-size = 13;
-        # font-family = "MonoLisa Nerd Font";
-        font-family = "GeistMono Nerd Font";
-        background-opacity = 0.95;
-        theme = "tokyonight";
-        window-theme = "system";
-        macos-option-as-alt = true;
-      };
-    };
-
     git = {
       enable = true;
       userName = "Jonathan Schneider";
