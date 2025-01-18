@@ -75,33 +75,6 @@ in {
       ];
     };
 
-    # "karabiner/assets/complex_modifications/nix.json".text = builtins.toJSON {
-    #   title = "CapsLock modifier - Nix managed";
-    #   rules = [
-    #     {
-    #       description = ''
-    #         Change caps_lock to left_control if pressed with other keys,
-    #         change caps_lock to escape if pressed alone.
-    #       '';
-    #       manipulators = [
-    #         {
-    #           type = "basic";
-    #           from = {
-    #             key_code = "caps_lock";
-    #             modifiers = {optional = ["any"];};
-    #           };
-    #           to = [
-    #             {key_code = "left_control";}
-    #           ];
-    #           to_if_alone = [
-    #             {key_code = "escape";}
-    #           ];
-    #         }
-    #       ];
-    #     }
-    #   ];
-    # };
-
     "raycast/latest.rayconfig" = {
       source = ./raycast/latest.rayconfig;
     };
@@ -180,7 +153,6 @@ in {
         "postscreen_access.txt"
         ".DS_Store"
         ".vscode"
-        "*.pem"
         "*/vcr_responses.localdev.*.yaml"
         "result"
       ];
