@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ../../home
   ];
@@ -17,6 +21,7 @@
     zlib
 
     # Dev
+    inputs.ai-toolbox.packages.${pkgs.system}.appender
     cpulimit
     fh
     git-open

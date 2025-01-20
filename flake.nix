@@ -13,6 +13,8 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
+    # Add your AI Toolbox as an input
+    ai-toolbox.url = "github:jongschneider/ai-toolbox";
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -39,7 +41,7 @@
             inputs.darwin.lib.darwinSystem {
               inherit system;
               specialArgs = {
-                inherit username system;
+                inherit username system inputs;
               };
               modules = [
                 ./hosts/mbp/configuration.nix
@@ -50,7 +52,7 @@
                     useUserPackages = true;
                     # extraSpecialArgs for home-manager modules (since it's a separate module system)
                     extraSpecialArgs = {
-                      inherit username system;
+                      inherit username system inputs;
                     };
                     users.${username} = {
                       imports = [
