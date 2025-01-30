@@ -38,7 +38,6 @@
     ruby
     rubyPackages.rubocop-performance
     rubyPackages.solargraph
-    sesh
     yt-dlp
 
     # not sure I need... were migrated from brew

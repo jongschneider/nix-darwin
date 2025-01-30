@@ -163,7 +163,7 @@ in {
         diff.colorMoved = "zebra";
         fetch.prune = true;
         init.defaultBranch = "main";
-        merge.conflictstyle = "diff3";
+        merge.conflictstyle = "zdiff3";
         push.autoSetupRemote = true;
         rebase.autoStash = true;
       };

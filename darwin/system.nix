@@ -68,6 +68,7 @@
   environment.systemPackages = with pkgs; [
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
+    (import ../scripts/gtc.nix {inherit pkgs;})
     alejandra
     coreutils
     curl
