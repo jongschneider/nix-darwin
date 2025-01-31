@@ -268,7 +268,7 @@ end)
 
 -- Go keymaps --
 nnoremap("<leader>gc", ":GoCoverage -t<cr>", { desc = "Toggle Test Coverage" })
-nnoremap("<leader>gp", ":GoTestPkg -v<cr>")
+nnoremap("<leader>gp", ":GoTestPkg -t<cr>")
 
 -- Git keymaps --
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<cr>")

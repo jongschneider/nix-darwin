@@ -157,6 +157,7 @@ in {
         "result"
         "permitted_addresses.txt"
         "postscreen_access.txt"
+        "cover.cov"
       ];
 
       extraConfig = {
