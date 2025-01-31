@@ -303,7 +303,7 @@ nnoremap("<leader>tt", "<CMD>FloatermNew --autoclose=2 --height=0.9 --width=0.9 
 nnoremap("<leader>T", "<CMD>FloatermToggle --autoclose=2 --height=0.9 --width=0.9 zsh<CR>", { silent = true })
 
 -- Telescope keybinds --
-nnoremap("<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
+nnoremap("<leader>fr", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
 nnoremap("<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind in Open [B]uffers" })
 nnoremap("<leader>ff", function()
 	require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
@@ -314,18 +314,12 @@ nnoremap("<leader>fsd", require("telescope.builtin").lsp_document_symbols, { des
 nnoremap("<leader>fsw", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
 nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
 nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
-
-nnoremap("<leader>Tab", function()
-	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
-		previewer = false,
-	}))
-end, { desc = "[F]ind [C]ommands" })
-
-nnoremap("<leader>/", function()
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		previewer = false,
-	}))
-end, { desc = "[/] Fuzzily search in current buffer]" })
+nnoremap("<leader>fc", require("telescope.builtin").commands, { desc = "[F]ind [C]ommands" })
+nnoremap(
+	"<leader>/",
+	require("telescope.builtin").current_buffer_fuzzy_find,
+	{ desc = "[/] Fuzzily search in current buffer]" }
+)
 
 nnoremap("<leader>ss", function()
 	require("telescope.builtin").spell_suggest(require("telescope.themes").get_dropdown({

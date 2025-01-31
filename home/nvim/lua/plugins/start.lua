@@ -29,6 +29,7 @@ return {
         evaluate_single = true,
         header = logo,
         items = {
+          new_section("Yazi",    "lua require('yazi').yazi()", "Yazi"),
           new_section("Find file",       "Telescope find_files",                                   "Telescope"),
           new_section("Recent files",    "Telescope oldfiles",                                     "Telescope"),
           new_section("Grep text",       "Telescope live_grep",                                    "Telescope"),
