@@ -155,8 +155,8 @@ in {
         ".vscode"
         "*/vcr_responses.localdev.*.yaml"
         "result"
-        "services/postfix/media-postfix/permitted_addresses.txt"
-        "services/postfix/media-postfix/postscreen_access.txt"
+        "permitted_addresses.txt"
+        "postscreen_access.txt"
       ];
 
       extraConfig = {
