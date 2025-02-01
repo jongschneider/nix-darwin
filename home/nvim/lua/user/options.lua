@@ -1,18 +1,27 @@
+-- Set leader key to space
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
 -- Enable relative line numbers
-vim.opt.nu = true
-vim.opt.rnu = true
+vim.opt.nu = false
+vim.opt.rnu = false
 
 -- Disable showing the mode below the statusline
 vim.opt.showmode = false
 
--- Set tabs to 2 spaces
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab = true
+-- ex line
+vim.o.ls = 0
+vim.o.ch = 0
 
--- Enable auto indenting and set it to spaces
+-- indent
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 vim.opt.smartindent = true
-vim.opt.shiftwidth = 4
 
 -- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
 vim.opt.breakindent = true
@@ -24,13 +33,19 @@ vim.opt.hlsearch = true
 -- Disable text wrap
 vim.opt.wrap = true
 
--- Set leader key to space
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Better splitting
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 0
+
+-- hides the tabline, which is the line that displays the tabs at the top of Neovim.
+vim.opt.showtabline = 0
+
+-- Default splitting will cause your main splits to jump when opening an edgebar.
+-- To prevent this, set `splitkeep` to either `screen` or `topline`.
+vim.opt.splitkeep = "screen"
 
 -- Enable mouse mode
 vim.opt.mouse = "a"
@@ -79,8 +94,7 @@ vim.opt.foldenable = true
 -- backspace
 vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
--- Always keep 8 lines above/below cursor unless at start/end of file
--- vim.opt.scrolloff = 8
+-- Always keep 20 lines above/below cursor unless at start/end of file
 vim.opt.scrolloff = 20
 
 -- Place a column line
