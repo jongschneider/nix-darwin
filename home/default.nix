@@ -309,7 +309,7 @@ in {
         glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' --preview-window down --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs git checkout";
         wt = "git worktree";
         sc = "sesh connect \"$(
-	sesh list -i | gum filter --limit 1 --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
+  sesh list -i | gum filter --no-strip-ansi --limit 1 --placeholder 'Choose a session' --height 50 --prompt='⚡'
 )\"";
       };
     };

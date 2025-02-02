@@ -18,7 +18,8 @@ in {
   keyMode = "vi";
   newSession = true;
   secureSocket = true;
-  shell = "${pkgs.fish}/bin/fish";
+  # shell = "${pkgs.fish}/bin/fish";
+  shell = "${pkgs.zsh}/bin/zsh";
   shortcut = "b";
   terminal = "screen-256color";
 
@@ -91,8 +92,9 @@ in {
     bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
     bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-    bind-key "K" display-popup -E -w 40% "sesh connect \"$(
-        sesh list -i | gum filter --limit 1 --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
+    # show popup to switch to a session (overrides default choose-tree command)
+    bind-key "K" display-popup -E "sesh connect \"$(
+      sesh list -i | gum filter --no-strip-ansi --limit 1 --placeholder 'Choose a session' --height 50 --prompt='⚡'
     )\""
 
     bind '"' split-window -v -c "#{pane_current_path}"

@@ -20,7 +20,9 @@ in {
     mariadb
     ripgrep
     lazydocker
+    sesh
     tree
+    yq
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
