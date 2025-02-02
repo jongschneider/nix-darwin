@@ -22,9 +22,14 @@ in {
   };
 
   xdg.configFile = {
+    sesh = {
+      source = ./sesh;
+    };
+
     ghostty = {
       source = ./ghostty;
     };
+
     nvim = {
       source = config.lib.file.mkOutOfStoreSymlink ./nvim;
       recursive = true;

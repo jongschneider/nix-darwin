@@ -20,6 +20,7 @@ in {
     mariadb
     ripgrep
     lazydocker
+    pam-reattach
     sesh
     tree
     yq
