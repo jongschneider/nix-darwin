@@ -1,0 +1,38 @@
+# [default_session]
+# preview_command = "eza --all --git --icons --color=always {}"
+# startup_command = "tmux set-option -t {} default-command 'reattach-to-session-namespace zsh' && sesh connect {}"
+
+# [[session_preview]]
+# pattern_folder_has = "README.md"
+# preview_command = "glow -s light {}"
+#
+[[session]]
+name = "Home 🏡"
+path = "~"
+startup_command = "l"
+
+[[session]]
+name = "Developer 💻"
+path = "~/Developer"
+startup_command = "yazi"
+
+[[session]]
+name = "Documents 💻"
+path = "~/Documents"
+startup_command = "yazi"
+
+[[session]]
+name = "Downloads"
+path = "~/Downloads"
+startup_command = "yazi"
+
+[[session]]
+name = "/ect/hosts"
+path = "/etc"
+startup_command = "sudo nvim hosts"
+
+[[session]]
+name = "ssh"
+path = "~/.config/ssh"
+startup_command = "sudo nvim config"
+

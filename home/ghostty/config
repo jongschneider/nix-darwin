@@ -7,7 +7,7 @@ font-family = GeistMono Nerd Font
 font-size = 13
 
 # Ghostty theme
-theme = tokyonight
+theme =  catppuccin-macchiato
 window-theme = system
 
 # Opacity of split windows
