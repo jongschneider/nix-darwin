@@ -2,7 +2,9 @@
   pkgs,
   system,
   ...
-}: {
+}: let
+  gtd = pkgs.callPackage ../scripts/gtd {};
+in {
   # Base system configuration
   services.nix-daemon.enable = true;
 
@@ -68,7 +70,7 @@
   environment.systemPackages = with pkgs; [
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
-    (import ../scripts/gtc.nix {inherit pkgs;})
+    gtd
     alejandra
     coreutils
     curl

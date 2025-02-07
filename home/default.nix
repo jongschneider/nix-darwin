@@ -153,6 +153,7 @@ in {
         ".envrc"
         "tmp.txt"
         "tmp*.json"
+        "*.log"
         "testout.txt"
         "permitted_addresses.txt"
         "postscreen_access.txt"
@@ -278,8 +279,8 @@ in {
 
         # Work
         localdev = "/Users/jschneider/Developer/localdev/localdev";
-        runingester = "export INGESTER_ENV=.env && goi && ingester > tmp.json";
-        runintegrator = "export INTEGRATOR_ENV=.env && goi && integrator  > tmp.json";
+        runingester = "(INGESTER_ENV=.env && goi && ingester) 2>&1 | tee tmp.log";
+        runintegrator = "(INTEGRATOR_ENV=.env && goi && integrator) 2>&1 | tee tmp.log";
         runemailpreprocessor = "ENV_FILE=preprocessor.env.localdev go run ./cmd/email_preprocessor/...";
         telcon = "tsh login --proxy=thetalake.teleport.sh --auth=google";
         colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";

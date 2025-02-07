@@ -32,6 +32,7 @@
     mkcert
     neofetch
     nodejs_23
+    nodePackages_latest.jsonlint
     protobuf
     redis
     rubocop
