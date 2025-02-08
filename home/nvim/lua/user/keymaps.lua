@@ -84,6 +84,12 @@ nnoremap("<leader>w", "<cmd>w<cr>", { silent = false })
 -- Save and Quit with leader key
 -- nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
+-- toggle line numbers
+vim.keymap.set("n", "<leader>ln", function()
+	vim.wo.number = not vim.wo.number
+	vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "Toggle line numbers" })
+
 -- Center buffer while navigating
 nnoremap("j", "jzz")
 nnoremap("k", "kzz")
@@ -313,7 +319,7 @@ nnoremap("<leader>fsd", require("telescope.builtin").lsp_document_symbols, { des
 -- --  Similar to document symbols, except searches over your entire project.
 nnoremap("<leader>fsw", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
 nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
-nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
+-- nnoremap("<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 nnoremap("<leader>fc", require("telescope.builtin").commands, { desc = "[F]ind [C]ommands" })
 nnoremap(
 	"<leader>/",
@@ -326,6 +332,12 @@ nnoremap("<leader>ss", function()
 		previewer = false,
 	}))
 end, { desc = "[S]earch [S]pelling suggestions" })
+nnoremap("<leader>en", function()
+	require("telescope.builtin").find_files({
+		prompt_title = "Neovim Config",
+		cwd = vim.fn.stdpath("config"),
+	})
+end, { desc = "[e]dit [n]vim" })
 
 -- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
 M.map_lsp_keybinds = function(buffer_number)
