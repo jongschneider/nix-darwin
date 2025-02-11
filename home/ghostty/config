@@ -14,7 +14,8 @@ window-theme = system
 unfocused-split-opacity = 0.92  
 
 # Set the background-opacity to be slightly transparent
-background-opacity = 0.96
+# background-opacity = 0.96
+background-opacity = 1.0
 
 # Cursor style
 cursor-style-blink = true

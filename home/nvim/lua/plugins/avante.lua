@@ -8,53 +8,66 @@ local role_map = {
 }
 
 ---@param opts AvantePromptOptions
-local parse_messages = function(self, opts)
+local function convert_message_to_ollama_format(msg, has_images)
+	local role = role_map[msg.role] or "assistant"
+	local content = msg.content or "" -- Default content to empty string
+
+	if has_images and role == "user" then
+		return {
+			role = role,
+			content = content,
+			images = {},
+		}
+	else
+		return {
+			role = role,
+			content = content,
+		}
+	end
+end
+
+---@param opts AvantePromptOptions
+local function add_images_to_message(message_content, opts)
+	for _, image_path in ipairs(opts.image_paths) do
+		local base64_content = vim.fn.system(string.format("base64 -w 0 %s", image_path)):gsub("\n", "")
+		table.insert(message_content.images, "data:image/png;base64," .. base64_content)
+	end
+end
+
+---@param opts AvantePromptOptions
+local function parse_messages(self, opts)
 	local messages = {}
 	local has_images = opts.image_paths and #opts.image_paths > 0
-	-- Ensure opts.messages is always a table
 	local msg_list = opts.messages or {}
-	-- Convert Avante messages to Ollama format
+
 	for _, msg in ipairs(msg_list) do
-		local role = role_map[msg.role] or "assistant"
-		local content = msg.content or "" -- Default content to empty string
-		-- Handle multimodal content if images are present
-		-- *Experimental* not tested
-		if has_images and role == "user" then
-			local message_content = {
-				role = role,
-				content = content,
-				images = {},
-			}
-			for _, image_path in ipairs(opts.image_paths) do
-				local base64_content = vim.fn.system(string.format("base64 -w 0 %s", image_path)):gsub("\n", "")
-				table.insert(message_content.images, "data:image/png;base64," .. base64_content)
-			end
-			table.insert(messages, message_content)
-		else
-			table.insert(messages, {
-				role = role,
-				content = content,
-			})
+		local message_content = convert_message_to_ollama_format(msg, has_images)
+
+		if has_images then
+			add_images_to_message(message_content, opts)
 		end
+
+		table.insert(messages, message_content)
 	end
+
 	return messages
 end
 
+---@param code_opts table
 local function parse_curl_args(self, code_opts)
-	-- Create the messages array starting with the system message
 	local messages = {
 		{ role = "system", content = code_opts.system_prompt },
 	}
-	-- Extend messages with the parsed conversation messages
+
 	vim.list_extend(messages, self:parse_messages(code_opts))
-	-- Construct options separately for clarity
+
 	local options = {
 		num_ctx = (self.options and self.options.num_ctx) or 4096,
 		temperature = code_opts.temperature or (self.options and self.options.temperature) or 0,
 	}
-	-- Check if tools table is empty
+
 	local tools = (code_opts.tools and next(code_opts.tools)) and code_opts.tools or nil
-	-- Return the final request table
+
 	return {
 		url = self.endpoint .. "/api/chat",
 		headers = {
@@ -65,30 +78,32 @@ local function parse_curl_args(self, code_opts)
 			model = self.model,
 			messages = messages,
 			options = options,
-			-- tools = tools, -- Optional tool support
 			stream = true, -- Keep streaming enabled
 		},
 	}
 end
 
+---@param data string
+---@param handler_opts table
 local function parse_stream_data(data, handler_opts)
 	local json_data = vim.fn.json_decode(data)
-	if json_data then
-		if json_data.done then
-			handler_opts.on_stop({ reason = json_data.done_reason or "stop" })
-			return
-		end
-		if json_data.message then
-			local content = json_data.message.content
-			if content and content ~= "" then
-				handler_opts.on_chunk(content)
-			end
-		end
-		-- Handle tool calls if present
-		if json_data.tool_calls then
-			for _, tool in ipairs(json_data.tool_calls) do
-				handler_opts.on_tool(tool)
-			end
+
+	if not json_data then
+		return
+	end
+
+	if json_data.done then
+		handler_opts.on_stop({ reason = json_data.done_reason or "stop" })
+		return
+	end
+
+	if json_data.message and json_data.message.content then
+		handler_opts.on_chunk(json_data.message.content)
+	end
+
+	if json_data.tool_calls then
+		for _, tool in ipairs(json_data.tool_calls) do
+			handler_opts.on_tool(tool)
 		end
 	end
 end

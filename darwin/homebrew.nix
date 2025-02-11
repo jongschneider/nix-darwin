@@ -17,6 +17,7 @@
     brews =
       [
         "lazygit"
+        "litra"
         "trash"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
@@ -40,6 +41,7 @@
 
     # Default taps
     taps = [
+      "timrogers/tap"
       "homebrew/cask-fonts"
     ];
   };
