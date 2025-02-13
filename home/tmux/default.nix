@@ -1,13 +1,12 @@
 {pkgs, ...}: let
-  tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tokyo-night";
-    version = "unstable-2023-01-06";
-    src = pkgs.fetchFromGitHub {
-      owner = "janoamaral";
-      repo = "tokyo-night-tmux";
-      rev = "master";
-      sha256 = "sha256-3rMYYzzSS2jaAMLjcQoKreE0oo4VWF9dZgDtABCUOtY=";
-    };
+  # Create a derivation for your theme files
+  tmuxThemes = pkgs.stdenv.mkDerivation {
+    name = "tmux-themes";
+    src = ./themes;
+    installPhase = ''
+      mkdir -p $out/themes
+      cp -r * $out/themes/
+    '';
   };
 in {
   enable = true;
@@ -21,111 +20,22 @@ in {
   shell = "${pkgs.zsh}/bin/zsh";
   shortcut = "b";
   terminal = "xterm-256color";
-  # Important notice about tmux plugins and the tmux.conf that generated from
-  # this tmux.nix
-  #
-  # in general plugins may and will conflict with each other, so the order in
-  # which tmux loads them matters.  This is true when editing directly tmux.conf
-  # and same applies when putting them in the plugins list in NixOS.
-  #
-  # Specifically in my current list. The theme plugin(nord) must be included before
-  # continuum and same is true for everything that might set tmux tatus-right
-  # as the auto save command(set -g @continuum-save-interval '1')
-  # gets written into status-right. So everything that sets status-right would have to be loaded
-  # beforehand.
-  # Furthermore the continuum plugin must be loaded after the resurrect plugin.
   plugins = with pkgs.tmuxPlugins; [
-    # The nord plugin or any other theme should on the top of the list
-    # of the plugins. As it writes into the status-right which breaks the
-    # set -g @continuum-save-interval for the continuum plugin.
-    tokyo-night
-    # This plugin needs to be loaded before continuum or else continuum, will
-    # not work.
     {
       plugin = resurrect;
       extraConfig = ''
-
-        # I have tested this strategy to work with neovim but it is not enough to have
-        # Session.vim at the root of the path from which the plugin is going to do the restore
-        # it is important that for neovim to be saved to be restored from the path where Session.vim
-        # exist for this flow to kick in. Which means that even if tmux-resurrect saved the path with
-        # Session.vim in it but vim was not open at the time of the save of the sessions then when
-        # tmux-resurrect restore the window with the path with Session.vim nothing will happen.
-
-        # Furthermore I currently using vim-startify which among other things is able to restore
-        # from Session.vim if neovim is opened from the path where Session.vim exist. So in a
-        # sense I don't really need tmux resurrect to restore the session as this already
-        # taken care of and this functionality becomes redundant. But as I am not sure if I keep
-        # using vim-startify or its auto restore feature and it do not conflict in any way that
-        # I know of with set -g @resurrect-strategy-* I decided to keep it enabled for the time being.
-
-        # Disabled
-        # set -g @resurrect-strategy-nvim 'session'
-        # set -g @resurrect-strategy-vim 'session'
-
-        # set -g @resurrect-capture-pane-contents 'on'
         # Use default resurrect location
         set -g @resurrect-capture-pane-contents 'on'
         set -g @resurrect-processes 'all'
         set -g @resurrect-strategy-nvim 'session'
       '';
     }
-    # vim-tmux-navigator plugin has a dual function(although name implies only
-    # vim integration )
-    #
-    # This plugin adds smart movements between tmux panes and vim windows. By using
-    # Ctrl+h/j/k/l you will be able to move across tmux pane into pane with
-    # vim inside it and then move inside the vim windows and back seamlessly
-    # For this integration to work counterpart plugin needs to be added to vim.
-    #
-    # If the counterpart isn't installed the only functionality that will be added
-    # is the ability to move between panes using Ctr+h/j/k/l in tmux.
     {
       plugin = vim-tmux-navigator;
     }
-    # The copy buffer for tmux is separate from the system one, in the past in
-    # order to sync the two there was a need to install tmux-yank but it looks like
-    # Tmux now sends the OSC52 escape code that tells the terminal(one that support this)
-    # to not display the following characters, but to copy them into the clipboard
-    # instead.
-    #
-    # The reason that this plugin is still included because it provides a quick way to copy what
-    # what is on the command line and once in copy mode to copy the PWD. I might just replace the
-    # plugin with keybindings(based on send-keys).
     {
       plugin = yank;
     }
-    # a few words about @continuum-boot and @continuum-systemd-start-cmd that
-    # are not used as part of the extraConfig for the continuum plugin.
-    #
-    # @continuum-boot - when set will generate a user level systemd unit file
-    # which it will save to ${HOME}/.config/systemd/user/tmux.service and enable
-    # it.
-    #
-    # @continuum-systemd-start-cmd - The command used to start the tmux server
-    # is determined via this configuration, and this command is set in the
-    # context of the systemd unit file that is generated by setting @continuum-boot
-    # when this option is not set the default will be "tmux new-session -d"
-    # This setting provides a more fine grain option over the creation of the
-    # systemd unit.
-    #
-    # Having said all that, it is important to understand that systemd units
-    # are defined as .nix settings and then created when NixOS is built and
-    # nothing is generated "willy-nilly" by applications.
-    # So this aspect of the plugin is already taken care of by me in a separate
-    # systemd unit that is responsible to start tmux when system starts.
-    #
-    # set -g @continuum-save-interval is written into the status-right which
-    # means that any other plugin that writes into status-right needs to be
-    # loaded first or the autosave functionality will not work.
-    #
-    # More then that it looks like the autosave feature(set -g @continuum-save-interval)
-    # only works if you are attached to tmux, for some reason it does not work
-    # in detached mode. Maybe if no one is attached then there is nothing
-    # changing and so nothing to save.
-    #
-    # If autosave option interval is not set there is a default of 15 minutes
-    # and it worked for me when tested.
     {
       plugin = continuum;
       extraConfig = ''
@@ -133,10 +43,10 @@ in {
         set -g @continuum-restore 'on'
 
         # Save every 5 minutes
-        set -g @continuum-save-interval '1'
+        set -g @continuum-save-interval '5'
 
         # Show save status in status bar
-        set -g status-right 'Continuum: #{continuum_status}'
+        # set -g status-right 'Continuum: #{continuum_status}'
 
         # Enable automatic saves
         set -g @continuum-save 'on'
@@ -185,17 +95,11 @@ in {
     bind -n M-H previous-window
     bind -n M-L next-window
 
-    set -g @tokyo-night-tmux_show_datetime 0
-    set -g @tokyo-night-tmux_transparent 1
-    set -g @tokyo-night-tmux_show_path 1
-    set -g @tokyo-night-tmux_path_format relative
-    set -g @tokyo-night-tmux_window_id_style dsquare
-    set -g @tokyo-night-tmux_show_git 1
-
-    run-shell ${tokyo-night}/share/tmux-plugins/tokyo-night/tokyo-night.tmux
-
     # reload config file
     bind r source-file ~/.config/tmux/tmux.conf \; display "Config Reloaded!"
+
+    # open lazygit in a new window
+    bind-key g display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
 
     unbind '"'
     # split window and fix path for tmux 1.9
@@ -214,11 +118,14 @@ in {
     # toggle the status bar
     bind-key -T prefix B set-option -g status
 
+    # Theme configuration
     if-shell '[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]' \
-      'source-file "$DOTFILES/config/tmux/themes/catppuccin/dark.conf"' \
-      'source-file "$DOTFILES/config/tmux/themes/catppuccin/light.conf"'
-    source-file "$DOTFILES/config/tmux/themes/catppuccin.conf"
+      "source-file '${tmuxThemes}/themes/catppuccin/dark.conf'" \
+      "source-file '${tmuxThemes}/themes/catppuccin/light.conf'"
+    source-file "${tmuxThemes}/themes/catppuccin.conf"
 
+
+    # Status bar visibility management
     if-shell "[ -z \"$TMUX_MINIMAL\" ]" {
       set -g status on
     } {
@@ -228,11 +135,6 @@ in {
       set-hook -g pane-exited           'if "[ #{session_windows} -lt 2 ]" "set status off"'
       set-hook -g window-layout-changed 'if "[ #{session_windows} -lt 2 ]" "set status off"'
     }
-
-    # show popup to switch to a session (overrides default choose-tree command)
-    bind-key "K" display-popup -E "sesh connect \"$(
-      sesh list -i | gum filter --no-strip-ansi --limit 1 --placeholder 'Choose a session' --height 50 --prompt='⚡'
-    )\""
 
     bind-key "T" run-shell "sesh connect \"$(
       sesh list --icons | fzf-tmux -p 80%,70% \
