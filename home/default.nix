@@ -455,6 +455,6 @@ in {
       vimdiffAlias = true;
     };
 
-    tmux = import ./tmux.nix {inherit pkgs;};
+    tmux = import ./tmux {inherit pkgs;};
   };
 }

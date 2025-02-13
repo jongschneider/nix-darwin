@@ -214,21 +214,25 @@ in {
     # toggle the status bar
     bind-key -T prefix B set-option -g status
 
-    # if-shell '[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]' \
-    #   'source-file "$DOTFILES/config/tmux/themes/catppuccin/dark.conf"' \
-    #   'source-file "$DOTFILES/config/tmux/themes/catppuccin/light.conf"'
-    # source-file "$DOTFILES/config/tmux/themes/catppuccin.conf"
-    #
-    # if-shell "[ -z \"$TMUX_MINIMAL\" ]" {
-    #   set -g status on
-    # } {
-    #   set -g status off
-    #   set-hook -g after-new-window      'if "[ #{session_windows} -gt 1 ]" "set status on"'
-    #   set-hook -g after-kill-pane       'if "[ #{session_windows} -lt 2 ]" "set status off"'
-    #   set-hook -g pane-exited           'if "[ #{session_windows} -lt 2 ]" "set status off"'
-    #   set-hook -g window-layout-changed 'if "[ #{session_windows} -lt 2 ]" "set status off"'
-    # }
+    if-shell '[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]' \
+      'source-file "$DOTFILES/config/tmux/themes/catppuccin/dark.conf"' \
+      'source-file "$DOTFILES/config/tmux/themes/catppuccin/light.conf"'
+    source-file "$DOTFILES/config/tmux/themes/catppuccin.conf"
 
+    if-shell "[ -z \"$TMUX_MINIMAL\" ]" {
+      set -g status on
+    } {
+      set -g status off
+      set-hook -g after-new-window      'if "[ #{session_windows} -gt 1 ]" "set status on"'
+      set-hook -g after-kill-pane       'if "[ #{session_windows} -lt 2 ]" "set status off"'
+      set-hook -g pane-exited           'if "[ #{session_windows} -lt 2 ]" "set status off"'
+      set-hook -g window-layout-changed 'if "[ #{session_windows} -lt 2 ]" "set status off"'
+    }
+
+    # show popup to switch to a session (overrides default choose-tree command)
+    bind-key "K" display-popup -E "sesh connect \"$(
+      sesh list -i | gum filter --no-strip-ansi --limit 1 --placeholder 'Choose a session' --height 50 --prompt='⚡'
+    )\""
 
     bind-key "T" run-shell "sesh connect \"$(
       sesh list --icons | fzf-tmux -p 80%,70% \
