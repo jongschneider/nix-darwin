@@ -16,7 +16,7 @@ in {
   baseIndex = 1;
   disableConfirmationPrompt = true;
   keyMode = "vi";
-  newSession = true;
+  newSession = false;
   secureSocket = true;
   shell = "${pkgs.zsh}/bin/zsh";
   shortcut = "b";
@@ -29,7 +29,7 @@ in {
   # and same applies when putting them in the plugins list in NixOS.
   #
   # Specifically in my current list. The theme plugin(nord) must be included before
-  # continuum and same is true for everything that might set tmux status-right
+  # continuum and same is true for everything that might set tmux tatus-right
   # as the auto save command(set -g @continuum-save-interval '1')
   # gets written into status-right. So everything that sets status-right would have to be loaded
   # beforehand.
@@ -63,7 +63,11 @@ in {
         # set -g @resurrect-strategy-nvim 'session'
         # set -g @resurrect-strategy-vim 'session'
 
+        # set -g @resurrect-capture-pane-contents 'on'
+        # Use default resurrect location
         set -g @resurrect-capture-pane-contents 'on'
+        set -g @resurrect-processes 'all'
+        set -g @resurrect-strategy-nvim 'session'
       '';
     }
     # vim-tmux-navigator plugin has a dual function(although name implies only
@@ -125,8 +129,17 @@ in {
     {
       plugin = continuum;
       extraConfig = ''
+        # Enable automatic restore
         set -g @continuum-restore 'on'
-        set -g @continuum-save-interval '10'
+
+        # Save every 5 minutes
+        set -g @continuum-save-interval '1'
+
+        # Show save status in status bar
+        set -g status-right 'Continuum: #{continuum_status}'
+
+        # Enable automatic saves
+        set -g @continuum-save 'on'
       '';
     }
     sensible
@@ -139,7 +152,7 @@ in {
     set-option -g default-command "$__helper zsh"
 
     set -g mouse on
-    set -g status-right ""
+    # set -g status-right ""
     set -g status-left-length 300    # increase length (from 10)
     set -g status-position top       # macOS / darwin style
     set -g status-style 'bg=default' # transparent
@@ -225,5 +238,13 @@ in {
     bind '"' split-window -v -c "#{pane_current_path}"
     bind % split-window -h -c "#{pane_current_path}"
     bind c new-window -c "#{pane_current_path}"
+
+    # Manual save/restore bindings with absolute paths
+    bind-key C-s run-shell "${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh"
+    bind-key C-r run-shell "${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh"
+
+    # Explicitly initialize plugins in order
+    run-shell "${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux"
+    run-shell "${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux"
   '';
 }
