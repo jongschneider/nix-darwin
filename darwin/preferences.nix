@@ -7,8 +7,13 @@
       finder._FXShowPosixPathInTitle = lib.mkDefault true;
       finder.ShowPathbar = lib.mkDefault true;
       finder.ShowStatusBar = lib.mkDefault true;
+
       # Use current directory as default search scope in Finder
       finder.FXDefaultSearchScope = lib.mkDefault "SCcf";
+
+      # Whether to show warnings when change the file extension of files.
+      finder.FXEnableExtensionChangeWarning = lib.mkDefault false;
+
       NSGlobalDomain.InitialKeyRepeat = lib.mkDefault 14;
       NSGlobalDomain.KeyRepeat = lib.mkDefault 1;
       NSGlobalDomain.ApplePressAndHoldEnabled = lib.mkDefault false;
