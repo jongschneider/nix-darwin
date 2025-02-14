@@ -5,9 +5,6 @@
 }: let
   gtd = pkgs.callPackage ../scripts/gtd {};
 in {
-  # Base system configuration
-  services.nix-daemon.enable = true;
-
   # Necessary for using flakes on this system.
   nix = {
     package = pkgs.nix;
