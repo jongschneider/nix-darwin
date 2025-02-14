@@ -34,4 +34,10 @@ in {
     node2nix # generate Nix expressions to build NPM packages
     statix # lints and suggestions for the Nix programming language
   ];
+
+  xdg.configFile = {
+    sesh = {
+      source = ./sesh;
+    };
+  };
 }

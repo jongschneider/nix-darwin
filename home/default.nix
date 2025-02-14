@@ -5,80 +5,19 @@
   username,
   system,
   ...
-}: let
-  flavor = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
-in {
+}: {
   imports = [
+    ./catppuccin
+    ./karabiner
+    ./nvim
     ./packages.nix
     ./tmux
+    ./wezterm
   ];
 
-  catppuccin = lib.mkIf (system == "aarch64-darwin") {
-    enable = true;
-    flavor = flavor;
-    bat.enable = true;
-    fzf.enable = true;
-    delta.enable = true;
-    zsh-syntax-highlighting.enable = true;
-  };
-
   xdg.configFile = {
-    sesh = {
-      source = ./sesh;
-    };
-
     ghostty = {
       source = ./ghostty;
-    };
-
-    nvim = {
-      source = config.lib.file.mkOutOfStoreSymlink ./nvim;
-      recursive = true;
-    };
-
-    wezterm = {
-      source = ./wezterm;
-    };
-    "karabiner/assets/complex_modifications/nix.json".text = builtins.toJSON {
-      title = "CapsLock and Escape modifiers - Nix managed";
-      rules = [
-        {
-          description = ''
-            Change caps_lock to left_control if pressed with other keys,
-            change caps_lock to escape if pressed alone.
-          '';
-          manipulators = [
-            {
-              type = "basic";
-              from = {
-                key_code = "caps_lock";
-                modifiers = {optional = ["any"];};
-              };
-              to = [
-                {key_code = "left_control";}
-              ];
-              to_if_alone = [
-                {key_code = "escape";}
-              ];
-            }
-          ];
-        }
-        {
-          description = "Toggle caps_lock by pressing escape";
-          manipulators = [
-            {
-              type = "basic";
-              from = {
-                key_code = "escape";
-                modifiers = {optional = ["any"];};
-              };
-              to = [
-                {key_code = "caps_lock";}
-              ];
-            }
-          ];
-        }
-      ];
     };
 
     "raycast/latest.rayconfig" = {
@@ -320,9 +259,6 @@ in {
 )\"";
       };
     };
-    wezterm = {
-      enable = true;
-    };
 
     starship = {
       enable = true;
@@ -436,24 +372,6 @@ in {
         };
         add_newline = false;
       };
-    };
-
-    neovim = {
-      enable = true;
-      extraLuaConfig = ''
-        require('user')
-      '';
-      extraPackages = with pkgs; [
-        # Included for nil_ls
-        cargo
-        # Included to build telescope-fzf-native.nvim
-        cmake
-        luajitPackages.tiktoken_core # copilot (optional)
-      ];
-      withNodeJs = true;
-      withPython3 = true;
-      withRuby = true;
-      vimdiffAlias = true;
     };
   };
 }
