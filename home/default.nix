@@ -10,6 +10,7 @@
 in {
   imports = [
     ./packages.nix
+    ./tmux
   ];
 
   catppuccin = lib.mkIf (system == "aarch64-darwin") {
@@ -454,7 +455,5 @@ in {
       withRuby = true;
       vimdiffAlias = true;
     };
-
-    tmux = import ./tmux {inherit pkgs;};
   };
 }

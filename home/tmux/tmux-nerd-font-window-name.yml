@@ -1,0 +1,21 @@
+config:
+  fallback-icon: "?"
+  multi-pane-icon: "󰝮 "
+  show-name: false
+  icon-position: "left"
+icons:
+  nvim: " "
+  fish: " "
+  zsh: " "
+  bash: " "
+  nh: " "
+  python3.10: " "
+  python3.11: " "
+  python: " "
+  cat: "󰄛 "
+  bat: "󰭟 "
+  cargo: " "
+  just: "󰰈 "
+  docker: " "
+  ollama: "🦙"
+  yazi: "󰰳 "
