@@ -132,174 +132,55 @@ return {
 			end,
 			event = "VeryLazy",
 			keys = {
-				-- Show help actions with telescope
 				{
-					"<leader>mh",
+					"<leader>cc",
+					"<CMD>CopilotChatToggle<CR>",
+				},
+				{
+					"<leader>cf",
+					"<CMD>CopilotChatFixDiagnostic<CR>",
+				},
+				{
+					"<leader>cm",
+					"<CMD>CopilotChatCommitStaged<CR>",
+				},
+				{
+					"<leader>cd",
+					"<CMD>CopilotChatDocs<CR>",
+				},
+				{
+					"<leader>ce",
+					"<CMD>CopilotChatExplain<CR>",
+				},
+				{
+					"<leader>cr",
+					"<CMD>CopilotChatReset<CR>",
+				},
+				{
+					"<leader>co",
+					"<CMD>CopilotChatOptimize<CR>",
+				},
+				{
+					"<leader>cp",
 					function()
-						local actions = require("CopilotChat.actions")
-						require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-					end,
-					desc = "CopilotChat - Help actions",
-				},
-				-- Show prompts actions with telescope
-				{
-					"<leader>mp",
-					function()
-						local actions = require("CopilotChat.actions")
-						require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-					end,
-					desc = "CopilotChat - Prompt actions",
-				},
-				{
-					"<leader>mp",
-					":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
-					mode = "x",
-					desc = "CopilotChat - Prompt actions",
-				},
-				-- Code related commands
-				{ "<leader>me", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-				{ "<leader>mt", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-				{ "<leader>mr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-				{ "<leader>mR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-				{ "<leader>mn", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-				-- Chat with Copilot in visual mode
-				{
-					"<leader>mv",
-					":CopilotChatVisual<cr>",
-					mode = "x",
-					desc = "CopilotChat - Open in vertical split",
-				},
-				{
-					"<leader>mI",
-					"<cmd>CopilotChatInline<cr>",
-					desc = "CopilotChat - Inline chat",
-				},
-				-- Custom input for CopilotChat
-				{
-					"<leader>mi",
-					function()
-						local input = vim.fn.input("Ask Copilot: ")
+						local copilotchat = require("CopilotChat")
+						local copilotchat_select = require("CopilotChat.select")
+
+						local input = vim.fn.input("Prompt: ")
 						if input ~= "" then
-							vim.cmd("CopilotChat " .. input)
+							copilotchat.ask(input, { selection = copilotchat_select.visual })
 						end
 					end,
-					desc = "CopilotChat - Ask input",
 				},
-				-- Generate commit message based on the git diff
 				{
-					"<leader>mm",
-					"<cmd>CopilotChatCommit<cr>",
-					desc = "CopilotChat - Generate commit message for staged changes",
+					"<leader>cs",
+					"<CMD>CopilotChatSelect<CR>",
 				},
-				-- Quick chat with Copilot
 				{
-					"<leader>mq",
-					function()
-						local input = vim.fn.input("Quick Chat: ")
-						if input ~= "" then
-							vim.cmd("CopilotChatBuffer " .. input)
-						end
-					end,
-					desc = "CopilotChat - Quick chat",
+					"<leader>ct",
+					"<CMD>CopilotChatTests<CR>",
 				},
-				-- Debug
-				{ "<leader>md", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
-				-- Fix the issue with diagnostic
-				{ "<leader>mf", "<cmd>CopilotChatFix<cr>", desc = "CopilotChat - Fix Diagnostic" },
-				-- Clear buffer and chat history
-				{ "<leader>ml", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
-				-- Toggle Copilot Chat Vsplit
-				{ "<leader>mv", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
-				-- Copilot Chat Models
-				{ "<leader>m?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
 			},
 		},
 	},
 }
--- return {
--- 	{
--- 		"zbirenbaum/copilot.lua",
--- 		event = { "BufEnter" },
--- 		config = function()
--- 			require("copilot").setup({
--- 				suggestion = {
--- 					enabled = false,
--- 				},
--- 				panel = { enabled = false },
--- 			})
--- 		end,
--- 	},
--- 	{
--- 		"zbirenbaum/copilot-cmp",
--- 		event = { "BufEnter" },
--- 		dependencies = { "zbirenbaum/copilot.lua" },
--- 		config = function()
--- 			require("copilot_cmp").setup()
--- 		end,
--- 	},
--- 	{
--- 		"CopilotC-Nvim/CopilotChat.nvim",
--- 		branch = "main",
--- 		event = "VeryLazy",
--- 		dependencies = {
--- 			{ "zbirenbaum/copilot.lua" },
--- 			-- { "github/copilot.vim" }, -- or github/copilot.vim
--- 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
--- 		},
--- 		keys = {
--- 			{
--- 				"<leader>cc",
--- 				"<CMD>CopilotChatToggle<CR>",
--- 			},
--- 			{
--- 				"<leader>cf",
--- 				"<CMD>CopilotChatFixDiagnostic<CR>",
--- 			},
--- 			{
--- 				"<leader>cm",
--- 				"<CMD>CopilotChatCommitStaged<CR>",
--- 			},
--- 			{
--- 				"<leader>cd",
--- 				"<CMD>CopilotChatDocs<CR>",
--- 			},
--- 			{
--- 				"<leader>ce",
--- 				"<CMD>CopilotChatExplain<CR>",
--- 			},
--- 			{
--- 				"<leader>cr",
--- 				"<CMD>CopilotChatReset<CR>",
--- 			},
--- 			{
--- 				"<leader>co",
--- 				"<CMD>CopilotChatOptimize<CR>",
--- 			},
--- 			{
--- 				"<leader>cp",
--- 				function()
--- 					local copilotchat = require("CopilotChat")
--- 					local copilotchat_select = require("CopilotChat.select")
---
--- 					local input = vim.fn.input("Prompt: ")
--- 					if input ~= "" then
--- 						copilotchat.ask(input, { selection = copilotchat_select.visual })
--- 					end
--- 				end,
--- 			},
--- 			{
--- 				"<leader>cs",
--- 				"<CMD>CopilotChatSelect<CR>",
--- 			},
--- 			{
--- 				"<leader>ct",
--- 				"<CMD>CopilotChatTests<CR>",
--- 			},
--- 		},
--- 		opts = {
--- 			-- debug = true, -- Enable debugging
--- 			-- See Configuration section for rest
--- 		},
--- 		-- See Commands section for default commands if you want to lazy load on them
--- 	},
--- }
