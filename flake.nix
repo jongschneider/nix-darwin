@@ -34,6 +34,37 @@
 
       flake = {
         darwinConfigurations = {
+          "js-m4-mini" = let
+            username = "js_mini";
+            system = "aarch64-darwin";
+          in
+            inputs.darwin.lib.darwinSystem {
+              inherit system;
+              specialArgs = {
+                inherit username system inputs;
+              };
+              modules = [
+                ./hosts/m4mini/configuration.nix
+                inputs.home-manager.darwinModules.home-manager
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    # extraSpecialArgs for home-manager modules (since it's a separate module system)
+                    extraSpecialArgs = {
+                      inherit username system inputs;
+                    };
+                    users.${username} = {
+                      imports = [
+                        ./hosts/m4mini/home.nix
+                        inputs.catppuccin.homeManagerModules.catppuccin
+                      ];
+                    };
+                  };
+                }
+              ];
+            };
+
           "Jonathans-MacBook-Pro" = let
             username = "jschneider";
             system = "aarch64-darwin";

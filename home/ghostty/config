@@ -43,12 +43,12 @@ title = ghostty
 bold-is-bright = true
 
 # window settings
-macos-titlebar-style = hidden
+# macos-titlebar-style = hidden
 window-decoration = true
 window-theme = auto
 window-padding-color = background
-window-padding-x = 0
-window-padding-y = 0
+window-padding-x = 2
+window-padding-y = 2
 window-padding-balance = false
 window-colorspace = "display-p3"
 adjust-cell-height = 10%
