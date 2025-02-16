@@ -42,7 +42,6 @@
     # Default taps
     taps = [
       "timrogers/tap"
-      "homebrew/cask-fonts"
     ];
   };
 }

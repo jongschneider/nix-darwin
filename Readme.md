@@ -10,7 +10,7 @@ This repository contains my personal Nix configuration for managing macOS system
 
 3. Install nix-darwin following the [Getting Started Guide](https://github.com/LnL7/nix-darwin#getting-started)
 
-5. Install Just command runner:
+4. Install Just command runner:
 ```bash
 brew install just
 ```
@@ -63,7 +63,12 @@ just clean
 ```bash
 scutil --get LocalHostName
 ```
-
+- If your hostname has a conflict with a current hostname (or you just want to change it) use the following commands to change it.
+```sh
+sudo scutil --set ComputerName "new-hostname-no-spaces"
+sudo scutil --set HostName "new-hostname-no-spaces"
+sudo scutil --set LocalHostName "new-hostname-no-spaces"  # Must not contain spaces or special characters
+```
 2. Create a new directory under `hosts/` with your machine's configuration:
 ```bash
 mkdir -p hosts/new-machine
@@ -80,6 +85,7 @@ mkdir -p hosts/new-machine
   imports = [
     ../../darwin
     ./systemoverrides.nix # Import the overrides
+    ./homebrewoverrides.nix # Import the overrides
   ];
 
   users.users.${username} = {
@@ -88,6 +94,7 @@ mkdir -p hosts/new-machine
   };
 }
 ```
+- 💡 Note: if using the Determinate Systems nix installer you might need to set `nix.enable = false;` in `hosts/new-machine/systemoverrides.nix`
 
 4. Create the machine-specific home configuration:
 ```nix
@@ -145,6 +152,10 @@ just switch
 
 ## Notes
 
+- When installing nix-darwin the first time, you will want to specifically target the new flake of the new hostname:
+```sh
+nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
+```
 - The configuration uses `specialArgs` to pass username to all modules
 - Base configurations in `darwin/` and `home/` are shared across all machines
 - Machine-specific overrides and additions go in `hosts/<machine>/`
