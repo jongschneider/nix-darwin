@@ -7,7 +7,8 @@ local role_map = {
 	tool = "tool",
 }
 
----@param opts AvantePromptOptions
+---@param msg Message
+---@return OllamaMessage
 local function convert_message_to_ollama_format(msg, has_images)
 	local role = role_map[msg.role] or "assistant"
 	local content = msg.content or "" -- Default content to empty string
@@ -26,8 +27,13 @@ local function convert_message_to_ollama_format(msg, has_images)
 	end
 end
 
+---@param message_content OllamaMessage
 ---@param opts AvantePromptOptions
 local function add_images_to_message(message_content, opts)
+	if not opts.image_paths or #opts.image_paths == 0 then
+		return
+	end
+
 	for _, image_path in ipairs(opts.image_paths) do
 		local base64_content = vim.fn.system(string.format("base64 -w 0 %s", image_path)):gsub("\n", "")
 		table.insert(message_content.images, "data:image/png;base64," .. base64_content)
@@ -35,15 +41,14 @@ local function add_images_to_message(message_content, opts)
 end
 
 ---@param opts AvantePromptOptions
-local function parse_messages(self, opts)
+local function parse_messages(_, opts)
 	local messages = {}
-	local has_images = opts.image_paths and #opts.image_paths > 0
 	local msg_list = opts.messages or {}
 
 	for _, msg in ipairs(msg_list) do
-		local message_content = convert_message_to_ollama_format(msg, has_images)
+		local message_content = convert_message_to_ollama_format(msg, opts.image_paths)
 
-		if has_images then
+		if opts.image_paths and #opts.image_paths > 0 then
 			add_images_to_message(message_content, opts)
 		end
 
@@ -65,8 +70,6 @@ local function parse_curl_args(self, code_opts)
 		num_ctx = (self.options and self.options.num_ctx) or 4096,
 		temperature = code_opts.temperature or (self.options and self.options.temperature) or 0,
 	}
-
-	local tools = (code_opts.tools and next(code_opts.tools)) and code_opts.tools or nil
 
 	return {
 		url = self.endpoint .. "/api/chat",
@@ -121,7 +124,7 @@ return {
 	"yetone/avante.nvim",
 	event = "VeryLazy",
 	lazy = false,
-	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+	version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 	opts = {
 		auto_suggestions_provider = "ollama",
 		debug = true,

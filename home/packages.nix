@@ -24,6 +24,7 @@ in {
     pam-reattach
     sesh
     tree
+    ollama
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
