@@ -1,7 +1,7 @@
 {...}: {
   programs.git = {
     enable = true;
-    userName = "Jonathan Schneider";
+    userName = "jonathan-schneider-tl";
     userEmail = "jonathan.schneider@thetalake.com";
 
     delta = {
