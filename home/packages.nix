@@ -18,13 +18,13 @@ in {
     fastfetch
     fd # fancy version of `find`
     ffmpeg
-    mariadb
-    ripgrep
     lazydocker
+    mariadb
+    ollama
     pam-reattach
+    ripgrep
     sesh
     tree
-    ollama
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix

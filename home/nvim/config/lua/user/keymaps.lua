@@ -140,7 +140,18 @@ nnoremap("<leader>nh", "<cmd>noh<cr>", { desc = "Clear search highlights" })
 
 -- Debugging
 nnoremap("<leader>db", ":DapToggleBreakpoint<cr>", {})
-
+nnoremap("<leader>dc", ":DapContinue<CR>", { desc = "Start/Continue debugging" })
+nnoremap("<leader>dt", function()
+	require("dap-go").debug_test()
+end, { desc = "Debug Go test under cursor" })
+nnoremap("<leader>dT", function()
+	require("dap-go").debug_last_test()
+end, { desc = "Debug last Go test" })
+nnoremap("<leader>di", ":DapStepInto<CR>", { desc = "Step into" })
+nnoremap("<leader>do", ":DapStepOver<CR>", { desc = "Step over" })
+nnoremap("<leader>dO", ":DapStepOut<CR>", { desc = "Step out" })
+nnoremap("<leader>du", ":DapUIToggle<CR>", { desc = "Toggle DAP UI" })
+nnoremap("<leader>dx", ":DapTerminate<CR>", { desc = "Terminate debugging" })
 -- Diagnostics
 
 -- Goto next diagnostic of any severity

@@ -16,6 +16,7 @@
     # Core homebrew packages
     brews =
       [
+        "displayplacer"
         "lazygit"
         "litra"
         "trash"

@@ -3,7 +3,6 @@
   homebrew.casks = [
     "microsoft-teams"
     "powershell"
-    # "wkhtmltopdf" # for work
     "zed"
   ];
 
