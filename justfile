@@ -19,6 +19,10 @@ update-input input:
 build hostname=host:
     nix build .#darwinConfigurations.{{hostname}}.system
 
+# Update, upgrade, and clean up Homebrew
+brew:
+    brew update && brew upgrade && brew cleanup
+
 # Build and switch to the new configuration (optionally specify a different hostname)
 switch hostname=host:
     darwin-rebuild switch --flake .#{{hostname}}
