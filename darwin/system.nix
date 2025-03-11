@@ -67,7 +67,6 @@ in {
   environment.systemPackages = with pkgs; [
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
-    gtd
     alejandra
     coreutils
     curl
@@ -82,6 +81,7 @@ in {
     gotests
     gotestsum
     gotools
+    gtd
     ice-bar
     impl
     just
@@ -91,6 +91,7 @@ in {
     nil # nix LSP... testing this out.
     nixd
     nurl
+    sqlc
     vim
     yazi
   ];
