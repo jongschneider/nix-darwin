@@ -17,6 +17,7 @@
     brews =
       [
         "displayplacer"
+        "golang-migrate"
         "lazygit"
         "litra"
         "trash"
