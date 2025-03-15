@@ -92,6 +92,7 @@ in {
     nixd
     nurl
     sqlc
+    sqlite
     vim
     yazi
   ];

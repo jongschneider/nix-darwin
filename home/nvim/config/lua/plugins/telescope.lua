@@ -4,6 +4,7 @@ local finders = require("telescope.finders")
 local make_entry = require("telescope.make_entry")
 local conf = require("telescope.config").values
 
+-- example: TODO  **/*micro*/**
 local live_multigrep = function(opts)
 	opts = opts or {}
 	opts.cwd = opts.cwd or vim.uv.cwd()
