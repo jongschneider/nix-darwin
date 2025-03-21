@@ -40,6 +40,7 @@ return {
 					border = "rounded",
 				},
 				trouble = true,
+				remap_commands = { GoDoc = false },
 			})
 
 			local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})

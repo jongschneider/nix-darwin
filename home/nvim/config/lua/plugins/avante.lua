@@ -127,7 +127,7 @@ return {
 	version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 	opts = {
 		auto_suggestions_provider = "ollama",
-		debug = true,
+		debug = false,
 		provider = "ollama",
 		vendors = {
 			ollama = ollama,

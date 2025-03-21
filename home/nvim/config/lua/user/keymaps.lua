@@ -380,7 +380,7 @@ M.map_lsp_keybinds = function(buffer_number)
 	)
 
 	nnoremap(
-		"<leader>ps",
+		"<leader>ws",
 		require("telescope.builtin").lsp_workspace_symbols,
 		{ desc = "LSP: [P]roject [S]ymbols", buffer = buffer_number }
 	)

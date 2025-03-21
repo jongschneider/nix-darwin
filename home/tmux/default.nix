@@ -35,7 +35,7 @@ in {
     newSession = false;
     secureSocket = true;
     shortcut = "b";
-    terminal = "xterm-256color";
+    # terminal = "screen-256color";
 
     extraConfig = let
       gitmux = "$(gitmux -cfg ~/.gitmux.yml)";
@@ -44,8 +44,9 @@ in {
       __helper="${pkgs.pam-reattach}/bin/reattach-to-session-namespace";
       set-option -g default-command "$__helper zsh"
 
-      set -ga terminal-overrides ",*256col*:Tc"
-      setenv -g COLORTERM truecolor
+      # set -ga terminal-overrides ",*256col*:Tc"
+      # setenv -g COLORTERM truecolor
+      set-option -g default-terminal "screen-256color"
 
       set-option -g allow-passthrough
       set-option -ga update-environment TERM

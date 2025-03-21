@@ -87,6 +87,7 @@ in {
     just
     lua
     luarocks
+    lynx
     manix
     nil # nix LSP... testing this out.
     nixd
