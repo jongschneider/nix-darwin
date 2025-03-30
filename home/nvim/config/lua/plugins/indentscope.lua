@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	-- PLUGIN TO LAZY LOAD
 	-- Lazy.vim will look for lua files in the ~/.config/nvim/lua/plugins folder
 	"echasnovski/mini.indentscope",

@@ -15,7 +15,8 @@
     ./packages.nix
     ./starship
     ./tmux
-    ./wezterm
+    # ./wezterm
+    ./yazi
     ./zsh
   ];
 

@@ -11,11 +11,11 @@ theme =  catppuccin-macchiato
 window-theme = system
 
 # Opacity of split windows
-unfocused-split-opacity = 0.92  
+unfocused-split-opacity = 0.92
 
 # Set the background-opacity to be slightly transparent
-# background-opacity = 0.96
-background-opacity = 1.0
+background-opacity = 0.99
+# background-opacity = 1.0
 
 # Cursor style
 cursor-style-blink = true
@@ -29,7 +29,7 @@ macos-option-as-alt = true
 macos-titlebar-proxy-icon = hidden
 
 # Always show ghostty as the title
-title = ghostty 
+title = ghostty
 
 # Window settings
 # window-width = 90
