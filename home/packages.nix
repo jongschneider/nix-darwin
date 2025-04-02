@@ -14,6 +14,7 @@ in {
     nerd-fonts.gohufont
     nerd-fonts.code-new-roman
 
+    repomix
     bottom
     fastfetch
     fd # fancy version of `find`

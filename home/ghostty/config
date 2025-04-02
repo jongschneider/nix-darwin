@@ -11,11 +11,12 @@ theme =  catppuccin-macchiato
 window-theme = system
 
 # Opacity of split windows
-unfocused-split-opacity = 0.92
+unfocused-split-opacity = 0.70
 
 # Set the background-opacity to be slightly transparent
-background-opacity = 0.99
+background-opacity = 0.90
 # background-opacity = 1.0
+background-blur-radius = 50
 
 # Cursor style
 cursor-style-blink = true
@@ -43,7 +44,7 @@ title = ghostty
 bold-is-bright = true
 
 # window settings
-# macos-titlebar-style = hidden
+macos-titlebar-style = transparent
 window-decoration = true
 window-theme = auto
 window-padding-color = background
