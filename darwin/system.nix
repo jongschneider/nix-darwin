@@ -1,6 +1,7 @@
 {
   pkgs,
   system,
+  lib,
   ...
 }: let
   gtd = pkgs.callPackage ../scripts/gtd {};
@@ -30,11 +31,11 @@ in {
     };
 
     # optimise store
-    optimise.automatic = true;
+    optimise.automatic = lib.mkDefault true;
 
     # Enable automatic garbage collection
     gc = {
-      automatic = true;
+      automatic = lib.mkDefault true;
       options = "--delete-older-than 30d";
     };
 

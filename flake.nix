@@ -57,7 +57,7 @@
                     users.${username} = {
                       imports = [
                         ./hosts/m4mini/home.nix
-                        inputs.catppuccin.homeManagerModules.catppuccin
+                        inputs.catppuccin.homeModules.catppuccin
                       ];
                     };
                   };
@@ -88,7 +88,7 @@
                     users.${username} = {
                       imports = [
                         ./hosts/mbp/home.nix
-                        inputs.catppuccin.homeManagerModules.catppuccin
+                        inputs.catppuccin.homeModules.catppuccin
                       ];
                     };
                   };
@@ -119,7 +119,7 @@
                     users.${username} = {
                       imports = [
                         ./hosts/macmini/home.nix
-                        inputs.catppuccin.homeManagerModules.catppuccin
+                        inputs.catppuccin.homeModules.catppuccin
                       ];
                     };
                   };
