@@ -4,8 +4,8 @@ shell-integration = none
 
 # Font settings
 # font-family = GeistMono Nerd Font
-# font-family = MonoLisa Nerd Font
-font-family = MonoLisa Nerd Font Medium
+font-family = MonoLisa Nerd Font
+# font-family = MonoLisa Nerd Font Medium
 # font-family = JetBrainsMono NFM Regular
 font-size = 13
 
