@@ -5,10 +5,12 @@ return {
 			require("catppuccin").setup({
 				transparent_background = true,
 				integrations = {
-					barbar = true,
+					blink_cmp = true,
 					cmp = true,
 					dap_ui = true,
 					fidget = true,
+					fzf = true,
+					leap = true,
 					gitsigns = true,
 					harpoon = true,
 					illuminate = true,
@@ -28,7 +30,6 @@ return {
 					mason = true,
 					notify = true,
 					noice = true,
-					nvimtree = true,
 					native_lsp = {
 						enabled = true,
 						virtual_text = {
@@ -47,7 +48,10 @@ return {
 							background = true,
 						},
 					},
-					neotree = true,
+					snacks = {
+						enabled = true,
+						indent_scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+					},
 					symbols_outline = true,
 					telescope = true,
 					treesitter = true,
@@ -55,9 +59,29 @@ return {
 					ufo = true,
 					which_key = true,
 				},
+
+				compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 			})
 
-			vim.cmd.colorscheme("catppuccin-frappe")
+			-- vim.cmd.colorscheme("catppuccin-frappe")
+			--
+			-- -- Hide all semantic highlights until upstream issues are resolved (https://github.com/catppuccin/nvim/issues/480)
+			-- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+			-- 	vim.api.nvim_set_hl(0, group, {})
+			-- end
+
+			local palette = require("catppuccin.palettes").get_palette("macchiato")
+
+			vim.cmd.colorscheme("catppuccin-macchiato")
+
+			vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = palette.base })
+			vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = palette.blue })
+			vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = palette.base })
+			vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = palette.blue })
+			vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelp", { bg = palette.base })
+			vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { fg = palette.blue })
+			vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { fg = palette.blue, bg = palette.base })
+			vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = palette.overlay2 })
 
 			-- Hide all semantic highlights until upstream issues are resolved (https://github.com/catppuccin/nvim/issues/480)
 			for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do

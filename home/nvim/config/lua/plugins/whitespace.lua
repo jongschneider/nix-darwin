@@ -1,18 +1,11 @@
 return {
 	"ntpeters/vim-better-whitespace",
+	event = "VeryLazy", -- Load this plugin after everything else
 	config = function()
-		-- Setup autocmd to check for and disable on ministarter
-		vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
-			pattern = "*",
-			callback = function()
-				-- Check for ministarter specifically
-				if vim.bo.filetype == "ministarter" then
-					-- Disable plugin for this buffer
-					vim.b.better_whitespace_enabled = 0
-					-- Disable highlighting
-					vim.cmd("DisableWhitespace")
-				end
-			end,
-		})
+		-- Set global variable for dashboard filetypes blacklist
+		vim.g.better_whitespace_filetypes_blacklist = {
+			"ministarter",
+			"snacks_dashboard", -- Add the dashboard filetypes here
+		}
 	end,
 }
