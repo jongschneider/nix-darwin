@@ -1,18 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
 	{
-		-- "leoluz/nvim-dap-go",
-		-- config = function()
-		-- 	require("dap-go").setup()
-		-- 	vim.fn.sign_define(
-		-- 		"DapBreakpoint",
-		-- 		{ text = "🔴", texthl = "blue", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-		-- 	)
-		-- 	vim.fn.sign_define(
-		-- 		"DapStopped",
-		-- 		{ text = "➡️", texthl = "green", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-		-- 	)
-		-- end,
 		{
 			"leoluz/nvim-dap-go",
 			config = function()
