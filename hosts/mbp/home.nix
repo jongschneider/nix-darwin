@@ -40,6 +40,7 @@
     rubyPackages.rubocop-performance
     rubyPackages.solargraph
     yt-dlp
+    magic-wormhole
 
     # not sure I need... were migrated from brew
     pango
