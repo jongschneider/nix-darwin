@@ -85,3 +85,11 @@ vim.api.nvim_create_autocmd("User", {
 		vim.b.copilot_suggestion_hidden = false
 	end,
 })
+
+-- Enable italic comments (for cursive fonts like Victor Mono)
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.api.nvim_set_hl(0, "@comment", { italic = true })
+		vim.api.nvim_set_hl(0, "Comment", { italic = true })
+	end,
+})

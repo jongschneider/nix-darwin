@@ -4,6 +4,21 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				transparent_background = true,
+				styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+					comments = { "italic" }, -- Change the style of comments
+					conditionals = { "italic" },
+					loops = {},
+					functions = {},
+					keywords = { "italic" },
+					strings = {},
+					variables = {},
+					numbers = {},
+					booleans = {},
+					properties = {},
+					types = {},
+					operators = {},
+					-- miscs = {}, -- Uncomment to turn off hard-coded styles
+				},
 				integrations = {
 					blink_cmp = true,
 					cmp = true,

@@ -46,7 +46,12 @@ in {
 
       # set -ga terminal-overrides ",*256col*:Tc"
       # setenv -g COLORTERM truecolor
-      set-option -g default-terminal "screen-256color"
+      # set-option -g default-terminal "screen-256color"
+      # Enable italic text in tmux
+      set -g default-terminal "tmux-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -ga terminal-overrides ",*:sitm=\\E[3m:ritm=\\E[23m"
+      set -as terminal-overrides ",xterm*:sitm=\\E[3m"
 
       set-option -g allow-passthrough
       set-option -ga update-environment TERM

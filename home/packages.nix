@@ -13,6 +13,7 @@ in {
     nerd-fonts.symbols-only
     nerd-fonts.gohufont
     nerd-fonts.code-new-roman
+    nerd-fonts.victor-mono
 
     repomix
     bottom

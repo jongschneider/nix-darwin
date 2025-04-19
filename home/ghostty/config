@@ -4,9 +4,12 @@ shell-integration = none
 
 # Font settings
 # font-family = GeistMono Nerd Font
-font-family = MonoLisa Nerd Font
+# font-family = MonoLisa Nerd Font
 # font-family = MonoLisa Nerd Font Medium
 # font-family = JetBrainsMono NFM Regular
+font-family = VictorMono Nerd Font Mono
+# font-family = Victor Mono
+
 font-size = 13
 
 # Ghostty theme
