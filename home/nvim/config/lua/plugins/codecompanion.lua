@@ -7,6 +7,13 @@ return {
 		"j-hui/fidget.nvim",
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
+		{ "echasnovski/mini.diff", version = false },
+		{
+			"Davidyz/VectorCode",
+			version = "*",
+			build = "pipx upgrade vectorcode",
+			dependencies = { "nvim-lua/plenary.nvim" },
+		},
 	},
 	opts = {
 		adapters = {
@@ -207,7 +214,19 @@ return {
 					},
 				},
 			},
-			inline = { adapter = "copilot" },
+			inline = {
+				adapter = "copilot",
+				keymaps = {
+					accept_change = {
+						modes = { n = "ga" },
+						description = "Accept the suggested change",
+					},
+					reject_change = {
+						modes = { n = "gr" },
+						description = "Reject the suggested change",
+					},
+				},
+			},
 		},
 		display = {
 			action_palette = {
@@ -234,6 +253,7 @@ return {
 
 		nnoremap("<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle a chat buffer" })
 		vnoremap("<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle a chat buffer" })
+		vnoremap("<C-p>", "<cmd>'<,'>CodeCompanion<CR>", { desc = "Open selection in CodeCompanion [p]rompt" })
 
 		nnoremap("ga", "<cmd>CodeCompanionChat Add<CR>", { desc = "Add selected text to a chat buffer" })
 		vnoremap("ga", "<cmd>CodeCompanionChat Add<CR>", { desc = "Add selected text to a chat buffer" })

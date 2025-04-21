@@ -15,7 +15,6 @@ in {
     nerd-fonts.code-new-roman
     nerd-fonts.victor-mono
 
-    repomix
     bottom
     fastfetch
     fd # fancy version of `find`
@@ -24,9 +23,12 @@ in {
     mariadb
     ollama
     pam-reattach
+    pipx
+    repomix
     ripgrep
     sesh
     tree
+    vectorcode
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
