@@ -1,6 +1,7 @@
 return {
 	"zbirenbaum/copilot.lua",
 	opts = {
+		copilot_model = "claude-3.7-sonnet",
 		suggestion = {
 			enabled = true,
 			auto_trigger = true,

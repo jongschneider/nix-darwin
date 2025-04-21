@@ -5,7 +5,7 @@ return {
 		opts = {
 			file_types = { "markdown", "copilot-chat" },
 		},
-		ft = { "markdown", "copilot-chat" },
+		ft = { "markdown", "copilot-chat", "codecompanion" },
 	},
 	--------------------------------------------------------------------------------
 	-- Markdown Previewer
