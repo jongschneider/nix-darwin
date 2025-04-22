@@ -21,6 +21,7 @@ in {
     ffmpeg
     lazydocker
     mariadb
+    nushell
     ollama
     pam-reattach
     pipx

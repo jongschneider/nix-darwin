@@ -79,6 +79,7 @@
                 inputs.home-manager.darwinModules.home-manager
                 {
                   home-manager = {
+                    backupFileExtension = "backup";
                     useGlobalPkgs = true;
                     useUserPackages = true;
                     # extraSpecialArgs for home-manager modules (since it's a separate module system)
