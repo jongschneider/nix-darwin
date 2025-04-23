@@ -7,6 +7,7 @@ return {
 		"j-hui/fidget.nvim",
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
+		"banjo/contextfiles.nvim",
 		{ "echasnovski/mini.diff", version = false },
 		{
 			"Davidyz/VectorCode",
@@ -40,6 +41,33 @@ return {
 			-- end,
 		},
 		prompt_library = {
+			["context"] = {
+				strategy = "chat",
+				description = "Chat with context files",
+				opts = {
+					-- ...
+				},
+				prompts = {
+					{
+						role = "user",
+						opts = {
+							contains_code = true,
+						},
+						content = function(context)
+							local ctx = require("contextfiles.extensions.codecompanion")
+
+							local ctx_opts = {
+								-- ...
+							}
+							local format_opts = {
+								-- ...
+							}
+
+							return ctx.get(context.filename, ctx_opts, format_opts)
+						end,
+					},
+				},
+			},
 			-- 			["Docusaurus"] = {
 			-- 				strategy = "chat",
 			-- 				description = "Write documentation for me",

@@ -22,5 +22,5 @@
   nix.gc.automatic = false;
 
   environment.pathsToLink = ["/Applications"];
-  environment.systemPath = ["/opt/homebrew/bin" "/Users/${username}/go/bin"];
+  environment.systemPath = ["/opt/homebrew/bin" "/Users/${username}/go/bin" "/Users/${username}/.local/bin"];
 }
