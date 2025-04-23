@@ -57,6 +57,8 @@
       "permitted_addresses.txt"
       "postscreen_access.txt"
       "cover.cov"
+      ".cursor"
+      "codecompanion-workspace.json"
     ];
 
     extraConfig = {

@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Markdown files
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
-	pattern = { "*.mdx", "*.md" },
+	pattern = { "*.mdx", "*.md", "*.mdc" },
 	callback = function()
 		vim.cmd([[set filetype=markdown wrap linebreak nolist nospell]])
 	end,
