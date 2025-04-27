@@ -8,7 +8,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"banjo/contextfiles.nvim",
-		{ "echasnovski/mini.diff", version = false },
 		{
 			"Davidyz/VectorCode",
 			version = "*",
@@ -240,6 +239,13 @@ return {
 							return require("vectorcode.integrations").codecompanion.chat.make_tool()
 						end,
 					},
+					["mcp"] = {
+						-- calling it in a function would prevent mcphub from being loaded before it's needed
+						callback = function()
+							return require("mcphub.extensions.codecompanion")
+						end,
+						description = "Call tools and resources from the MCP Servers",
+					},
 				},
 			},
 			inline = {
@@ -266,6 +272,7 @@ return {
 				-- show_settings = false,
 			},
 			diff = {
+				-- enabled = true,
 				provider = "mini_diff",
 			},
 		},

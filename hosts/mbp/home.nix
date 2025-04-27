@@ -39,6 +39,8 @@
     ruby
     rubyPackages.rubocop-performance
     rubyPackages.solargraph
+    uv
+    pipx
     yt-dlp
     magic-wormhole
 
