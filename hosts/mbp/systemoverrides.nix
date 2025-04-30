@@ -10,10 +10,10 @@
   environment.systemPackages = with pkgs; [
     # MBP-specific packages
     discord
-    # tailscale
+    tailscale
   ];
 
-  # services.tailscale.enable = true;
+  services.tailscale.enable = true;
 
   # Disable nix-darwin's Nix management in favor of the Determinate Systems installation
   nix.enable = false;
