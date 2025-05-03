@@ -6,6 +6,7 @@
 
   homebrew.brews = [
     # Additional brew just for MBP
+    "litra"
   ];
 
   homebrew.taps = [

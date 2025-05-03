@@ -35,6 +35,7 @@
     nodePackages_latest.jsonlint
     protobuf
     redis
+    repomix
     rubocop
     ruby
     rubyPackages.rubocop-performance

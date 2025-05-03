@@ -19,7 +19,6 @@
         "displayplacer"
         "golang-migrate"
         "lazygit"
-        "litra"
         "trash"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [

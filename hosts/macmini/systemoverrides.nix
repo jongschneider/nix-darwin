@@ -10,8 +10,10 @@
   environment.systemPackages = with pkgs; [
     # MBP-specific packages
     # discord
+        tailscale
   ];
   ids.uids.nixbld = 300;
+  services.tailscale.enable = true;
 
   environment.pathsToLink = ["/Applications"];
   environment.systemPath = ["/opt/homebrew/bin" "/Users/${username}/go/bin"];

@@ -25,7 +25,6 @@ in {
     ollama
     pam-reattach
     pipx
-    repomix
     ripgrep
     sesh
     tree

@@ -27,6 +27,7 @@
     nodejs_23
     nodePackages_latest.jsonlint
     redis
+    repomix
     yt-dlp
   ];
 }
