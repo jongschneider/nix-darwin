@@ -11,6 +11,11 @@ return {
 	config = function()
 		require("go").setup({
 			-- icons = { breakpoint = "⭕", currentpos = "👉" },
+			sign_priority = 9999,
+			-- gocoverage_sign = "█",
+			gocoverage_sign = "󱋱",
+			-- gocoverage_sign = "┇",
+			sign_uncovered_hl = "GoCoverUncoveredCustom",
 		})
 		local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
 		vim.api.nvim_create_autocmd("BufWritePre", {
