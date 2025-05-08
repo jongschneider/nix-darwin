@@ -31,7 +31,7 @@
     lazydocker
     mkcert
     neofetch
-    nodejs_23
+    nodejs_24
     nodePackages_latest.jsonlint
     protobuf
     redis
