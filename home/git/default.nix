@@ -59,6 +59,7 @@
       "cover.cov"
       ".cursor"
       "codecompanion-workspace.json"
+      ".aider*"
     ];
 
     extraConfig = {
