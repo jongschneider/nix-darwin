@@ -5,6 +5,7 @@
   ...
 }: let
   gtd = pkgs.callPackage ../scripts/gtd {};
+  caider = pkgs.callPackage ../scripts/caider {};
 in {
   # Necessary for using flakes on this system.
   nix = {
@@ -69,6 +70,7 @@ in {
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/wta.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
+    caider
     alejandra
     coreutils
     curl

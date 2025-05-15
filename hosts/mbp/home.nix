@@ -33,6 +33,7 @@
     neofetch
     nodejs_24
     nodePackages_latest.jsonlint
+    presenterm
     protobuf
     redis
     repomix
