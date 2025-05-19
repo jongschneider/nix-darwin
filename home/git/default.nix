@@ -60,6 +60,7 @@
       ".cursor"
       "codecompanion-workspace.json"
       ".aider*"
+      "bt_private_key"
     ];
 
     extraConfig = {
