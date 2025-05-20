@@ -12,7 +12,7 @@
     discord
     tailscale
   ];
-
+  system.primaryUser = username;
   services.tailscale.enable = true;
 
   # Disable nix-darwin's Nix management in favor of the Determinate Systems installation
