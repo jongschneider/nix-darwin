@@ -25,7 +25,7 @@ brew:
 
 # Build and switch to the new configuration (optionally specify a different hostname)
 switch hostname=host:
-    darwin-rebuild switch --flake .#{{hostname}}
+    sudo darwin-rebuild switch --flake .#{{hostname}}
 
 # Clean up old generations
 clean:
@@ -34,7 +34,7 @@ clean:
 # Check configuration for errors (optionally specify a different hostname)
 check hostname=host:
     nix flake check
-    darwin-rebuild check --flake .#{{hostname}}
+    sudo darwin-rebuild check --flake .#{{hostname}}
 
 # Format nix files
 fmt:
@@ -54,7 +54,7 @@ generations:
 
 # Boot into a specific generation (optionally specify a different hostname)
 boot-generation gen hostname=host:
-    darwin-rebuild switch --flake . --switch-generation {{gen}}
+    sudo darwin-rebuild switch --flake . --switch-generation {{gen}}
 
 # Create a new backup of the current generation
 backup:
