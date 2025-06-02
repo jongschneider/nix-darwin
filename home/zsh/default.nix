@@ -2,7 +2,7 @@
   programs = {
     zsh = {
       enable = true;
-      initExtra = ''
+      initContent = ''
           function gcpb(){
               git branch | grep \* | cut -d ' ' -f2 | pbcopy
           }
