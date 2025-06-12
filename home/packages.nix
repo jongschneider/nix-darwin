@@ -19,6 +19,7 @@ in {
     fastfetch
     fd # fancy version of `find`
     ffmpeg
+    jujutsu
     lazydocker
     mariadb
     nushell
