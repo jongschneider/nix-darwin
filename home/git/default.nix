@@ -61,6 +61,7 @@
       "codecompanion-workspace.json"
       ".aider*"
       "bt_private_key"
+      ".opencode"
     ];
 
     extraConfig = {

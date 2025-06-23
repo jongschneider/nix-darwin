@@ -19,6 +19,7 @@
         "displayplacer"
         "golang-migrate"
         "lazygit"
+        "opencode"
         "trash"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
@@ -43,6 +44,7 @@
     # Default taps
     taps = [
       "timrogers/tap"
+      "sst/tap"
     ];
   };
 }
