@@ -29,7 +29,7 @@ switch hostname=host:
 
 # Clean up old generations
 clean:
-    nix-collect-garbage -d
+    sudo nix-collect-garbage -d
 
 # Check configuration for errors (optionally specify a different hostname)
 check hostname=host:

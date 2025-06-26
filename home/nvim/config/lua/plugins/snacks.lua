@@ -11,7 +11,10 @@ return {
 		dashboard = { enabled = true },
 		explorer = { enabled = true },
 		input = { enabled = true },
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			ui_select = true,
+		},
 		notifier = { enabled = true },
 		quickfile = { enabled = true },
 		scope = { enabled = true },
@@ -22,14 +25,14 @@ return {
 	keys = {
 		-- Top Pickers & Explorer
 		{
-			"<leader><space>",
+			"<leader>,",
 			function()
 				Snacks.picker.smart()
 			end,
 			desc = "Smart Find Files",
 		},
 		{
-			"<leader>,",
+			"<leader>.",
 			function()
 				Snacks.picker.buffers()
 			end,
