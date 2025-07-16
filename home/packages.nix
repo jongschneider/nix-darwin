@@ -37,7 +37,7 @@ in {
     nix-output-monitor # get additional information while building packages
     nix-tree # interactively browse dependency graphs of Nix derivations
     nix-update # swiss-knife for updating nix packages
-    node2nix # generate Nix expressions to build NPM packages
+    # node2nix # generate Nix expressions to build NPM packages
     statix # lints and suggestions for the Nix programming language
   ];
 

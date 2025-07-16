@@ -66,6 +66,7 @@
 
     extraConfig = {
       url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
+      url."ssh://git@bitbucket.org/".insteadOf = "https://bitbucket.org/";
       color.ui = true;
       diff.colorMoved = "zebra";
       fetch.prune = true;

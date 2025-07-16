@@ -24,8 +24,8 @@
     lazydocker
     mkcert
     neofetch
-    nodejs_24
-    nodePackages_latest.jsonlint
+    # nodejs-slim
+    # nodePackages_latest.jsonlint
     redis
     repomix
     yt-dlp

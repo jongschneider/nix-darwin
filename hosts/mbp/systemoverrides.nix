@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     # MBP-specific packages
     discord
+    jira-cli-go
     tailscale
   ];
   system.primaryUser = username;
