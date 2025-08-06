@@ -10,6 +10,7 @@
     # Additional brew just for MBP
     "llm"
     "litra"
+    "openapi-generator"
   ];
 
   homebrew.taps = [
