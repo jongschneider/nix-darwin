@@ -20,6 +20,7 @@
         "golang-migrate"
         "lazygit"
         "opencode"
+        "uv"
         "trash"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [

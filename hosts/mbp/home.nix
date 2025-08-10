@@ -41,7 +41,7 @@
     ruby
     rubyPackages.rubocop-performance
     rubyPackages.solargraph
-    uv
+    # uv
     pipx
     yt-dlp
 
