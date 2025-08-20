@@ -6,41 +6,41 @@
     zsh = {
       enable = true;
       initContent = ''
-          function gcpb(){
-              git branch | grep \* | cut -d ' ' -f2 | pbcopy
-          }
-          nn () {
-            if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
-              echo "nnn is already running"
-              return
-            fi
-
-            export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
-
-            nnn -aeHo "$@"
-            # nnn -adeHo "$@"
-
-            if [ -f "$NNN_TMPFILE" ]; then
-              . "$NNN_TMPFILE"
-              rm -f "$NNN_TMPFILE" > /dev/null
-            fi
-          }
-
-          function yy() {
-              local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-              yazi "$@" --cwd-file="$tmp"
-              if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-                  cd -- "$cwd"
+            function gcpb(){
+                git branch | grep \* | cut -d ' ' -f2 | pbcopy
+            }
+            nn () {
+              if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
+                echo "nnn is already running"
+                return
               fi
-              rm -f -- "$tmp"
-          }
 
-        wtp () {
-            CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
-            git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
-        }
-          PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
-      eval "$(gbm shell-integration)"
+              export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+
+              nnn -aeHo "$@"
+              # nnn -adeHo "$@"
+
+              if [ -f "$NNN_TMPFILE" ]; then
+                . "$NNN_TMPFILE"
+                rm -f "$NNN_TMPFILE" > /dev/null
+              fi
+            }
+
+            function yy() {
+                local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+                yazi "$@" --cwd-file="$tmp"
+                if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+                    cd -- "$cwd"
+                fi
+                rm -f -- "$tmp"
+            }
+
+          wtp () {
+              CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+              git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
+          }
+            PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
+        eval "$(gbm shell-integration)"
       '';
       plugins = [
         {
@@ -96,7 +96,7 @@
         gco = "git checkout";
         gcob = "git checkout -b";
         gcom = "git checkout master && git pull";
-        gignore = "c .git/info/exclude";
+        gignore = "v .git/info/exclude";
         glog = "git log --simplify-by-decoration --oneline --graph";
         glast = "git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff {1} --color=always' --preview-window down --bind 'ctrl-/:change-preview-window(down|hidden|),shift-up:preview-page-up,shift-down:preview-page-down' | xargs git checkout";
         wt = "git worktree";

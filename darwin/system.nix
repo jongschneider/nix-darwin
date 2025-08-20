@@ -78,7 +78,7 @@ in {
     delve
     git
     gnumake
-    go_1_24
+    go_1_25
     gofumpt
     golangci-lint
     golines

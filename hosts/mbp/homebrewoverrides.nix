@@ -11,7 +11,9 @@
     # Additional brew just for MBP
     "llm"
     "litra"
+    "poppler"
     "openapi-generator"
+    "dotnet"
   ];
 
   homebrew.taps = [

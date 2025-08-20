@@ -31,6 +31,7 @@
     lazydocker
     mkcert
     neofetch
+    oapi-codegen
     # nodejs-slim
     # nodePackages_latest.jsonlint
     presenterm
