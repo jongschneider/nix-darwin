@@ -35,6 +35,10 @@
                 rm -f -- "$tmp"
             }
 
+            ai() {
+              opencode -m github-copilot/gpt-4.1 run "$@"
+            }
+
           wtp () {
               CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
               git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
