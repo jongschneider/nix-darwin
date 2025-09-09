@@ -60,6 +60,7 @@
       shellAliases = {
         l = "yy";
         cl = "clear";
+        ccd = "claude --dangerously-skip-permissions";
 
         nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
         nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";

@@ -30,11 +30,14 @@
     # Default casks for all machines
     casks =
       [
+        "android-platform-tools"
         "font-monaspace"
         "karabiner-elements"
+        "mitmproxy"
         "raycast"
         "shottr"
         "claude"
+        "voiceink"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "ghostty"

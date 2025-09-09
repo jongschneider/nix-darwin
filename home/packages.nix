@@ -23,7 +23,7 @@ in {
     lazydocker
     mariadb
     nushell
-    ollama
+    # ollama
     pam-reattach
     pipx
     ripgrep
