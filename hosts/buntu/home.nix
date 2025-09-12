@@ -65,7 +65,6 @@
   home.shellAliases = {
     ll = "ls -la";
     la = "ls -la";
-    l = "ls -l";
     ".." = "cd ..";
     "..." = "cd ../..";
     grep = "rg";
