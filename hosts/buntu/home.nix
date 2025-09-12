@@ -10,6 +10,12 @@
     ../../home/zsh
   ];
 
+  home = {
+    username = "jschneider";
+    homeDirectory = "/home/jschneider";
+    stateVersion = "24.05";
+  };
+
   home.packages = with pkgs; [
     # Go development tools
     go_1_23
