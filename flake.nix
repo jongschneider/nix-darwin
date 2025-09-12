@@ -19,7 +19,7 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["aarch64-darwin" "x86_64-darwin"];
+      systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
 
       perSystem = {
         config,
@@ -97,34 +97,24 @@
               ];
             };
 
-          "Jonathans-Mac-mini" = let
-            username = "jgs";
-            system = "x86_64-darwin";
+        };
+
+        homeConfigurations = {
+          "jschneider@buntu" = let
+            username = "jschneider";
+            system = "x86_64-linux";
           in
-            inputs.darwin.lib.darwinSystem {
-              inherit system;
-              specialArgs = {
-                inherit username system;
+            inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs {
+                inherit system;
+                config = {allowUnfree = true;};
+              };
+              extraSpecialArgs = {
+                inherit username system inputs;
               };
               modules = [
-                ./hosts/macmini/configuration.nix
-                inputs.home-manager.darwinModules.home-manager
-                {
-                  home-manager = {
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    # extraSpecialArgs for home-manager modules (since it's a separate module system)
-                    extraSpecialArgs = {
-                      inherit username system;
-                    };
-                    users.${username} = {
-                      imports = [
-                        ./hosts/macmini/home.nix
-                        inputs.catppuccin.homeModules.catppuccin
-                      ];
-                    };
-                  };
-                }
+                ./hosts/buntu/home.nix
+                inputs.catppuccin.homeModules.catppuccin
               ];
             };
         };
