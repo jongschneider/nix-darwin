@@ -18,7 +18,15 @@
   };
 
   # Set zsh as default shell
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    defaultKeymap = "emacs";
+  };
+
+  # Set user's default shell
+  home.sessionVariables = {
+    SHELL = "${pkgs.zsh}/bin/zsh";
+  };
 
   xdg.configFile = {
     "albert/albert.conf" = {
