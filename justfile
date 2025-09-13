@@ -21,7 +21,7 @@ build hostname=host:
     if [[ "{{os()}}" == "macos" ]]; then
         nix build .#darwinConfigurations.{{hostname}}.system
     else
-        nix build .#homeConfigurations.{{hostname}}
+        nix build .#homeConfigurations.{{hostname}}.activationPackage
     fi
 
 # Manual Homebrew update/upgrade (usually handled by switch)
@@ -66,7 +66,7 @@ debug-deps package hostname=host:
     if [[ "{{os()}}" == "macos" ]]; then
         nix why-depends .#darwinConfigurations.{{hostname}}.system {{package}}
     else
-        nix why-depends .#homeConfigurations.{{hostname}} {{package}}
+        nix why-depends .#homeConfigurations.{{hostname}}.activationPackage {{package}}
     fi
 
 # List all current system generations
