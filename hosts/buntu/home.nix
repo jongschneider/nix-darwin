@@ -24,6 +24,30 @@
     ghostty = {
       source = ../../home/ghostty;
     };
+
+    "albert/albert.conf" = {
+      text = ''
+        [General]
+        hotkey=Alt+Space
+        showTray=false
+        telemetry=false
+
+        [org.albert.extension.applications]
+        enabled=true
+
+        [org.albert.extension.calculator]
+        enabled=true
+
+        [org.albert.extension.files]
+        enabled=true
+
+        [org.albert.extension.terminal]
+        enabled=true
+
+        [org.albert.extension.websearch]
+        enabled=true
+      '';
+    };
   };
 
   home.packages = with pkgs; [
@@ -69,6 +93,9 @@
     yazi
     fzf
     lazygit
+
+    # Desktop applications
+    albert
 
     # Nix tools
     home-manager
