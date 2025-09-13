@@ -1,7 +1,7 @@
 # justfile for managing Nix configuration
 
-# Get local hostname
-host := `scutil --get LocalHostName`
+# Get local hostname (cross-platform)
+host := if os() == "macos" { `scutil --get LocalHostName` } else { `hostname -s` }
 
 # List available commands
 default:
@@ -17,7 +17,12 @@ update-input input:
 
 # Build the system configuration (optionally specify a different hostname)
 build hostname=host:
-    nix build .#darwinConfigurations.{{hostname}}.system
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" == "macos" ]]; then
+        nix build .#darwinConfigurations.{{hostname}}.system
+    else
+        nix build .#homeConfigurations.{{hostname}}
+    fi
 
 # Manual Homebrew update/upgrade (usually handled by switch)
 brew:
@@ -25,8 +30,13 @@ brew:
 
 # Build and switch to the new configuration (optionally specify a different hostname)
 switch hostname=host:
-    sudo darwin-rebuild switch --flake .#{{hostname}}
-    brew update && brew upgrade && brew cleanup
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" == "macos" ]]; then
+        sudo darwin-rebuild switch --flake .#{{hostname}}
+        brew update && brew upgrade && brew cleanup
+    else
+        home-manager switch --flake .#{{hostname}}
+    fi
 
 # Clean up old generations
 clean:
@@ -34,8 +44,13 @@ clean:
 
 # Check configuration for errors (optionally specify a different hostname)
 check hostname=host:
+    #!/usr/bin/env bash
     nix flake check
-    sudo darwin-rebuild check --flake .#{{hostname}}
+    if [[ "{{os()}}" == "macos" ]]; then
+        sudo darwin-rebuild check --flake .#{{hostname}}
+    else
+        home-manager build --flake .#{{hostname}}
+    fi
 
 # Format nix files
 fmt:
@@ -47,15 +62,30 @@ show:
 
 # Debug build time dependencies (optionally specify a different hostname)
 debug-deps package hostname=host:
-    nix why-depends .#darwinConfigurations.{{hostname}}.system {{package}}
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" == "macos" ]]; then
+        nix why-depends .#darwinConfigurations.{{hostname}}.system {{package}}
+    else
+        nix why-depends .#homeConfigurations.{{hostname}} {{package}}
+    fi
 
 # List all current system generations
 generations:
-    darwin-rebuild --list-generations
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" == "macos" ]]; then
+        darwin-rebuild --list-generations
+    else
+        home-manager generations
+    fi
 
 # Boot into a specific generation (optionally specify a different hostname)
 boot-generation gen hostname=host:
-    sudo darwin-rebuild switch --flake . --switch-generation {{gen}}
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" == "macos" ]]; then
+        sudo darwin-rebuild switch --flake . --switch-generation {{gen}}
+    else
+        echo "Generation switching on Linux should be done with: home-manager switch --flake .#{{hostname}} --generation {{gen}}"
+    fi
 
 # Create a new backup of the current generation
 backup:
