@@ -21,10 +21,6 @@
   programs.zsh.enable = true;
 
   xdg.configFile = {
-    ghostty = {
-      source = ../../home/ghostty;
-    };
-
     "albert/albert.conf" = {
       text = ''
         [General]
@@ -104,7 +100,7 @@
     inputs.ai-toolbox.packages.${pkgs.system}.appender
     gh
     git-open
-    ghostty
+    kitty
     glow
     gum
     jqp
