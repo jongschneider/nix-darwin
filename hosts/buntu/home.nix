@@ -100,6 +100,7 @@
     inputs.ai-toolbox.packages.${pkgs.system}.appender
     gh
     git-open
+    gnome.gnome-terminal
     glow
     gum
     jqp
