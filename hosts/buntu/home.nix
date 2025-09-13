@@ -67,6 +67,9 @@
     fzf
     lazygit
 
+    # Nix tools
+    home-manager
+
     # Development extras
     inputs.ai-toolbox.packages.${pkgs.system}.appender
     gh
