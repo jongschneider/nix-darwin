@@ -17,6 +17,9 @@
     stateVersion = "24.05";
   };
 
+  # Set zsh as default shell
+  programs.zsh.enable = true;
+
   xdg.configFile = {
     ghostty = {
       source = ../../home/ghostty;
