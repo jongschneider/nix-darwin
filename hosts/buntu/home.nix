@@ -100,7 +100,7 @@
     inputs.ai-toolbox.packages.${pkgs.system}.appender
     gh
     git-open
-    kitty
+    alacritty
     glow
     gum
     jqp
