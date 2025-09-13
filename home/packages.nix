@@ -24,7 +24,6 @@ in {
     mariadb
     nushell
     # ollama
-    pam-reattach
     pipx
     ripgrep
     sesh
@@ -39,6 +38,9 @@ in {
     nix-update # swiss-knife for updating nix packages
     # node2nix # generate Nix expressions to build NPM packages
     statix # lints and suggestions for the Nix programming language
+  ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+    # macOS-only packages
+    pam-reattach
   ];
 
   xdg.configFile = {
