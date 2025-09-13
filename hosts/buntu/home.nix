@@ -7,6 +7,7 @@
     ../../home/cli
     ../../home/git
     ../../home/nvim
+    ../../home/packages.nix
     ../../home/zsh
   ];
 
@@ -14,6 +15,12 @@
     username = "jschneider";
     homeDirectory = "/home/jschneider";
     stateVersion = "24.05";
+  };
+
+  xdg.configFile = {
+    ghostty = {
+      source = ../../home/ghostty;
+    };
   };
 
   home.packages = with pkgs; [
@@ -42,10 +49,29 @@
     neofetch
     just
 
+    # Neovim dependencies
+    # Language servers
+    lua-language-server
+    nil
+    bash-language-server
+    marksman
+
+    # Formatters
+    stylua
+    alejandra
+    prettierd
+    nodePackages.prettier
+
+    # File management & navigation
+    yazi
+    fzf
+    lazygit
+
     # Development extras
     inputs.ai-toolbox.packages.${pkgs.system}.appender
     gh
     git-open
+    ghostty
     glow
     gum
     jqp
@@ -73,5 +99,6 @@
     du = "dust";
     ps = "procs";
     find = "fd";
+    v = "nvim";
   };
 }
