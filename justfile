@@ -1,7 +1,7 @@
 # justfile for managing Nix configuration
 
 # Get local hostname (cross-platform)
-host := if os() == "macos" { `scutil --get LocalHostName` } else { `hostname -s` }
+host := if os() == "macos" { `scutil --get LocalHostName` } else { `whoami` + "@" + `hostname -s` }
 
 # List available commands
 default:
