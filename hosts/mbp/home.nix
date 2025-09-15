@@ -8,7 +8,7 @@
   ];
 
   home.packages = with pkgs; [
-    azure-cli
+    # azure-cli # disabled due to azure-multiapi-storage build failure
     gh
     inetutils
     # mosh # wrapper for `ssh` that better and not dropping connections
@@ -30,7 +30,7 @@
     jqp
     lazydocker
     mkcert
-    neofetch
+    # neofetch # disabled due to ueberzug dependency not building on macOS
     oapi-codegen
     # nodejs-slim
     # nodePackages_latest.jsonlint

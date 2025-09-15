@@ -36,7 +36,7 @@
             }
 
             ai() {
-              opencode -m github-copilot/gpt-4.1 run "$@"
+              opencode -m github-copilot/gpt-4.1 run "$@" 2>/dev/null | ${pkgs.glow}/bin/glow
             }
 
           wtp () {
