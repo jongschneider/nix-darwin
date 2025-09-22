@@ -16,7 +16,7 @@ font-thicken = true
 font-thicken-strength = 255
 
 # Ghostty theme
-theme =  catppuccin-macchiato
+theme =  catppuccin macchiato
 window-theme = system
 
 # Opacity of split windows
