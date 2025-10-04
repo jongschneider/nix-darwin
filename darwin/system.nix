@@ -6,6 +6,7 @@
 }: let
   gtd = pkgs.callPackage ../scripts/gtd {};
   caider = pkgs.callPackage ../scripts/caider {};
+  mike = pkgs.callPackage ../scripts/mike {};
 in {
   # Necessary for using flakes on this system.
   nix = {
@@ -94,6 +95,7 @@ in {
     luarocks
     lynx
     manix
+    mike
     nil # nix LSP... testing this out.
     nixd
     nurl
