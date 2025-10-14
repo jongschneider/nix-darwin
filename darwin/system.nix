@@ -87,6 +87,7 @@ in {
     gotests
     gotestsum
     gotools
+    grc
     gtd
     ice-bar
     impl
