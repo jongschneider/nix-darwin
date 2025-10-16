@@ -1,0 +1,87 @@
+# grc configuration for runintegrator logs
+# This file defines colorization patterns for log output
+
+# Error patterns
+regexp=\b(ERROR|FATAL|FAIL|Failed|Error|error)\b
+colours=bold red
+-
+
+# Warning patterns
+regexp=\b(WARN|WARNING|Warning|warning)\b
+colours=bold yellow
+-
+
+# Info patterns
+regexp=\b(INFO|Info|info)\b
+colours=bold cyan
+-
+
+# Debug patterns
+regexp=\b(DEBUG|Debug|debug|TRACE|Trace|trace)\b
+colours=bold blue
+-
+
+# Success patterns
+regexp=\b(SUCCESS|OK|Success|success|completed|PASS|Passed)\b
+colours=bold green
+-
+
+# Timestamps (various formats)
+regexp=\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})?
+colours=bold white
+-
+
+# ISO timestamps
+regexp=\d{2}:\d{2}:\d{2}
+colours=bold white
+-
+
+# URLs
+regexp=(https?|ftp)://[^\s/$.?#].[^\s]*
+colours=blue underline
+-
+
+# File paths
+regexp=/[^\s:]+\.(go|json|yaml|yml|xml|txt|log)
+colours=cyan
+-
+
+# Function/Method names in Go
+regexp=\w+\.\w+\(
+colours=magenta
+-
+
+# Numbers
+regexp=\b\d+\b
+colours=yellow
+-
+
+# JSON keys
+regexp="[^"]+":
+colours=cyan
+-
+
+# Quoted strings
+regexp="[^"]+"
+colours=green
+-
+
+# SQL keywords
+regexp=\b(SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|GROUP BY|ORDER BY|LIMIT|OFFSET)\b
+colours=bold magenta
+-
+
+# IP addresses
+regexp=\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b
+colours=bold cyan
+-
+
+# Request methods
+regexp=\b(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS)\b
+colours=bold yellow
+-
+
+# HTTP status codes
+regexp=\b[1-5]\d{2}\b
+colours=bold green
+-

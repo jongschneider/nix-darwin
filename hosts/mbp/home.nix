@@ -40,8 +40,8 @@
     repomix
     rubocop
     ruby
-    rubyPackages.rubocop-performance
-    rubyPackages.solargraph
+    # rubyPackages.rubocop-performance
+    # rubyPackages.solargraph
     # uv
     pipx
     yt-dlp

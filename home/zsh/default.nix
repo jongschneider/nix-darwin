@@ -45,6 +45,9 @@
           }
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         eval "$(gbm shell-integration)"
+
+        # Enable grc aliases
+        [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
       '';
       plugins = [
         {
@@ -71,7 +74,7 @@
         # Work
         localdev = "/Users/jschneider/Developer/localdev/localdev";
         runingester = "(INGESTER_ENV=.env && goi && ingester) 2>&1 | tee tmp.log";
-        runintegrator = "(INTEGRATOR_ENV=.env && goi && integrator) 2>&1 | tee tmp.log";
+        runintegrator = "(INTEGRATOR_ENV=.env && goi && integrator) 2>&1 | grc cat | tee tmp.log";
         runemailpreprocessor = "ENV_FILE=preprocessor.env.localdev go run ./cmd/email_preprocessor/...";
         telcon = "tsh login --proxy=thetalake.teleport.sh --auth=google";
         colcon = "echo 'creating an ssh tunnel to dev collector via teleport...\ntsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com' && tsh ssh -N -L 27777:localhost.thetalake.com:13579 ubuntu@ingester1.dev1.thetalake.com";

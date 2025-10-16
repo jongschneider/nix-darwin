@@ -10,6 +10,7 @@
     ./catppuccin
     ./cli
     ./git
+    ./grc
     ./karabiner
     ./nvim
     ./packages.nix
