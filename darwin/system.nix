@@ -71,7 +71,7 @@ in {
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/wta.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
-    python313Packages.markitdown
+    # python313Packages.markitdown  # temporarily disabled due to pyarrow import crash
     caider
     alejandra
     coreutils
