@@ -1,3 +1,0 @@
-return {
-	"banjo/contextfiles.nvim",
-}

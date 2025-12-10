@@ -36,7 +36,7 @@
             }
 
             ai() {
-              opencode -m github-copilot/gpt-5-mini run "$@" 2>/dev/null | ${pkgs.glow}/bin/glow
+              opencode -m github-copilot/gpt-5-mini run "$@" 2>&1 | ${pkgs.glow}/bin/glow
             }
 
           wtp () {
