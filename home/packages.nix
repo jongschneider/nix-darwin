@@ -26,7 +26,6 @@ in {
     # ollama
     pam-reattach
     pipx
-    ripgrep
     sesh
     tree
     # vectorcode

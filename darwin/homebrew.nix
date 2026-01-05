@@ -20,6 +20,7 @@
         "golang-migrate"
         "lazygit"
         "opencode"
+        "ripgrep"
         "uv"
         "trash"
       ]

@@ -72,6 +72,8 @@ in {
     (import ../scripts/wta.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
     # python313Packages.markitdown  # temporarily disabled due to pyarrow import crash
+    amp-cli
+    bun
     caider
     alejandra
     coreutils
@@ -102,7 +104,9 @@ in {
     nurl
     sqlc
     sqlite
+    vhs
     vim
+    zig
     yazi
   ];
 }
