@@ -5,8 +5,8 @@
     # New unified settings attribute replaces userName/userEmail/aliases/extraConfig.
     settings = {
       user = {
-        name = "jonathan-schneider-tl";
-        email = "jonathan.schneider@thetalake.com";
+        name = "jongschneider";
+        email = "jongschneider@gmail.com";
       };
 
       alias = {

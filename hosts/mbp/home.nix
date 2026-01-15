@@ -7,6 +7,11 @@
     ../../home
   ];
 
+  programs.git.settings.user = {
+    name = "jonathan-schneider-tl";
+    email = "jonathan.schneider@thetalake.com";
+  };
+
   home.packages = with pkgs; [
     # azure-cli # disabled due to azure-multiapi-storage build failure
     gh
