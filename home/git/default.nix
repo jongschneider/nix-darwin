@@ -1,12 +1,12 @@
-{ ... }: {
+{ lib, ... }: {
   programs.git = {
     enable = true;
 
     # New unified settings attribute replaces userName/userEmail/aliases/extraConfig.
     settings = {
       user = {
-        name = "jongschneider";
-        email = "jongschneider@gmail.com";
+        name = lib.mkDefault "jongschneider";
+        email = lib.mkDefault "jongschneider@gmail.com";
       };
 
       alias = {
