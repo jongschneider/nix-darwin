@@ -8,6 +8,7 @@
       },
       "locked": {
         "lastModified": 1747337555,
+        "narHash": "sha256-dMDIkvO1wK5o0k98NY05fMtx1SPZy4m9Hu/trTgnKqw=",
         "owner": "jongschneider",
         "repo": "ai-toolbox",
         "rev": "63e2e5c4c031e9f93fdbd545e054818f8d24e8ff",
@@ -25,6 +26,7 @@
       },
       "locked": {
         "lastModified": 1767967164,
+        "narHash": "sha256-Cx4VETh9dGoQYDtWhre7g66d7SAr+h1h6f+SSHxVrck=",
         "owner": "catppuccin",
         "repo": "nix",
         "rev": "e973584280e3b0e1d5b5a1a5e9948dc222c54af7",
@@ -44,6 +46,7 @@
       },
       "locked": {
         "lastModified": 1768220509,
+        "narHash": "sha256-8wMrJP/Xk5Dkm0TxzaERLt3eGFEhHTWaJKUpK3AoL4o=",
         "owner": "lnl7",
         "repo": "nix-darwin",
         "rev": "7b1d394e7d9112d4060e12ef3271b38a7c43e83b",
@@ -95,6 +98,7 @@
       },
       "locked": {
         "lastModified": 1768135262,
+        "narHash": "sha256-PVvu7OqHBGWN16zSi6tEmPwwHQ4rLPU9Plvs8/1TUBY=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "rev": "80daad04eddbbf5a4d883996a73f3f542fa437ac",
@@ -156,6 +160,7 @@
       },
       "locked": {
         "lastModified": 1768434960,
+        "narHash": "sha256-cJbFn17oyg6qAraLr+NVeNJrXsrzJdrudkzI4H2iTcg=",
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "b4d88c9ac42ae1a745283f6547701da43b6e9f9b",
@@ -248,6 +253,7 @@
     "nixpkgs_4": {
       "locked": {
         "lastModified": 1768395095,
+        "narHash": "sha256-ZhuYJbwbZT32QA95tSkXd9zXHcdZj90EzHpEXBMabaw=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "13868c071cc73a5e9f610c47d7bb08e5da64fdd5",

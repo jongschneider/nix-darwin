@@ -8,11 +8,29 @@ This repository contains my personal Nix configuration for managing macOS system
 
 2. Install Homebrew from [brew.sh](https://brew.sh/)
 
-3. Install nix-darwin following the [Getting Started Guide](https://github.com/LnL7/nix-darwin#getting-started)
-
-4. Install Just command runner:
+3. Enable Nix flakes and prepare for nix-darwin installation:
 ```bash
-brew install just
+# Enable experimental features (flakes)
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+
+# Back up existing /etc config files that nix-darwin will manage
+sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
+```
+
+4. Install nix-darwin:
+```bash
+# Navigate to your nix-darwin config directory
+cd ~/.config/nix-darwin  # or wherever you cloned this repo
+
+# Run the initial installation (requires sudo)
+sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
+```
+Note: Replace `js-m4-mini` with your machine's hostname. The first installation will take several minutes.
+
+5. Install Just command runner:
+```bash
+nix-shell -p just
 ```
 
 ## Repository Structure
@@ -169,3 +187,27 @@ nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
 - Check for errors before switching with `just check`
 - Use `just generations` to list available generations
 - Back up your current generation with `just backup`
+
+## Troubleshooting
+
+### First-time installation: "Unexpected files in /etc"
+
+If you get an error about unexpected files in `/etc` during the initial nix-darwin installation, back up the conflicting files:
+
+```bash
+# Common files that may need backing up:
+sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+```
+
+Then retry the installation command.
+
+### Flakes not working
+
+If you get errors about flakes not being enabled, ensure your nix configuration includes:
+
+```bash
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+```

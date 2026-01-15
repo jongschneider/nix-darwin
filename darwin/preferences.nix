@@ -17,6 +17,9 @@
       NSGlobalDomain.InitialKeyRepeat = lib.mkDefault 14;
       NSGlobalDomain.KeyRepeat = lib.mkDefault 1;
       NSGlobalDomain.ApplePressAndHoldEnabled = lib.mkDefault false;
+
+      # Trackpad tracking speed (0.0 to 3.0, higher = faster)
+      NSGlobalDomain."com.apple.trackpad.scaling" = lib.mkDefault 3.0;
       # expand save dialog by default
       NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = lib.mkDefault true;
       # expand save dialog by default
