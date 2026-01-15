@@ -111,6 +111,10 @@
         sc = "sesh connect \"$(
   sesh list -i | gum filter --no-strip-ansi --limit 1 --placeholder 'Choose a session' --height 50 --prompt='⚡'
 )\"";
+
+        # Raycast config sync
+        raycast-export = "cp \"$(find ~/Downloads -maxdepth 1 -name '*.rayconfig' -type f -print0 | xargs -0 ls -t | head -1)\" ~/.config/nix-darwin/master/home/raycast/latest.rayconfig && echo 'Exported raycast config to nix-darwin repo'";
+        raycast-import = "open ~/.config/raycast/latest.rayconfig";
       };
     };
   };

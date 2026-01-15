@@ -36,7 +36,6 @@
         "karabiner-elements"
         "mitmproxy"
         "raycast"
-        "shottr"
         "claude"
         "voiceink"
       ]
