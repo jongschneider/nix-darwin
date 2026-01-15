@@ -78,6 +78,7 @@
     glow
     gum
     jqp
+    miller
     mkcert
     protobuf
     repomix
@@ -105,3 +106,4 @@
     v = "nvim";
   };
 }
+
