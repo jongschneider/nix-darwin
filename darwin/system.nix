@@ -55,7 +55,10 @@ in {
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
+  programs.zsh = {
+    enable = true; # default shell on catalina
+    enableCompletion = false; # Disable system-level compinit (oh-my-zsh handles it)
+  };
   programs.nix-index.enable = true;
 
   system.stateVersion = 4;

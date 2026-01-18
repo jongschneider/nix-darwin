@@ -5,6 +5,16 @@
   programs = {
     zsh = {
       enable = true;
+      enableCompletion = false; # We handle compinit manually for speed
+      initExtraFirst = ''
+        # Fast compinit - only regenerate cache once per day
+        autoload -Uz compinit
+        if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+          compinit
+        else
+          compinit -C
+        fi
+      '';
       initContent = ''
             function gcpb(){
                 git branch | grep \* | cut -d ' ' -f2 | pbcopy
@@ -45,6 +55,7 @@
           }
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         eval "$(gbm shell-integration)"
+        eval "$(gbm2 shell-integration)"
 
         # Enable grc aliases
         [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
@@ -55,8 +66,6 @@
           src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
         }
       ];
-      oh-my-zsh.enable = true;
-      enableCompletion = true;
       autocd = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;

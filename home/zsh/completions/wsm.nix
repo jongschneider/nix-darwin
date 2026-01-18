@@ -3,13 +3,9 @@
 
   programs.zsh = {
     enable = true;
-    initContent = ''
-      # Add the completion directory to fpath
+    initExtraFirst = ''
+      # Add custom completions to fpath (before compinit runs)
       fpath=(~/.config/zsh/completions $fpath)
-
-      # Initialize completions
-      autoload -Uz compinit
-      compinit
     '';
   };
 }
