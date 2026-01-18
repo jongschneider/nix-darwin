@@ -1,7 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ./completions/wsm.nix
-  ];
   programs = {
     zsh = {
       enable = true;
