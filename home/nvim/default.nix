@@ -25,7 +25,6 @@
       cmake
       luajitPackages.tiktoken_core # copilot (optional)
     ];
-    # withNodeJs = true;
     withPython3 = true;
     withRuby = true;
     vimdiffAlias = true;

@@ -35,7 +35,6 @@ in {
     newSession = false;
     secureSocket = true;
     shortcut = "b";
-    # terminal = "screen-256color";
 
     extraConfig = let
       gitmux = "$(gitmux -cfg ~/.gitmux.yml)";
@@ -44,10 +43,6 @@ in {
       __helper="${pkgs.pam-reattach}/bin/reattach-to-session-namespace";
       set-option -g default-command "$__helper zsh"
 
-      # set -ga terminal-overrides ",*256col*:Tc"
-      # setenv -g COLORTERM truecolor
-      # set-option -g default-terminal "screen-256color"
-      # Enable italic text in tmux
       set -g default-terminal "tmux-256color"
       set -ga terminal-overrides ",*256col*:Tc"
       set -ga terminal-overrides ",*:sitm=\\E[3m:ritm=\\E[23m"

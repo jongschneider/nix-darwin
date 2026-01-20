@@ -32,8 +32,8 @@ in {
       warn-dirty = false;
     };
 
-    # optimise store
-    optimise.automatic = lib.mkDefault true;
+    # optimise store - disabled, let Determinate Nix handle it
+    optimise.automatic = false;
 
     # Enable automatic garbage collection
     gc = {
@@ -44,9 +44,6 @@ in {
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
-
-    #  https://nixcademy.com/2024/02/12/macos-linux-builder/
-    # linux-builder.enable = true;
   };
 
   nixpkgs = {
@@ -74,7 +71,6 @@ in {
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/wta.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
-    # python313Packages.markitdown  # temporarily disabled due to pyarrow import crash
     amp-cli
     bun
     caider
@@ -102,8 +98,7 @@ in {
     lynx
     manix
     mike
-    nil # nix LSP... testing this out.
-    nixd
+    nil # nix LSP
     nurl
     sqlc
     sqlite

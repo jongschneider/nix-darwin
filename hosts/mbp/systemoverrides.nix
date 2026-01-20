@@ -3,10 +3,6 @@
   username,
   ...
 }: {
-  # example of overriding system configuration
-  # system.defaults.dock.orientation = "right";
-  # system.defaults.NSGlobalDomain.InitialKeyRepeat = 20;
-  # packages added here will be added to the shared config, not replace them.
   environment.systemPackages = with pkgs; [
     # MBP-specific packages
     discord
@@ -22,5 +18,5 @@
   nix.gc.automatic = false;
 
   environment.pathsToLink = ["/Applications"];
-  environment.systemPath = ["/opt/homebrew/bin" "/Users/${username}/go/bin" "/Users/${username}/.local/bin" "/Users/${username}/Library/Python/3.9/bin"];
+  environment.systemPath = ["/opt/homebrew/bin" "/Users/${username}/go/bin" "/Users/${username}/.local/bin"];
 }
