@@ -15,6 +15,7 @@
     catppuccin.url = "github:catppuccin/nix";
     # Add your AI Toolbox as an input
     ai-toolbox.url = "github:jongschneider/ai-toolbox";
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs = inputs @ {flake-parts, ...}:

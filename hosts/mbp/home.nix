@@ -27,6 +27,7 @@
 
     # Dev
     inputs.ai-toolbox.packages.${pkgs.system}.appender
+    inputs.llm-agents.packages.${pkgs.system}.cursor-agent
     cpulimit
     fh
     git-open

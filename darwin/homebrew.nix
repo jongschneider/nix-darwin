@@ -19,6 +19,7 @@
         "displayplacer"
         "golang-migrate"
         "lazygit"
+        "lumen"
         "opencode"
         "ripgrep"
         "uv"
@@ -49,6 +50,7 @@
     taps = [
       "timrogers/tap"
       "sst/tap"
+      "jnsahaj/lumen"
     ];
   };
 }
