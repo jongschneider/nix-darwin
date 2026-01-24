@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{lib, ...}: {
   programs.git = {
     enable = true;
 
@@ -77,6 +77,6 @@
   programs.delta = {
     enable = true; # renamed from programs.git.delta.enable
     enableGitIntegration = true; # must now be explicit
-    options = { side-by-side = true; }; # renamed from programs.git.delta.options
+    options = {side-by-side = true;}; # renamed from programs.git.delta.options
   };
 }

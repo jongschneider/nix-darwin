@@ -71,7 +71,7 @@
     home-manager
 
     # Development extras
-    inputs.ai-toolbox.packages.${pkgs.system}.appender
+    inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
     gh
     git-open
     ghostty

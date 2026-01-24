@@ -20,7 +20,6 @@
         "golang-migrate"
         "lazygit"
         "lumen"
-        "opencode"
         "ripgrep"
         "uv"
         "trash"
@@ -38,7 +37,6 @@
         "mitmproxy"
         "raycast"
         "claude"
-        "voiceink"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "ghostty"

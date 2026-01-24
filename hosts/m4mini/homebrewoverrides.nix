@@ -4,7 +4,6 @@
     "microsoft-teams"
     "superwhisper"
     "zed"
-    "claude-code"
   ];
 
   homebrew.brews = [

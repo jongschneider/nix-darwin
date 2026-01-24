@@ -71,7 +71,6 @@ in {
     (import ../scripts/git-bare-clone.nix {inherit pkgs;})
     (import ../scripts/wta.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
-    amp-cli
     bun
     caider
     alejandra

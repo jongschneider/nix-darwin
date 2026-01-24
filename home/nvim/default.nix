@@ -15,7 +15,7 @@
 
   programs.neovim = {
     enable = true;
-    extraLuaConfig = ''
+    initLua = ''
       require('user')
     '';
     extraPackages = with pkgs; [

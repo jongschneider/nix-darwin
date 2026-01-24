@@ -16,7 +16,7 @@
     zlib
 
     # Dev
-    inputs.ai-toolbox.packages.${pkgs.system}.appender
+    inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
     git-open
     glow
     gum
