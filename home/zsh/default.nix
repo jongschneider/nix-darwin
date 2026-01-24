@@ -1,18 +1,19 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   programs = {
     zsh = {
       enable = true;
       enableCompletion = false; # We handle compinit manually for speed
-      initExtraFirst = ''
-        # Fast compinit - only regenerate cache once per day
-        autoload -Uz compinit
-        if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-          compinit
-        else
-          compinit -C
-        fi
-      '';
-      initContent = ''
+      initContent = lib.mkMerge [
+        (lib.mkBefore ''
+          # Fast compinit - only regenerate cache once per day
+          autoload -Uz compinit
+          if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+            compinit
+          else
+            compinit -C
+          fi
+        '')
+        ''
             function gcpb(){
                 git branch | grep \* | cut -d ' ' -f2 | pbcopy
             }
@@ -56,7 +57,8 @@
 
         # Enable grc aliases
         [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
-      '';
+      ''
+      ];
       plugins = [
         {
           name = "fzf-tab";

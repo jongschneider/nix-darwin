@@ -94,3 +94,7 @@ backup:
 # Print current hostname
 print-host:
     @echo "Current hostname: {{host}}"
+
+# Upgrade Determinate Nix to the latest version
+upgrade-nix:
+    sudo determinate-nixd upgrade
