@@ -15,8 +15,20 @@
     xz # extract XZ archives
     zlib
 
+    # Apps
+    brave
+
     # Dev
     inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
+    inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.amp
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.tuicr
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.handy
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
     git-open
     glow
     gum
