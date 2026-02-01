@@ -5,15 +5,15 @@ shell-integration = none
 # Font settings
 # font-family = GeistMono Nerd Font
 # font-family = MonoLisa Nerd Font
-# font-family = MonoLisa Nerd Font Medium
 # font-family = JetBrainsMono Nerd Font Mono
-font-family = VictorMono Nerd Font Mono
+# font-family = VictorMono Nerd Font Mono
+font-family = MonoLisa Nerd Font Regular
 
 font-size = 13
 
 # makes sure VictorMono is not too fine
-font-thicken = true
-font-thicken-strength = 255
+# font-thicken = true
+# font-thicken-strength = 255
 
 # Ghostty theme
 theme =  catppuccin macchiato
