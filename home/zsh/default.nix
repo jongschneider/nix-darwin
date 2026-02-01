@@ -47,6 +47,10 @@
               opencode -m github-copilot/gpt-5-mini run "$@" 2>&1 | ${pkgs.glow}/bin/glow
             }
 
+            take() {
+              mkdir -p "$1" && cd "$1"
+            }
+
           wtp () {
               CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
               git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
