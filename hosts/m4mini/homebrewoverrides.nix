@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   # Machine-specific Homebrew configuration
   homebrew.casks = [
+    "firefox"
     "microsoft-teams"
     "superwhisper"
     "zed"
