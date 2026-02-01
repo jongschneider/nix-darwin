@@ -27,6 +27,7 @@ in {
     pam-reattach
     pipx
     sesh
+    trash-cli
     tree
     # vectorcode
 
