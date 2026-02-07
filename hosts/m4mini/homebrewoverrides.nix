@@ -3,6 +3,7 @@
   homebrew.casks = [
     "firefox"
     "microsoft-teams"
+    "notion"
     "superwhisper"
     "zed"
   ];

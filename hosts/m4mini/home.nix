@@ -25,7 +25,6 @@
 
     # Dev
     inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
-    inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.amp
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
@@ -45,6 +44,6 @@
     # nodePackages_latest.jsonlint
     redis
     repomix
-    yt-dlp
+    # yt-dlp # disabled: curl-impersonate checkPhase fails on macOS 15
   ];
 }
