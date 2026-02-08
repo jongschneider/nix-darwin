@@ -76,6 +76,19 @@ vim.opt.signcolumn = "yes"
 -- Enable access to System Clipboard
 vim.opt.clipboard = "unnamed,unnamedplus"
 
+-- Use OSC52 clipboard provider (works over SSH)
+vim.g.clipboard = {
+	name = "OSC 52",
+	copy = {
+		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+	},
+	paste = {
+		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+	},
+}
+
 -- Enable cursor line highlight
 vim.opt.cursorline = true
 vim.opt.list = true
