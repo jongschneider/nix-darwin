@@ -4,7 +4,6 @@
     "microsoft-teams"
     "powershell"
     "zed"
-    "superwhisper"
   ];
 
   homebrew.brews = [

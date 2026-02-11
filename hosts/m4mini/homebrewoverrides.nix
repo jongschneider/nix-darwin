@@ -4,7 +4,6 @@
     "firefox"
     "microsoft-teams"
     "notion"
-    "superwhisper"
     "zed"
   ];
 

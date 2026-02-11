@@ -22,7 +22,6 @@ in {
     jujutsu
     lazydocker
     mariadb
-    nushell
     # ollama
     pam-reattach
     pipx

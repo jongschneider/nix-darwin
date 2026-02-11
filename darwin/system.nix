@@ -5,7 +5,6 @@
   ...
 }: let
   gtd = pkgs.callPackage ../scripts/gtd {};
-  caider = pkgs.callPackage ../scripts/caider {};
   mike = pkgs.callPackage ../scripts/mike {};
 in {
   # Necessary for using flakes on this system.
@@ -81,7 +80,6 @@ in {
     (import ../scripts/wta.nix {inherit pkgs;})
     (import ../scripts/gsquash.nix {inherit pkgs;})
     bun
-    caider
     alejandra
     coreutils
     curl
