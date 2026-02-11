@@ -32,6 +32,7 @@
     casks =
       [
         "android-platform-tools"
+        "bettershot"
         "font-monaspace"
         "karabiner-elements"
         "mitmproxy"

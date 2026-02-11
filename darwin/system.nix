@@ -58,6 +58,15 @@ in {
   };
   programs.nix-index.enable = true;
 
+  # Raise default macOS file descriptor limits (default soft limit is 256)
+  launchd.daemons.maxfiles = {
+    command = "/bin/launchctl limit maxfiles 524288 524288";
+    serviceConfig = {
+      Label = "limit.maxfiles";
+      RunAtLoad = true;
+    };
+  };
+
   system.stateVersion = 4;
 
   # Add ability to used TouchID for sudo authentication

@@ -3,6 +3,10 @@
 # Get local hostname (cross-platform)
 host := if os() == "macos" { `scutil --get LocalHostName` } else { `hostname -s` }
 
+alias u := update
+alias c := check
+alias s := switch
+
 # List available commands
 default:
     @just --list
