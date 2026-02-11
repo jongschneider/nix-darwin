@@ -12,12 +12,23 @@
     email = "jonathan.schneider@thetalake.com";
   };
 
-  # Auto-rewrite personal GitHub URLs to use personal SSH key
+  # Auto-rewrite personal GitHub URLs to use personal SSH key and identity
   programs.git.includes = [
     {
+      # Matches repos cloned with the canonical github.com URL
       condition = "hasconfig:remote.*.url:git@github.com:jongschneider/**";
       contents = {
+        user.name = "jongschneider";
+        user.email = "jongschneider@gmail.com";
         url."git@github.com-personal:jongschneider/".insteadOf = "git@github.com:jongschneider/";
+      };
+    }
+    {
+      # Matches repos cloned directly with the github.com-personal SSH alias
+      condition = "hasconfig:remote.*.url:git@github.com-personal:jongschneider/**";
+      contents = {
+        user.name = "jongschneider";
+        user.email = "jongschneider@gmail.com";
       };
     }
   ];
