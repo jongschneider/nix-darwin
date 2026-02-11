@@ -81,6 +81,7 @@ in {
     (import ../scripts/gsquash.nix {inherit pkgs;})
     bun
     alejandra
+    ast-grep
     coreutils
     curl
     delve
