@@ -180,6 +180,10 @@ nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
 - Homebrew packages are managed through nix-darwin
 - The justfile automatically uses your local hostname for commands
 
+## Related Configuration
+
+- [OpenCode Configuration](https://github.com/jongschneider/opencode) - OpenCode agent and tool configuration
+
 ## Maintenance
 
 - Keep your system updated with `just update`
