@@ -31,55 +31,45 @@ in {
     aggressiveResize = true;
     baseIndex = 1;
     disableConfirmationPrompt = true;
+    escapeTime = 0;
+    historyLimit = 1000000;
     keyMode = "vi";
+    mouse = true;
     newSession = false;
     secureSocket = true;
     shortcut = "b";
+    focusEvents = true;
 
     extraConfig = let
       gitmux = "$(gitmux -cfg ~/.gitmux.yml)";
     in ''
       # Make pam_tid.so work in tmux
-      __helper="${pkgs.pam-reattach}/bin/reattach-to-session-namespace";
-      set-option -g default-command "$__helper zsh"
+      set-option -g default-command "${pkgs.pam-reattach}/bin/reattach-to-session-namespace zsh"
 
       set -g default-terminal "tmux-256color"
       set -ga terminal-overrides ",*256col*:Tc"
       set -ga terminal-overrides ",*:sitm=\\E[3m:ritm=\\E[23m"
       set -as terminal-overrides ",xterm*:sitm=\\E[3m"
+      set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours
 
       set-option -g allow-passthrough
       set-option -ga update-environment TERM
       set-option -ga update-environment TERM_PROGRAM
 
-      set -g base-index 1              # start indexing windows at 1 instead of 0
-      setw -g pane-base-index 1        # start indexing panes at 1 instead of 0
-      set -g detach-on-destroy off     # don't exit from tmux when closing a session
-      set -g escape-time 0             # zero-out escape time delay (http://superuser.com/a/252717/65504) a larger value may be required in remote connections
-      set -g history-limit 1000000     # increase history size (from 2,000)
-      set -g mouse on                  # enable mouse support
-      set -g renumber-windows on       # renumber all windows when any window is closed
-      set -g set-clipboard on          # use system clipboard
-      set -g status-interval 3         # update the status bar every 3 seconds
-      set -g focus-events on           # TODO: learn how this works
-      set -g detach-on-destroy off # don't exit from tmux when closing a session
-      setw -g automatic-rename on      # automatically rename windows based on the application within
-      set -g set-titles on             # use titles in tabs
-      set -g set-titles-string "#I:#W" # Set parent terminal title to reflect current window in tmux session
-      set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+      set -g detach-on-destroy off
+      set -g renumber-windows on
+      set -g set-clipboard on
+      set -g status-interval 3
+      setw -g automatic-rename on
+      set -g set-titles on
+      set -g set-titles-string "#I:#W"
 
       # Vim style pane selection
       bind h select-pane -L
       bind j select-pane -D
       bind k select-pane -U
       bind l select-pane -R
-
-      # Start windows and panes at 1, not 0
-      set -g base-index 1
-      set -g pane-base-index 1
-      set-window-option -g pane-base-index 1
-      set-option -g renumber-windows on
 
       # Use Alt-arrow keys without prefix key to switch panes
       bind -n M-Left select-pane -L
@@ -95,14 +85,11 @@ in {
       bind -n M-H previous-window
       bind -n M-L next-window
 
-      # reload config file
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config Reloaded!"
 
-      # open lazygit in a new window
       bind-key g display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
 
       unbind '"'
-      # split window and fix path for tmux 1.9
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
 
@@ -112,12 +99,9 @@ in {
       bind -r K resize-pane -U 10
       bind -r L resize-pane -R 10
 
-
       bind -r M resize-pane -Z
 
-      # toggle the status bar
       bind-key -T prefix B set-option -g status
-
 
       bind-key "T" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
@@ -134,8 +118,7 @@ in {
           --preview 'sesh preview {}'
       )\""
 
-      bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
-      set -g detach-on-destroy off  # don't exit from tmux when closing a session
+      bind-key x kill-pane
       bind -N "last-session (via sesh) " L run-shell "sesh last"
 
       bind c new-window -c "#{pane_current_path}"
@@ -157,20 +140,14 @@ in {
       tmux-nerd-font-window-name
       vim-tmux-navigator
       yank
-      sensible
       prefix-highlight
       {
         plugin = resurrect;
-        extraConfig =
-          # bash
-          ''
-            set -g @resurrect-save 'S'
-            set -g @resurrect-restore 'R'
-            set -g @resurrect-capture-pane-contents 'on'
-
-            resurrect_dir="$HOME/.config/tmux/resurrect"
-            set -g @resurrect-dir $resurrect_dir
-          '';
+        extraConfig = ''
+          set -g @resurrect-save 'S'
+          set -g @resurrect-restore 'R'
+          set -g @resurrect-dir "$HOME/.config/tmux/resurrect"
+        '';
       }
     ];
   };
