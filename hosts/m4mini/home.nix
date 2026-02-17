@@ -29,9 +29,6 @@
     xz # extract XZ archives
     zlib
 
-    # Apps
-    brave
-
     # Dev
     inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.amp

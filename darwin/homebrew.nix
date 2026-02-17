@@ -34,6 +34,7 @@
         "android-platform-tools"
         "bettershot"
         "font-monaspace"
+        "font-zed-mono-nerd-font"
         "karabiner-elements"
         "mitmproxy"
         "raycast"
