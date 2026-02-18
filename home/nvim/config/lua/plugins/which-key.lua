@@ -13,6 +13,7 @@ return {
 		-- Register debugging key group with correct format
 		wk.add({
 			{ "<leader>d", group = "Debug" },
+			{ "<leader>y", group = "PromptYank" },
 			-- {
 			-- 	"<leader>dA",
 			-- 	function()
