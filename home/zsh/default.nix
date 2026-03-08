@@ -56,6 +56,8 @@
               git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
           }
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
+        [[ -f ~/.secrets ]] && source ~/.secrets
+
         eval "$(gbm shell-integration)"
         eval "$(gbm2 shell-integration)"
 
