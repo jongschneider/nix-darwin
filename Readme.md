@@ -9,15 +9,18 @@ This repository contains my personal Nix configuration for managing macOS system
 2. Install Homebrew from [brew.sh](https://brew.sh/)
 
 3. Enable Nix flakes and prepare for nix-darwin installation:
-```bash
-# Enable experimental features (flakes)
-mkdir -p ~/.config/nix
-echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+
+   ```bash
+   # Enable experimental features (flakes)
+   mkdir -p ~/.config/nix
+   echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+   ```
 
 # Back up existing /etc config files that nix-darwin will manage
-sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
-```
 
+sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
+
+```
 4. Install nix-darwin:
 ```bash
 # Navigate to your nix-darwin config directory
@@ -26,12 +29,14 @@ cd ~/.config/nix-darwin  # or wherever you cloned this repo
 # Run the initial installation (requires sudo)
 sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
 ```
+
 Note: Replace `js-m4-mini` with your machine's hostname. The first installation will take several minutes.
 
 5. Install Just command runner:
-```bash
-nix-shell -p just
-```
+
+   ```bash
+   nix-shell -p just
+   ```
 
 ## Repository Structure
 
@@ -39,7 +44,7 @@ nix-shell -p just
 .
 ├── flake.nix                       # Main flake configuration
 ├── darwin/                         # Base darwin configuration
-│   ├── default.nix       
+│   ├── default.nix
 │   ├── system.nix                  # System-wide settings
 │   ├── preferences.nix             # macOS preferences
 │   └── homebrew.nix                # Base Homebrew config
@@ -50,7 +55,7 @@ nix-shell -p just
     └── mbp/                        # Example MacBook Pro config
         ├── configuration.nix       # System configuration
         ├── home.nix                # Home-manager configuration
-        ├── homebrewoverrides.nix   # Homebrew overrides 
+        ├── homebrewoverrides.nix   # Homebrew overrides
         └── systemoverrides.nix     # Darwin system overrides
 ```
 
@@ -78,62 +83,67 @@ just clean
 ## Adding a New Machine
 
 1. Get your machine's hostname:
-```bash
-scutil --get LocalHostName
-```
+
+   ```bash
+   scutil --get LocalHostName
+   ```
 - If your hostname has a conflict with a current hostname (or you just want to change it) use the following commands to change it.
-```sh
-sudo scutil --set ComputerName "new-hostname-no-spaces"
-sudo scutil --set HostName "new-hostname-no-spaces"
-sudo scutil --set LocalHostName "new-hostname-no-spaces"  # Must not contain spaces or special characters
-```
+
+  ```sh
+  sudo scutil --set ComputerName "new-hostname-no-spaces"
+  sudo scutil --set HostName "new-hostname-no-spaces"
+  sudo scutil --set LocalHostName "new-hostname-no-spaces"  # Must not contain spaces or special characters
+  ```
 2. Create a new directory under `hosts/` with your machine's configuration:
-```bash
-mkdir -p hosts/new-machine
-```
+
+   ```bash
+   mkdir -p hosts/new-machine
+   ```
 
 3. Create the machine-specific system configuration:
-```nix
-# hosts/new-machine/configuration.nix
-{
-  pkgs,
-  username,
-  ...
-}: {
-  imports = [
+
+   ```nix
+   # hosts/new-machine/configuration.nix
+   {
+   pkgs,
+   username,
+   ...
+   }: {
+   imports = [
     ../../darwin
     ./systemoverrides.nix # Import the overrides
     ./homebrewoverrides.nix # Import the overrides
-  ];
+   ];
 
-  users.users.${username} = {
+   users.users.${username} = {
     name = username;
     home = "/Users/${username}";
-  };
-}
-```
+   };
+   }
+   ```
 - 💡 Note: if using the Determinate Systems nix installer you might need to set `nix.enable = false;` in `hosts/new-machine/systemoverrides.nix`
-
 4. Create the machine-specific home configuration:
-```nix
-# hosts/new-machine/home.nix
-{ pkgs, ... }: {
-  imports = [
-    ../../home
-  ];
 
-  # Add machine-specific home packages
-  home.packages = with pkgs; [
+   ```nix
+   # hosts/new-machine/home.nix
+   { pkgs, ... }: {
+   imports = [
+    ../../home
+   ];
+
+   # Add machine-specific home packages
+   home.packages = with pkgs; [
     # your packages here
-  ];
-}
-```
+   ];
+   }
+   ```
 
 5. Add your machine to the flake:
-```nix
-# flake.nix
-darwinConfigurations = {
-  "Your-Hostname" = inputs.darwin.lib.darwinSystem {
+
+   ```nix
+   # flake.nix
+   darwinConfigurations = {
+   "Your-Hostname" = inputs.darwin.lib.darwinSystem {
     system = "aarch64-darwin";  # or "x86_64-darwin" for Intel Macs
     specialArgs = {
       username = "yourusername";
@@ -159,21 +169,23 @@ darwinConfigurations = {
         };
       }
     ];
-  };
-};
-```
+   };
+   };
+   ```
 
 6. Build and switch to your new configuration:
-```bash
-just switch
-```
+
+   ```bash
+   just switch
+   ```
 
 ## Notes
 
 - When installing nix-darwin the first time, you will want to specifically target the new flake of the new hostname:
-```sh
-nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
-```
+
+  ```sh
+  nix run nix-darwin/master#darwin-rebuild -- switch --flake .#"js-m4-mini"
+  ```
 - The configuration uses `specialArgs` to pass username to all modules
 - Base configurations in `darwin/` and `home/` are shared across all machines
 - Machine-specific overrides and additions go in `hosts/<machine>/`
