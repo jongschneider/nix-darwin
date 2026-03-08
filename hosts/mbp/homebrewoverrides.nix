@@ -3,6 +3,7 @@
   homebrew.casks = [
     "microsoft-teams"
     "powershell"
+    "mark-text"
     "zed"
   ];
 
