@@ -11,15 +11,16 @@ return {
 	-- Markdown Previewer
 	--------------------------------------------------------------------------------
 	{
-		"iamcco/markdown-preview.nvim",
+		"selimacerbas/markdown-preview.nvim",
+		dependencies = { "selimacerbas/live-server.nvim" },
 		ft = "markdown",
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
 		cmd = {
-			"MarkdownPreviewToggle",
 			"MarkdownPreview",
+			"MarkdownPreviewRefresh",
 			"MarkdownPreviewStop",
 		},
+		config = function()
+			require("markdown_preview").setup()
+		end,
 	},
 }
