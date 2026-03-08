@@ -6,6 +6,7 @@
 }: let
   gtd = pkgs.callPackage ../scripts/gtd {};
   mike = pkgs.callPackage ../scripts/mike {};
+  scalyr = pkgs.callPackage ../scripts/scalyr.nix {};
 in {
   # Necessary for using flakes on this system.
   nix = {
@@ -106,6 +107,7 @@ in {
     manix
     mike
     nil # nix LSP
+    scalyr
     nurl
     sqlc
     sqlite

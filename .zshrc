@@ -163,7 +163,6 @@ flakify() {
   ${EDITOR:-vim} flake.nix
 }
 
-export scalyr_readlog_token='0bOzw_U_GGCB2mxlBzxSEsRSISja6JPucJpM6rFUXW8g-'
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
