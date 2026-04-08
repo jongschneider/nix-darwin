@@ -31,6 +31,13 @@
       dock.autohide = lib.mkDefault true;
       # Whether to automatically rearrange spaces based on most recent use
       dock.mru-spaces = lib.mkDefault false;
+
+      # Enable scroll gesture with modifier key to zoom
+      universalaccess.closeViewScrollWheelToggle = lib.mkDefault true;
+
+      # Set modifier key to Command (⌘) instead of default Ctrl
+      # 262144 = Ctrl, 524288 = Option, 1048576 = Command
+      CustomUserPreferences."com.apple.universalaccess".HIDScrollZoomModifierMask = lib.mkDefault 1048576;
     };
 
     # Used for backwards compatibility, please read the changelog before changing.

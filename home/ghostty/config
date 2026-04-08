@@ -7,7 +7,8 @@ shell-integration = none
 # font-family = MonoLisa Nerd Font
 # font-family = JetBrainsMono Nerd Font Mono
 # font-family = VictorMono Nerd Font Mono
-font-family = MonoLisa Nerd Font Regular
+# font-family = MonoLisa Nerd Font Regular
+font-family = Maple Mono NF
 
 font-size = 13
 

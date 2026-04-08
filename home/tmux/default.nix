@@ -46,6 +46,11 @@ in {
       # Make pam_tid.so work in tmux
       set-option -g default-command "${pkgs.pam-reattach}/bin/reattach-to-session-namespace zsh"
 
+      # Extended keys: forward modifier info (e.g. Shift+Enter, Ctrl+Enter) in CSI-u format
+      # Without this, tmux strips modifiers and all Enter variants become plain \r
+      set -g extended-keys on
+      set -g extended-keys-format csi-u
+
       set -g default-terminal "tmux-256color"
       set -ga terminal-overrides ",*256col*:Tc"
       set -ga terminal-overrides ",*:sitm=\\E[3m:ritm=\\E[23m"

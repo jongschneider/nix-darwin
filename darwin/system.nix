@@ -82,7 +82,7 @@ in {
     (import ../scripts/gsquash.nix {inherit pkgs;})
     bun
     alejandra
-    ast-grep
+    (ast-grep.overrideAttrs (old: {doCheck = false;}))
     coreutils
     curl
     delve

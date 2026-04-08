@@ -14,6 +14,9 @@ in {
     nerd-fonts.gohufont
     nerd-fonts.code-new-roman
     nerd-fonts.victor-mono
+    maple-mono.truetype-autohint
+    maple-mono.NF
+    maple-mono.NF-CN
 
     bottom
     fastfetch
