@@ -1,26 +1,26 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
 	build = ":TSUpdate",
-	config = function()
-		local configs = require("nvim-treesitter.configs")
-
-		configs.setup({
-			ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "typescript", "tsx", "html", "go" },
-			sync_install = false,
-			auto_install = true,
-			ignore_install = {},
-			highlight = { enable = true },
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-SPACE>", -- set to `false` to disable one of the mappings
-					node_incremental = "<C-SPACE>",
-					scope_incremental = false,
-					node_decremental = "<Backspace>",
-				},
-			},
-			modules = {},
+	main = "nvim-treesitter",
+	init = function()
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function()
+				pcall(vim.treesitter.start)
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end,
 		})
+	end,
+	config = function()
+		local ensureInstalled = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "typescript", "tsx", "html", "go" }
+		local installed = require("nvim-treesitter.config").get_installed()
+		local to_install = vim.iter(ensureInstalled)
+			:filter(function(parser)
+				return not vim.tbl_contains(installed, parser)
+			end)
+			:totable()
+		if #to_install > 0 then
+			require("nvim-treesitter").install(to_install)
+		end
 	end,
 }

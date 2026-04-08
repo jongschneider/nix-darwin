@@ -24,6 +24,7 @@
       # Included to build telescope-fzf-native.nvim
       cmake
       luajitPackages.tiktoken_core # copilot (optional)
+      tree-sitter # Required for nvim-treesitter parser compilation
     ];
     withNodeJs = true;
     withPython3 = true;

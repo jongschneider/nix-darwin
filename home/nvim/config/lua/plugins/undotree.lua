@@ -1,7 +1,3 @@
-return {
-	"mbbill/undotree",
-
-	config = function()
-		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-	end,
-}
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", "<cmd>Undotree<cr>")
+return {}
