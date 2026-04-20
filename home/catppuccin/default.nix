@@ -11,6 +11,7 @@ in {
     bat.enable = true;
     fzf.enable = true;
     delta.enable = true;
+    nvim.enable = false; # managed via lazy.nvim in nvim/config/lua/plugins/color_scheme.lua
     zsh-syntax-highlighting.enable = true;
   };
 }
