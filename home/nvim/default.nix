@@ -1,14 +1,10 @@
 {
   pkgs,
-  config,
   ...
 }: {
   xdg.configFile = {
     nvim = {
-      # Use mkOutOfStoreSymlink for Darwin, regular source for Linux
-      source = if pkgs.stdenv.isDarwin 
-        then config.lib.file.mkOutOfStoreSymlink ./config
-        else ./config;
+      source = ./config;
       recursive = true;
     };
   };
