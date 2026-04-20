@@ -1,6 +1,7 @@
 {lib, ...}: {
   programs.git = {
     enable = true;
+    signing.format = null;
 
     # New unified settings attribute replaces userName/userEmail/aliases/extraConfig.
     settings = {
