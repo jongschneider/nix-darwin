@@ -5,13 +5,21 @@
       enableCompletion = false; # We handle compinit manually for speed
       initContent = lib.mkMerge [
         (lib.mkBefore ''
-          # Fast compinit - only regenerate cache once per day
+          # Fast compinit:
+          #  - Pin to a single dumpfile so per-host/PID-suffixed dumps don't proliferate.
+          #  - Full rebuild (with compaudit) only when missing or >24h old; otherwise -C
+          #    skips both dump regeneration and the security audit.
+          #  - zcompile the dump so subsequent loads use the bytecode (~10x faster).
           autoload -Uz compinit
-          if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-            compinit
+          _zcompdump="$HOME/.zcompdump"
+          if [[ ! -f $_zcompdump || -n $_zcompdump(#qN.mh+24) ]]; then
+            compinit -d $_zcompdump
+            [[ -f $_zcompdump && ( ! -f ''${_zcompdump}.zwc || $_zcompdump -nt ''${_zcompdump}.zwc ) ]] && \
+              zcompile $_zcompdump
           else
-            compinit -C
+            compinit -C -d $_zcompdump
           fi
+          unset _zcompdump
         '')
         ''
             function gcpb(){
@@ -57,11 +65,6 @@
           }
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         [[ -f ~/.secrets ]] && source ~/.secrets
-
-        # Strip the unconditional `compinit` from gbm's shell-integration output:
-        # nix-built zsh 5.9 deadlocks in compdump on macOS 26.x.
-        eval "$(gbm shell-integration | grep -v '^[[:space:]]*compinit')"
-        eval "$(gbm2 shell-integration | grep -v '^[[:space:]]*compinit')"
 
         # Enable grc aliases
         [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"

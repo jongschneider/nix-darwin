@@ -26,7 +26,10 @@ in {
 
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.zsh}/bin/zsh";
+    # Use Apple's /bin/zsh — nix-built zsh-5.9 hangs in compinit/compdump
+    # on macOS 26.x (1% CPU, blocked on I/O). ~/.zshrc still works since
+    # paths are absolute. Verified 2026-04-25.
+    shell = "/bin/zsh";
 
     aggressiveResize = true;
     baseIndex = 1;
@@ -44,7 +47,7 @@ in {
       gitmux = "$(gitmux -cfg ~/.gitmux.yml)";
     in ''
       # Make pam_tid.so work in tmux
-      set-option -g default-command "${pkgs.pam-reattach}/bin/reattach-to-session-namespace zsh"
+      set-option -g default-command "${pkgs.pam-reattach}/bin/reattach-to-session-namespace /bin/zsh"
 
       # Extended keys: forward modifier info (e.g. Shift+Enter, Ctrl+Enter) in CSI-u format
       # Without this, tmux strips modifiers and all Enter variants become plain \r
