@@ -57,6 +57,7 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.handy
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.mcporter
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.sandbox-runtime
     llama-cpp
     cpulimit

@@ -20,7 +20,9 @@ return {
 			"MarkdownPreviewStop",
 		},
 		config = function()
-			require("markdown_preview").setup()
+			require("markdown_preview").setup({
+				instance_mode = "multi",
+			})
 		end,
 	},
 }
