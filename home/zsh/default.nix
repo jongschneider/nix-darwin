@@ -58,8 +58,10 @@
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         [[ -f ~/.secrets ]] && source ~/.secrets
 
-        eval "$(gbm shell-integration)"
-        eval "$(gbm2 shell-integration)"
+        # Strip the unconditional `compinit` from gbm's shell-integration output:
+        # nix-built zsh 5.9 deadlocks in compdump on macOS 26.x.
+        eval "$(gbm shell-integration | grep -v '^[[:space:]]*compinit')"
+        eval "$(gbm2 shell-integration | grep -v '^[[:space:]]*compinit')"
 
         # Enable grc aliases
         [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
