@@ -7,7 +7,7 @@ pkgs.stdenv.mkDerivation {
 
   src = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/scalyr/scalyr-tool/master/scalyr";
-    hash = "sha256-EfU8zwr65tXF4CsIfKFTZo4HsCwoMoJkHHiUPLs5YWA=";
+    hash = "sha256-bSrYyOXLTd3WJGaLxMDTs1FNWu6CWMn4UsG5wGl8smw=";
   };
 
   dontUnpack = true;
