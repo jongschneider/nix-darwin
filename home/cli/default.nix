@@ -19,6 +19,7 @@
         env = (old.env or {}) // {
           CGO_ENABLED = 1;
         };
+        doCheck = false;
       });
     };
 
