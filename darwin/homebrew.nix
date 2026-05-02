@@ -12,7 +12,6 @@
     };
 
     global.brewfile = true;
-    caskArgs.no_quarantine = true;
     # Core homebrew packages
     brews =
       [
@@ -33,6 +32,8 @@
       [
         "android-platform-tools"
         "bettershot"
+        "dockdoor"
+        "xykong/tap/flux-markdown"
         "font-monaspace"
         "font-zed-mono-nerd-font"
         "karabiner-elements"
@@ -51,6 +52,7 @@
       "timrogers/tap"
       "sst/tap"
       "jnsahaj/lumen"
+      "xykong/tap"
     ];
   };
 }
