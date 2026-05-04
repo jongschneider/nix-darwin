@@ -18,8 +18,14 @@
   '';
 
   # Ghostty terminfo for SSH sessions (TERM=xterm-ghostty)
-  home.file.".terminfo/78/xterm-ghostty".source = config.lib.file.mkOutOfStoreSymlink "/Applications/Ghostty.app/Contents/Resources/terminfo/78/xterm-ghostty";
-  home.file.".terminfo/67/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/Applications/Ghostty.app/Contents/Resources/terminfo/67/ghostty";
+  home.file.".terminfo/78/xterm-ghostty" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/Applications/Ghostty.app/Contents/Resources/terminfo/78/xterm-ghostty";
+    force = true;
+  };
+  home.file.".terminfo/67/ghostty" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/Applications/Ghostty.app/Contents/Resources/terminfo/67/ghostty";
+    force = true;
+  };
 
   home.packages = with pkgs; [
     gh
@@ -49,7 +55,7 @@
     jqp
     lazydocker
     mkcert
-    neofetch
+    fastfetch
     # nodejs-slim
     # nodePackages_latest.jsonlint
     redis

@@ -3,9 +3,10 @@
   ...
 }: {
   xdg.configFile = {
-    nvim = {
-      source = ./config;
-      recursive = true;
+    "nvim/init.lua".source = ./config/init.lua;
+    "nvim/lua" = {
+      source = ./config/lua;
+      force = true;
     };
   };
 

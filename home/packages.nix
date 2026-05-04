@@ -25,7 +25,7 @@ in {
     jujutsu
     lazydocker
     mariadb
-    # ollama
+    ollama
     pam-reattach
     pipx
     sesh

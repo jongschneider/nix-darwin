@@ -51,6 +51,7 @@
                   home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
+                    backupFileExtension = "backup";
                     # extraSpecialArgs for home-manager modules (since it's a separate module system)
                     extraSpecialArgs = {
                       inherit username system inputs;

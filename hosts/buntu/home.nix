@@ -46,7 +46,7 @@
 
     # Development utilities
     tmux
-    neofetch
+    fastfetch
     just
 
     # Neovim dependencies

@@ -2,6 +2,7 @@
   # Machine-specific Homebrew configuration
   homebrew.casks = [
     "microsoft-teams"
+    "orbstack"
     "powershell"
     "mark-text"
     "zed"

@@ -68,7 +68,7 @@
     jqp
     lazydocker
     mkcert
-    # neofetch # disabled due to ueberzug dependency not building on macOS
+    fastfetch
     oapi-codegen
     # nodejs-slim
     # nodePackages_latest.jsonlint

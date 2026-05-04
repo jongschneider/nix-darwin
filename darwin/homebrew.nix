@@ -43,7 +43,6 @@
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "ghostty"
-        "orbstack"
         "vlc"
       ];
 

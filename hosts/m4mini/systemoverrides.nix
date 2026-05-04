@@ -5,6 +5,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     # m4mini-specific packages
+    jira-cli-go
     discord
     tailscale
   ];
