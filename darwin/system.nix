@@ -67,6 +67,24 @@ in {
     };
   };
 
+  # Executor.app's MCP stdio sidecars inherit PATH from LaunchServices:
+  #   /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+  # On macOS 26, both `launchctl setenv` (via LaunchAgent) and `launchctl config
+  # user path` are silently ignored by LaunchServices — verified empirically
+  # 2026-05-15 via /tmp/slack-mcp-trace.log after rebuild + logout/login.
+  # Workaround: symlink node + npx into /usr/local/bin (already on Executor's
+  # PATH) so bare `npx ...` MCP source commands resolve.
+  system.activationScripts.extraActivation.text = ''
+    mkdir -p /usr/local/bin
+    for cmd in node npx; do
+      src="/opt/homebrew/bin/$cmd"
+      dst="/usr/local/bin/$cmd"
+      if [ -e "$src" ]; then
+        ln -sfn "$src" "$dst"
+      fi
+    done
+  '';
+
   system.stateVersion = 4;
 
   # Add ability to used TouchID for sudo authentication
