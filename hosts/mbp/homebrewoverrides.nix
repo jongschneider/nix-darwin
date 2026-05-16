@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   # Machine-specific Homebrew configuration
   homebrew.casks = [
+    "docker/tap/sbx"
     "microsoft-teams"
     "orbstack"
     "powershell"
@@ -19,5 +20,6 @@
 
   homebrew.taps = [
     # Additional tap for MBP
+    "docker/tap"
   ];
 }

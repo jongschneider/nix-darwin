@@ -94,44 +94,48 @@ in {
   services.karabiner-elements.enable = false;
 
   # Basic system packages all machines should have
-  environment.systemPackages = with pkgs; [
-    (import ../scripts/git-bare-clone.nix {inherit pkgs;})
-    (import ../scripts/wta.nix {inherit pkgs;})
-    (import ../scripts/gsquash.nix {inherit pkgs;})
-    bun
-    alejandra
-    (ast-grep.overrideAttrs (old: {doCheck = false;}))
-    coreutils
-    curl
-    delve
-    git
-    gnumake
-    go_1_25
-    gofumpt
-    golangci-lint
-    golines
-    gomodifytags
-    gotests
-    gotestsum
-    gotools
-    grc
-    gtd
-    ice-bar
-    impl
-    just
-    lua
-    luarocks
-    lynx
-    manix
-    mike
-    nil # nix LSP
-    scalyr
-    nurl
-    sqlc
-    sqlite
-    vhs
-    vim
-    zig
-    yazi
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      (import ../scripts/git-bare-clone.nix {inherit pkgs;})
+      (import ../scripts/wta.nix {inherit pkgs;})
+      (import ../scripts/gsquash.nix {inherit pkgs;})
+      bun
+      alejandra
+      (ast-grep.overrideAttrs (old: {doCheck = false;}))
+      coreutils
+      curl
+      delve
+      git
+      gnumake
+      go_1_25
+      gofumpt
+      golangci-lint
+      golines
+      gomodifytags
+      gotests
+      gotestsum
+      gotools
+      grc
+      gtd
+      ice-bar
+      impl
+      just
+      lua
+      luarocks
+      lynx
+      manix
+      mike
+      nil # nix LSP
+      scalyr
+      nurl
+      sqlc
+      sqlite
+      vhs
+      vim
+      zig
+      yazi
+    ]
+    ++ lib.optionals (system == "aarch64-darwin") [
+      (mactop.overrideAttrs (old: {doCheck = false;}))
+    ];
 }
