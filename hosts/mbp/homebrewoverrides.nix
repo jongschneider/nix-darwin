@@ -16,10 +16,12 @@
     "poppler"
     "openapi-generator"
     "dotnet"
+    "grafana/grafana/gcx"
   ];
 
   homebrew.taps = [
     # Additional tap for MBP
     "docker/tap"
+    "grafana/grafana"
   ];
 }
