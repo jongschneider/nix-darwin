@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   system,
   lib,
@@ -8,8 +9,10 @@
   mike = pkgs.callPackage ../scripts/mike {};
   scalyr = pkgs.callPackage ../scripts/scalyr.nix {};
 in {
-  # Necessary for using flakes on this system.
-  nix = {
+  # Latent config for hosts using nix-darwin's Nix management. Currently dormant
+  # on every host because Determinate Nix sets `nix.enable = false` in each
+  # host's systemoverrides.nix — leaving /etc/nix/nix.conf to Determinate.
+  nix = lib.mkIf config.nix.enable {
     package = pkgs.nix;
 
     nixPath = [
@@ -21,10 +24,6 @@ in {
       auto-optimise-store = false;
       builders-use-substitutes = true;
       experimental-features = ["flakes" "nix-command"];
-      substituters = ["https://nix-community.cachix.org"];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
       trusted-users = [
         "@wheel"
         "@admin" # This line is a prerequisite for linux-builder
@@ -32,13 +31,11 @@ in {
       warn-dirty = false;
     };
 
-    # optimise store - disabled, let Determinate Nix handle it
     optimise.automatic = false;
 
-    # Enable automatic garbage collection
     gc = {
       automatic = lib.mkDefault true;
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 14d";
     };
 
     extraOptions = ''
