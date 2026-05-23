@@ -98,7 +98,7 @@ in {
       (import ../scripts/gsquash.nix {inherit pkgs;})
       bun
       alejandra
-      (ast-grep.overrideAttrs (old: {doCheck = false;}))
+      ast-grep
       coreutils
       curl
       delve
@@ -133,6 +133,7 @@ in {
       yazi
     ]
     ++ lib.optionals (system == "aarch64-darwin") [
+      # TestHeadlessIntegration writes to $HOME, fails in the Nix sandbox where /homeless-shelter is read-only.
       (mactop.overrideAttrs (old: {doCheck = false;}))
     ];
 }
