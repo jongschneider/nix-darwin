@@ -25,7 +25,6 @@
     ];
     withNodeJs = true;
     withPython3 = true;
-    withRuby = true;
     vimdiffAlias = true;
   };
 }

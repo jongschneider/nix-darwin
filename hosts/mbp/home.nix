@@ -75,10 +75,6 @@
     protobuf
     redis
     repomix
-    rubocop
-    ruby
-    # rubyPackages.rubocop-performance
-    # rubyPackages.solargraph
     terraform
     # uv
     # yt-dlp # disabled: jeepney checkPhase fails on macOS (nixpkgs-unstable)
