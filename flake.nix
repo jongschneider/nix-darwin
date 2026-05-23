@@ -14,8 +14,16 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
     # Add your AI Toolbox as an input
-    ai-toolbox.url = "github:jongschneider/ai-toolbox";
-    llm-agents.url = "github:numtide/llm-agents.nix";
+    ai-toolbox = {
+      url = "github:jongschneider/ai-toolbox";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
