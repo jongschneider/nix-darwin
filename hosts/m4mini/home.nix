@@ -55,7 +55,6 @@
     mkcert
     # nodejs-slim
     # nodePackages_latest.jsonlint
-    redis
     repomix
     # yt-dlp # disabled: curl-impersonate checkPhase fails on macOS 15
   ];

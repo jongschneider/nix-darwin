@@ -65,12 +65,9 @@
     jqp
     lazydocker
     mkcert
-    oapi-codegen
     # nodejs-slim
     # nodePackages_latest.jsonlint
     presenterm
-    protobuf
-    redis
     repomix
     terraform
     # uv
