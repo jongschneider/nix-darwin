@@ -67,7 +67,6 @@
     mkcert
     # nodejs-slim
     # nodePackages_latest.jsonlint
-    presenterm
     repomix
     terraform
     # uv

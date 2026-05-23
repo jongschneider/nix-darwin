@@ -117,8 +117,6 @@ in {
       ice-bar
       impl
       just
-      lua
-      luarocks
       manix
       mike
       nil # nix LSP
