@@ -30,7 +30,6 @@
   home.packages = with pkgs; [
     gh
     inetutils
-    unrar # extract RAR archives
     wget
     xz # extract XZ archives
     zlib

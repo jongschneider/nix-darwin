@@ -41,7 +41,6 @@
     procs
     srt
     teleport
-    unrar # extract RAR archives
     wget
     xz # extract XZ archives
     zlib
@@ -59,7 +58,6 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.sandbox-runtime
     llama-cpp
-    cpulimit
     fh
     git-open
     glow

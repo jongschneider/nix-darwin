@@ -119,7 +119,6 @@ in {
       just
       lua
       luarocks
-      lynx
       manix
       mike
       nil # nix LSP
