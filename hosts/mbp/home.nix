@@ -78,15 +78,5 @@
     terraform
     # uv
     # yt-dlp # disabled: jeepney checkPhase fails on macOS (nixpkgs-unstable)
-
-    # not sure I need... were migrated from brew
-    pango
-    rav1e
-    snappy
-    speex
-    svt-av1
-    utf8proc
-    x264
-    x265
   ];
 }
