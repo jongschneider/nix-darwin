@@ -27,11 +27,9 @@ in {
     mariadb
     ollama
     pam-reattach
-    pipx
     sesh
     trash-cli
     tree
-    # vectorcode
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix

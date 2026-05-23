@@ -80,7 +80,6 @@
     # rubyPackages.rubocop-performance
     # rubyPackages.solargraph
     # uv
-    pipx
     # yt-dlp # disabled: jeepney checkPhase fails on macOS (nixpkgs-unstable)
 
     # not sure I need... were migrated from brew
