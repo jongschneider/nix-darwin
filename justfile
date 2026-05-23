@@ -42,8 +42,12 @@ switch hostname=host:
         home-manager switch --flake .#{{hostname}}
     fi
 
-# Clean up old generations
+# Clean up old generations (retention: 14d; use `clean-all` for full wipe)
 clean:
+    sudo nix-collect-garbage --delete-older-than 14d
+
+# Nuke every generation but the current one (no rollback runway)
+clean-all:
     sudo nix-collect-garbage -d
 
 # Check configuration for errors (optionally specify a different hostname)
@@ -102,3 +106,85 @@ print-host:
 # Upgrade Determinate Nix to the latest version
 upgrade-nix:
     sudo determinate-nixd upgrade
+
+# Capture a perf snapshot to tmp/perf/<label>-<timestamp>.txt for before/after comparison
+perf-snapshot label:
+    #!/usr/bin/env bash
+    set -uo pipefail
+    mkdir -p tmp/perf
+    out="tmp/perf/{{label}}-$(date +%Y%m%d-%H%M%S).txt"
+    {
+        echo "=== perf snapshot: {{label}} ==="
+        echo "host:  {{host}}"
+        echo "date:  $(date)"
+        echo
+        echo "=== /nix/store size ==="
+        du -sh /nix/store
+        echo
+        echo "=== retained system generations ==="
+        ls /nix/var/nix/profiles/ 2>/dev/null | grep -c '^system-[0-9]*-link$' || echo 0
+        echo
+        echo "=== flake.lock stats ==="
+        echo "total nodes:             $(jq '.nodes | length' flake.lock)"
+        echo "distinct nixpkgs revs:   $(jq '[.nodes | to_entries[] | select(.key | test("^nixpkgs(_[0-9]+)?$"))] | length' flake.lock)"
+        echo "distinct flake-parts:    $(jq '[.nodes | to_entries[] | select(.key | test("^flake-parts(_[0-9]+)?$"))] | length' flake.lock)"
+        echo "distinct nixpkgs-lib:    $(jq '[.nodes | to_entries[] | select(.key | test("^nixpkgs-lib(_[0-9]+)?$"))] | length' flake.lock)"
+        echo
+        echo "=== effective nix config (selected) ==="
+        nix config show 2>/dev/null | grep -E '^(substituters|extra-substituters|trusted-substituters|max-jobs|cores|eval-cores|lazy-trees|auto-optimise-store)' || true
+    } | tee "$out"
+    echo
+    echo "wrote $out"
+
+# List existing perf snapshots
+perf-list:
+    @ls -lhrt tmp/perf/ 2>/dev/null || echo "no snapshots yet"
+
+# Diff two perf snapshots by label prefix (latest match wins for each)
+perf-diff before after:
+    #!/usr/bin/env bash
+    set -uo pipefail
+    b=$(ls -1t tmp/perf/{{before}}-*.txt 2>/dev/null | head -1)
+    a=$(ls -1t tmp/perf/{{after}}-*.txt 2>/dev/null | head -1)
+    if [[ -z "$b" || -z "$a" ]]; then
+        echo "snapshot(s) not found: before='$b' after='$a'"
+        exit 1
+    fi
+    echo "diff $b -> $a"
+    diff -u "$b" "$a" || true
+
+# Show what nix store gc would reclaim (read-only)
+perf-gc-dry:
+    nix store gc --dry-run 2>&1 | tail -10
+
+# Time evaluation of the system derivation (no build); slower than perf-snapshot
+perf-eval-time hostname=host:
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" == "macos" ]]; then
+        time nix eval .#darwinConfigurations.{{hostname}}.system.drvPath
+    else
+        time nix eval .#homeConfigurations.{{hostname}}.activationPackage.drvPath
+    fi
+
+# Time darwin-rebuild switch (no brew), log output, then snapshot as built-<label>
+perf-switch label hostname=host:
+    #!/usr/bin/env bash
+    set -uo pipefail
+    mkdir -p tmp/perf
+    log="tmp/perf/switch-{{label}}-$(date +%Y%m%d-%H%M%S).log"
+    echo "logging switch to $log"
+    if [[ "{{os()}}" == "macos" ]]; then
+        { time sudo darwin-rebuild switch --flake .#{{hostname}} ; } 2>&1 | tee "$log"
+    else
+        { time home-manager switch --flake .#{{hostname}} ; } 2>&1 | tee "$log"
+    fi
+    echo
+    just perf-snapshot built-{{label}}
+
+# nix-collect-garbage -d, then snapshot as clean-<label>
+perf-clean label:
+    #!/usr/bin/env bash
+    set -uo pipefail
+    sudo nix-collect-garbage -d
+    echo
+    just perf-snapshot clean-{{label}}
