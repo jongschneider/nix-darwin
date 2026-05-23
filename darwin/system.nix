@@ -129,7 +129,6 @@ in {
       sqlite
       vhs
       vim
-      zig
       yazi
     ]
     ++ lib.optionals (system == "aarch64-darwin") [
