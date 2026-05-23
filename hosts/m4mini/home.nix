@@ -54,7 +54,6 @@
     jqp
     lazydocker
     mkcert
-    fastfetch
     # nodejs-slim
     # nodePackages_latest.jsonlint
     redis

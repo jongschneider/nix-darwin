@@ -67,7 +67,6 @@
     jqp
     lazydocker
     mkcert
-    fastfetch
     oapi-codegen
     # nodejs-slim
     # nodePackages_latest.jsonlint

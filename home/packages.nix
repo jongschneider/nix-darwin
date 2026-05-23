@@ -19,7 +19,6 @@ in {
     maple-mono.NF-CN
 
     bottom
-    fastfetch
     fd # fancy version of `find`
     ffmpeg
     jujutsu
