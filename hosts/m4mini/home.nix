@@ -36,15 +36,10 @@
 
     # Dev
     inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.amp
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.tuicr
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.handy
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.sandbox-runtime
     llama-cpp
     git-open
