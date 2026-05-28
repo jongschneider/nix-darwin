@@ -113,6 +113,8 @@ in {
 
       bind-key "T" run-shell "~/.config/sesh/picker.sh"
 
+      bind C-y run-shell "tmux display-message -p '#S' | pbcopy"
+
       bind-key x kill-pane
       bind -N "last-session (via sesh) " L run-shell "sesh last"
 
