@@ -17,6 +17,7 @@
       [
         "displayplacer"
         "golang-migrate"
+        "modem-dev/tap/hunk"
         "lazygit"
         "lumen"
         "ripgrep"
@@ -52,6 +53,7 @@
       "sst/tap"
       "jnsahaj/lumen"
       "xykong/tap"
+      "modem-dev/tap"
     ];
   };
 }
