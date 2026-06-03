@@ -20,7 +20,8 @@
       inputs.flake-parts.follows = "flake-parts";
     };
     llm-agents = {
-      url = "github:numtide/llm-agents.nix";
+      # Pinned: see WORKAROUNDS.md (agent-browser-0.27.1 pnpm-deps OOMs on darwin).
+      url = "github:numtide/llm-agents.nix/93c592a1bf2bfcb7e72b9a5344611efcf72917db";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
