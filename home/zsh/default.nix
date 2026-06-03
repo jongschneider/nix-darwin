@@ -66,6 +66,9 @@
             PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
         [[ -f ~/.secrets ]] && source ~/.secrets
 
+        # gbm wrapper: cd's into the path printed by `gbm wt {ls,switch,add}`.
+        eval "$(gbm shell-integration)"
+
         # Enable grc aliases
         [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
       ''
