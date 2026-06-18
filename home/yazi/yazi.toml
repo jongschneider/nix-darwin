@@ -1,3 +1,13 @@
 # Minimal Yazi configuration
 [mgr]
 show_hidden = true
+
+[opener]
+flux-markdown = [
+  { run = 'open -a FluxMarkdown "$@"', desc = "Open in FluxMarkdown", orphan = true },
+]
+
+[open]
+prepend_rules = [
+  { url = "*.md", use = ["edit", "flux-markdown"] },
+]
