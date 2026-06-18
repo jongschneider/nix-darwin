@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   system,
@@ -20,7 +21,9 @@
         "modem-dev/tap/hunk"
         "lazygit"
         "lumen"
+        "ollama"
         "ripgrep"
+        "shaharia-lab/tap/slackcli"
         "uv"
         "trash"
       ]
@@ -49,11 +52,30 @@
 
     # Default taps
     taps = [
-      "timrogers/tap"
-      "sst/tap"
-      "jnsahaj/lumen"
-      "xykong/tap"
-      "modem-dev/tap"
+      {
+        name = "timrogers/tap";
+        trusted = true;
+      }
+      {
+        name = "sst/tap";
+        trusted = true;
+      }
+      {
+        name = "jnsahaj/lumen";
+        trusted = true;
+      }
+      {
+        name = "xykong/tap";
+        trusted = true;
+      }
+      {
+        name = "modem-dev/tap";
+        trusted = true;
+      }
+      {
+        name = "shaharia-lab/tap";
+        trusted = true;
+      }
     ];
   };
 }
