@@ -5,7 +5,6 @@
     "microsoft-teams"
     "orbstack"
     "powershell"
-    "mark-text"
     "zed"
   ];
 
