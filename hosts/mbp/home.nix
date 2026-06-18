@@ -35,6 +35,8 @@
 
   home.packages = with pkgs; [
     # azure-cli # disabled due to azure-multiapi-storage build failure
+    asciinema
+    asciinema-agg
     gh
     inetutils
     # mosh # wrapper for `ssh` that better and not dropping connections
