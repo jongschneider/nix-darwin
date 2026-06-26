@@ -13,15 +13,8 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
-    # Add your AI Toolbox as an input
-    ai-toolbox = {
-      url = "github:jongschneider/ai-toolbox";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
     llm-agents = {
-      # Pinned: see WORKAROUNDS.md (agent-browser-0.27.1 pnpm-deps OOMs on darwin).
-      url = "github:numtide/llm-agents.nix/93c592a1bf2bfcb7e72b9a5344611efcf72917db";
+      url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };

@@ -13,37 +13,21 @@ Temporary deviations from upstream applied to this config to work around bugs we
 
 ## Open
 
-### Pin `llm-agents` to 93c592a — `agent-browser-0.27.1` pnpm-deps OOM on darwin
-
-- **Opened**: 2026-06-02
-- **Last reproduced**: 2026-06-14 (retested against `02eaebc` / agent-browser 0.27.3 — still SIGKILLs)
-- **Upstream**: [numtide/llm-agents.nix](https://github.com/numtide/llm-agents.nix)
-
-**Symptom**: `just c` / `just build` fails building `agent-browser-dashboard-pnpm-deps` with exit code 137 (SIGKILL). The kill happens right after pnpm logs `added 1122, done`, during the final store-write phase. Reproducible even with 16 GB of free memory.
-
-**Cause**: Any `llm-agents` rev newer than `93c592a` (confirmed broken: `2f2a2d3`, `a418d27`, `02eaebc`) ships `agent-browser` ≥ 0.27.1, which pulls Next.js 16.1.1 plus all five `@next/swc` platform binaries (~180 MB of native code). The fixed-output `pnpm install` derivation gets killed by the kernel at finalization on darwin. The 0.27.3 packaging refactor (`fetcherVersion = 3`, vendored Geist font) did not fix it. Not a memory-pressure issue — it's a hard upstream regression in the dashboard packaging.
-
-**Workaround**: Pinned the rev directly in `flake.nix` so `just u` / `nix flake update` can't stomp it:
-
-```nix
-llm-agents = {
-  url = "github:numtide/llm-agents.nix/93c592a1bf2bfcb7e72b9a5344611efcf72917db";
-  ...
-};
-```
-
-(Earlier we used `nix flake lock --override-input`, but that pin lived only in `flake.lock` and got blown away by `just u`. The URL pin in `flake.nix` is the durable form.)
-
-**Retest**:
-
-1. In `flake.nix`, drop the rev from `inputs.llm-agents.url` (back to `github:numtide/llm-agents.nix`).
-2. `nix flake update llm-agents && just c`.
-
-If it succeeds, remove this entry and leave `flake.nix` unpinned. If it OOMs again, restore the rev in `flake.nix` and append today's date to **Last reproduced**.
+_None._
 
 ---
 
 ## Closed
+
+### Pin `llm-agents` to 93c592a — `agent-browser-0.27.1` pnpm-deps OOM on darwin
+
+- **Opened**: 2026-06-02
+- **Closed**: 2026-06-26
+- **Resolution**: sidestepped, not upstream-fixed. `agent-browser` was dropped from `inputs.llm-agents.packages.*` on both darwin hosts (`hosts/mbp/home.nix`, `hosts/m4mini/home.nix`) and added to the shared Homebrew `brews` list in `darwin/homebrew.nix`. Homebrew core ships the same `agent-browser 0.30.1` as a bottled formula, so no local pnpm build runs. The `llm-agents` input is now unpinned and tracks upstream HEAD.
+
+Was: `flake.nix` pinned `inputs.llm-agents.url` to `93c592a1bf2bfcb7e72b9a5344611efcf72917db` because every rev newer than `93c592a` (confirmed broken: `2f2a2d3`, `a418d27`, `02eaebc`, `05f2ea6`) SIGKILLed `agent-browser-dashboard-pnpm-deps` at finalization on darwin. The fixed-output `pnpm install` derivation got killed by the kernel right after `added 1136, done`. Subsequent upstream packaging changes through 0.30.1 did not fix it. If we ever want `agent-browser` back inside the nix closure, recheck this against a future `llm-agents` rev (and reintroduce the `inputs.llm-agents.packages.*.agent-browser` line on both hosts).
+
+---
 
 ### `--force-cleanup` on `brew bundle` — homebrew requires non-interactive opt-in
 

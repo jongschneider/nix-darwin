@@ -37,31 +37,21 @@
     # azure-cli # disabled due to azure-multiapi-storage build failure
     asciinema
     asciinema-agg
-    gh
     inetutils
     # mosh # wrapper for `ssh` that better and not dropping connections
-    procs
-    srt
     teleport
-    wget
     xz # extract XZ archives
     zlib
 
     # Dev
-    inputs.ai-toolbox.packages.${pkgs.stdenv.hostPlatform.system}.appender
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.handy
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.sandbox-runtime
     llama-cpp
     fh
-    git-open
     glow
     gum
-    jqp
-    lazydocker
-    mkcert
     # nodejs-slim
     # nodePackages_latest.jsonlint
     repomix

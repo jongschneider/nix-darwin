@@ -16,16 +16,14 @@
     # Core homebrew packages
     brews =
       [
+        "agent-browser"
         "displayplacer"
-        "golang-migrate"
         "modem-dev/tap/hunk"
         "lazygit"
-        "lumen"
         "ollama"
         "ripgrep"
         "shaharia-lab/tap/slackcli"
         "uv"
-        "trash"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "bitwarden-cli"
@@ -47,21 +45,12 @@
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "ghostty"
-        "vlc"
       ];
 
     # Default taps
     taps = [
       {
-        name = "timrogers/tap";
-        trusted = true;
-      }
-      {
         name = "sst/tap";
-        trusted = true;
-      }
-      {
-        name = "jnsahaj/lumen";
         trusted = true;
       }
       {

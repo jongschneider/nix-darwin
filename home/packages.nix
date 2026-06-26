@@ -26,20 +26,10 @@ in {
       bottom
       fd # fancy version of `find`
       ffmpeg
-      jujutsu
-      lazydocker
       mariadb
       pam-reattach
       sesh
       trash-cli
-
-      # Useful nix related tools
-      cachix # adding/managing alternative binary caches hosted by Cachix
-      comma # run software from without installing it
-      nix-output-monitor # get additional information while building packages
-      nix-tree # interactively browse dependency graphs of Nix derivations
-      # node2nix # generate Nix expressions to build NPM packages
-      statix # lints and suggestions for the Nix programming language
     ]
     # On darwin, ollama is installed via homebrew (see darwin/homebrew.nix).
     # The nixpkgs ollama now requires the Xcode Metal toolchain to build MLX backends.
