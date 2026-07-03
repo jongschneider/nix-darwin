@@ -50,7 +50,7 @@
     # Default taps
     taps = [
       {
-        name = "sst/tap";
+        name = "anomalyco/tap";
         trusted = true;
       }
       {

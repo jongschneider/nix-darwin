@@ -14,7 +14,13 @@
 
   homebrew.taps = [
     # Additional tap for MBP
-    "docker/tap"
-    "grafana/grafana"
+    {
+      name = "docker/tap";
+      trusted = true;
+    }
+    {
+      name = "grafana/grafana";
+      trusted = true;
+    }
   ];
 }

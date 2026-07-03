@@ -20,7 +20,13 @@
 
   homebrew.taps = [
     # Additional tap for MBP
-    "surge-downloader/tap"
-    "docker/tap"
+    {
+      name = "surge-downloader/tap";
+      trusted = true;
+    }
+    {
+      name = "docker/tap";
+      trusted = true;
+    }
   ];
 }
