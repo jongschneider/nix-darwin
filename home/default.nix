@@ -11,6 +11,7 @@
     ./cli
     ./git
     ./grc
+    ./herdr
     ./karabiner
     ./nvim
     ./packages.nix

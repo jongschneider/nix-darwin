@@ -1,0 +1,25 @@
+[keys]
+next_workspace = "prefix+shift+j"
+previous_workspace = "prefix+shift+k"
+next_agent = "prefix+shift+h"
+previous_agent = "prefix+shift+l"
+
+[[keys.command]]
+key = "prefix+t"
+type = "pane"
+command = "~/.config/herdr/session-picker.sh"
+description = "session picker (fzf + zoxide)"
+
+[ui.toast]
+delivery = "terminal"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"
+
+[experimental]
+pane_history = false
+
+[theme]
+name = "catppuccin"
+auto_switch = false
