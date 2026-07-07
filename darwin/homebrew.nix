@@ -18,6 +18,7 @@
       [
         "agent-browser"
         "displayplacer"
+        "herdr"
         "modem-dev/tap/hunk"
         "lazygit"
         "ollama"

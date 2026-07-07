@@ -13,7 +13,13 @@ Temporary deviations from upstream applied to this config to work around bugs we
 
 ## Open
 
-_None._
+### Homebrew `herdr` — vendored `libghostty-vt` zig build fails with `DarwinSdkNotFound` in nix sandbox
+
+- **Opened**: 2026-07-03
+- **Last reproduced**: 2026-07-03
+- **Retest**: `nix build --no-link "github:nixos/nixpkgs/nixpkgs-unstable#legacyPackages.aarch64-darwin.herdr"`. If it succeeds, drop `herdr` from the `brews` list in `darwin/homebrew.nix` and add `herdr` to `home.packages` in both `hosts/mbp/home.nix` and `hosts/m4mini/home.nix` instead.
+
+Nixpkgs (unstable, and the pin in this repo's `flake.lock`) carries `herdr` (0.7.1), but building it invokes a vendored `zig build` for `libghostty-vt` that calls `std.zig.LibCInstallation.findNative` and fails with `error: DarwinSdkNotFound` — zig can't locate the macOS SDK inside the nix build sandbox. Installed via the Homebrew `herdr` formula (prebuilt bottle) instead.
 
 ---
 
