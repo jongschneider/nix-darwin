@@ -26,6 +26,8 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      # Let Atuin own Ctrl-R; fzf keeps Ctrl-T and Alt-C.
+      historyWidget.command = "";
     };
 
     atuin = {

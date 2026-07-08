@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp ~/.zshrc /tmp/test_zshrc/.zshrc)",
+      "Bash(mkdir -p /tmp/test_zshrc)",
+      "Bash(awk ' *)",
+      "Read(//tmp/test_zshrc/**)",
+      "Bash(cat)",
+      "Bash(tail -n +8 ~/.zshrc)",
+      "Read(//private/tmp/test_zshrc/**)"
+    ]
+  }
+}
