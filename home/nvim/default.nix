@@ -8,6 +8,7 @@
       source = ./config/lua;
       force = true;
     };
+    "nvim/after/plugin/herdr_nav.lua".source = ./config/after/plugin/herdr_nav.lua;
   };
 
   programs.neovim = {

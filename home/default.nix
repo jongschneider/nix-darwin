@@ -12,6 +12,7 @@
     ./git
     ./grc
     ./herdr
+    ./hunk
     ./karabiner
     ./nvim
     ./packages.nix
