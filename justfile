@@ -37,7 +37,7 @@ switch hostname=host:
     #!/usr/bin/env bash
     if [[ "{{os()}}" == "macos" ]]; then
         sudo darwin-rebuild switch --flake .#{{hostname}}
-        brew update && brew upgrade --yes && brew cleanup
+        brew update && brew upgrade --yes --force && brew cleanup
     else
         home-manager switch --flake .#{{hostname}}
     fi

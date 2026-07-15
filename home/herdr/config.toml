@@ -43,6 +43,8 @@ agent_panel_sort = "spaces"
 
 [experimental]
 pane_history = false
+# Render child Kitty graphics (e.g. yazi image previews) onto the outer terminal.
+kitty_graphics = true
 
 [theme]
 name = "catppuccin"
