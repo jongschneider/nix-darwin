@@ -25,6 +25,16 @@ Nixpkgs (unstable, and the pin in this repo's `flake.lock`) carries `herdr` (0.7
 
 ## Closed
 
+### `doCheck = false` on `mactop` — `TestHeadlessIntegration` fails in nix sandbox
+
+- **Opened**: 2026-05-16
+- **Closed**: 2026-07-15
+- **Resolution**: sidestepped, not upstream-fixed. `mactop` was dropped from `environment.systemPackages` in `darwin/system.nix` entirely, so the override is no longer needed. If `mactop` is ever reintroduced, expect the same failure and reapply the override (or run its build with `doCheck = false`) unless upstream has moved the test off `$HOME`.
+
+Was: `darwin/system.nix` wrapped the aarch64-darwin `mactop` package in `(mactop.overrideAttrs (old: {doCheck = false;}))` because its `TestHeadlessIntegration` writes to `$HOME`, which fails in the Nix build sandbox where `/homeless-shelter` is read-only.
+
+---
+
 ### Pin `llm-agents` to 93c592a — `agent-browser-0.27.1` pnpm-deps OOM on darwin
 
 - **Opened**: 2026-06-02
