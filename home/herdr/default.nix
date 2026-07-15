@@ -2,16 +2,19 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   # herdr installs plugins imperatively into ~/.config/herdr/plugins and tracks
   # them in a machine-local plugins.json, so they don't reproduce on their own.
-  # We vendor the sources here, symlink them to stable paths, and re-link them
-  # through herdr on activation so a fresh machine converges to the same set.
-  # Keys are the plugin id herdr reports; values are the vendored source dirs.
+  # We pin each source, symlink it to a stable path, and re-link it through
+  # herdr on activation so a fresh machine converges to the same set. Keys are
+  # the plugin id herdr reports; values are the source dirs. repo-workspace-name
+  # is a local plugin vendored in this repo; vim-herdr-navigation is fetched from
+  # upstream and pinned in flake.lock (bump with `nix flake update`).
   herdrPlugins = {
     "repo-workspace-name" = ./plugins/repo-workspace-name;
-    "vim-herdr-navigation" = ./plugins/vim-herdr-navigation;
+    "vim-herdr-navigation" = inputs.vim-herdr-navigation;
   };
 in {
   # Let lazygit keep Ctrl+h/j/k/l for itself instead of moving herdr focus

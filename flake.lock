@@ -186,7 +186,8 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "vim-herdr-navigation": "vim-herdr-navigation"
       }
     },
     "systems": {
@@ -222,6 +223,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vim-herdr-navigation": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782649130,
+        "narHash": "sha256-vUUt46jiK6ZsPH8D13/+IIlqT3KbFliPJkNplsVqiQo=",
+        "owner": "paulbkim-dev",
+        "repo": "vim-herdr-navigation",
+        "rev": "53e318c772c4d3b7fbd904ac43bcf3e5b5d8b244",
+        "type": "github"
+      },
+      "original": {
+        "owner": "paulbkim-dev",
+        "repo": "vim-herdr-navigation",
         "type": "github"
       }
     }
