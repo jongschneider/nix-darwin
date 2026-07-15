@@ -1,0 +1,21 @@
+id = "local.repo-workspace-name"
+name = "Repo Workspace Name"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Name new workspaces after their git repository. Works for linked worktrees too; the branch stays on the sidebar's second line."
+platforms = ["linux", "macos"]
+
+# Fire on every path that creates or opens a workspace. rename.sh is idempotent,
+# so overlapping events (e.g. worktree.created also emitting workspace.created)
+# are harmless.
+[[events]]
+on = "workspace.created"
+command = ["bash", "rename.sh"]
+
+[[events]]
+on = "worktree.created"
+command = ["bash", "rename.sh"]
+
+[[events]]
+on = "worktree.opened"
+command = ["bash", "rename.sh"]
