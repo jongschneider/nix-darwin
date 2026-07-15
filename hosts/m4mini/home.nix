@@ -40,6 +40,7 @@
     llama-cpp
     glow
     gum
+    herdr
     # nodejs-slim
     # nodePackages_latest.jsonlint
     repomix

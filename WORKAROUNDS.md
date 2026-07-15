@@ -13,17 +13,21 @@ Temporary deviations from upstream applied to this config to work around bugs we
 
 ## Open
 
-### Homebrew `herdr` — vendored `libghostty-vt` zig build fails with `DarwinSdkNotFound` in nix sandbox
-
-- **Opened**: 2026-07-03
-- **Last reproduced**: 2026-07-03
-- **Retest**: `nix build --no-link "github:nixos/nixpkgs/nixpkgs-unstable#legacyPackages.aarch64-darwin.herdr"`. If it succeeds, drop `herdr` from the `brews` list in `darwin/homebrew.nix` and add `herdr` to `home.packages` in both `hosts/mbp/home.nix` and `hosts/m4mini/home.nix` instead.
-
-Nixpkgs (unstable, and the pin in this repo's `flake.lock`) carries `herdr` (0.7.1), but building it invokes a vendored `zig build` for `libghostty-vt` that calls `std.zig.LibCInstallation.findNative` and fails with `error: DarwinSdkNotFound` — zig can't locate the macOS SDK inside the nix build sandbox. Installed via the Homebrew `herdr` formula (prebuilt bottle) instead.
+_None._
 
 ---
 
 ## Closed
+
+### Homebrew `herdr` — vendored `libghostty-vt` zig build fails with `DarwinSdkNotFound` in nix sandbox
+
+- **Opened**: 2026-07-03
+- **Closed**: 2026-07-15
+- **Resolution**: upstream fixed. Nixpkgs-unstable now carries `herdr` 0.7.3, and both a substituted build and a forced source rebuild (`nix build --rebuild ...#legacyPackages.aarch64-darwin.herdr`) complete inside the nix sandbox — no more `DarwinSdkNotFound`. Retired the workaround: dropped `herdr` from the `brews` list in `darwin/homebrew.nix` and added `herdr` to `home.packages` in both `hosts/mbp/home.nix` and `hosts/m4mini/home.nix`.
+
+Was: nixpkgs carried `herdr` 0.7.1, but building it invoked a vendored `zig build` for `libghostty-vt` that called `std.zig.LibCInstallation.findNative` and failed with `error: DarwinSdkNotFound` — zig couldn't locate the macOS SDK inside the nix build sandbox. Installed via the Homebrew `herdr` formula (prebuilt bottle) instead until upstream packaging fixed the SDK lookup.
+
+---
 
 ### `doCheck = false` on `mactop` — `TestHeadlessIntegration` fails in nix sandbox
 

@@ -51,6 +51,7 @@
     llama-cpp
     fh
     glow
+    herdr
     gum
     # nodejs-slim
     # nodePackages_latest.jsonlint
