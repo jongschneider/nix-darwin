@@ -17,9 +17,11 @@
     "vim-herdr-navigation" = inputs.vim-herdr-navigation;
   };
 in {
-  # Let lazygit keep Ctrl+h/j/k/l for itself instead of moving herdr focus
-  # (vim-herdr-navigation passthrough; anchored exact match on the process name).
-  home.sessionVariables.HERDR_NAV_PASSTHROUGH_RE = "^lazygit$";
+  # Let lazygit and fzf keep Ctrl+h/j/k/l for themselves instead of moving herdr
+  # focus (vim-herdr-navigation passthrough; anchored exact match on the process
+  # name). fzf is here so Ctrl+j/k move the selection in the session-picker.sh
+  # pane (and any other fzf) — fzf binds those to down/up by default.
+  home.sessionVariables.HERDR_NAV_PASSTHROUGH_RE = "^(lazygit|fzf)$";
 
   xdg.configFile =
     {

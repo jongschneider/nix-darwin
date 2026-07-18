@@ -5,7 +5,8 @@ set -euo pipefail
 
 list_entries() {
   herdr workspace list | jq -r '
-    .result.workspaces[]
+    .result.workspaces
+    | sort_by(if .focused then 0 else 1 end)[]
     | ["[38;2;166;227;161m󰆍[0m  \(.label)", "ws", .workspace_id, .label] | @tsv
   '
   zoxide query -l | while IFS= read -r dir; do
