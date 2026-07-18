@@ -66,16 +66,28 @@ case "${1:-}" in
     ;;
 esac
 
+# Two-step copy: ^y enters a copy mode that swaps the footer hints, then l copies
+# the label and i copies the workspace_id ({4} and {3}). l/i are normal query
+# characters, so they are pre-bound but unbound at start; ^y rebinds them for the
+# duration of the mode, and each choice restores the header and unbinds them
+# again. esc is left untouched so it keeps fzf's default abort (closes the
+# picker) everywhere — note that unbind(esc) would make esc inert, not abort.
+hdr_main='  enter: focus/create   ^r rename   ^d close   ^y copy ▶ '
+hdr_copy='  copy ▶   l name   i id   esc close '
+
 selected=$(
   list_entries | fzf --no-sort --ansi --border-label ' herdr ' --prompt '⚡  ' \
-    --header '  enter: focus/create   ^r rename   ^d close   ^y copy ▶ ' \
+    --header "$hdr_main" \
     --delimiter '\t' --with-nth 1 \
     --preview '~/.config/herdr/session-picker.sh --preview {2} {3}' \
     --preview-window 'right:55%' \
     --bind 'ctrl-r:transform:~/.config/herdr/session-picker.sh --rename-prompt {2} {3} {4}' \
     --bind 'enter:transform:~/.config/herdr/session-picker.sh --enter {fzf:prompt} {q}' \
     --bind 'ctrl-d:execute-silent(~/.config/herdr/session-picker.sh --close {2} {3})+reload(~/.config/herdr/session-picker.sh --list)' \
-    --bind 'ctrl-y:execute-silent(printf %s {4} | pbcopy)'
+    --bind 'start:unbind(l,i)' \
+    --bind "ctrl-y:change-header($hdr_copy)+rebind(l,i)" \
+    --bind "l:execute-silent(printf %s {4} | pbcopy)+change-header($hdr_main)+unbind(l,i)" \
+    --bind "i:execute-silent(printf %s {3} | pbcopy)+change-header($hdr_main)+unbind(l,i)"
 )
 
 [[ -z "$selected" ]] && exit 0
