@@ -14,6 +14,7 @@
   # upstream and pinned in flake.lock (bump with `nix flake update`).
   herdrPlugins = {
     "repo-workspace-name" = ./plugins/repo-workspace-name;
+    "session-picker" = ./plugins/session-picker;
     "vim-herdr-navigation" = inputs.vim-herdr-navigation;
   };
 in {

@@ -1,13 +1,32 @@
 [keys]
+# Global single-jump nav (kept). prefix+shift+j / k = next / prev workspace.
 next_workspace = "prefix+shift+j"
 previous_workspace = "prefix+shift+k"
-next_agent = "prefix+shift+h"
-previous_agent = "prefix+shift+l"
+
+# Agents: h = previous, l = next.
+# Bound on both prefix+h/l and prefix+shift+h/l. The prefix+h / prefix+l form
+# also fires on a bare h / l while the workspace picker (prefix+w) is open,
+# where it jumps one agent and closes the picker.
+previous_agent = ["prefix+h", "prefix+shift+h"]
+next_agent = ["prefix+l", "prefix+shift+l"]
+
+# Workspace picker (prefix+w opens Navigate mode): j / k move the highlight
+# through workspaces and STAY in the picker so you can press j j j / k k k;
+# Enter switches to the highlighted workspace, Esc cancels.
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+
+# Free h/j/k/l inside the picker from their default pane-focus role so h / l
+# reach the agent bindings above. Pane nav still lives on ctrl+h/j/k/l (plugin).
+navigate_pane_left = ""
+navigate_pane_right = ""
+navigate_pane_down = ""
+navigate_pane_up = ""
 
 [[keys.command]]
 key = "prefix+t"
-type = "pane"
-command = "~/.config/herdr/session-picker.sh"
+type = "plugin_action"
+command = "session-picker.open"
 description = "session picker (fzf + zoxide)"
 
 [[keys.command]]

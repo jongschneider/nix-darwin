@@ -1,0 +1,21 @@
+id = "session-picker"
+name = "Session Picker"
+version = "0.1.0"
+min_herdr_version = "0.7.4"
+description = "Modal fzf popup over herdr workspaces and zoxide directories."
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "open"
+title = "Session Picker: open workspace/directory picker"
+description = "Open a modal fzf picker over herdr workspaces and zoxide directories."
+contexts = ["workspace"]
+command = ["sh", "open.sh"]
+
+[[panes]]
+id = "main"
+title = "Session Picker"
+placement = "popup"
+width = "90%"
+height = "80%"
+command = ["sh", "-c", "exec $HOME/.config/herdr/session-picker.sh"]
