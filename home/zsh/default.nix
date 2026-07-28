@@ -51,10 +51,6 @@
                 rm -f -- "$tmp"
             }
 
-            ai() {
-              opencode -m github-copilot/gpt-5-mini run "$@" 2>&1 | ${pkgs.glow}/bin/glow
-            }
-
             take() {
               mkdir -p "$1" && cd "$1"
             }
@@ -86,11 +82,6 @@
         l = "yy";
         cl = "clear";
         ccd = "claude --dangerously-skip-permissions";
-        oc = "opencode";
-
-        nixcheck = "darwin-rebuild check --flake ~/.config/nix-darwin/";
-        nixswitch = "darwin-rebuild switch --flake ~/.config/nix-darwin/";
-        nixup = "pushd ~/.config/nix-darwin; nix flake update; nixswitch; popd";
 
         killmysql = "sudo pkill mysql";
 
