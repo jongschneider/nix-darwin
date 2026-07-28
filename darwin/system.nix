@@ -96,6 +96,7 @@ in {
       (import ../scripts/git-bare-clone.nix {inherit pkgs;})
       (import ../scripts/wta.nix {inherit pkgs;})
       (import ../scripts/gsquash.nix {inherit pkgs;})
+      (import ../scripts/open-computer-use.nix {inherit pkgs;})
       bun
       alejandra
       ast-grep
