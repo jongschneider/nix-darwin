@@ -11,13 +11,23 @@ alias s := switch
 default:
     @just --list
 
-# Update flake inputs
+# Update flake inputs and repin the hand-rolled derivations in scripts/
 update:
     nix flake update
+    just update-npm open-computer-use
+    just update-url scalyr
 
 # Update specific input
 update-input input:
     nix flake lock --update-input {{input}}
+
+# Repin scripts/<package>.nix to the version npm tags as latest
+update-npm package:
+    @{{justfile_directory()}}/scripts/update-npm.sh {{package}}
+
+# Repin scripts/<package>.nix to whatever its src URL serves right now
+update-url package:
+    @{{justfile_directory()}}/scripts/update-url.sh {{package}}
 
 # Build the system configuration (optionally specify a different hostname)
 build hostname=host:
