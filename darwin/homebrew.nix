@@ -20,6 +20,12 @@
         "displayplacer"
         "modem-dev/tap/hunk"
         "lazygit"
+        # node is wanted in its own right: global npm CLIs live under
+        # /opt/homebrew/lib, and the /usr/local/bin symlinks in system.nix need
+        # node + npx to exist. Listed explicitly so it stops riding along as a
+        # transitive dep of agent-browser/bitwarden-cli, where `cleanup = "zap"`
+        # would take it out the moment either of those goes away.
+        "node"
         "ollama"
         "ripgrep"
         "shaharia-lab/tap/slackcli"

@@ -13,7 +13,21 @@ Temporary deviations from upstream applied to this config to work around bugs we
 
 ## Open
 
-_None._
+### macOS 26 ignores `launchctl` PATH for LaunchServices — `node`/`npx` symlinked into `/usr/local/bin`
+
+- **Opened**: 2026-05-15
+- **Last reproduced**: 2026-05-15
+
+Executor.app's MCP stdio sidecars inherit their PATH from LaunchServices (`/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin`), so bare `npx ...` MCP source commands fail to resolve. On macOS 26 both `launchctl setenv` (via a LaunchAgent) and `launchctl config user path` are silently ignored by LaunchServices — verified empirically via `/tmp/slack-mcp-trace.log` after a rebuild plus logout/login.
+
+Workaround, in two parts:
+
+- `system.activationScripts.extraActivation` in `darwin/system.nix` symlinks `/opt/homebrew/bin/{node,npx}` into `/usr/local/bin`. Note the attribute name matters — nix-darwin silently drops custom `activationScripts` names, so this has to hang off `extraActivation`.
+- `node` is listed explicitly in `brews` in `darwin/homebrew.nix`. It used to arrive only as a transitive dep of `agent-browser`/`bitwarden-cli`, which means `cleanup = "zap"` would have removed the symlink targets had either formula stopped depending on it.
+
+**Retest**: drop the `extraActivation` block, run `just c` and rebuild, then log out and back in and confirm an `npx`-based MCP server still starts under Executor.app. If it does, macOS honors the LaunchServices PATH again and both parts can go (keep `node` in `brews` if global npm CLIs are still in use — see below).
+
+**Note**: `node` in `brews` also backs the imperative global npm packages under `/opt/homebrew/lib` (currently `@dmmulroy/overseer`, `@google/gemini-cli`, `executor`). Those are not managed by this config at all; nothing here installs or pins them.
 
 ---
 
