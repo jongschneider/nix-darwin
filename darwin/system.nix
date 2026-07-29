@@ -91,42 +91,46 @@ in {
   services.karabiner-elements.enable = false;
 
   # Basic system packages all machines should have
-  environment.systemPackages = with pkgs;
-    [
-      (import ../scripts/git-bare-clone.nix {inherit pkgs;})
-      (import ../scripts/wta.nix {inherit pkgs;})
-      (import ../scripts/gsquash.nix {inherit pkgs;})
-      (import ../scripts/open-computer-use.nix {inherit pkgs;})
-      bun
-      alejandra
-      ast-grep
-      coreutils
-      curl
-      delve
-      git
-      gnumake
-      go_1_25
-      gofumpt
-      golangci-lint
-      golines
-      gomodifytags
-      gotests
-      gotestsum
-      gotools
-      grc
-      gtd
-      ice-bar
-      impl
-      just
-      manix
-      mike
-      nil # nix LSP
-      scalyr
-      nurl
-      sqlc
-      sqlite
-      vhs
-      vim
-      yazi
-    ];
+  environment.systemPackages = with pkgs; [
+    (import ../scripts/git-bare-clone.nix {inherit pkgs;})
+    (import ../scripts/wta.nix {inherit pkgs;})
+    (import ../scripts/gsquash.nix {inherit pkgs;})
+    (import ../scripts/open-computer-use.nix {inherit pkgs;})
+    (import ../scripts/gnu-only-coreutils.nix {inherit pkgs;})
+    bun
+    alejandra
+    ast-grep
+    # Prefixed (gdate, gls, ...) so bare `date`/`ls`/`stat` stay the BSD tools
+    # macOS ships. Unprefixed GNU coreutils shadows them via
+    # /run/current-system/sw/bin and silently breaks darwin-only flags like
+    # `date -v-7d`.
+    coreutils-prefixed
+    curl
+    delve
+    git
+    gnumake
+    go_1_25
+    gofumpt
+    golangci-lint
+    golines
+    gomodifytags
+    gotests
+    gotestsum
+    gotools
+    grc
+    gtd
+    ice-bar
+    impl
+    just
+    manix
+    mike
+    nil # nix LSP
+    scalyr
+    nurl
+    sqlc
+    sqlite
+    vhs
+    vim
+    yazi
+  ];
 }
