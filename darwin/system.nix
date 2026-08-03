@@ -97,6 +97,7 @@ in {
     (import ../scripts/gsquash.nix {inherit pkgs;})
     (import ../scripts/open-computer-use.nix {inherit pkgs;})
     (import ../scripts/gnu-only-coreutils.nix {inherit pkgs;})
+    (import ../scripts/yaak-cli.nix {inherit pkgs;})
     bun
     alejandra
     ast-grep

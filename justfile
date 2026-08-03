@@ -15,6 +15,7 @@ default:
 update:
     nix flake update
     just update-npm open-computer-use
+    just update-npm yaak-cli
     just update-url scalyr
 
 # Update specific input

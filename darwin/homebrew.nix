@@ -48,6 +48,7 @@
         "mitmproxy"
         "raycast"
         "claude"
+        "yaak"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
         "ghostty"
