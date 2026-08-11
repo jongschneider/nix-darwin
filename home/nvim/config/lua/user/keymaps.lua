@@ -7,8 +7,6 @@ local conform = require("conform")
 
 local M = {}
 
-local TERM = os.getenv("TERM")
-
 inoremap("fj", "<ESC>", { desc = "Exit insert mode with fj" })
 
 -- Normal --
@@ -21,46 +19,10 @@ nnoremap("<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- spli
 nnoremap("<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 nnoremap("<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
--- Window +  better kitty navigation
-nnoremap("<C-j>", function()
-	if vim.fn.exists(":KittyNavigateDown") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateDown()
-	elseif vim.fn.exists(":NvimTmuxNavigateDown") ~= 0 then
-		vim.cmd.NvimTmuxNavigateDown()
-	else
-		vim.cmd.wincmd("j")
-	end
-end)
-
-nnoremap("<C-k>", function()
-	if vim.fn.exists(":KittyNavigateUp") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateUp()
-	elseif vim.fn.exists(":NvimTmuxNavigateUp") ~= 0 then
-		vim.cmd.NvimTmuxNavigateUp()
-	else
-		vim.cmd.wincmd("k")
-	end
-end)
-
-nnoremap("<C-l>", function()
-	if vim.fn.exists(":KittyNavigateRight") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateRight()
-	elseif vim.fn.exists(":NvimTmuxNavigateRight") ~= 0 then
-		vim.cmd.NvimTmuxNavigateRight()
-	else
-		vim.cmd.wincmd("l")
-	end
-end)
-
-nnoremap("<C-h>", function()
-	if vim.fn.exists(":KittyNavigateLeft") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateLeft()
-	elseif vim.fn.exists(":NvimTmuxNavigateLeft") ~= 0 then
-		vim.cmd.NvimTmuxNavigateLeft()
-	else
-		vim.cmd.wincmd("h")
-	end
-end)
+-- Window navigation across splits and herdr panes lives in
+-- after/plugin/herdr_nav.lua. Do not map <C-h/j/k/l> in normal mode here:
+-- lazy.setup() sources after/plugin before this file runs, so anything set
+-- here wins the race and breaks the herdr handoff.
 
 -- Center buffer while navigating
 -- nnoremap("j", "jzz")
