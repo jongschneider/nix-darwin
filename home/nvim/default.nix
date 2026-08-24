@@ -26,6 +26,7 @@
     ];
     withNodeJs = true;
     withPython3 = true;
+    withRuby = false; # no ruby plugins; adopts the post-26.05 home-manager default
     vimdiffAlias = true;
   };
 }

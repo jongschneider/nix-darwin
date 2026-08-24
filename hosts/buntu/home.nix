@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ../../home/catppuccin
     ../../home/cli
     ../../home/git
     ../../home/nvim

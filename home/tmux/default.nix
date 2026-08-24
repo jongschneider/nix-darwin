@@ -26,6 +26,18 @@ in {
 
   programs.tmux = {
     enable = true;
+    # tmux 3.7's configure refuses to run on darwin unless jemalloc is
+    # explicitly enabled or disabled, and nixpkgs passes neither. Upstream
+    # recommends enabling it because macOS calloc(3) can hand back memory
+    # that isn't zeroed. See WORKAROUNDS.md.
+    package =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then
+        pkgs.tmux.overrideAttrs (old: {
+          buildInputs = (old.buildInputs or []) ++ [pkgs.jemalloc];
+          configureFlags = (old.configureFlags or []) ++ ["--enable-jemalloc"];
+        })
+      else pkgs.tmux;
     # Use Apple's /bin/zsh — nix-built zsh-5.9 hangs in compinit/compdump
     # on macOS 26.x (1% CPU, blocked on I/O). ~/.zshrc still works since
     # paths are absolute. Verified 2026-04-25.
