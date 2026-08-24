@@ -20,6 +20,8 @@
         "displayplacer"
         "modem-dev/tap/hunk"
         "lazygit"
+        # Brew rather than nix: nixpkgs' mole-cleaner lags the upstream releases.
+        "mole"
         # node is wanted in its own right: global npm CLIs live under
         # /opt/homebrew/lib, and the /usr/local/bin symlinks in system.nix need
         # node + npx to exist. Listed explicitly so it stops riding along as a
