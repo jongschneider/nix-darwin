@@ -13,19 +13,6 @@ Temporary deviations from upstream applied to this config to work around bugs we
 
 ## Open
 
-### tmux 3.7c on darwin — `--enable-jemalloc` added because nixpkgs passes no jemalloc flag
-
-- **Opened**: 2026-08-24
-- **Last reproduced**: 2026-08-24
-
-`nix build` of `tmux-3.7c` fails on aarch64-darwin with `configure: error: must give --enable-jemalloc or --disable-jemalloc`. tmux 3.7's configure refuses to guess on macOS: it warns that the system `calloc(3)` "appears not to correctly zero allocations in some circumstances" and makes the caller pick. `pkgs/by-name/tm/tmux/package.nix` in nixpkgs-unstable passes neither flag, so every darwin build of tmux aborts at configure. Linux is unaffected — the check is darwin-only.
-
-Workaround: `home/tmux/default.nix` sets `programs.tmux.package` to `pkgs.tmux.overrideAttrs` adding `jemalloc` to `buildInputs` and `--enable-jemalloc` to `configureFlags`, guarded by `pkgs.stdenv.hostPlatform.isDarwin` so the Linux host (`hosts/buntu`) keeps stock `pkgs.tmux`. Enabling rather than disabling jemalloc follows upstream's own recommendation for macOS.
-
-**Retest**: drop the `package` override and run `just c`. If tmux builds, nixpkgs is passing a jemalloc flag itself and the override can go.
-
----
-
 ### macOS 26 ignores `launchctl` PATH for LaunchServices — `node`/`npx` symlinked into `/usr/local/bin`
 
 - **Opened**: 2026-05-15
@@ -45,6 +32,16 @@ Workaround, in two parts:
 ---
 
 ## Closed
+
+### tmux 3.7c on darwin — `--enable-jemalloc` added because nixpkgs passes no jemalloc flag
+
+- **Opened**: 2026-08-24
+- **Closed**: 2026-08-28
+- **Upstream fix**: [NixOS/nixpkgs@56d4d71](https://github.com/NixOS/nixpkgs/commit/56d4d710b) ("tmux: fix darwin build", 2026-08-23). `pkgs/by-name/tm/tmux/package.nix` now passes `--enable-jemalloc` and pulls in `jemalloc` on darwin itself, so stock `pkgs.tmux` builds and links `libjemalloc.2.dylib`. Removed the `programs.tmux.package` override in `home/tmux/default.nix`; `just c` passes.
+
+Was: `nix build` of `tmux-3.7c` failed on aarch64-darwin with `configure: error: must give --enable-jemalloc or --disable-jemalloc`. tmux 3.7's configure refuses to guess on macOS: it warns that the system `calloc(3)` "appears not to correctly zero allocations in some circumstances" and makes the caller pick. Nixpkgs-unstable passed neither flag, so every darwin build aborted at configure. Linux was unaffected — the check is darwin-only. The workaround set `programs.tmux.package` to `pkgs.tmux.overrideAttrs` adding `jemalloc` to `buildInputs` and `--enable-jemalloc` to `configureFlags`, guarded by `pkgs.stdenv.hostPlatform.isDarwin`.
+
+---
 
 ### Homebrew `herdr` — vendored `libghostty-vt` zig build fails with `DarwinSdkNotFound` in nix sandbox
 
