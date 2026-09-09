@@ -18,9 +18,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
-    # herdr plugin, sourced straight from upstream; not a flake, just files.
+    # herdr plugins, sourced straight from upstream; not flakes, just files.
     vim-herdr-navigation = {
       url = "github:paulbkim-dev/vim-herdr-navigation";
+      flake = false;
+    };
+    herdr-annotate = {
+      url = "github:plannotator/herdr-annotate";
       flake = false;
     };
   };

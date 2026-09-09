@@ -10,12 +10,22 @@
   # We pin each source, symlink it to a stable path, and re-link it through
   # herdr on activation so a fresh machine converges to the same set. Keys are
   # the plugin id herdr reports; values are the source dirs. repo-workspace-name
-  # is a local plugin vendored in this repo; vim-herdr-navigation is fetched from
-  # upstream and pinned in flake.lock (bump with `nix flake update`).
+  # and session-picker are local plugins vendored in this repo; the rest are
+  # fetched from upstream and pinned in flake.lock (bump with `nix flake update`).
+  #
+  # annotate runs its tools with `bun`, which comes from
+  # environment.systemPackages in darwin/system.nix. It also needs a
+  # plannotator-tui binary staged into its plugin root, which upstream does with
+  # a build step we can't use — annotate.nix explains why and does it at build
+  # time instead.
   herdrPlugins = {
     "repo-workspace-name" = ./plugins/repo-workspace-name;
     "session-picker" = ./plugins/session-picker;
     "vim-herdr-navigation" = inputs.vim-herdr-navigation;
+    "annotate" = import ./plugins/annotate.nix {
+      inherit pkgs;
+      src = inputs.herdr-annotate;
+    };
   };
 in {
   # Let lazygit and fzf keep Ctrl+h/j/k/l for themselves instead of moving herdr
@@ -35,8 +45,10 @@ in {
       };
     }
     // lib.mapAttrs' (name: src:
-      # recursive: real directory of file symlinks, so the plugin_root path stays
-      # stable across nix updates and herdr can still write its own config dir.
+      # recursive: a real directory of file symlinks rather than one symlink to
+      # the store, so a plugin that looks for a sibling file finds a normal tree.
+      # herdr canonicalizes herdr-plugin.toml before recording plugin_root, so
+      # the root it stores is the store path either way — nothing may write there.
       lib.nameValuePair "herdr/managed-plugins/${name}" {
         source = src;
         recursive = true;

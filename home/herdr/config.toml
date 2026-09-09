@@ -16,6 +16,10 @@ next_agent = ["prefix+l", "prefix+shift+l"]
 navigate_workspace_down = "j"
 navigate_workspace_up = "k"
 
+# prefix+o belongs to annotate.open (document review) below; herdr binds it to
+# open_notification_target by default, so clear that or the two compete for it.
+open_notification_target = ""
+
 # Free h/j/k/l inside the picker from their default pane-focus role so h / l
 # reach the agent bindings above. Pane nav still lives on ctrl+h/j/k/l (plugin).
 navigate_pane_left = ""
@@ -28,6 +32,42 @@ key = "prefix+t"
 type = "plugin_action"
 command = "session-picker.open"
 description = "session picker (fzf + zoxide)"
+
+# annotate (plannotator/herdr-annotate). Terminal annotations on a / m, document
+# review on o. None of these collide with a herdr default except prefix+o, which
+# the [keys] table above hands over from open_notification_target.
+
+# Terminal annotations
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "annotate.capture"
+description = "annotate text"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "annotate.copy-context"
+description = "copy annotations as context"
+
+[[keys.command]]
+key = "prefix+m"
+type = "plugin_action"
+command = "annotate.manage"
+description = "manage annotations"
+
+# Document review (plannotator-tui)
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "annotate.open"
+description = "review documents in this folder"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "plugin_action"
+command = "annotate.last"
+description = "review the agent's last reply"
 
 [[keys.command]]
 key = "ctrl+h"
