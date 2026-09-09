@@ -38,6 +38,7 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.handy
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.sandbox-runtime
     llama-cpp
+    gh
     glow
     gum
     herdr

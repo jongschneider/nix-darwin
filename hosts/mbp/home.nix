@@ -50,6 +50,7 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.sandbox-runtime
     llama-cpp
     fh
+    gh
     glow
     herdr
     gum
