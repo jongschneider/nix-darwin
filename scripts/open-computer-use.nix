@@ -8,11 +8,11 @@
 {pkgs}:
 pkgs.stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "open-computer-use";
-  version = "0.3.1";
+  version = "0.3.4";
 
   src = pkgs.fetchurl {
     url = "https://registry.npmjs.org/open-computer-use/-/open-computer-use-${finalAttrs.version}.tgz";
-    hash = "sha256-dXS3o1tkK8vimaY5zgFCjBlVX7Ke9zB5bbT4fysykbU=";
+    hash = "sha256-9Bh3+/fje2DFmo8z9ITsNfYEdiYXoIWDvJ0Diz6v2nU=";
   };
 
   nativeBuildInputs = [pkgs.makeWrapper];
