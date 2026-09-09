@@ -13,6 +13,24 @@ Temporary deviations from upstream applied to this config to work around bugs we
 
 ## Open
 
+### `herdr-annotate` staged by nix — `plugin link` skips `[[build]]` and `plugin_root` resolves to the store
+
+- **Opened**: 2026-09-09
+- **Last reproduced**: 2026-09-09 (herdr 0.9.0)
+
+`herdr-annotate` ships a `[[build]]` step that downloads a pinned `plannotator-tui` release into `<plugin root>/bin`. Two things keep it from running here:
+
+- `herdr plugin link` never runs build steps — only `herdr plugin install` does, and this config links every plugin from a home-manager-managed path so it converges on a fresh machine.
+- herdr records `plugin_root` as the *realpath* of `herdr-plugin.toml`, so even the recursive symlink tree home-manager builds resolves to the read-only nix store path. A build step would have nowhere to write.
+
+Workaround: `home/herdr/plugins/annotate.nix` copies the upstream source and stages the `plannotator-tui` release binary into `bin/` at build time, writing the same `bin/plannotator-tui.version` stamp that upstream's `scripts/fetch-plannotator-tui.sh` would, so the build step is a no-op if herdr ever does run it. The binary is `fetchurl`'d per-system with hashes from the release `SHA256SUMS`, and `dontStrip = true` because its ad-hoc macOS signature is load-bearing — rewriting the Mach-O makes the kernel refuse to exec it. The derivation asserts upstream's own pin (`plannotator-tui.version`) against the version it fetches, so a source bump that moves the pin fails the build instead of silently shipping the old binary.
+
+**Retest**: after a `nix flake update` that bumps `herdr-annotate` or a herdr release, check whether `herdr plugin link` has learned to run `[[build]]` steps and whether `plugin_root` can point at a writable directory. If both hold, `annotate.nix` can be dropped and the input linked directly like `vim-herdr-navigation`.
+
+**Note**: bumping the input is not a no-op — if upstream moves its `plannotator-tui` pin, the build fails by design and `version` plus the four `targets` hashes in `annotate.nix` must be refreshed from that release's `SHA256SUMS`.
+
+---
+
 ### macOS 26 ignores `launchctl` PATH for LaunchServices — `node`/`npx` symlinked into `/usr/local/bin`
 
 - **Opened**: 2026-05-15
