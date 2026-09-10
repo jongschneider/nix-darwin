@@ -49,10 +49,10 @@ in {
       # the store, so a plugin that looks for a sibling file finds a normal tree.
       # herdr canonicalizes herdr-plugin.toml before recording plugin_root, so
       # the root it stores is the store path either way — nothing may write there.
-      lib.nameValuePair "herdr/managed-plugins/${name}" {
-        source = src;
-        recursive = true;
-      })
+        lib.nameValuePair "herdr/managed-plugins/${name}" {
+          source = src;
+          recursive = true;
+        })
     herdrPlugins;
 
   # Register the vendored plugins with herdr. `plugin link` is idempotent and

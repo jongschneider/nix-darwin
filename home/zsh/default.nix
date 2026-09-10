@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs = {
     zsh = {
       enable = true;
@@ -22,52 +26,52 @@
           unset _zcompdump
         '')
         ''
-            function gcpb(){
-                git branch | grep \* | cut -d ' ' -f2 | pbcopy
-            }
-            nn () {
-              if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
-                echo "nnn is already running"
-                return
-              fi
-
-              export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
-
-              nnn -aeHo "$@"
-              # nnn -adeHo "$@"
-
-              if [ -f "$NNN_TMPFILE" ]; then
-                . "$NNN_TMPFILE"
-                rm -f "$NNN_TMPFILE" > /dev/null
-              fi
-            }
-
-            function yy() {
-                local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-                yazi "$@" --cwd-file="$tmp"
-                if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-                    cd -- "$cwd"
+              function gcpb(){
+                  git branch | grep \* | cut -d ' ' -f2 | pbcopy
+              }
+              nn () {
+                if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
+                  echo "nnn is already running"
+                  return
                 fi
-                rm -f -- "$tmp"
+
+                export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+
+                nnn -aeHo "$@"
+                # nnn -adeHo "$@"
+
+                if [ -f "$NNN_TMPFILE" ]; then
+                  . "$NNN_TMPFILE"
+                  rm -f "$NNN_TMPFILE" > /dev/null
+                fi
+              }
+
+              function yy() {
+                  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+                  yazi "$@" --cwd-file="$tmp"
+                  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+                      cd -- "$cwd"
+                  fi
+                  rm -f -- "$tmp"
+              }
+
+              take() {
+                mkdir -p "$1" && cd "$1"
+              }
+
+            wtp () {
+                CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+                git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
             }
+              PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
+          [[ -f ~/.secrets ]] && source ~/.secrets
 
-            take() {
-              mkdir -p "$1" && cd "$1"
-            }
+          # gbm wrapper: cd's into the path printed by `gbm wt {ls,switch,add}`.
+          eval "$(gbm shell-integration)"
 
-          wtp () {
-              CURRENT_WT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
-              git push -u origin "$CURRENT_WT_BRANCH" --force-with-lease
-          }
-            PATH=$HOME/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/tools:$HOME/scripts:$PATH
-        [[ -f ~/.secrets ]] && source ~/.secrets
-
-        # gbm wrapper: cd's into the path printed by `gbm wt {ls,switch,add}`.
-        eval "$(gbm shell-integration)"
-
-        # Enable grc aliases
-        [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
-      ''
+          # Enable grc aliases
+          [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source "${pkgs.grc}/etc/grc.zsh"
+        ''
       ];
       plugins = [
         {

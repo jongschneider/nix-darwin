@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   xdg.configFile = {
     "nvim/init.lua".source = ./config/init.lua;
     "nvim/lua" = {

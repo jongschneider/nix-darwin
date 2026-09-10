@@ -5,7 +5,7 @@
     "docker"
     "docker/tap/sbx"
     "firefox"
-#    "linear-linear"
+    #    "linear-linear"
     "microsoft-teams"
     "notion"
     "surge-downloader/tap/surge"
