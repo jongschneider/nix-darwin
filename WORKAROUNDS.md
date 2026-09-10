@@ -27,7 +27,7 @@ Workaround: `home/herdr/plugins/annotate.nix` copies the upstream source and sta
 
 **Retest**: after a `nix flake update` that bumps `herdr-annotate` or a herdr release, check whether `herdr plugin link` has learned to run `[[build]]` steps and whether `plugin_root` can point at a writable directory. If both hold, `annotate.nix` can be dropped and the input linked directly like `vim-herdr-navigation`.
 
-**Note**: bumping the input is not a no-op — if upstream moves its `plannotator-tui` pin, the build fails by design and `version` plus the four `targets` hashes in `annotate.nix` must be refreshed from that release's `SHA256SUMS`.
+**Note**: bumping the input is not a no-op — if upstream moves its `plannotator-tui` pin, the build fails by design. `scripts/update-herdr-annotate.sh` (`just update-herdr-annotate`, run by `just update` after every `nix flake update`) does the refresh: it reads the pin and the plugin version out of the locked source, pulls the four `targets` hashes from that release's `SHA256SUMS`, and rewrites `annotate.nix`. It goes away with the workaround.
 
 ---
 

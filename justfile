@@ -17,6 +17,7 @@ update:
     just update-npm open-computer-use
     just update-npm yaak-cli
     just update-url scalyr
+    just update-herdr-annotate
 
 # Update specific input
 update-input input:
@@ -29,6 +30,10 @@ update-npm package:
 # Repin scripts/<package>.nix to whatever its src URL serves right now
 update-url package:
     @{{justfile_directory()}}/scripts/update-url.sh {{package}}
+
+# Refresh the plannotator-tui pin annotate.nix stages, from the locked source
+update-herdr-annotate:
+    @{{justfile_directory()}}/scripts/update-herdr-annotate.sh
 
 # Build the system configuration (optionally specify a different hostname)
 build hostname=host:
