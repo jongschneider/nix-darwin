@@ -12,32 +12,36 @@
 # binary into bin/ at build time. The version comes from upstream's own pin
 # (plannotator-tui.version), which is asserted below so a source bump that
 # moves the pin fails the build instead of silently shipping the old binary.
+#
+# When that assert fires, `just update-herdr-annotate` rewrites both versions
+# and all four hashes here from whatever source flake.lock points at; `just
+# update` runs it after every `nix flake update`.
 {
   pkgs,
   src,
 }: let
   inherit (pkgs) lib stdenvNoCC;
 
-  version = "0.7.0";
+  version = "0.8.0";
 
   # Rust target triples as named in the plannotator-tui release assets; hashes
   # come from that release's SHA256SUMS.
   targets = {
     aarch64-darwin = {
       rustTarget = "aarch64-apple-darwin";
-      hash = "sha256-tSA4uqJko3INV8mg5Wc9uG1eB7mNY5cz+WIb6IuPFSg=";
+      hash = "sha256-fQV/Oho6ojywpEhD/tPwTUmKHaUhl83sAhLG+OFhjLI=";
     };
     x86_64-darwin = {
       rustTarget = "x86_64-apple-darwin";
-      hash = "sha256-UVWvh0Qv0STJ7fEFxIZ0z6VjOiW+cDllKvUruNxhZ00=";
+      hash = "sha256-a2CE0W7YqgmRWJL5B+WBhqbsacVgdSz/nQQr3Ltigg8=";
     };
     aarch64-linux = {
       rustTarget = "aarch64-unknown-linux-gnu";
-      hash = "sha256-GUgIcAHloC6Hn9oVhmjLVZ5ARTREageGEN55mwtTBRQ=";
+      hash = "sha256-I/keWx5dBKGsQfHY9Q6/TCDwRhFBlShilypjDvaQ4Y4=";
     };
     x86_64-linux = {
       rustTarget = "x86_64-unknown-linux-gnu";
-      hash = "sha256-j4FK/WPGMQDf0Vx+TC1ciSTnSUPoF4gMOciAwvicmUQ=";
+      hash = "sha256-+qZROtGkdXooYelVcBaPLIEY8hm36NalF1oAj+I0/gs=";
     };
   };
 
@@ -55,7 +59,7 @@ in
     pname = "herdr-annotate";
     inherit src;
     # Tracks the plugin's own version, not plannotator-tui's.
-    version = "0.3.0";
+    version = "0.4.0";
 
     dontConfigure = true;
     dontBuild = true;
@@ -70,8 +74,8 @@ in
       pinned="$(tr -d '[:space:]' < plannotator-tui.version)"
       if [ "$pinned" != "${version}" ]; then
         echo "herdr-annotate pins plannotator-tui $pinned but this derivation fetches ${version}." >&2
-        echo "Update version and the hashes in home/herdr/plugins/annotate.nix from" >&2
-        echo "https://github.com/plannotator/plannotator-tui/releases/download/v$pinned/SHA256SUMS" >&2
+        echo "Run 'just update-herdr-annotate' to repin this file from the locked source," >&2
+        echo "or edit it by hand from https://github.com/plannotator/plannotator-tui/releases/download/v$pinned/SHA256SUMS" >&2
         exit 1
       fi
 
