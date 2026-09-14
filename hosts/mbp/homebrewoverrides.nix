@@ -9,17 +9,13 @@
 
   homebrew.brews = [
     # Additional brew just for MBP
-    "grafana/grafana/gcx"
+    "gcx"
   ];
 
   homebrew.taps = [
     # Additional tap for MBP
     {
       name = "docker/tap";
-      trusted = true;
-    }
-    {
-      name = "grafana/grafana";
       trusted = true;
     }
   ];

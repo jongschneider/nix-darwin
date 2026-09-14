@@ -18,6 +18,7 @@ update:
     just update-npm yaak-cli
     just update-url scalyr
     just update-herdr-annotate
+    just brew-audit
 
 # Update specific input
 update-input input:
@@ -47,6 +48,16 @@ build hostname=host:
 # Manual Homebrew update/upgrade (usually handled by switch)
 brew:
     brew update && brew upgrade && brew cleanup
+
+# Audit third-party brew taps for pins that have gone stale (pass --strict to fail on findings)
+brew-audit *args:
+    #!/usr/bin/env bash
+    if [[ "{{os()}}" != "macos" ]]; then
+        echo "brew-audit: not macOS, skipping"
+        exit 0
+    fi
+    brew update --quiet
+    {{justfile_directory()}}/scripts/brew-audit.sh {{args}}
 
 # Build and switch to the new configuration (optionally specify a different hostname)
 switch hostname=host:

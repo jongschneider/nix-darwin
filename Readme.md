@@ -67,8 +67,11 @@ Common commands (using just):
 # Build and switch to new configuration
 just switch
 
-# Update flake inputs
+# Update flake inputs (also audits third-party brew taps)
 just update
+
+# Audit third-party brew taps on their own
+just brew-audit
 
 # Check configuration
 just check
@@ -199,6 +202,10 @@ just clean
 ## Maintenance
 
 - Keep your system updated with `just update`
+- `just brew-audit` flags brew pins that have gone stale: a tap-qualified brew whose
+  package now lives in homebrew-core, a tap that stopped bumping its formula, a tap
+  nothing installs from, and packages `cleanup = "zap"` is about to remove. `just update`
+  runs it; add `--strict` to make it exit non-zero on findings.
 - Clean old generations with `just clean`
 - Check for errors before switching with `just check`
 - Use `just generations` to list available generations
