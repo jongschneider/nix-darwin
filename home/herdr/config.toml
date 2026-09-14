@@ -51,6 +51,12 @@ command = "annotate.copy-context"
 description = "copy annotations as context"
 
 [[keys.command]]
+key = "prefix+ctrl+a"
+type = "plugin_action"
+command = "annotate.copy-archive"
+description = "copy annotations as context, then archive them"
+
+[[keys.command]]
 key = "prefix+m"
 type = "plugin_action"
 command = "annotate.manage"

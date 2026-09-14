@@ -1,0 +1,13 @@
+# plannotator-tui, the document-review half of the annotate plugin. Only the
+# [herdr] table is read; everything else about the app is keys and mouse.
+#
+# placement decides where prefix+o / prefix+shift+o put the review. overlay is
+# the app's own default, spelled out here so the choice survives an upstream
+# change of mind: the review takes the whole tab, which is the most room to read
+# a plan in. split_direction / popup_* only matter if placement moves off
+# overlay; they are the defaults, left as a note of what the knobs are.
+[herdr]
+placement = "overlay"
+split_direction = "right"
+popup_width = "90%"
+popup_height = "85%"

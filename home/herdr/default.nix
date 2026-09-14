@@ -22,12 +22,38 @@
     "repo-workspace-name" = ./plugins/repo-workspace-name;
     "session-picker" = ./plugins/session-picker;
     "vim-herdr-navigation" = inputs.vim-herdr-navigation;
-    "annotate" = import ./plugins/annotate.nix {
-      inherit pkgs;
-      src = inputs.herdr-annotate;
-    };
+    "annotate" = annotate;
   };
+
+  annotate = import ./plugins/annotate.nix {
+    inherit pkgs;
+    src = inputs.herdr-annotate;
+  };
+
+  # The plugin keeps its copy as bin/plannotator-tui.exe, where only herdr looks.
+  # The plannotator-tui skill tells agents to run `plannotator-tui herdr open
+  # <file>` from their own pane, so put the same binary on PATH under the name
+  # the skill uses.
+  #
+  # HERDR_PLUGIN_ID is the reason this is a wrapper and not a bare symlink. To
+  # open its pane the binary asks herdr for a plugin by id, defaulting to
+  # "plannotator-tui" — the id in plannotator-tui's own development manifest.
+  # herdr-annotate ships it under the id "annotate" instead, so the bare command
+  # fails with plugin_not_found. herdr sets the variable itself when it runs the
+  # plugin's actions, which is why prefix+o never hit this; a run started from
+  # an agent's own pane has to set it. Exported, not just prefixed, so the value
+  # survives into the pane the binary asks herdr to spawn.
+  #
+  # The wrapper execs the store path in place rather than copying the binary
+  # forward: it is a self-contained Rust build whose ad-hoc macOS signature does
+  # not survive being rewritten.
+  plannotator-tui = pkgs.writeShellScriptBin "plannotator-tui" ''
+    export HERDR_PLUGIN_ID="''${HERDR_PLUGIN_ID:-annotate}"
+    exec ${annotate}/bin/plannotator-tui.exe "$@"
+  '';
 in {
+  home.packages = [plannotator-tui];
+
   # Let lazygit and fzf keep Ctrl+h/j/k/l for themselves instead of moving herdr
   # focus (vim-herdr-navigation passthrough; anchored exact match on the process
   # name). fzf is here so Ctrl+j/k move the selection in the session-picker.sh
@@ -42,6 +68,12 @@ in {
       "herdr/session-picker.sh" = {
         source = ./session-picker.sh;
         executable = true;
+      };
+
+      # Read by the plannotator-tui binary the annotate plugin stages, not by
+      # herdr, so it lives outside the herdr/ tree.
+      "plannotator-tui/config.toml" = {
+        source = ./plannotator-tui.toml;
       };
     }
     // lib.mapAttrs' (name: src:
