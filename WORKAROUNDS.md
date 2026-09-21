@@ -16,7 +16,7 @@ Temporary deviations from upstream applied to this config to work around bugs we
 ### `herdr-annotate` staged by nix — `plugin link` skips `[[build]]` and `plugin_root` resolves to the store
 
 - **Opened**: 2026-09-09
-- **Last reproduced**: 2026-09-09 (herdr 0.9.0)
+- **Last reproduced**: 2026-09-09, 2026-09-21 (herdr 0.9.0, herdr-annotate 0.5.0 / plannotator-tui 0.9.0)
 
 `herdr-annotate` ships a `[[build]]` step that downloads a pinned `plannotator-tui` release into `<plugin root>/bin`. Two things keep it from running here:
 
