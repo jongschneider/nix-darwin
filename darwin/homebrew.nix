@@ -30,7 +30,7 @@
         "node"
         "ollama"
         "ripgrep"
-        "shaharia-lab/tap/slackcli"
+        "shaharia-lab/tap/slackcli@0.12.0"
         "uv"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
