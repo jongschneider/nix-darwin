@@ -16,7 +16,7 @@
   # line: it reads npmPackage to find the registry entry, version from
   # dist-tags.latest, and refreshes the hash under each npmArch in turn.
   npmPackage = "@yaakapp/cli";
-  version = "2026.8.0";
+  version = "2026.8.1";
 
   # Only the systems this flake actually builds for. Upstream also ships
   # darwin-x64 (nixpkgs 26.11 dropped x86_64-darwin) and linux-arm64 (no host
@@ -28,11 +28,11 @@
   targets = {
     aarch64-darwin = {
       npmArch = "darwin-arm64";
-      hash = "sha256-pbwMKlJSvYDPdKAgKszPgK44h6pOCO6AYXxbkQEMmoM=";
+      hash = "sha256-2kLBi33KjEhq+ZPvycjPzV2lj09tseqHETBzOR35flk=";
     };
     x86_64-linux = {
       npmArch = "linux-x64";
-      hash = "sha256-bx3XnSnZunrrZOVtFnYQ3SS2hj/X9y/53OhU2eStmuc=";
+      hash = "sha256-opei6yyBpcuikiQJsMM7eR/2UZgMmM4znXAhQLDiuWM=";
     };
   };
 

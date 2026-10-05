@@ -24,13 +24,21 @@
   ];
 
   xdg.configFile = {
-    ghostty = {
+    ghostty = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
       source = ./ghostty;
     };
 
     "raycast/latest.rayconfig" = {
       source = ./raycast/latest.rayconfig;
     };
+  };
+
+  # Ghostty's native macOS build reads Application Support, not XDG_CONFIG_HOME.
+  # Force replaces old imperative/Claude-created configs that can shadow this
+  # file with broken Shift+Enter remaps such as ESC+CR or raw LF.
+  home.file."Library/Application Support/com.mitchellh.ghostty/config" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+    source = ./ghostty/config;
+    force = true;
   };
 
   home = {

@@ -22,26 +22,26 @@
 }: let
   inherit (pkgs) lib stdenvNoCC;
 
-  version = "0.9.0";
+  version = "0.9.4";
 
   # Rust target triples as named in the plannotator-tui release assets; hashes
   # come from that release's SHA256SUMS.
   targets = {
     aarch64-darwin = {
       rustTarget = "aarch64-apple-darwin";
-      hash = "sha256-3+41hpjkL/48quAtnzz+efrZrOORr4UxH7eAXppfoDg=";
+      hash = "sha256-qdpJ3WpE00lP7Q6DZsoymW7N9A4CcfztQQzsPIg5F10=";
     };
     x86_64-darwin = {
       rustTarget = "x86_64-apple-darwin";
-      hash = "sha256-LnI5XDv39D9bocQ9lCH2UUIbJY4RtHn6lHobJWb9vtQ=";
+      hash = "sha256-XRloPW+QpCSf+vOmp+0LoTJaE2p5XHsRqLofsW/o0U8=";
     };
     aarch64-linux = {
       rustTarget = "aarch64-unknown-linux-gnu";
-      hash = "sha256-QrVe8z0NO5eJNZ0zrM36DBKL14KlIQBJzoOFHPpc8wo=";
+      hash = "sha256-45B3qsLh537XmNJZD4Rc+ZjkVvoqIS/nyuLiX+v2III=";
     };
     x86_64-linux = {
       rustTarget = "x86_64-unknown-linux-gnu";
-      hash = "sha256-50dfVPEzJT9BPeYcBm0zQBgH0Y3vc2vKm4wNxvtZwmI=";
+      hash = "sha256-1U3GA8lfcQZ3vBPr5rJLLm6xDOdhV3r4qVoFAChit00=";
     };
   };
 
@@ -59,7 +59,7 @@ in
     pname = "herdr-annotate";
     inherit src;
     # Tracks the plugin's own version, not plannotator-tui's.
-    version = "0.5.0";
+    version = "0.8.0";
 
     dontConfigure = true;
     dontBuild = true;

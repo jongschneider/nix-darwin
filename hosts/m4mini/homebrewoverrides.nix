@@ -8,6 +8,7 @@
     #    "linear-linear"
     "microsoft-teams"
     "notion"
+    "obs"
     "surge-downloader/tap/surge"
     "zed"
   ];
