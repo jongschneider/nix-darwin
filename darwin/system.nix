@@ -86,6 +86,8 @@ in {
 
   # Add ability to used TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
+  # Lets pam_tid reach the GUI session from multiplexers (tmux, herdr)
+  security.pam.services.sudo_local.reattach = true;
 
   # Currently not working as a system service - using homebrew instead
   services.karabiner-elements.enable = false;

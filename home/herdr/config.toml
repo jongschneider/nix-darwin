@@ -1,3 +1,7 @@
+# Onboarding is done. herdr would otherwise try to write this key itself and
+# fail, because home-manager links this file read-only from the nix store.
+onboarding = false
+
 [keys]
 # Global single-jump nav (kept). prefix+shift+j / k = next / prev workspace.
 next_workspace = "prefix+shift+j"
