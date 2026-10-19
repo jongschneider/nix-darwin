@@ -14,9 +14,9 @@
   # fetched from upstream and pinned in flake.lock (bump with `nix flake update`).
   #
   # annotate runs its tools with `bun`, which comes from
-  # environment.systemPackages in darwin/system.nix. It also needs a
-  # plannotator-tui binary staged into its plugin root, which upstream does with
-  # a build step we can't use — annotate.nix explains why and does it at build
+  # environment.systemPackages in darwin/system.nix. It also needs its
+  # herdr-annotate and plannotator-tui binaries staged into its plugin root,
+  # which upstream does with build steps we can't use — annotate.nix explains why and does it at build
   # time instead.
   herdrPlugins = {
     "repo-workspace-name" = ./plugins/repo-workspace-name;

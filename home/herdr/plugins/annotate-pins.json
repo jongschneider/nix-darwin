@@ -1,0 +1,31 @@
+{
+  "plugin": "0.9.1",
+  "targets": {
+    "aarch64-darwin": "aarch64-apple-darwin",
+    "x86_64-darwin": "x86_64-apple-darwin",
+    "aarch64-linux": "aarch64-unknown-linux-gnu",
+    "x86_64-linux": "x86_64-unknown-linux-gnu"
+  },
+  "binaries": {
+    "plannotator-tui": {
+      "release": "https://github.com/plannotator/plannotator-tui/releases/download/v{version}",
+      "version": "0.9.4",
+      "hashes": {
+        "aarch64-darwin": "sha256-qdpJ3WpE00lP7Q6DZsoymW7N9A4CcfztQQzsPIg5F10=",
+        "x86_64-darwin": "sha256-XRloPW+QpCSf+vOmp+0LoTJaE2p5XHsRqLofsW/o0U8=",
+        "aarch64-linux": "sha256-45B3qsLh537XmNJZD4Rc+ZjkVvoqIS/nyuLiX+v2III=",
+        "x86_64-linux": "sha256-1U3GA8lfcQZ3vBPr5rJLLm6xDOdhV3r4qVoFAChit00="
+      }
+    },
+    "herdr-annotate": {
+      "release": "https://github.com/plannotator/herdr-annotate/releases/download/rust-lite-v{version}",
+      "version": "0.2.0",
+      "hashes": {
+        "aarch64-darwin": "sha256-WpxT03fNh+ZN4BueQ8hJBFP2q4GhExHTQKS/8HDqQwg=",
+        "x86_64-darwin": "sha256-GUMf4vGkC98SL7b9wipo/1/5VcxOjJw7iz3qJONA/+0=",
+        "aarch64-linux": "sha256-xNOA7VpwzXtDZCgsPXApCkgal5NQYrvlxnJXmRxpH28=",
+        "x86_64-linux": "sha256-o+9OcnhLuoz3nlgtYCHKNPDWAPFw2jCVvMYKh7G8uUI="
+      }
+    }
+  }
+}

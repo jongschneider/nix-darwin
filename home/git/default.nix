@@ -40,8 +40,13 @@
         st = "status";
       };
 
-      url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
-      url."ssh://git@bitbucket.org/".insteadOf = "https://bitbucket.org/";
+      # Bitbucket moves git-over-SSH to ssh.bitbucket.org on 2026-11-12; rewrite
+      # legacy remotes so existing clones keep working without edits.
+      url."git@ssh.bitbucket.org:".insteadOf = [
+        "https://bitbucket.org/"
+        "git@bitbucket.org:"
+        "ssh://git@bitbucket.org/"
+      ];
       color.ui = true;
       diff.colorMoved = "zebra";
       fetch.prune = true;

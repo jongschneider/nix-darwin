@@ -1,92 +1,79 @@
 # herdr-annotate: annotate terminal text and documents in herdr, send the
 # feedback back to the agent. https://github.com/plannotator/herdr-annotate
 #
-# The plugin ships a `[[build]]` step that downloads a pinned plannotator-tui
-# release into <plugin root>/bin. Two things make that unusable here:
+# The plugin ships `[[build]]` steps that download pinned release binaries
+# (herdr-annotate and plannotator-tui) into <plugin root>/bin. Two things make
+# that unusable here:
 #
 #   1. `herdr plugin link` never runs build steps — only `plugin install` does.
 #   2. herdr resolves plugin_root to the *realpath* of herdr-plugin.toml, so a
 #      home-manager symlink tree still lands on the read-only store directory.
 #
-# So we do the staging ourselves: copy the upstream source and drop the release
-# binary into bin/ at build time. The version comes from upstream's own pin
-# (plannotator-tui.version), which is asserted below so a source bump that
-# moves the pin fails the build instead of silently shipping the old binary.
+# So we do the staging ourselves: copy the upstream source and drop each release
+# binary into bin/ at build time. Versions and hashes live in annotate-pins.json,
+# and each version is asserted against upstream's own pin (<name>.version) so a
+# source bump that moves a pin fails the build instead of silently shipping an
+# old binary.
 #
-# When that assert fires, `just update-herdr-annotate` rewrites both versions
-# and all four hashes here from whatever source flake.lock points at; `just
-# update` runs it after every `nix flake update`.
+# When that assert fires, `just update-herdr-annotate` rewrites the pins file
+# from whatever source flake.lock points at; `just update` runs it after every
+# `nix flake update`.
 {
   pkgs,
   src,
 }: let
   inherit (pkgs) lib stdenvNoCC;
 
-  version = "0.9.4";
-
-  # Rust target triples as named in the plannotator-tui release assets; hashes
-  # come from that release's SHA256SUMS.
-  targets = {
-    aarch64-darwin = {
-      rustTarget = "aarch64-apple-darwin";
-      hash = "sha256-qdpJ3WpE00lP7Q6DZsoymW7N9A4CcfztQQzsPIg5F10=";
-    };
-    x86_64-darwin = {
-      rustTarget = "x86_64-apple-darwin";
-      hash = "sha256-XRloPW+QpCSf+vOmp+0LoTJaE2p5XHsRqLofsW/o0U8=";
-    };
-    aarch64-linux = {
-      rustTarget = "aarch64-unknown-linux-gnu";
-      hash = "sha256-45B3qsLh537XmNJZD4Rc+ZjkVvoqIS/nyuLiX+v2III=";
-    };
-    x86_64-linux = {
-      rustTarget = "x86_64-unknown-linux-gnu";
-      hash = "sha256-1U3GA8lfcQZ3vBPr5rJLLm6xDOdhV3r4qVoFAChit00=";
-    };
-  };
+  pins = lib.importJSON ./annotate-pins.json;
 
   inherit (pkgs.stdenv.hostPlatform) system;
-  target =
-    targets.${system}
-    or (throw "herdr-annotate: no plannotator-tui build for ${system}");
+  rustTarget =
+    pins.targets.${system}
+    or (throw "herdr-annotate: no prebuilt binaries for ${system}");
 
-  plannotatorTui = pkgs.fetchurl {
-    url = "https://github.com/plannotator/plannotator-tui/releases/download/v${version}/plannotator-tui-${target.rustTarget}";
-    inherit (target) hash;
-  };
+  binaries =
+    lib.mapAttrs (name: pin: {
+      inherit (pin) version;
+      file = pkgs.fetchurl {
+        url = "${lib.replaceStrings ["{version}"] [pin.version] pin.release}/${name}-${rustTarget}";
+        hash = pin.hashes.${system};
+      };
+    })
+    pins.binaries;
+
+  # What each upstream fetch script would have produced, including the version
+  # stamp, so the build steps are no-ops if herdr ever does run them.
+  stageBinary = name: bin: ''
+    pinned="$(tr -d '[:space:]' < ${name}.version)"
+    if [ "$pinned" != "${bin.version}" ]; then
+      echo "herdr-annotate pins ${name} $pinned but annotate-pins.json fetches ${bin.version}." >&2
+      echo "Run 'just update-herdr-annotate' to repin from the locked source." >&2
+      exit 1
+    fi
+    install -Dm755 ${bin.file} $out/bin/${name}.exe
+    printf '%s' "${bin.version}" > $out/bin/${name}.version
+  '';
 in
   stdenvNoCC.mkDerivation {
     pname = "herdr-annotate";
     inherit src;
-    # Tracks the plugin's own version, not plannotator-tui's.
-    version = "0.8.0";
+    version = pins.plugin;
 
     dontConfigure = true;
     dontBuild = true;
 
-    # A self-contained Rust binary whose ad-hoc macOS signature is load-bearing:
+    # Self-contained Rust binaries whose ad-hoc macOS signatures are load-bearing:
     # rewrite the Mach-O and the kernel refuses to exec it.
     dontStrip = true;
 
     installPhase = ''
       runHook preInstall
 
-      pinned="$(tr -d '[:space:]' < plannotator-tui.version)"
-      if [ "$pinned" != "${version}" ]; then
-        echo "herdr-annotate pins plannotator-tui $pinned but this derivation fetches ${version}." >&2
-        echo "Run 'just update-herdr-annotate' to repin this file from the locked source," >&2
-        echo "or edit it by hand from https://github.com/plannotator/plannotator-tui/releases/download/v$pinned/SHA256SUMS" >&2
-        exit 1
-      fi
-
       mkdir -p $out
       cp -R . $out/
       chmod -R u+w $out
 
-      # What scripts/fetch-plannotator-tui.sh would have produced, including the
-      # stamp, so the build step is a no-op if herdr ever does run it.
-      install -Dm755 ${plannotatorTui} $out/bin/plannotator-tui.exe
-      printf '%s' "${version}" > $out/bin/plannotator-tui.version
+      ${lib.concatStrings (lib.mapAttrsToList stageBinary binaries)}
 
       runHook postInstall
     '';
@@ -95,7 +82,7 @@ in
       description = "Annotate terminal text and documents in herdr and send the feedback back to the agent";
       homepage = "https://github.com/plannotator/herdr-annotate";
       license = lib.licenses.mit;
-      platforms = lib.attrNames targets;
+      platforms = lib.attrNames pins.targets;
       sourceProvenance = [lib.sourceTypes.binaryNativeCode];
     };
   }

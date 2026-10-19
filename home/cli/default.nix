@@ -35,6 +35,8 @@
     atuin = {
       enable = true;
       enableZshIntegration = true;
+      # See WORKAROUNDS.md: its bash-driven e2e tests time out in the nix sandbox on darwin.
+      package = pkgs.atuin.overrideAttrs {doCheck = false;};
       settings = {
         auto_sync = true;
         sync_frequency = "5m";

@@ -32,7 +32,7 @@ update-npm package:
 update-url package:
     @{{justfile_directory()}}/scripts/update-url.sh {{package}}
 
-# Refresh the plannotator-tui pin annotate.nix stages, from the locked source
+# Refresh the binary pins annotate.nix stages, from the locked source
 update-herdr-annotate:
     @{{justfile_directory()}}/scripts/update-herdr-annotate.sh
 

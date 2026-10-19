@@ -16,18 +16,18 @@ Temporary deviations from upstream applied to this config to work around bugs we
 ### `herdr-annotate` staged by nix — `plugin link` skips `[[build]]` and `plugin_root` resolves to the store
 
 - **Opened**: 2026-09-09
-- **Last reproduced**: 2026-09-09, 2026-09-21 (herdr 0.9.0, herdr-annotate 0.5.0 / plannotator-tui 0.9.0)
+- **Last reproduced**: 2026-09-09, 2026-09-21 (herdr 0.9.0, herdr-annotate 0.5.0 / plannotator-tui 0.9.0), 2026-10-07 (herdr 0.9.3 — probe plugin linked via `plugin link`: build step did not run, and a symlinked manifest still resolved `plugin_root` to its realpath)
 
-`herdr-annotate` ships a `[[build]]` step that downloads a pinned `plannotator-tui` release into `<plugin root>/bin`. Two things keep it from running here:
+`herdr-annotate` ships `[[build]]` steps that download two pinned release binaries into `<plugin root>/bin`: its own native runtime (`herdr-annotate.exe`, behind the terminal-annotation actions) and `plannotator-tui` (behind document review). Two things keep them from running here:
 
 - `herdr plugin link` never runs build steps — only `herdr plugin install` does, and this config links every plugin from a home-manager-managed path so it converges on a fresh machine.
 - herdr records `plugin_root` as the *realpath* of `herdr-plugin.toml`, so even the recursive symlink tree home-manager builds resolves to the read-only nix store path. A build step would have nowhere to write.
 
-Workaround: `home/herdr/plugins/annotate.nix` copies the upstream source and stages the `plannotator-tui` release binary into `bin/` at build time, writing the same `bin/plannotator-tui.version` stamp that upstream's `scripts/fetch-plannotator-tui.sh` would, so the build step is a no-op if herdr ever does run it. The binary is `fetchurl`'d per-system with hashes from the release `SHA256SUMS`, and `dontStrip = true` because its ad-hoc macOS signature is load-bearing — rewriting the Mach-O makes the kernel refuse to exec it. The derivation asserts upstream's own pin (`plannotator-tui.version`) against the version it fetches, so a source bump that moves the pin fails the build instead of silently shipping the old binary.
+Workaround: `home/herdr/plugins/annotate.nix` copies the upstream source and stages both release binaries into `bin/` at build time, writing the same `bin/<name>.version` stamps that upstream's `scripts/fetch-*.sh` would, so the build steps are no-ops if herdr ever does run them. Versions and per-system hashes (from each release's `SHA256SUMS`) live in `home/herdr/plugins/annotate-pins.json`, and `dontStrip = true` because the binaries' ad-hoc macOS signatures are load-bearing — rewriting the Mach-O makes the kernel refuse to exec it. The derivation asserts upstream's own pins (`<name>.version`) against the versions it fetches, so a source bump that moves a pin fails the build instead of silently shipping an old binary. Until 2026-10-07 only `plannotator-tui` was staged, so the terminal-annotation actions pointed at a missing `herdr-annotate.exe`.
 
 **Retest**: after a `nix flake update` that bumps `herdr-annotate` or a herdr release, check whether `herdr plugin link` has learned to run `[[build]]` steps and whether `plugin_root` can point at a writable directory. If both hold, `annotate.nix` can be dropped and the input linked directly like `vim-herdr-navigation`.
 
-**Note**: bumping the input is not a no-op — if upstream moves its `plannotator-tui` pin, the build fails by design. `scripts/update-herdr-annotate.sh` (`just update-herdr-annotate`, run by `just update` after every `nix flake update`) does the refresh: it reads the pin and the plugin version out of the locked source, pulls the four `targets` hashes from that release's `SHA256SUMS`, and rewrites `annotate.nix`. It goes away with the workaround.
+**Note**: bumping the input is not a no-op — if upstream moves a binary pin, the build fails by design. `scripts/update-herdr-annotate.sh` (`just update-herdr-annotate`, run by `just update` after every `nix flake update`) does the refresh: for each binary in the pins file it reads the pin out of the locked source, pulls the four `targets` hashes from that release's `SHA256SUMS`, and rewrites `annotate-pins.json`. It goes away with the workaround.
 
 ---
 
@@ -46,6 +46,24 @@ Workaround, in two parts:
 **Retest**: drop the `extraActivation` block, run `just c` and rebuild, then log out and back in and confirm an `npx`-based MCP server still starts under Executor.app. If it does, macOS honors the LaunchServices PATH again and both parts can go (keep `node` in `brews` if global npm CLIs are still in use — see below).
 
 **Note**: `node` in `brews` also backs the imperative global npm packages under `/opt/homebrew/lib` (currently `@dmmulroy/overseer`, `@google/gemini-cli`, `executor`). Those are not managed by this config at all; nothing here installs or pins them.
+
+---
+
+### atuin 18.23.0 — `doCheck = false` because its bash e2e tests time out in the nix sandbox
+
+- **Opened**: 2026-10-19
+- **Last reproduced**: 2026-10-19 (atuin 18.23.0, aarch64-darwin)
+
+atuin 18.23.0 isn't in cache.nixos.org for aarch64-darwin, so it builds locally, and its check phase fails. Every e2e test that drives atuin through bash (with bash-preexec) times out. These tests start a real shell in a pty and wait for atuin's shell hooks to respond, and inside the nix sandbox they never do:
+
+- `e2e_capture`: `filtered_commands_leave_no_captured_output` waits for captured output and gets `captured: []`.
+- `e2e_pty`: all 13 `setup_2_tests_shells_bash_preexec_toml` cases fail with `timed out waiting for shell session ID` or a pty wait timeout.
+
+The unit tests (554) and the non-bash e2e cases pass. A first attempt skipped just the `e2e_capture` test, and the next suite failed instead. With about 15 minutes per local build, skipping tests one at a time wasn't worth it.
+
+Workaround: `home/cli/default.nix` sets `programs.atuin.package` to `pkgs.atuin.overrideAttrs {doCheck = false;}`, the same approach as `direnv` in that file.
+
+**Retest**: after a `nix flake update` that bumps atuin or nixpkgs, drop the `package` override and run `just c`. If atuin comes from the cache or builds cleanly, remove the override and close this entry.
 
 ---
 

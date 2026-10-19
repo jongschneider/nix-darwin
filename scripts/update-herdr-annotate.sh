@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
-# Refresh home/herdr/plugins/annotate.nix from the herdr-annotate source that
-# flake.lock currently points at.
+# Refresh home/herdr/plugins/annotate-pins.json from the herdr-annotate source
+# that flake.lock currently points at.
 #
-# annotate.nix stages a pinned plannotator-tui release binary itself (see
-# WORKAROUNDS.md for why), and asserts upstream's own pin against the version it
-# fetches. That assert is deliberate — it stops a source bump from silently
-# shipping the old binary — but it means every `nix flake update` that moves the
-# pin breaks the build until three things are hand-edited: the plannotator-tui
-# version, the four per-platform hashes, and the plugin's own version. This does
-# all three from what the locked source says.
+# annotate.nix stages the plugin's pinned release binaries itself (see
+# WORKAROUNDS.md for why), and asserts upstream's own pins against the versions
+# it fetches. That assert is deliberate — it stops a source bump from silently
+# shipping an old binary — but it means every `nix flake update` that moves a
+# pin breaks the build until the versions and per-platform hashes are updated.
+# This does that from what the locked source says.
 #
 # Run it after `nix flake update` (`just update` already does). It reads the
 # locked input rather than GitHub, so it repins to exactly the revision the lock
@@ -16,10 +15,10 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-file="$root/home/herdr/plugins/annotate.nix"
+pins="$root/home/herdr/plugins/annotate-pins.json"
 
-if [[ ! -f "$file" ]]; then
-    echo "no such derivation: $file" >&2
+if [[ ! -f "$pins" ]]; then
+    echo "no such pins file: $pins" >&2
     exit 1
 fi
 
@@ -28,66 +27,58 @@ fi
 src=$(nix eval --raw --impure --expr \
     "(builtins.getFlake \"path:$root\").inputs.herdr-annotate.outPath")
 
-pinned=$(tr -d '[:space:]' <"$src/plannotator-tui.version")
 plugin_version=$(sed -n 's/^version = "\(.*\)"$/\1/p' "$src/herdr-plugin.toml" | head -1)
-
-if [[ -z "$pinned" || -z "$plugin_version" ]]; then
-    echo "herdr-annotate: could not read plannotator-tui.version / herdr-plugin.toml from $src" >&2
+if [[ -z "$plugin_version" ]]; then
+    echo "herdr-annotate: could not read the plugin version from $src/herdr-plugin.toml" >&2
     exit 1
 fi
 
-# The pin lives in the `let` block (two spaces), the plugin's own version in the
-# mkDerivation attrs (four).
-current_pin=$(sed -n 's/^  version = "\(.*\)";$/\1/p' "$file")
-current_plugin=$(sed -n 's/^    version = "\(.*\)";$/\1/p' "$file")
+new=$(jq --arg v "$plugin_version" '.plugin = $v' "$pins")
 
-if [[ "$current_pin" == "$pinned" && "$current_plugin" == "$plugin_version" ]]; then
-    echo "herdr-annotate: already at $plugin_version (plannotator-tui $pinned)"
+for name in $(jq -r '.binaries | keys[]' "$pins"); do
+    pinned=$(tr -d '[:space:]' <"$src/$name.version" 2>/dev/null || true)
+    if [[ -z "$pinned" ]]; then
+        echo "herdr-annotate: could not read $name.version from $src" >&2
+        exit 1
+    fi
+
+    current=$(jq -r --arg n "$name" '.binaries[$n].version' "$pins")
+    if [[ "$current" == "$pinned" ]]; then
+        continue
+    fi
+
+    # One SHA256SUMS covers every asset, so the hashes cost one request rather
+    # than a download per platform.
+    release=$(jq -r --arg n "$name" '.binaries[$n].release' "$pins")
+    sums_url="${release//\{version\}/$pinned}/SHA256SUMS"
+    sums=$(curl -fsSL "$sums_url") || {
+        echo "herdr-annotate: could not fetch $sums_url" >&2
+        echo "  upstream pins $name $pinned — check that release exists" >&2
+        exit 1
+    }
+
+    hashes="{}"
+    while IFS=$'\t' read -r system rust_target; do
+        hex=$(awk -v asset="$name-$rust_target" '$2 == asset { print $1 }' <<<"$sums")
+        if [[ -z "$hex" ]]; then
+            echo "herdr-annotate: $sums_url has no $name-$rust_target" >&2
+            exit 1
+        fi
+        hash=$(nix hash convert --hash-algo sha256 --to sri "$hex")
+        hashes=$(jq --arg s "$system" --arg h "$hash" '.[$s] = $h' <<<"$hashes")
+        echo "  $name $rust_target $hash"
+    done < <(jq -r '.targets | to_entries[] | "\(.key)\t\(.value)"' "$pins")
+
+    new=$(jq --arg n "$name" --arg v "$pinned" --argjson h "$hashes" \
+        '.binaries[$n].version = $v | .binaries[$n].hashes = $h' <<<"$new")
+    echo "herdr-annotate: $name ${current:-none} -> $pinned (hashes from $sums_url)"
+done
+
+if [[ "$new" == "$(jq . "$pins")" ]]; then
+    echo "herdr-annotate: already at $plugin_version"
     exit 0
 fi
 
-# One SHA256SUMS covers every asset, so the hashes cost one request rather than
-# four downloads — the same source the file's comment tells a human to use.
-sums_url="https://github.com/plannotator/plannotator-tui/releases/download/v$pinned/SHA256SUMS"
-sums=$(curl -fsSL "$sums_url") || {
-    echo "herdr-annotate: could not fetch $sums_url" >&2
-    echo "  upstream pins plannotator-tui $pinned — check that release exists" >&2
-    exit 1
-}
-
-# In file order, so the awk pass below can pair them off against the rustTarget
-# lines it walks.
-hashes=""
-while read -r rust_target; do
-    hex=$(awk -v asset="plannotator-tui-$rust_target" '$2 == asset { print $1 }' <<<"$sums")
-    if [[ -z "$hex" ]]; then
-        echo "herdr-annotate: $sums_url has no plannotator-tui-$rust_target" >&2
-        exit 1
-    fi
-    hash=$(nix hash convert --hash-algo sha256 --to sri "$hex")
-    hashes="$hashes $hash"
-    echo "  $rust_target $hash"
-done < <(sed -n 's/^      rustTarget = "\(.*\)";$/\1/p' "$file")
-
-if [[ -z "$hashes" ]]; then
-    echo "herdr-annotate: found no rustTarget entries in $file" >&2
-    exit 1
-fi
-
-# Not sed -i: BSD and GNU sed disagree on whether it takes a suffix argument.
-awk -v pin="$pinned" -v plugin="$plugin_version" -v hashes="$hashes" '
-BEGIN { count = split(hashes, hash, " "); seen = 0 }
-/^  version = ".*";$/ { sub(/"[^"]*"/, "\"" pin "\"") ; print ; next }
-/^    version = ".*";$/ { sub(/"[^"]*"/, "\"" plugin "\"") ; print ; next }
-/^      rustTarget = ".*";$/ { seen++ ; print ; next }
-/^      hash = ".*";$/ {
-    if (seen >= 1 && seen <= count) sub(/"[^"]*"/, "\"" hash[seen] "\"")
-    print ; next
-}
-{ print }
-' "$file" >"$file.tmp"
-mv "$file.tmp" "$file"
-
-echo "herdr-annotate: $current_plugin -> $plugin_version (plannotator-tui $current_pin -> $pinned)"
-echo "  hashes from $sums_url"
+printf '%s\n' "$new" >"$pins"
+echo "herdr-annotate: pins updated for plugin $plugin_version"
 echo "  run 'just c' before committing — check min_herdr_version too if the plugin fails to load"
