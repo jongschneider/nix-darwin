@@ -44,7 +44,16 @@
   home = {
     username = username;
     homeDirectory = "/Users/${username}";
-    sessionVariables.EDITOR = "nvim";
+    sessionVariables = {
+      EDITOR = "nvim";
+
+      # The llm-agents claude-code wrapper defaults CLAUDE_CODE_CERT_STORE to
+      # "system", and the OpenSSL store that mode consults is empty on a nix
+      # build, so every API call dies with UNABLE_TO_GET_ISSUER_CERT_LOCALLY.
+      # Point Node at the nix CA bundle, which is also where
+      # security.pki.certificateFiles would place a corporate CA.
+      NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+    };
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

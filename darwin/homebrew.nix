@@ -18,6 +18,7 @@
       [
         "agent-browser"
         "displayplacer"
+        "helm"
         "hunk"
         "lazygit"
         # Brew rather than nix: nixpkgs' mole-cleaner lags the upstream releases.
@@ -46,9 +47,11 @@
         "xykong/tap/flux-markdown"
         "font-monaspace"
         "font-zed-mono-nerd-font"
+        "anomalyco/tap/hex"
         "karabiner-elements"
         "mitmproxy"
         "raycast"
+        "swiftbar"
         "claude"
         "yaak"
       ]
@@ -61,6 +64,10 @@
     # reports no error, since as far as it knows there is no newer version.
     # `just brew-audit` is what notices.
     taps = [
+      {
+        name = "anomalyco/tap";
+        trusted = true;
+      }
       {
         name = "xykong/tap";
         trusted = true;
