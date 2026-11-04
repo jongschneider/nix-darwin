@@ -16,7 +16,7 @@ Temporary deviations from upstream applied to this config to work around bugs we
 ### `herdr-annotate` staged by nix — `plugin link` skips `[[build]]` and `plugin_root` resolves to the store
 
 - **Opened**: 2026-09-09
-- **Last reproduced**: 2026-09-09, 2026-09-21 (herdr 0.9.0, herdr-annotate 0.5.0 / plannotator-tui 0.9.0), 2026-10-07 (herdr 0.9.3 — probe plugin linked via `plugin link`: build step did not run, and a symlinked manifest still resolved `plugin_root` to its realpath)
+- **Last reproduced**: 2026-09-09, 2026-09-21 (herdr 0.9.0, herdr-annotate 0.5.0 / plannotator-tui 0.9.0), 2026-10-07 (herdr 0.9.3 — probe plugin linked via `plugin link`: build step did not run, and a symlinked manifest still resolved `plugin_root` to its realpath), 2026-11-03 (herdr 0.9.5 — same probe: no build step, `plugin_root` is the realpath)
 
 `herdr-annotate` ships `[[build]]` steps that download two pinned release binaries into `<plugin root>/bin`: its own native runtime (`herdr-annotate.exe`, behind the terminal-annotation actions) and `plannotator-tui` (behind document review). Two things keep them from running here:
 
@@ -49,25 +49,19 @@ Workaround, in two parts:
 
 ---
 
-### atuin 18.23.0 — `doCheck = false` because its bash e2e tests time out in the nix sandbox
-
-- **Opened**: 2026-10-19
-- **Last reproduced**: 2026-10-19 (atuin 18.23.0, aarch64-darwin)
-
-atuin 18.23.0 isn't in cache.nixos.org for aarch64-darwin, so it builds locally, and its check phase fails. Every e2e test that drives atuin through bash (with bash-preexec) times out. These tests start a real shell in a pty and wait for atuin's shell hooks to respond, and inside the nix sandbox they never do:
-
-- `e2e_capture`: `filtered_commands_leave_no_captured_output` waits for captured output and gets `captured: []`.
-- `e2e_pty`: all 13 `setup_2_tests_shells_bash_preexec_toml` cases fail with `timed out waiting for shell session ID` or a pty wait timeout.
-
-The unit tests (554) and the non-bash e2e cases pass. A first attempt skipped just the `e2e_capture` test, and the next suite failed instead. With about 15 minutes per local build, skipping tests one at a time wasn't worth it.
-
-Workaround: `home/cli/default.nix` sets `programs.atuin.package` to `pkgs.atuin.overrideAttrs {doCheck = false;}`, the same approach as `direnv` in that file.
-
-**Retest**: after a `nix flake update` that bumps atuin or nixpkgs, drop the `package` override and run `just c`. If atuin comes from the cache or builds cleanly, remove the override and close this entry.
-
 ---
 
 ## Closed
+
+### atuin 18.23.0 — `doCheck = false` because its bash e2e tests time out in the nix sandbox
+
+- **Opened**: 2026-10-19
+- **Closed**: 2026-11-03
+- **Resolution**: sidestepped, not upstream-fixed. After `nix flake update nixpkgs`, atuin 18.24.4 is in cache.nixos.org for aarch64-darwin, so the check phase no longer runs locally. Removed the `programs.atuin.package` override in `home/cli/default.nix`. If a future nixpkgs bump lands on a rev where atuin isn't cached, expect the same e2e timeouts and reapply the override.
+
+Was: atuin 18.23.0 wasn't cached for aarch64-darwin, so it built locally and every e2e test that drives atuin through bash (bash-preexec in a pty) timed out in the nix sandbox (`e2e_capture`, 13 `e2e_pty` cases). The workaround set `programs.atuin.package` to `pkgs.atuin.overrideAttrs {doCheck = false;}`.
+
+---
 
 ### tmux 3.7c on darwin — `--enable-jemalloc` added because nixpkgs passes no jemalloc flag
 
