@@ -31,7 +31,7 @@
         "node"
         "ollama"
         "ripgrep"
-        "shaharia-lab/tap/slackcli@0.12.0"
+        "shaharia-lab/tap/slackcli"
         "uv"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
@@ -53,6 +53,7 @@
         "raycast"
         "swiftbar"
         "claude"
+        "steipete/tap/codexbar"
         "yaak"
       ]
       ++ lib.optionals (system == "aarch64-darwin") [
@@ -74,6 +75,10 @@
       }
       {
         name = "shaharia-lab/tap";
+        trusted = true;
+      }
+      {
+        name = "steipete/tap";
         trusted = true;
       }
     ];
