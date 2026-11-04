@@ -85,7 +85,9 @@
       shellAliases = {
         l = "yy";
         cl = "clear";
-        ccd = "claude --dangerously-skip-permissions";
+        ccd = "claude --dangerously-skip-permissions --model claude-sonnet-5-5";
+        ccdo = "claude --dangerously-skip-permissions --model claude-opus-5-5";
+        ccdh = "claude --dangerously-skip-permissions --model claude-haiku-5-5";
 
         killmysql = "sudo pkill mysql";
 
